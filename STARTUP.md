@@ -5,6 +5,7 @@
 A lightweight web portal designed for **slow mobile networks (128kbps)**. Acts as a middle layer that fetches, strips, and serves only essential text-based information to the client. Target page weight: **< 55 KB per view**.
 
 Features (in priority order):
+
 1. Text-based news reader (RSS)
 2. Nearby location search with ratings (Google Places)
 3. Japan transit transfer lookup
@@ -36,14 +37,14 @@ External APIs (keys never exposed to client)
 
 ## Tech Stack
 
-| Layer | Choice | Reason |
-|---|---|---|
-| Frontend | Astro (static, minimal JS) | Zero-JS by default, partial hydration, familiar |
-| Hosting (frontend) | Cloudflare Pages | Free tier, globally distributed |
-| Edge functions | Cloudflare Workers | Free 100k req/day, zero cold start, built-in Cache API |
-| Caching | CF Cache API + CF KV | Free, no Redis needed at this scale |
-| CSS | Hand-written minimal CSS | No frameworks, target < 8 KB |
-| PWA | Service Worker (Astro plugin) | Cache app shell + last fetched content |
+| Layer              | Choice                        | Reason                                                 |
+| ------------------ | ----------------------------- | ------------------------------------------------------ |
+| Frontend           | Astro (static, minimal JS)    | Zero-JS by default, partial hydration, familiar        |
+| Hosting (frontend) | Cloudflare Pages              | Free tier, globally distributed                        |
+| Edge functions     | Cloudflare Workers            | Free 100k req/day, zero cold start, built-in Cache API |
+| Caching            | CF Cache API + CF KV          | Free, no Redis needed at this scale                    |
+| CSS                | Hand-written minimal CSS      | No frameworks, target < 8 KB                           |
+| PWA                | Service Worker (Astro plugin) | Cache app shell + last fetched content                 |
 
 ---
 
@@ -93,6 +94,7 @@ slim-portal/
 ## Data Sources
 
 ### News
+
 - **Source:** RSS feeds (no API key needed)
 - **Suggested feeds:**
   - NHK World: `https://www3.nhk.or.jp/rss/news/cat0.xml`
@@ -101,6 +103,7 @@ slim-portal/
 - **Cache TTL:** 15 minutes (CF Cache API)
 
 ### Location Search (Places)
+
 - **Source:** Google Places API — Text Search + Place Details
 - **Env var:** `GOOGLE_PLACES_API_KEY` (Workers secret)
 - **Strip to:** `{ name, rating, totalRatings, address, distanceMeters, mapsUrl }`
@@ -108,6 +111,7 @@ slim-portal/
 - **Note:** $200/month free credit from Google covers ~4k–7k searches
 
 ### Transit (Japan)
+
 - **Source (Phase 3):** Evaluate in order:
   1. [国土交通省 GTFS-JP open data](https://www.mlit.go.jp/sogoseisaku/transport/sosei_transport_tk_000035.html) — free, requires self-parsing
   2. [Jorudan Transit API](https://roadsign.jp/api/) — paid, simple
@@ -131,25 +135,25 @@ Request hits Worker
   └─ Fetch external API → strip → store in KV + Cache API → return
 ```
 
-| Feature | Cache API TTL | KV TTL |
-|---|---|---|
-| News | 15 min | 30 min |
-| Place search | 30 min | 60 min |
-| Place details | — | 24 hours |
-| Transit timetable | 1 hour | 6 hours |
-| Real-time transit | No cache | No cache |
+| Feature           | Cache API TTL | KV TTL   |
+| ----------------- | ------------- | -------- |
+| News              | 15 min        | 30 min   |
+| Place search      | 30 min        | 60 min   |
+| Place details     | —             | 24 hours |
+| Transit timetable | 1 hour        | 6 hours  |
+| Real-time transit | No cache      | No cache |
 
 ---
 
 ## Payload Budget (enforce per page)
 
-| Asset | Hard limit |
-|---|---|
-| HTML | 5 KB |
-| CSS (total) | 8 KB |
-| JS (total) | 30 KB |
-| API response (JSON) | 10 KB |
-| **Per view total** | **< 55 KB** |
+| Asset               | Hard limit  |
+| ------------------- | ----------- |
+| HTML                | 5 KB        |
+| CSS (total)         | 8 KB        |
+| JS (total)          | 30 KB       |
+| API response (JSON) | 10 KB       |
+| **Per view total**  | **< 55 KB** |
 
 No images on data pages. Icons via inline SVG only (< 1 KB each).
 
@@ -188,12 +192,12 @@ npm run deploy:worker  # → wrangler deploy
 
 ## Phase Plan
 
-| Phase | Scope |
-|---|---|
+| Phase       | Scope                                                                          |
+| ----------- | ------------------------------------------------------------------------------ |
 | **1 — Now** | Astro shell + CF Worker + RSS news reader. Proves architecture, zero API cost. |
-| **2** | Google Places proxy (location search + ratings). |
-| **3** | Japan transit lookup (evaluate GTFS vs Jorudan). |
-| **4** | PWA: service worker, offline shell, last-content cache. |
+| **2**       | Google Places proxy (location search + ratings).                               |
+| **3**       | Japan transit lookup (evaluate GTFS vs Jorudan).                               |
+| **4**       | PWA: service worker, offline shell, last-content cache.                        |
 
 ---
 
