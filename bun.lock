@@ -8,7 +8,7 @@
     "apps/web": {
       "name": "slim-portal-web",
       "dependencies": {
-        "@slim-portal/types": "workspace:*",
+        "@slim-portal/share": "workspace:*",
         "astro": "6.1.10",
       },
       "devDependencies": {
@@ -16,13 +16,13 @@
         "typescript": "6.0.3",
       },
     },
-    "packages/types": {
-      "name": "@slim-portal/types",
+    "packages/share": {
+      "name": "@slim-portal/share",
     },
     "workers/api": {
       "name": "slim-portal-worker",
       "dependencies": {
-        "@slim-portal/types": "workspace:*",
+        "@slim-portal/share": "workspace:*",
       },
       "devDependencies": {
         "@cloudflare/workers-types": "4.20260426.1",
@@ -282,7 +282,7 @@
 
     "@sindresorhus/is": ["@sindresorhus/is@7.2.0", "", {}, "sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw=="],
 
-    "@slim-portal/types": ["@slim-portal/types@workspace:packages/types"],
+    "@slim-portal/share": ["@slim-portal/share@workspace:packages/share"],
 
     "@speed-highlight/core": ["@speed-highlight/core@1.2.15", "", {}, "sha512-BMq1K3DsElxDWawkX6eLg9+CKJrTVGCBAWVuHXVUV2u0s2711qiChLSId6ikYPfxhdYocLNt3wWwSvDiTvFabw=="],
 

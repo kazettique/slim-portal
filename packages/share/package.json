@@ -1,5 +1,5 @@
 {
-  "name": "@slim-portal/types",
+  "name": "@slim-portal/share",
   "private": true,
   "type": "module",
   "exports": {

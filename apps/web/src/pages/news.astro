@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import type { NewsItem } from '@slim-portal/types';
+import type { NewsItem } from '@slim-portal/share';
 
 const WORKER_URL = import.meta.env.WORKER_URL ?? '';
 const apiUrl = WORKER_URL ? `${WORKER_URL}/api/news` : 'http://localhost:8787/api/news';

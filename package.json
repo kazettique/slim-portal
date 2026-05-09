@@ -2,7 +2,7 @@
   "name": "slim-portal",
   "private": true,
   "workspaces": [
-    "packages/types",
+    "packages/share",
     "apps/web",
     "workers/api"
   ],

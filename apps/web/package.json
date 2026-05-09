@@ -10,7 +10,7 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@slim-portal/types": "workspace:*",
+    "@slim-portal/share": "workspace:*",
     "astro": "6.1.10"
   },
   "devDependencies": {

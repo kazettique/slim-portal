@@ -1,4 +1,4 @@
-export type { NewsItem } from "@slim-portal/types";
+export type { NewsItem } from "@slim-portal/share";
 
 export interface Env {
   ALLOWED_ORIGIN_DEV?: string;
