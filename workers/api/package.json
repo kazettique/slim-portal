@@ -10,7 +10,8 @@
     "deploy:pages": "wrangler pages deploy ../../apps/web/dist --project-name slim-portal"
   },
   "dependencies": {
-    "@slim-portal/share": "workspace:*"
+    "@slim-portal/share": "workspace:*",
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "wrangler": "4.86.0",

@@ -1,11 +1,11 @@
 import { handleNews } from "./routes/news";
-import { Env } from "./type";
+import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
 
 function corsHeaders(origin: string | null, allowedOriginDev: string): Record<string, string> {
   if (origin && allowedOriginDev && origin === allowedOriginDev) {
     return {
       "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Methods": [HttpRequestMethod.GET, HttpRequestMethod.OPTIONS].join(", "),
       "Access-Control-Allow-Headers": "Content-Type",
     };
   }
@@ -18,11 +18,11 @@ export default {
     const origin = request.headers.get("Origin");
     const cors = corsHeaders(origin, env.ALLOWED_ORIGIN_DEV ?? "");
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: cors });
+    if (request.method === HttpRequestMethod.OPTIONS) {
+      return new Response(null, { status: HttpStatusCode.NO_CONTENT, headers: cors });
     }
 
-    if (request.method === "GET" && url.pathname === "/api/news") {
+    if (request.method === HttpRequestMethod.GET && url.pathname === "/api/news") {
       const response = await handleNews(request, env, ctx);
       const headers = new Headers(response.headers);
       for (const [k, v] of Object.entries(cors)) {
@@ -31,6 +31,6 @@ export default {
       return new Response(response.body, { status: response.status, headers });
     }
 
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not Found", { status: HttpStatusCode.NOT_FOUND });
   },
 };

@@ -1,7 +1,5 @@
+import { NewsItem } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
-import type { NewsItem } from "../type";
-
-const CACHE_TTL = 900; // 15 minutes
 
 function stripCdata(s: string): string {
   return s.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, "$1").trim();
@@ -64,7 +62,7 @@ async function fetchFeed(feedUrl: string, source: string, cache: Cache, ctx: Exe
   const cacheResponse = new Response(JSON.stringify(items), {
     headers: {
       "Content-Type": "application/json",
-      "Cache-Control": `public, max-age=${CACHE_TTL}`,
+      "Cache-Control": `public, max-age=${WorkerConstant.CACHE_TTL}`,
     },
   });
   ctx.waitUntil(cache.put(cacheKey, cacheResponse));

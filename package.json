@@ -11,6 +11,7 @@
     "dev:worker": "bun run --cwd workers/api dev",
     "type:web": "bun run --cwd apps/web type",
     "type:worker": "bun run --cwd workers/api type",
+    "type:share": "bun run --cwd packages/share type",
     "build:web": "bun run --cwd apps/web build",
     "deploy:web": "bun run --cwd apps/web build && bun run --cwd workers/api deploy:pages",
     "deploy:worker": "bun run --cwd workers/api deploy"
