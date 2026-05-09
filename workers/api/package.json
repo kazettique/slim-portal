@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "type": "tsc",
-    "deploy": "wrangler deploy",
-    "deploy:pages": "wrangler pages deploy ../../apps/web/dist --project-name slim-portal"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@slim-portal/share": "workspace:*",
