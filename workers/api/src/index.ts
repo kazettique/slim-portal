@@ -1,27 +1,18 @@
 import { handleNews } from "./routes/news";
 import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
-
-function corsHeaders(origin: string | null, allowedOriginDev: string): Record<string, string> {
-  if (origin && allowedOriginDev && origin === allowedOriginDev) {
-    return {
-      "Access-Control-Allow-Origin": origin,
-      "Access-Control-Allow-Methods": [HttpRequestMethod.GET, HttpRequestMethod.OPTIONS].join(", "),
-      "Access-Control-Allow-Headers": "Content-Type",
-    };
-  }
-  return {};
-}
+import { WorkerUtil } from "./util";
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const origin = request.headers.get("Origin");
-    const cors = corsHeaders(origin, env.ALLOWED_ORIGIN_DEV ?? "");
+    const cors = WorkerUtil.corsHeaders(origin, env.ALLOWED_ORIGIN_DEV ?? "");
 
     if (request.method === HttpRequestMethod.OPTIONS) {
       return new Response(null, { status: HttpStatusCode.NO_CONTENT, headers: cors });
     }
 
+    // TODO: base url, page url constant in app
     if (request.method === HttpRequestMethod.GET && url.pathname === "/api/news") {
       const response = await handleNews(request, env, ctx);
       const headers = new Headers(response.headers);

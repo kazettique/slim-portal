@@ -7,4 +7,6 @@ export abstract class WorkerConstant {
   ];
 
   public static readonly CACHE_TTL: number = 15 * 60; // 15 minutes
+
+  public static readonly REQUEST_TIMEOUT: number = 6_000;
 }

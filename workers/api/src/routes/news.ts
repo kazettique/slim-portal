@@ -1,9 +1,9 @@
-import { fetchAllFeeds } from "../lib/rss";
+import { RssLib } from "../lib/rss";
 import { Env } from "../type";
 
 export async function handleNews(_request: Request, _env: Env, ctx: ExecutionContext): Promise<Response> {
   try {
-    const items = await fetchAllFeeds(ctx);
+    const items = await RssLib.fetchAllFeeds(ctx);
     return new Response(JSON.stringify(items), {
       status: 200,
       headers: {
