@@ -15,7 +15,7 @@ Features (in priority order):
 
 ## Architecture
 
-```
+```txt
 Browser (Astro PWA)
   │
   ├─ fetch /api/news
@@ -50,42 +50,52 @@ External APIs (keys never exposed to client)
 
 ## Monorepo Structure
 
-```
+```txt
 slim-portal/
 ├── apps/
 │   └── web/                  # Astro frontend
 │       ├── src/
 │       │   ├── pages/
 │       │   │   ├── index.astro       # Home / dashboard
-│       │   │   ├── news.astro        # News reader
-│       │   │   ├── places.astro      # Location search
-│       │   │   └── transit.astro     # Transit lookup
-│       │   ├── components/
+│       │   │   └── news.astro        # News reader (Phase 1 complete)
 │       │   ├── layouts/
 │       │   │   └── Base.astro
-│       │   └── styles/
-│       │       └── global.css        # Minimal, < 8 KB target
+│       │   ├── styles/
+│       │   │   └── global.css        # Minimal, < 8 KB target
+│       │   ├── constant.ts
+│       │   ├── type.ts
+│       │   ├── util.ts
+│       │   └── validator.ts          # Zod validators (web-only)
 │       ├── public/
 │       │   └── manifest.json         # PWA manifest
 │       └── astro.config.mjs
+│
+├── packages/
+│   └── share/                # @slim-portal/share — shared across web + worker
+│       ├── src/
+│       │   ├── constant.ts
+│       │   ├── type.ts               # NewsItem interface (single source of truth)
+│       │   └── validator.ts
+│       ├── index.ts
+│       ├── package.json
+│       └── tsconfig.json
 │
 ├── workers/
 │   └── api/                  # Cloudflare Workers (single worker, route-based)
 │       ├── src/
 │       │   ├── index.ts              # Entry point, router
+│       │   ├── constant.ts           # FEEDS array, timeouts, limits
+│       │   ├── type.ts               # Env, Feed interfaces
+│       │   ├── util.ts
+│       │   ├── validator.ts
 │       │   ├── routes/
-│       │   │   ├── news.ts           # GET /api/news
-│       │   │   ├── places.ts         # GET /api/places
-│       │   │   └── transit.ts        # GET /api/transit
-│       │   ├── lib/
-│       │   │   ├── cache.ts          # CF Cache API + KV helpers
-│       │   │   ├── rss.ts            # RSS fetch + XML strip
-│       │   │   └── strip.ts          # Generic response minimizer
-│       │   └── types.ts
+│       │   │   └── news.ts           # GET /api/news
+│       │   └── lib/
+│       │       └── rss.ts            # RSS fetch + regex XML parser
 │       ├── wrangler.toml
 │       └── package.json
 │
-├── package.json              # Workspace root
+├── package.json              # Workspace root (Bun)
 └── STARTUP.md                # This file
 ```
 
@@ -96,10 +106,10 @@ slim-portal/
 ### News
 
 - **Source:** RSS feeds (no API key needed)
-- **Suggested feeds:**
+- **Active feeds:**
   - NHK World: `https://www3.nhk.or.jp/rss/news/cat0.xml`
-  - Reuters: `https://feeds.reuters.com/reuters/topNews`
-- **Strip to:** `{ title, summary, url, publishedAt }`
+  - BBC News: `https://feeds.bbci.co.uk/news/rss.xml`
+- **Strip to:** `{ title, summary, url, publishedAt, source }`
 - **Cache TTL:** 15 minutes (CF Cache API)
 
 ### Location Search (Places)
@@ -123,7 +133,7 @@ slim-portal/
 
 ## Caching Strategy
 
-```
+```txt
 Request hits Worker
   │
   ├─ Check CF Cache API (in-memory, per edge node)
@@ -161,7 +171,7 @@ No images on data pages. Icons via inline SVG only (< 1 KB each).
 
 ## Environment Variables (Cloudflare Workers Secrets)
 
-```
+```txt
 GOOGLE_PLACES_API_KEY=...
 TRANSIT_API_KEY=...          # when applicable in Phase 3
 CF_KV_NAMESPACE_ID=...       # set in wrangler.toml
@@ -173,31 +183,35 @@ CF_KV_NAMESPACE_ID=...       # set in wrangler.toml
 
 ```bash
 # Install dependencies (workspace root)
-npm install
+bun install
 
 # Dev: frontend
-npm run dev:web        # → cd apps/web && astro dev
+bun run dev:web        # → cd apps/web && astro dev
 
 # Dev: worker (local)
-npm run dev:worker     # → cd workers/api && wrangler dev
+bun run dev:worker     # → cd workers/api && wrangler dev
 
-# Deploy frontend
-npm run deploy:web     # → astro build + wrangler pages deploy
+# Type checking
+bun run type:web       # → TypeScript check for apps/web
+bun run type:worker    # → TypeScript check for workers/api
+bun run type:share     # → TypeScript check for packages/share
 
-# Deploy worker
-npm run deploy:worker  # → wrangler deploy
+# Build & deploy
+bun run build:web      # → astro build
+bun run deploy:web     # → astro build + wrangler pages deploy
+bun run deploy:worker  # → wrangler deploy
 ```
 
 ---
 
 ## Phase Plan
 
-| Phase       | Scope                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| **1 — Now** | Astro shell + CF Worker + RSS news reader. Proves architecture, zero API cost. |
-| **2**       | Google Places proxy (location search + ratings).                               |
-| **3**       | Japan transit lookup (evaluate GTFS vs Jorudan).                               |
-| **4**       | PWA: service worker, offline shell, last-content cache.                        |
+| Phase          | Scope                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| **1 — Done ✓** | Astro shell + CF Worker + RSS news reader (NHK + BBC). Architecture proven, zero API cost. |
+| **2**          | Google Places proxy (location search + ratings).                                           |
+| **3**          | Japan transit lookup (evaluate GTFS vs Jorudan).                                           |
+| **4**          | PWA: service worker, offline shell, last-content cache.                                    |
 
 ---
 
@@ -215,8 +229,10 @@ npm run deploy:worker  # → wrangler deploy
 
 ## Notes for Claude Code
 
-- Start with **Phase 1 only** — do not scaffold Phase 2/3 routes until Phase 1 is working end-to-end
-- Worker router should use URL pattern matching, not a heavy framework (no Hono needed unless routing gets complex)
-- RSS parsing: use native `DOMParser` in the Worker (available in CF Workers runtime) or a minimal XML parser — no heavy libraries
+- Phase 1 is complete. Begin Phase 2 (Google Places) next.
+- Worker router uses URL pattern matching — no framework (no Hono needed unless routing gets complex)
+- **RSS parsing**: Do NOT use `DOMParser`. The worker tsconfig uses `lib: ["ES2022"]` with no `"DOM"` — adding DOM lib causes conflicts with `@cloudflare/workers-types`. Use the pure regex parser already in `workers/api/src/lib/rss.ts` (`extractTag`, `extractLinkUrl`, `stripCdata`).
+- **Package manager**: Bun everywhere — `bun install`, `bun run <script>`. Never use npm.
+- **Shared package**: `packages/share` (`@slim-portal/share`, `workspace:*`) is the canonical location for cross-environment types, validators, and constants. Both `apps/web` and `workers/api` import from it.
 - Keep `wrangler.toml` bindings explicit; add KV namespace binding only when caching layer is being built
-- Run `wrangler dev` locally to test Workers before deploying — it accurately emulates the CF runtime including Cache API
+- Run `bun run dev:worker` locally to test Workers before deploying — wrangler dev accurately emulates the CF runtime including Cache API
