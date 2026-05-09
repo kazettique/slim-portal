@@ -79,6 +79,7 @@ out/
 .env
 .env.local
 .env.*.local
+.env.production
 
 # npm cache directory
 .npm
