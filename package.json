@@ -1,0 +1,18 @@
+{
+  "name": "slim-portal",
+  "private": true,
+  "workspaces": [
+    "packages/types",
+    "apps/web",
+    "workers/api"
+  ],
+  "scripts": {
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:worker": "bun run --cwd workers/api dev",
+    "type:web": "bun run --cwd apps/web type",
+    "type:worker": "bun run --cwd workers/api type",
+    "build:web": "bun run --cwd apps/web build",
+    "deploy:web": "bun run --cwd apps/web build && bun run --cwd workers/api deploy:pages",
+    "deploy:worker": "bun run --cwd workers/api deploy"
+  }
+}

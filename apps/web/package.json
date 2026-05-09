@@ -1,0 +1,20 @@
+{
+  "name": "slim-portal-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "type": "tsc",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@slim-portal/types": "workspace:*",
+    "astro": "6.1.10"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3"
+  }
+}

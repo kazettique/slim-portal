@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'A lightweight web portal for slow networks.' } = Astro.props;
+const canonicalPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="manifest" href="/manifest.json" />
+    <title>{title} — Slim Portal</title>
+  </head>
+  <body>
+    <header>
+      <nav aria-label="Main">
+        <a href="/" aria-current={canonicalPath === '/' ? 'page' : undefined}>Home</a>
+        <a href="/news" aria-current={canonicalPath === '/news' ? 'page' : undefined}>News</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <small>Slim Portal — optimized for slow networks</small>
+    </footer>
+  </body>
+</html>

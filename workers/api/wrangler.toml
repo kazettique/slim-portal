@@ -1,0 +1,16 @@
+name = "slim-portal-api"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGIN_DEV = "http://localhost:4321"
+
+# Phase 1: no KV binding yet.
+# [[kv_namespaces]]
+# binding = "NEWS_CACHE"
+# id = "YOUR_KV_NAMESPACE_ID"
+
+[dev]
+port = 8787
+local_protocol = "http"
