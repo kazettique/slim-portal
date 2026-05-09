@@ -1,101 +1,123 @@
 ---
-import Base from '../layouts/Base.astro';
-import type { NewsItem } from '@slim-portal/share';
+import Base from "../layouts/Base.astro";
+import type { NewsItem } from "@slim-portal/share";
+import { AppConstant } from "../constant";
+import { AppUtil } from "../util";
 
-const WORKER_URL = import.meta.env.WORKER_URL ?? '';
-const apiUrl = WORKER_URL ? `${WORKER_URL}/api/news` : 'http://localhost:8787/api/news';
+// const WORKER_URL = import.meta.env.WORKER_URL ?? "";
+const apiUrl = AppConstant.WORKER_URL
+  ? AppConstant.WORKER_URL + AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url
+  : "http://localhost:8787" + AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url;
 
 let items: NewsItem[] = [];
-let error = '';
+let error = "";
 
 try {
-  const res = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
+  const res = await fetch(apiUrl, { signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   items = await res.json();
 } catch (e) {
-  error = 'Could not load news. Please try again later.';
+  error = AppConstant.ERROR_MSG_LOAD_NEWS;
 }
 
-function formatDate(iso: string): string {
-  try {
-    return new Date(iso).toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  } catch {
-    return iso;
-  }
-}
+// function formatDate(iso: string): string {
+//   try {
+//     return new Date(iso).toLocaleString("en-US", {
+//       month: "short",
+//       day: "numeric",
+//       hour: "2-digit",
+//       minute: "2-digit",
+//     });
+//   } catch {
+//     return iso;
+//   }
+// }
 ---
 
-<Base title="News" description="Text-based news reader — top headlines from NHK and Reuters.">
-  <h1>News</h1>
+<Base title={AppConstant.NEWS_PAGE_META.title} description={AppConstant.NEWS_PAGE_META.description}>
+  <h1>{AppConstant.NEWS_PAGE_META.title}</h1>
 
   {error && <p class="status">{error}</p>}
   {!error && items.length === 0 && <p class="status">No articles found.</p>}
 
-  {items.length > 0 && (
-    <ul class="news-list" id="news-list">
-      {items.map(item => (
-        <li class="news-item">
-          <div class="news-item__title">
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-              {item.title}
-            </a>
-            <span class="badge">{item.source}</span>
-          </div>
-          <div class="news-item__meta">{formatDate(item.publishedAt)}</div>
-          {item.summary && (
-            <div class="news-item__summary">{item.summary}</div>
-          )}
-        </li>
-      ))}
-    </ul>
-  )}
+  {
+    items.length > 0 && (
+      <ul class="news-list" id="news-list">
+        {items.map((item) => (
+          <li class="news-item">
+            <div class="news-item__title">
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                {item.title}
+              </a>
+              <span class="badge">{item.source}</span>
+            </div>
+            <div class="news-item__meta">{AppUtil.formatDate(item.publishedAt)}</div>
+            {item.summary && <div class="news-item__summary">{item.summary}</div>}
+          </li>
+        ))}
+      </ul>
+    )
+  }
 
   <button id="refresh-btn" class="refresh-btn" style="display:none" aria-label="Refresh news">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path d="M1 4v6h6M23 20v-6h-6"/>
-      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M1 4v6h6M23 20v-6h-6"></path>
+      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
     </svg>
     Refresh
   </button>
 </Base>
 
 <script>
-  const btn = document.getElementById('refresh-btn') as HTMLButtonElement | null;
-  const list = document.getElementById('news-list');
+  import { AppConstant } from "../constant";
+
+  const btn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const list = document.getElementById("news-list");
 
   if (btn) {
-    btn.style.display = 'inline-flex';
+    btn.style.display = "inline-flex";
 
-    btn.addEventListener('click', async () => {
+    btn.addEventListener("click", async () => {
       btn.disabled = true;
-      btn.textContent = 'Loading…';
+      btn.textContent = "Loading…";
 
       try {
-        const res = await fetch('/api/news');
+        const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const fresh = await res.json() as Array<{
-          title: string; summary: string; url: string; publishedAt: string; source: string;
+        const fresh = (await res.json()) as Array<{
+          title: string;
+          summary: string;
+          url: string;
+          publishedAt: string;
+          source: string;
         }>;
 
         if (list) {
-          list.innerHTML = fresh.map(item => `
+          list.innerHTML = fresh
+            .map(
+              (item) => `
             <li class="news-item">
               <div class="news-item__title">
                 <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
                 <span class="badge">${item.source}</span>
               </div>
-              <div class="news-item__meta">${new Date(item.publishedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
-              ${item.summary ? `<div class="news-item__summary">${item.summary}</div>` : ''}
+              <div class="news-item__meta">${new Date(item.publishedAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</div>
+              ${item.summary ? `<div class="news-item__summary">${item.summary}</div>` : ""}
             </li>
-          `).join('');
+          `,
+            )
+            .join("");
         }
       } catch {
-        alert('Refresh failed. Check your connection.');
+        alert(AppConstant.ERROR_MSG_REFRESH_FAILED);
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> Refresh`;

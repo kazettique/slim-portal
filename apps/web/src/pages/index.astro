@@ -1,10 +1,16 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from "../layouts/Base.astro";
+import { AppConstant } from "../constant";
 ---
-<Base title="Home" description="A lightweight web portal for slow networks.">
-  <h1>Slim Portal</h1>
-  <p>Fast, minimal, text-first. Built for slow networks.</p>
+
+<Base title={AppConstant.HOME_PAGE_META.title} description={AppConstant.HOME_PAGE_META.description}>
+  <h1>{AppConstant.APP_TITLE}</h1>
+  <p>{AppConstant.APP_DESCRIPTION}</p>
   <ul>
-    <li><a href="/news">News Reader</a> — Top headlines from NHK &amp; Reuters</li>
+    <li>
+      <a href={AppConstant.NEWS_PAGE_META.url}>{AppConstant.NEWS_PAGE_META.title}</a>
+      <span> — </span>
+      <span>{AppConstant.NEWS_PAGE_META.description}</span>
+    </li>
   </ul>
 </Base>

@@ -1,14 +1,17 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
+import { AppConstant } from "../constant";
+import { AppUtil } from "../util";
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = 'A lightweight web portal for slow networks.' } = Astro.props;
+const { title, description = AppConstant.HOME_PAGE_META.description } = Astro.props;
 const canonicalPath = Astro.url.pathname;
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,20 +19,27 @@ const canonicalPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="manifest" href="/manifest.json" />
-    <title>{title} — Slim Portal</title>
+    <title>{AppUtil.getPageTitle(title)}</title>
   </head>
   <body>
     <header>
       <nav aria-label="Main">
-        <a href="/" aria-current={canonicalPath === '/' ? 'page' : undefined}>Home</a>
-        <a href="/news" aria-current={canonicalPath === '/news' ? 'page' : undefined}>News</a>
+        {
+          AppConstant.NAV_LIST.map((navItem) => (
+            <a href={navItem.url} aria-current={canonicalPath === navItem.url ? "page" : undefined}>
+              {navItem.title}
+            </a>
+          ))
+        }
+        <!-- <a href="/" aria-current={canonicalPath === "/" ? "page" : undefined}>Home</a> -->
+        <!-- <a href="/news" aria-current={canonicalPath === "/news" ? "page" : undefined}>News</a> -->
       </nav>
     </header>
     <main>
       <slot />
     </main>
     <footer>
-      <small>Slim Portal — optimized for slow networks</small>
+      <small>{AppConstant.FOOTER_MESSAGE}</small>
     </footer>
   </body>
 </html>
