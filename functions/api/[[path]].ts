@@ -2,7 +2,7 @@ interface Env {
   WORKER_URL: string;
 }
 
-export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
+export const onRequest = async ({ request, env }: { request: Request; env: Env }): Promise<Response> => {
   if (!env.WORKER_URL) {
     return new Response(JSON.stringify({ error: "WORKER_URL not configured" }), {
       status: 502,
