@@ -92,4 +92,5 @@ out/
 .pnp.*
 
 workers/api/.wrangler
+workers/api/.dev.vars
 apps/web/.astro

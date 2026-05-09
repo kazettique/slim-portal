@@ -17,4 +17,15 @@ export abstract class AppUtil {
       return iso;
     }
   }
+
+  public static formatDistance(meters: number | null): string {
+    if (meters === null) return "";
+    if (meters < 1000) return ` · ${meters}m`;
+    return ` · ${(meters / 1000).toFixed(1)}km`;
+  }
+
+  public static formatRating(rating: number | null, total: number): string {
+    if (rating === null) return "No rating";
+    return `★ ${rating.toFixed(1)} · ${total.toLocaleString()} reviews`;
+  }
 }

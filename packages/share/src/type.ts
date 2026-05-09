@@ -5,3 +5,12 @@ export interface NewsItem {
   publishedAt: string;
   source: string;
 }
+
+export interface PlaceItem {
+  name: string;
+  address: string;
+  rating: number | null;
+  totalRatings: number;
+  distanceMeters: number | null;
+  mapsUrl: string;
+}

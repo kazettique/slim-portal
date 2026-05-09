@@ -22,11 +22,18 @@ export abstract class AppConstant {
     url: "/news",
   };
 
-  public static readonly NAV_LIST: PageMeta[] = [this.HOME_PAGE_META, this.NEWS_PAGE_META];
+  public static readonly PLACES_PAGE_META: PageMeta = {
+    title: "Places",
+    description: "Search nearby locations with ratings.",
+    url: "/places",
+  };
+
+  public static readonly NAV_LIST: PageMeta[] = [this.HOME_PAGE_META, this.NEWS_PAGE_META, this.PLACES_PAGE_META];
 
   public static readonly FOOTER_MESSAGE: string = "Slim Portal - optimized for slow networks";
 
   public static readonly ERROR_MSG_LOAD_NEWS: string = "Could not load news. Please try again later.";
+  public static readonly ERROR_MSG_LOAD_PLACES: string = "Could not load places. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";
 }

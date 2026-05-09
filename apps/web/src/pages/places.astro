@@ -1,0 +1,124 @@
+---
+import Base from "../layouts/Base.astro";
+import { AppConstant } from "../constant";
+---
+
+<Base title={AppConstant.PLACES_PAGE_META.title} description={AppConstant.PLACES_PAGE_META.description}>
+  <h1>{AppConstant.PLACES_PAGE_META.title}</h1>
+  <p>{AppConstant.PLACES_PAGE_META.description}</p>
+
+  <form id="places-form" class="places-form">
+    <div class="places-form__row">
+      <input
+        id="query-input"
+        type="search"
+        name="q"
+        placeholder="e.g. ramen, coffee, pharmacy"
+        autocomplete="off"
+        required
+        class="places-form__input"
+      />
+      <button type="submit" class="places-form__submit">Search</button>
+    </div>
+    <button type="button" id="locate-btn" class="locate-btn">Use my location</button>
+  </form>
+
+  <p id="places-status" class="status" aria-live="polite"></p>
+
+  <ul id="places-list" class="places-list"></ul>
+</Base>
+
+<script>
+  import { AppConstant } from "../constant";
+  import { AppUtil } from "../util";
+  import type { PlaceItem } from "@slim-portal/share";
+
+  const form = document.getElementById("places-form") as HTMLFormElement | null;
+  const input = document.getElementById("query-input") as HTMLInputElement | null;
+  const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
+  const list = document.getElementById("places-list") as HTMLUListElement | null;
+  const status = document.getElementById("places-status") as HTMLParagraphElement | null;
+
+  let userLat: number | null = null;
+  let userLng: number | null = null;
+
+  function setStatus(msg: string) {
+    if (status) status.textContent = msg;
+  }
+
+  function renderPlaces(items: PlaceItem[]) {
+    if (!list) return;
+    if (items.length === 0) {
+      list.innerHTML = "";
+      setStatus("No places found.");
+      return;
+    }
+    setStatus("");
+    list.innerHTML = items
+      .map(
+        (p) => `
+      <li class="place-item">
+        <div class="place-item__name">
+          <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+          ${AppUtil.formatDistance(p.distanceMeters)}
+        </div>
+        <div class="place-item__address">${p.address}</div>
+        <div class="place-item__meta">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
+      </li>
+    `,
+      )
+      .join("");
+  }
+
+  if (locateBtn) {
+    if (!navigator.geolocation) {
+      locateBtn.style.display = "none";
+    } else {
+      locateBtn.addEventListener("click", () => {
+        locateBtn.disabled = true;
+        locateBtn.textContent = "Locating…";
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            userLat = pos.coords.latitude;
+            userLng = pos.coords.longitude;
+            locateBtn.textContent = "Location set ✓";
+          },
+          () => {
+            locateBtn.disabled = false;
+            locateBtn.textContent = "Use my location";
+            setStatus("Could not get location. Search will work without it.");
+          },
+          { timeout: AppConstant.REQUEST_TIMEOUT },
+        );
+      });
+    }
+  }
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const q = input?.value.trim() ?? "";
+      if (!q) return;
+
+      setStatus("Searching…");
+      if (list) list.innerHTML = "";
+
+      const params = new URLSearchParams({ q });
+      if (userLat !== null && userLng !== null) {
+        params.set("lat", String(userLat));
+        params.set("lng", String(userLng));
+      }
+
+      try {
+        const res = await fetch(`${AppConstant.API_BASE_URL}/places?${params}`, {
+          signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const items = (await res.json()) as PlaceItem[];
+        renderPlaces(items);
+      } catch {
+        setStatus(AppConstant.ERROR_MSG_LOAD_PLACES);
+      }
+    });
+  }
+</script>

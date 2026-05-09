@@ -19,19 +19,6 @@ try {
 } catch (e) {
   error = AppConstant.ERROR_MSG_LOAD_NEWS;
 }
-
-// function formatDate(iso: string): string {
-//   try {
-//     return new Date(iso).toLocaleString("en-US", {
-//       month: "short",
-//       day: "numeric",
-//       hour: "2-digit",
-//       minute: "2-digit",
-//     });
-//   } catch {
-//     return iso;
-//   }
-// }
 ---
 
 <Base title={AppConstant.NEWS_PAGE_META.title} description={AppConstant.NEWS_PAGE_META.description}>

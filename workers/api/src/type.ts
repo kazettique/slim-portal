@@ -5,9 +5,22 @@ export interface Feed {
 
 export interface Env {
   ALLOWED_ORIGIN_DEV?: string;
+  GOOGLE_PLACES_API_KEY: string;
   // Future:
   // NEWS_CACHE: KVNamespace;
-  // GOOGLE_PLACES_API_KEY: string;
+}
+
+export interface GooglePlace {
+  displayName?: { text?: string };
+  formattedAddress?: string;
+  rating?: number;
+  userRatingCount?: number;
+  location?: { latitude?: number; longitude?: number };
+  googleMapsUri?: string;
+}
+
+export interface GooglePlacesResponse {
+  places?: GooglePlace[];
 }
 
 export enum HttpRequestMethod {

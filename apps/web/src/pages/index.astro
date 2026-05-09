@@ -7,10 +7,17 @@ import { AppConstant } from "../constant";
   <h1>{AppConstant.APP_TITLE}</h1>
   <p>{AppConstant.APP_DESCRIPTION}</p>
   <ul>
-    <li>
-      <a href={AppConstant.NEWS_PAGE_META.url}>{AppConstant.NEWS_PAGE_META.title}</a>
-      <span> — </span>
-      <span>{AppConstant.NEWS_PAGE_META.description}</span>
-    </li>
+    {
+      AppConstant.NAV_LIST.map(
+        (feature, index) =>
+          index !== 0 && (
+            <li>
+              <a href={feature.url}>{feature.title}</a>
+              <span> — </span>
+              <span>{feature.description}</span>
+            </li>
+          ),
+      )
+    }
   </ul>
 </Base>
