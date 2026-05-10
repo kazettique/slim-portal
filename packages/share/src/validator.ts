@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { NewsItem, PlaceItem } from "./type";
+import type { NewsItem, PlaceItem } from "./type";
 
 export abstract class ShareValidator {
   public static NEWS_ITEM_VALIDATOR: z.ZodType<NewsItem> = z.object({
@@ -17,5 +17,7 @@ export abstract class ShareValidator {
     totalRatings: z.number().int().nonnegative(),
     distanceMeters: z.number().int().nonnegative().nullable(),
     mapsUrl: z.string(),
+    lat: z.number().nullable(),
+    lng: z.number().nullable(),
   });
 }

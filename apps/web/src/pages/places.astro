@@ -60,6 +60,7 @@ import { AppConstant } from "../constant";
       <li class="place-item">
         <div class="place-item__name">
           <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+          ${p.lat !== null && p.lng !== null ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>` : ""}
           ${AppUtil.formatDistance(p.distanceMeters)}
         </div>
         <div class="place-item__address">${p.address}</div>

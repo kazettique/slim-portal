@@ -69,6 +69,8 @@ export abstract class PlacesLib {
           ? this.haversineMeters(lat, lng, p.location.latitude, p.location.longitude)
           : null,
       mapsUrl: p.googleMapsUri ?? "",
+      lat: p.location?.latitude ?? null,
+      lng: p.location?.longitude ?? null,
     }));
 
     const cached_response = new Response(JSON.stringify(items), {

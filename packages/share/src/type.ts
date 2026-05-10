@@ -13,4 +13,6 @@ export interface PlaceItem {
   totalRatings: number;
   distanceMeters: number | null;
   mapsUrl: string;
+  lat: number | null;
+  lng: number | null;
 }

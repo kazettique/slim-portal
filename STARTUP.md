@@ -228,7 +228,7 @@ bun run deploy:worker  # → wrangler deploy
 | **4 — Done ✓**  | PWA: vanilla service worker, offline shell, last-content cache. SW bundled via `bun build` (IIFE, 2.6 KB).                                                                     |
 | **5 — Planned** | Text search via DuckDuckGo Instant Answer API (no key). New `/search` page + `GET /api/search` worker route. `SearchItem { title, url, snippet }` added to shared types.      |
 | **6 — Planned** | SW cache transparency: `X-Cache-Date` header injected on cache hits; frontend shows "Cached at HH:mm" + Refresh button; `/api/search` uses `cacheFirst`, bypass via `cache: 'no-store'`. |
-| **7 — Planned** | Apple Maps links in Places: add `lat`/`lng` to `PlaceItem`; render `https://maps.apple.com/?ll={lat},{lng}&q={name}` alongside Google Maps URL on the places page.            |
+| **7 — Done ✓**  | Apple Maps links in Places: add `lat`/`lng` to `PlaceItem`; render `https://maps.apple.com/?ll={lat},{lng}&q={name}` alongside Google Maps URL on the places page.            |
 
 ---
 
