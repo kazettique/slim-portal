@@ -67,6 +67,27 @@
         throw err;
       }
     }
+    static async apiCacheFirst(request) {
+      if (request.cache === "no-store") {
+        return SwHandler.networkFirst(request);
+      }
+      const cache = await caches.open(SwConstant.API_CACHE);
+      const cached = await cache.match(request);
+      if (cached)
+        return cached;
+      try {
+        const response = await fetch(request);
+        if (response.ok) {
+          cache.put(request, response.clone());
+        }
+        return response;
+      } catch {
+        return new Response(JSON.stringify({ error: "Offline" }), {
+          status: 503,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+    }
   }
   sw.addEventListener("install", (event) => SwHandler.install(event));
   sw.addEventListener("activate", (event) => SwHandler.activate(event));
@@ -74,7 +95,9 @@
     const url = new URL(event.request.url);
     if (url.origin !== sw.location.origin)
       return;
-    if (url.pathname.startsWith("/api/")) {
+    if (url.pathname === "/api/search") {
+      event.respondWith(SwHandler.apiCacheFirst(event.request));
+    } else if (url.pathname.startsWith("/api/")) {
       event.respondWith(SwHandler.networkFirst(event.request));
     } else {
       event.respondWith(SwHandler.cacheFirst(event.request));
