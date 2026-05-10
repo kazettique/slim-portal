@@ -16,3 +16,9 @@ export interface PlaceItem {
   lat: number | null;
   lng: number | null;
 }
+
+export interface SearchItem {
+  title: string;
+  url: string;
+  snippet: string;
+}

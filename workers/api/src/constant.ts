@@ -17,4 +17,8 @@ export abstract class WorkerConstant {
   public static readonly PLACES_API_URL = "https://places.googleapis.com/v1/places:searchText";
   public static readonly FIELD_MASK =
     "places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.location,places.googleMapsUri";
+
+  public static readonly SEARCH_CACHE_TTL: number = 60 * 60;
+  public static readonly SEARCH_MAX_RESULTS: number = 10;
+  public static readonly DUCKDUCKGO_API_URL: string = "https://api.duckduckgo.com/";
 }
