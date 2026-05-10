@@ -20,20 +20,22 @@ export async function handlePlaces(request: Request, env: Env, ctx: ExecutionCon
   }
 
   try {
-    const items = await PlacesLib.search(
+    const { items, cachedAt } = await PlacesLib.search(
       result.data.q,
       result.data.lat ?? null,
       result.data.lng ?? null,
       env,
       ctx,
     );
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      "Cache-Control": `public, max-age=${WorkerConstant.PLACES_CACHE_TTL}`,
+      "X-Content-Type-Options": "nosniff",
+    };
+    if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(items), {
       status: HttpStatusCode.OK,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${WorkerConstant.PLACES_CACHE_TTL}`,
-        "X-Content-Type-Options": "nosniff",
-      },
+      headers,
     });
   } catch (err) {
     console.error("handlePlaces error:", err);

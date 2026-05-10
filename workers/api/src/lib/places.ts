@@ -23,11 +23,14 @@ export abstract class PlacesLib {
     lng: number | null,
     env: Env,
     ctx: ExecutionContext,
-  ): Promise<PlaceItem[]> {
+  ): Promise<{ items: PlaceItem[]; cachedAt: string | null }> {
     const cache = await caches.open("places");
     const key = this.cacheKey(q, lat, lng);
     const cached = await cache.match(key);
-    if (cached) return (await cached.json()) as PlaceItem[];
+    if (cached) {
+      const cachedAt = cached.headers.get("X-Cached-At");
+      return { items: (await cached.json()) as PlaceItem[], cachedAt };
+    }
 
     const body: Record<string, unknown> = {
       textQuery: q,
@@ -77,10 +80,11 @@ export abstract class PlacesLib {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": `public, max-age=${WorkerConstant.PLACES_CACHE_TTL}`,
+        "X-Cached-At": new Date().toISOString(),
       },
     });
     ctx.waitUntil(cache.put(key, cached_response));
 
-    return items;
+    return { items, cachedAt: null };
   }
 }

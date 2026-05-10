@@ -45,12 +45,13 @@ export abstract class RssLib {
     source: string,
     cache: Cache,
     ctx: ExecutionContext,
-  ): Promise<NewsItem[]> {
+  ): Promise<{ items: NewsItem[]; cachedAt: string | null }> {
     const cacheKey = new Request(feedUrl);
 
     const cached = await cache.match(cacheKey);
     if (cached) {
-      return (await cached.json()) as NewsItem[];
+      const cachedAt = cached.headers.get("X-Cached-At");
+      return { items: (await cached.json()) as NewsItem[], cachedAt };
     }
 
     const res = await fetch(feedUrl, {
@@ -69,14 +70,15 @@ export abstract class RssLib {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": `public, max-age=${WorkerConstant.CACHE_TTL}`,
+        "X-Cached-At": new Date().toISOString(),
       },
     });
     ctx.waitUntil(cache.put(cacheKey, cacheResponse));
 
-    return items;
+    return { items, cachedAt: null };
   }
 
-  public static async fetchAllFeeds(ctx: ExecutionContext): Promise<NewsItem[]> {
+  public static async fetchAllFeeds(ctx: ExecutionContext): Promise<{ items: NewsItem[]; cachedAt: string | null }> {
     const cache = await caches.open("news-feeds");
 
     const results = await Promise.allSettled(
@@ -84,17 +86,32 @@ export abstract class RssLib {
     );
 
     const items: NewsItem[] = [];
+    const cachedAts: string[] = [];
+    let anyFresh = false;
+
     for (const [i, result] of results.entries()) {
       if (result.status === "fulfilled") {
-        console.log(`[rss] ${WorkerConstant.FEEDS[i]?.source}: ${result.value.length} items`);
-        items.push(...result.value);
+        console.log(`[rss] ${WorkerConstant.FEEDS[i]?.source}: ${result.value.items.length} items`);
+        items.push(...result.value.items);
+        if (result.value.cachedAt !== null) {
+          cachedAts.push(result.value.cachedAt);
+        } else {
+          anyFresh = true;
+        }
       } else {
         console.error(`[rss] ${WorkerConstant.FEEDS[i]?.source} failed:`, result.reason);
+        anyFresh = true;
       }
     }
 
     items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-    return items.slice(0, 30);
+    // Only report a cache date when ALL feeds were served from cache
+    const cachedAt =
+      !anyFresh && cachedAts.length > 0
+        ? cachedAts.reduce((earliest, ts) => (ts < earliest ? ts : earliest))
+        : null;
+
+    return { items: items.slice(0, 30), cachedAt };
   }
 }
