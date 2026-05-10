@@ -1,4 +1,5 @@
 import type { PageMeta } from "./type";
+import { ShareConstant } from "@slim-portal/share";
 
 export abstract class AppConstant {
   public static readonly APP_TITLE: string = "Slim Portal";
@@ -13,19 +14,19 @@ export abstract class AppConstant {
   public static readonly HOME_PAGE_META: PageMeta = {
     title: "Home",
     description: "A lightweight web portal for slow networks.",
-    url: "/",
+    url: ShareConstant.PAGE_URL_HOME,
   };
 
   public static readonly NEWS_PAGE_META: PageMeta = {
     title: "News",
     description: "Text-based news reader - top headlines from NHK and BBC.",
-    url: "/news",
+    url: ShareConstant.PAGE_URL_NEWS,
   };
 
   public static readonly PLACES_PAGE_META: PageMeta = {
     title: "Places",
     description: "Search nearby locations with ratings.",
-    url: "/places",
+    url: ShareConstant.PAGE_URL_PLACES,
   };
 
   public static readonly NAV_LIST: PageMeta[] = [this.HOME_PAGE_META, this.NEWS_PAGE_META, this.PLACES_PAGE_META];

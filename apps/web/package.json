@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "type": "tsc",
-    "build": "astro build",
+    "type:sw": "tsc -p tsconfig.sw.json --noEmit",
+    "build:sw": "bun build src/sw.ts --outfile public/sw.js --target browser --format iife",
+    "build": "bun run build:sw && astro build",
     "preview": "astro preview",
     "check": "astro check"
   },

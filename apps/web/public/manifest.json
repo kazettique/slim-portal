@@ -1,9 +1,12 @@
 {
   "name": "Slim Portal",
   "short_name": "Portal",
+  "description": "Lightweight portal for slow networks",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1a1a1a",
-  "icons": []
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
 }

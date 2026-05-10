@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["ES2019", "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "composite": true
+  },
+  "include": ["src/sw.ts", "src/sw-constant.ts"]
+}

@@ -17,6 +17,7 @@ const canonicalPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1a1a1a" />
     <meta name="description" content={description} />
     <link rel="manifest" href="/manifest.json" />
     <title>{AppUtil.getPageTitle(title)}</title>
@@ -41,5 +42,12 @@ const canonicalPath = Astro.url.pathname;
     <footer>
       <small>{AppConstant.FOOTER_MESSAGE}</small>
     </footer>
+    <script is:inline>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js");
+        });
+      }
+    </script>
   </body>
 </html>

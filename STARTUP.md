@@ -44,7 +44,7 @@ External APIs (keys never exposed to client)
 | Edge functions     | Cloudflare Workers            | Free 100k req/day, zero cold start, built-in Cache API |
 | Caching            | CF Cache API + CF KV          | Free, no Redis needed at this scale                    |
 | CSS                | Hand-written minimal CSS      | No frameworks, target < 8 KB                           |
-| PWA                | Service Worker (Astro plugin) | Cache app shell + last fetched content                 |
+| PWA                | Vanilla Service Worker (IIFE) | Cache app shell + last fetched content, no extra deps  |
 
 ---
 
@@ -195,9 +195,10 @@ bun run dev:worker     # → cd workers/api && wrangler dev
 bun run type:web       # → TypeScript check for apps/web
 bun run type:worker    # → TypeScript check for workers/api
 bun run type:share     # → TypeScript check for packages/share
+bun run type:sw        # → TypeScript check for apps/web/src/sw.ts (WebWorker lib)
 
 # Build & deploy
-bun run build:web      # → astro build
+bun run build:web      # → bun build sw.ts (IIFE bundle) + astro build
 bun run deploy:web     # → astro build + wrangler pages deploy
 bun run deploy:worker  # → wrangler deploy
 ```
@@ -206,12 +207,12 @@ bun run deploy:worker  # → wrangler deploy
 
 ## Phase Plan
 
-| Phase          | Scope                                                                                      |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| **1 — Done ✓** | Astro shell + CF Worker + RSS news reader (NHK + BBC). Architecture proven, zero API cost. |
-| **2**          | Google Places proxy (location search + ratings).                                           |
-| **3**          | Japan transit lookup (evaluate GTFS vs Jorudan).                                           |
-| **4**          | PWA: service worker, offline shell, last-content cache.                                    |
+| Phase           | Scope                                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **1 — Done ✓**  | Astro shell + CF Worker + RSS news reader (NHK + BBC). Architecture proven, zero API cost.                                      |
+| **2 — Done ✓**  | Google Places proxy (location search + ratings).                                                                                |
+| **3 — Blocked** | Japan transit lookup — waiting for Jorudan Open API credentials (applied 2026-05-10). Changes stashed as `phase-3-transit-wip`. |
+| **4 — Done ✓**  | PWA: vanilla service worker, offline shell, last-content cache. SW bundled via `bun build` (IIFE, 2.6 KB).                      |
 
 ---
 
@@ -229,7 +230,7 @@ bun run deploy:worker  # → wrangler deploy
 
 ## Notes for Claude Code
 
-- Phase 1 is complete. Begin Phase 2 (Google Places) next.
+- Phases 1, 2, 4 complete. Phase 3 (transit) blocked — see Phase Plan above.
 - Worker router uses URL pattern matching — no framework (no Hono needed unless routing gets complex)
 - **RSS parsing**: Do NOT use `DOMParser`. The worker tsconfig uses `lib: ["ES2022"]` with no `"DOM"` — adding DOM lib causes conflicts with `@cloudflare/workers-types`. Use the pure regex parser already in `workers/api/src/lib/rss.ts` (`extractTag`, `extractLinkUrl`, `stripCdata`).
 - **Package manager**: Bun everywhere — `bun install`, `bun run <script>`. Never use npm.

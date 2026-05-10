@@ -10,6 +10,7 @@
     "dev:web": "bun run --cwd apps/web dev",
     "dev:worker": "bun run --cwd workers/api dev",
     "type:web": "bun run --cwd apps/web type",
+    "type:sw": "bun run --cwd apps/web type:sw",
     "type:worker": "bun run --cwd workers/api type",
     "type:share": "bun run --cwd packages/share type",
     "build:web": "bun run --cwd apps/web build",
