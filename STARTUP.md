@@ -227,7 +227,7 @@ bun run deploy:worker  # → wrangler deploy
 | **3 — Blocked** | Japan transit lookup — waiting for Jorudan Open API credentials (applied 2026-05-10). Changes stashed as `phase-3-transit-wip`.                                               |
 | **4 — Done ✓**  | PWA: vanilla service worker, offline shell, last-content cache. SW bundled via `bun build` (IIFE, 2.6 KB).                                                                     |
 | **5 — Planned** | Text search via DuckDuckGo Instant Answer API (no key). New `/search` page + `GET /api/search` worker route. `SearchItem { title, url, snippet }` added to shared types.      |
-| **6 — Planned** | SW cache transparency: `X-Cache-Date` header injected on cache hits; frontend shows "Cached at HH:mm" + Refresh button; `/api/search` uses `cacheFirst`, bypass via `cache: 'no-store'`. |
+| **6 — Done ✓**  | SW cache transparency: `X-Cache-Date` header injected on cache hits; frontend shows "Cached at HH:mm" + Refresh button; `/api/search` uses `cacheFirst`, bypass via `cache: 'no-store'`. |
 | **7 — Done ✓**  | Apple Maps links in Places: add `lat`/`lng` to `PlaceItem`; render `https://maps.apple.com/?ll={lat},{lng}&q={name}` alongside Google Maps URL on the places page.            |
 
 ---
