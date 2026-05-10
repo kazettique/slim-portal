@@ -28,4 +28,11 @@ export abstract class AppUtil {
     if (rating === null) return "No rating";
     return `★ ${rating.toFixed(1)} · ${total.toLocaleString()} reviews`;
   }
+
+  public static formatCacheTime(isoTs: string): string {
+    const d = new Date(isoTs);
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mm = String(d.getMinutes()).padStart(2, "0");
+    return `Cached at ${hh}:${mm}`;
+  }
 }

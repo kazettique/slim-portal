@@ -37,4 +37,7 @@ export abstract class AppConstant {
   public static readonly ERROR_MSG_LOAD_PLACES: string = "Could not load places. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";
+
+  public static readonly REFRESH_ICON: string =
+    `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>`;
 }

@@ -27,6 +27,25 @@ try {
   {error && <p class="status">{error}</p>}
   {!error && items.length === 0 && <p class="status">No articles found.</p>}
 
+  <div class="news-toolbar toolbar" id="news-toolbar">
+    <button id="refresh-btn" class="refresh-btn" aria-label="Refresh news">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M1 4v6h6M23 20v-6h-6"></path>
+        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+      </svg>
+      Refresh
+    </button>
+    <span id="cache-status" class="cache-status" aria-live="polite"></span>
+  </div>
+
   {
     items.length > 0 && (
       <ul class="news-list" id="news-list">
@@ -45,39 +64,26 @@ try {
       </ul>
     )
   }
-
-  <button id="refresh-btn" class="refresh-btn" style="display:none" aria-label="Refresh news">
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      aria-hidden="true"
-    >
-      <path d="M1 4v6h6M23 20v-6h-6"></path>
-      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-    </svg>
-    Refresh
-  </button>
 </Base>
 
 <script>
   import { AppConstant } from "../constant";
+  import { AppUtil } from "../util";
 
   const btn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
   const list = document.getElementById("news-list");
 
   if (btn) {
-    btn.style.display = "inline-flex";
-
     btn.addEventListener("click", async () => {
       btn.disabled = true;
-      btn.textContent = "Loading…";
+      btn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      if (cacheStatus) cacheStatus.textContent = "";
 
       try {
-        const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url);
+        const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url, {
+          cache: "no-store",
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const fresh = (await res.json()) as Array<{
           title: string;
@@ -103,11 +109,14 @@ try {
             )
             .join("");
         }
+
+        const cacheDate = res.headers.get("X-Cache-Date");
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate) : "";
       } catch {
         alert(AppConstant.ERROR_MSG_REFRESH_FAILED);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> Refresh`;
+        btn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
       }
     });
   }
