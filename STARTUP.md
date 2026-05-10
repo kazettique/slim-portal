@@ -8,8 +8,10 @@ Features (in priority order):
 
 1. Text-based news reader (RSS)
 2. Nearby location search with ratings (Google Places)
-3. Japan transit transfer lookup
-4. (Future) General text navigation
+3. Japan transit transfer lookup (blocked — Phase 3, awaiting Jorudan credentials)
+4. Text search via DuckDuckGo Instant Answer API (Phase 5)
+5. SW cache transparency — cached date display + refresh bypass (Phase 6)
+6. Apple Maps links alongside Google Maps in Places (Phase 7)
 
 ---
 
@@ -20,13 +22,15 @@ Browser (Astro PWA)
   │
   ├─ fetch /api/news
   ├─ fetch /api/places?q=...&lat=...&lng=...
+  ├─ fetch /api/search?q=...
   └─ fetch /api/transit?from=...&to=...
   │
   ▼
 Cloudflare Workers (edge proxy + data stripper)
   │
   ├─ RSS feeds        → parse XML → {title, summary, url, date}[]
-  ├─ Google Places    → strip response → {name, rating, address, distance}[]
+  ├─ Google Places    → strip response → {name, rating, address, distance, lat, lng}[]
+  ├─ DuckDuckGo       → strip response → {title, url, snippet}[]
   └─ Transit API      → {route, time, transfers, platform}[]
   │
   ▼
@@ -116,9 +120,17 @@ slim-portal/
 
 - **Source:** Google Places API — Text Search + Place Details
 - **Env var:** `GOOGLE_PLACES_API_KEY` (Workers secret)
-- **Strip to:** `{ name, rating, totalRatings, address, distanceMeters, mapsUrl }`
+- **Strip to:** `{ name, rating, totalRatings, address, distanceMeters, mapsUrl, lat, lng }`
 - **Cache TTL:** 30–60 minutes (CF Cache API, keyed by query+coords)
 - **Note:** $200/month free credit from Google covers ~4k–7k searches
+
+### Text Search (Phase 5)
+
+- **Source:** DuckDuckGo Instant Answer API — no API key required
+- **Endpoint:** `https://api.duckduckgo.com/?q={q}&format=json&no_html=1&skip_disambig=1`
+- **Strip to:** `{ title, url, snippet }[]` (max 10 results)
+- **Mapping priority:** `Answer` → `AbstractText` → `Results[]` → leaf `RelatedTopics[]`
+- **Cache TTL:** 1 hour (CF Cache API)
 
 ### Transit (Japan)
 
@@ -150,6 +162,7 @@ Request hits Worker
 | News              | 15 min        | 30 min   |
 | Place search      | 30 min        | 60 min   |
 | Place details     | —             | 24 hours |
+| Search (DDG)      | 1 hour        | —        |
 | Transit timetable | 1 hour        | 6 hours  |
 | Real-time transit | No cache      | No cache |
 
@@ -207,12 +220,15 @@ bun run deploy:worker  # → wrangler deploy
 
 ## Phase Plan
 
-| Phase           | Scope                                                                                                                           |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **1 — Done ✓**  | Astro shell + CF Worker + RSS news reader (NHK + BBC). Architecture proven, zero API cost.                                      |
-| **2 — Done ✓**  | Google Places proxy (location search + ratings).                                                                                |
-| **3 — Blocked** | Japan transit lookup — waiting for Jorudan Open API credentials (applied 2026-05-10). Changes stashed as `phase-3-transit-wip`. |
-| **4 — Done ✓**  | PWA: vanilla service worker, offline shell, last-content cache. SW bundled via `bun build` (IIFE, 2.6 KB).                      |
+| Phase           | Scope                                                                                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1 — Done ✓**  | Astro shell + CF Worker + RSS news reader (NHK + BBC). Architecture proven, zero API cost.                                                                                     |
+| **2 — Done ✓**  | Google Places proxy (location search + ratings).                                                                                                                               |
+| **3 — Blocked** | Japan transit lookup — waiting for Jorudan Open API credentials (applied 2026-05-10). Changes stashed as `phase-3-transit-wip`.                                               |
+| **4 — Done ✓**  | PWA: vanilla service worker, offline shell, last-content cache. SW bundled via `bun build` (IIFE, 2.6 KB).                                                                     |
+| **5 — Planned** | Text search via DuckDuckGo Instant Answer API (no key). New `/search` page + `GET /api/search` worker route. `SearchItem { title, url, snippet }` added to shared types.      |
+| **6 — Planned** | SW cache transparency: `X-Cache-Date` header injected on cache hits; frontend shows "Cached at HH:mm" + Refresh button; `/api/search` uses `cacheFirst`, bypass via `cache: 'no-store'`. |
+| **7 — Planned** | Apple Maps links in Places: add `lat`/`lng` to `PlaceItem`; render `https://maps.apple.com/?ll={lat},{lng}&q={name}` alongside Google Maps URL on the places page.            |
 
 ---
 
@@ -230,7 +246,7 @@ bun run deploy:worker  # → wrangler deploy
 
 ## Notes for Claude Code
 
-- Phases 1, 2, 4 complete. Phase 3 (transit) blocked — see Phase Plan above.
+- Phases 1, 2, 4 complete. Phase 3 (transit) blocked — see Phase Plan above. Phases 5, 6, 7 planned — implement in separate sessions.
 - Worker router uses URL pattern matching — no framework (no Hono needed unless routing gets complex)
 - **RSS parsing**: Do NOT use `DOMParser`. The worker tsconfig uses `lib: ["ES2022"]` with no `"DOM"` — adding DOM lib causes conflicts with `@cloudflare/workers-types`. Use the pure regex parser already in `workers/api/src/lib/rss.ts` (`extractTag`, `extractLinkUrl`, `stripCdata`).
 - **Package manager**: Bun everywhere — `bun install`, `bun run <script>`. Never use npm.
