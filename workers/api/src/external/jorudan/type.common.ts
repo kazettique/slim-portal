@@ -1,226 +1,226 @@
 export enum JErrorCode {
-  Success = 0, // 成功
-  InitFailed = 1, // 初期化失敗
-  ConfigLoadFailed = 2, // 設定ファイル読込失敗
-  InvalidRequest = 3, // 不正なリクエスト
-  AccessKeyMismatch = 4, // アクセスキー不一致
-  TransitServerConnectFailed = 5, // 乗換案内サーバー接続失敗
-  TransitServerDisconnectFailed = 6, // 乗換案内サーバー切断失敗
-  ShutdownFailed = 8, // 終了処理失敗
-  ApiProcessingError = 9, // API処理エラー
-  AccessNotPermitted = 10, // アクセス許可対象外
-  RequestLimitExceeded = 11, // リクエスト数上限エラー
+  SUCCESS = 0, // 成功
+  INIT_FAILED = 1, // 初期化失敗
+  CONFIG_LOAD_FAILED = 2, // 設定ファイル読込失敗
+  INVALID_REQUEST = 3, // 不正なリクエスト
+  ACCESS_KEY_MISMATCH = 4, // アクセスキー不一致
+  TRANSIT_SERVER_CONNECT_FAILED = 5, // 乗換案内サーバー接続失敗
+  TRANSIT_SERVER_DISCONNECT_FAILED = 6, // 乗換案内サーバー切断失敗
+  SHUTDOWN_FAILED = 8, // 終了処理失敗
+  API_PROCESSING_ERROR = 9, // API処理エラー
+  ACCESS_NOT_PERMITTED = 10, // アクセス許可対象外
+  REQUEST_LIMIT_EXCEEDED = 11, // リクエスト数上限エラー
 
-  StationSearchInitError = 200, // 駅名検索 初期化エラー
-  StationSearchConditionFailed = 201, // 駅名検索 処理条件設定失敗
-  StationSearchFailed = 202, // 駅名検索 検索失敗
+  STATION_SEARCH_INIT_ERROR = 200, // 駅名検索 初期化エラー
+  STATION_SEARCH_CONDITION_FAILED = 201, // 駅名検索 処理条件設定失敗
+  STATION_SEARCH_FAILED = 202, // 駅名検索 検索失敗
 
-  LineSearchInitError = 300, // 路線名検索 初期化エラー
-  LineSearchConditionFailed = 301, // 路線名検索 処理条件設定失敗
-  LineSearchFailed = 302, // 路線名検索 検索失敗
+  LINE_SEARCH_INIT_ERROR = 300, // 路線名検索 初期化エラー
+  LINE_SEARCH_CONDITION_FAILED = 301, // 路線名検索 処理条件設定失敗
+  LINE_SEARCH_FAILED = 302, // 路線名検索 検索失敗
 
-  StationGetInitError = 400, // 駅取得 初期化エラー
-  StationGetConditionFailed = 401, // 駅取得 処理条件設定失敗
-  StationGetFailed = 402, // 駅取得 処理失敗
+  STATION_GET_INIT_ERROR = 400, // 駅取得 初期化エラー
+  STATION_GET_CONDITION_FAILED = 401, // 駅取得 処理条件設定失敗
+  STATION_GET_FAILED = 402, // 駅取得 処理失敗
 
-  LineGetInitError = 500, // 路線取得 初期化エラー
-  LineGetConditionFailed = 501, // 路線取得 処理条件設定失敗
-  LineGetFailed = 502, // 路線取得 処理失敗
+  LINE_GET_INIT_ERROR = 500, // 路線取得 初期化エラー
+  LINE_GET_CONDITION_FAILED = 501, // 路線取得 処理条件設定失敗
+  LINE_GET_FAILED = 502, // 路線取得 処理失敗
 
-  RouteSearchInitError = 2400, // 経路検索 初期化エラー
-  RouteSearchConditionFailed = 2401, // 経路検索 処理条件設定失敗
-  RouteSearchFailed = 2402, // 経路検索 経路検索失敗
-  RouteSearchSaveFailed = 2403, // 経路検索 経路情報保存失敗
-  RouteSearchInsufficientStations = 2404, // 経路検索 駅不足
-  RouteSearchDateTimeError = 2405, // 経路検索 日時指定エラー
-  RouteSearchFailed2 = 2406, // 経路検索 経路検索失敗
+  ROUTE_SEARCH_INIT_ERROR = 2400, // 経路検索 初期化エラー
+  ROUTE_SEARCH_CONDITION_FAILED = 2401, // 経路検索 処理条件設定失敗
+  ROUTE_SEARCH_FAILED = 2402, // 経路検索 経路検索失敗
+  ROUTE_SEARCH_SAVE_FAILED = 2403, // 経路検索 経路情報保存失敗
+  ROUTE_SEARCH_INSUFFICIENT_STATIONS = 2404, // 経路検索 駅不足
+  ROUTE_SEARCH_DATE_TIME_ERROR = 2405, // 経路検索 日時指定エラー
+  ROUTE_SEARCH_FAILED_2 = 2406, // 経路検索 経路検索失敗
 
-  RouteSearch2InitError = 3400, // 経路検索 初期化エラー
-  RouteSearch2ConditionFailed = 3401, // 経路検索 処理条件設定失敗
-  RouteSearch2Failed = 3402, // 経路検索 経路検索失敗
-  RouteSearch2SaveFailed = 3403, // 経路検索 経路情報保存失敗
-  RouteSearch2InsufficientStations = 3404, // 経路検索 駅不足
-  RouteSearch2DateTimeError = 3405, // 経路検索 日時指定エラー
-  RouteSearch2Failed2 = 3406, // 経路検索 経路検索失敗
+  ROUTE_SEARCH_2_INIT_ERROR = 3400, // 経路検索 初期化エラー
+  ROUTE_SEARCH_2_CONDITION_FAILED = 3401, // 経路検索 処理条件設定失敗
+  ROUTE_SEARCH_2_FAILED = 3402, // 経路検索 経路検索失敗
+  ROUTE_SEARCH_2_SAVE_FAILED = 3403, // 経路検索 経路情報保存失敗
+  ROUTE_SEARCH_2_INSUFFICIENT_STATIONS = 3404, // 経路検索 駅不足
+  ROUTE_SEARCH_2_DATE_TIME_ERROR = 3405, // 経路検索 日時指定エラー
+  ROUTE_SEARCH_2_FAILED_2 = 3406, // 経路検索 経路検索失敗
 }
 
 // 検索モード
 export enum SearchMode {
-  Default = 0, // 前方一致検索(デフォルト)
-  FullMatch = 1, // 完全一致優先検索
+  DEFAULT = 0, // 前方一致検索(デフォルト)
+  FULL_MATCH = 1, // 完全一致優先検索
 }
 
 // 乗換候補・リクエストの交通機関種別
 export enum TransitMode {
-  Rail = "R", // 鉄道
-  AirportBus = "P", // 空港連絡バス
-  HighwayBus = "H", // 高速バス
-  Ferry = "F", // フェリー
-  Bus = "B", // 路線バス
+  RAIL = "R", // 鉄道
+  AIRPORT_BUS = "P", // 空港連絡バス
+  HIGHWAY_BUS = "H", // 高速バス
+  FERRY = "F", // フェリー
+  BUS = "B", // 路線バス
 }
 
 // 路線の種別区分
 export enum LineKubun {
-  Rail = "-", // 在来線
-  Airplane = "A", // 飛行機
-  Bus = "B", // バス
-  Car = "C", // 自動車
-  ExpressTrain = "E", // 有料特急
-  Ferry = "F", // 船
-  Tram = "K", // 路面電車
-  Liner = "L", // ライナー
-  PremiumExpress = "Q", // 有料急行列車
-  Shinkansen = "S", // 新幹線
-  Walk = "W", // 徒歩
+  RAIL = "-", // 在来線
+  AIRPLANE = "A", // 飛行機
+  BUS = "B", // バス
+  CAR = "C", // 自動車
+  EXPRESS_TRAIN = "E", // 有料特急
+  FERRY = "F", // 船
+  TRAM = "K", // 路面電車
+  LINER = "L", // ライナー
+  PREMIUM_EXPRESS = "Q", // 有料急行列車
+  SHINKANSEN = "S", // 新幹線
+  WALK = "W", // 徒歩
 }
 
 export enum Diagram {
-  Unscheduled = 0, // 時刻表データなし
-  Scheduled = 1, // 時刻表データあり
+  UNSCHEDULED = 0, // 時刻表データなし
+  SCHEDULED = 1, // 時刻表データあり
 }
 
 export enum ObtainMode {
-  Default = 0, // 通常モード(デフォルト)
-  ExcludeIdentical = 1, // 同一駅扱いされている駅の情報を除外
+  DEFAULT = 0, // 通常モード(デフォルト)
+  EXCLUDE_IDENTICAL = 1, // 同一駅扱いされている駅の情報を除外
 }
 
 export enum IsIncluded {
-  Excluded = 0, // 含まない
-  Included = 1, // 含む
+  EXCLUDED = 0, // 含まない
+  INCLUDED = 1, // 含む
 }
 
 // 路線種別
 export enum RosenSyubetu {
-  JrLocal = 0, // JR在来線
-  PrivateLocal = 1, // 私鉄在来線
-  Subway = 2, // 地下鉄
-  Tram = 3, // 路面電車
-  Walk = 4, // 徒歩
-  Bus = 5, // バス
-  Airplane = 6, // 飛行機
-  Ferry = 7, // 船
-  ExpressTrain = 8, // 有料特急列車
-  Shinkansen = 9, // 新幹線
-  SleeperTrain = 10, // 寝台列車
-  PremiumExpress = 11, // 有料急行列車
-  HighwayBus = 12, // 高速バス
-  Car = 13, // 自動車
-  AirportBus = 14, // 空港連絡バス
+  JR_LOCAL = 0, // JR在来線
+  PRIVATE_LOCAL = 1, // 私鉄在来線
+  SUBWAY = 2, // 地下鉄
+  TRAM = 3, // 路面電車
+  WALK = 4, // 徒歩
+  BUS = 5, // バス
+  AIRPLANE = 6, // 飛行機
+  FERRY = 7, // 船
+  EXPRESS_TRAIN = 8, // 有料特急列車
+  SHINKANSEN = 9, // 新幹線
+  SLEEPER_TRAIN = 10, // 寝台列車
+  PREMIUM_EXPRESS = 11, // 有料急行列車
+  HIGHWAY_BUS = 12, // 高速バス
+  CAR = 13, // 自動車
+  AIRPORT_BUS = 14, // 空港連絡バス
 }
 
 // 乗換有無
 export enum Norikae {
-  No = 0, // 無し(直通など)
-  Yes = 1, // 乗換あり
+  NO = 0, // 無し(直通など)
+  YES = 1, // 乗換あり
 }
 
 // 往復割引の適用
 export enum UntinOufuku {
-  Oneway = 0, // 片道運賃
-  Roundtrip = 1, // 往復割引の片道分運賃
+  ONEWAY = 0, // 片道運賃
+  ROUNDTRIP = 1, // 往復割引の片道分運賃
 }
 
 // 学生割引有無(0固定)
 export enum UntinGakusei {
-  None = 0, // 学生割引なし
+  NONE = 0, // 学生割引なし
 }
 
 // 季節料金区分
 export enum TokkyuKisetu {
-  None = -1, // 無し
-  Normal = 0, // 通常期
-  Busy = 1, // 繁忙期
+  NONE = -1, // 無し
+  NORMAL = 0, // 通常期
+  BUSY = 1, // 繁忙期
 }
 
 // 特急乗継割引有無
 export enum TokkyuWaribiki {
-  None = 0, // 無し
-  Discount = 1, // 乗継割引あり
+  NONE = 0, // 無し
+  DISCOUNT = 1, // 乗継割引あり
 }
 
 // 時刻タイプ
 export enum TimeType {
-  PassThrough = -2, // 通過
-  NotInService = -1, // 非運行
-  Confirm = 0, // 確定時刻
-  Estimated = 1, // 推定時刻
-  Temporary = 2, // 仮時刻 ※時刻表がない場合に平均所要時間を加算したもの
+  PASS_THROUGH = -2, // 通過
+  NOT_IN_SERVICE = -1, // 非運行
+  CONFIRM = 0, // 確定時刻
+  ESTIMATED = 1, // 推定時刻
+  TEMPORARY = 2, // 仮時刻 ※時刻表がない場合に平均所要時間を加算したもの
 }
 
 export enum LineColorType {
-  Normal = 0, // 通常
-  Yokojima = 1, // 横じま
+  NORMAL = 0, // 通常
+  YOKOJIMA = 1, // 横じま
 }
 
 // 路線の時刻表有無
 export enum HaveDiagram {
-  No = 0, // 時刻表が存在しない
-  Yes = 1, // 時刻表が存在
+  NO = 0, // 時刻表が存在しない
+  YES = 1, // 時刻表が存在
 }
 
 // 結果の時刻表適用
 export enum UseDiagram {
-  No = 0, // 時刻表適用なし
-  Yes = 1, // 時刻表適用
+  NO = 0, // 時刻表適用なし
+  YES = 1, // 時刻表適用
 }
 
 // IC運賃有無
 export enum IcSupport {
-  NotSupported = 0, // IC運賃なし
-  Supported = 1, // IC運賃あり
+  NOT_SUPPORTED = 0, // IC運賃なし
+  SUPPORTED = 1, // IC運賃あり
 }
 
 // 最も所要時間が短いか / 最も乗り換え時間が短い
 export enum Hayai {
-  No = 0, // 最短ではない
-  Yes = 1, // 最も短い
+  NO = 0, // 最短ではない
+  YES = 1, // 最も短い
 }
 
 // 最も費用が安いか
 export enum Yasui {
-  No = 0, // 最安ではない
-  Yes = 1, // 最も安い
+  NO = 0, // 最安ではない
+  YES = 1, // 最も安い
 }
 
 // 最も乗換回数が少ない
 export enum Raku {
-  No = 0, // 最小ではない
-  Yes = 1, // 最も少ない
+  NO = 0, // 最小ではない
+  YES = 1, // 最も少ない
 }
 
 // 結果に飛行機を含む
 export enum Kuuro {
-  Excluded = 0, // 空路を含まない
-  Included = 1, // 空路を含む
+  EXCLUDED = 0, // 空路を含まない
+  INCLUDED = 1, // 空路を含む
 }
 
 // 結果に寝台列車を含む
 export enum Shindai {
-  Excluded = 0, // 寝台列車を含まない
-  Included = 1, // 寝台列車を含む
+  EXCLUDED = 0, // 寝台列車を含まない
+  INCLUDED = 1, // 寝台列車を含む
 }
 
 // 結果に高速バスを含む
 export enum Kousoku {
-  Excluded = 0, // 高速バスを含まない
-  Included = 1, // 高速バスを含む
+  EXCLUDED = 0, // 高速バスを含まない
+  INCLUDED = 1, // 高速バスを含む
 }
 
 // ICカードを使用した際に異なる運賃があるか
 export enum IcSpecialPrice {
-  No = 0, // ICカード運賃なし
-  Yes = 1, // ICカード運賃あり
+  NO = 0, // ICカード運賃なし
+  YES = 1, // ICカード運賃あり
 }
 
 // CO2排出量が最も少ない
 export enum CO2Emission {
-  NotLowest = 0, // 最小ではない
-  Lowest = 1, // 最も少ない
+  NOT_LOWEST = 0, // 最小ではない
+  LOWEST = 1, // 最も少ない
 }
 
 // 検索種別
 export enum Syubetu {
-  Normal = 0, // 通常の検索結果
+  NORMAL = 0, // 通常の検索結果
 }
 
 export interface StationCandidate {
@@ -400,4 +400,3 @@ export interface LineColor {
   num: number; // 路線色の数
   rgb: string[]; // RGB値 (16進数でRRGGBB, e.g. "ff5611")
 }
-
