@@ -1,7 +1,7 @@
 import { PlacesLib } from "../lib/places";
 import { Env, HttpStatusCode } from "../type";
-import { WorkerValidator } from "../validator";
-import { WorkerConstant } from "../constant";
+import { PlacesConstant } from "../external/places/constant";
+import { PlacesValidator } from "../external/places/validator";
 
 export async function handlePlaces(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
@@ -11,7 +11,7 @@ export async function handlePlaces(request: Request, env: Env, ctx: ExecutionCon
   const lat = latRaw !== null ? parseFloat(latRaw) : undefined;
   const lng = lngRaw !== null ? parseFloat(lngRaw) : undefined;
 
-  const result = WorkerValidator.PLACES_QUERY_VALIDATOR.safeParse({ q, lat, lng });
+  const result = PlacesValidator.QUERY_VALIDATOR.safeParse({ q, lat, lng });
   if (!result.success) {
     return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
       status: HttpStatusCode.BAD_REQUEST,
@@ -29,7 +29,7 @@ export async function handlePlaces(request: Request, env: Env, ctx: ExecutionCon
     );
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "Cache-Control": `public, max-age=${WorkerConstant.PLACES_CACHE_TTL}`,
+      "Cache-Control": `public, max-age=${PlacesConstant.CACHE_TTL}`,
       "X-Content-Type-Options": "nosniff",
     };
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;

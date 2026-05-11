@@ -10,45 +10,6 @@ export interface Env {
   // NEWS_CACHE: KVNamespace;
 }
 
-export interface GooglePlace {
-  displayName?: { text?: string };
-  formattedAddress?: string;
-  rating?: number;
-  userRatingCount?: number;
-  location?: { latitude?: number; longitude?: number };
-  googleMapsUri?: string;
-}
-
-export interface GooglePlacesResponse {
-  places?: GooglePlace[];
-}
-
-export interface DdgResult {
-  FirstURL: string;
-  Text: string;
-}
-
-export interface DdgRelatedTopicLeaf {
-  FirstURL: string;
-  Text: string;
-}
-
-export interface DdgRelatedTopicGroup {
-  Name: string;
-  Topics: DdgRelatedTopicLeaf[];
-}
-
-export type DdgRelatedTopic = DdgRelatedTopicLeaf | DdgRelatedTopicGroup;
-
-export interface DdgResponse {
-  Answer?: string;
-  AbstractText?: string;
-  AbstractURL?: string;
-  AbstractSource?: string;
-  Results?: DdgResult[];
-  RelatedTopics?: DdgRelatedTopic[];
-}
-
 export enum HttpRequestMethod {
   GET = "GET",
   POST = "POST",

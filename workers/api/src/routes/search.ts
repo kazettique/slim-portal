@@ -1,13 +1,13 @@
 import { SearchLib } from "../lib/search";
 import { Env, HttpStatusCode } from "../type";
-import { WorkerValidator } from "../validator";
-import { WorkerConstant } from "../constant";
+import { DuckDuckGoConstant } from "../external/duckduckgo/constant";
+import { DuckDuckGoValidator } from "../external/duckduckgo/validator";
 
 export async function handleSearch(request: Request, _env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const q = url.searchParams.get("q") ?? "";
 
-  const result = WorkerValidator.SEARCH_QUERY_VALIDATOR.safeParse({ q });
+  const result = DuckDuckGoValidator.QUERY_VALIDATOR.safeParse({ q });
   if (!result.success) {
     return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
       status: HttpStatusCode.BAD_REQUEST,
@@ -19,7 +19,7 @@ export async function handleSearch(request: Request, _env: Env, ctx: ExecutionCo
     const { items, cachedAt } = await SearchLib.search(result.data.q, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "Cache-Control": `public, max-age=${WorkerConstant.SEARCH_CACHE_TTL}`,
+      "Cache-Control": `public, max-age=${DuckDuckGoConstant.CACHE_TTL}`,
       "X-Content-Type-Options": "nosniff",
     };
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;

@@ -1,6 +1,7 @@
 import { SearchItem } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
-import { DdgRelatedTopic, DdgResponse } from "../type";
+import { DuckDuckGoConstant } from "../external/duckduckgo/constant";
+import { DdgRelatedTopic, DdgResponse } from "../external/duckduckgo/type";
 
 export abstract class SearchLib {
   private static cacheKey(q: string): string {
@@ -22,22 +23,22 @@ export abstract class SearchLib {
 
     for (const r of data.Results ?? []) {
       items.push({ title: r.Text, url: r.FirstURL, snippet: "" });
-      if (items.length >= WorkerConstant.SEARCH_MAX_RESULTS) return items;
+      if (items.length >= DuckDuckGoConstant.MAX_RESULTS) return items;
     }
 
     for (const topic of data.RelatedTopics ?? []) {
       SearchLib.collectLeafTopics(topic, items);
-      if (items.length >= WorkerConstant.SEARCH_MAX_RESULTS) break;
+      if (items.length >= DuckDuckGoConstant.MAX_RESULTS) break;
     }
 
-    return items.slice(0, WorkerConstant.SEARCH_MAX_RESULTS);
+    return items.slice(0, DuckDuckGoConstant.MAX_RESULTS);
   }
 
   private static collectLeafTopics(topic: DdgRelatedTopic, out: SearchItem[]): void {
     if ("Topics" in topic) {
       for (const sub of topic.Topics) {
         out.push({ title: sub.Text, url: sub.FirstURL, snippet: "" });
-        if (out.length >= WorkerConstant.SEARCH_MAX_RESULTS) return;
+        if (out.length >= DuckDuckGoConstant.MAX_RESULTS) return;
       }
     } else {
       out.push({ title: topic.Text, url: topic.FirstURL, snippet: "" });
@@ -53,7 +54,7 @@ export abstract class SearchLib {
       return { items: (await cached.json()) as SearchItem[], cachedAt };
     }
 
-    const apiUrl = new URL(WorkerConstant.DUCKDUCKGO_API_URL);
+    const apiUrl = new URL(DuckDuckGoConstant.API_URL);
     apiUrl.searchParams.set("q", q);
     apiUrl.searchParams.set("format", "json");
     apiUrl.searchParams.set("no_html", "1");
@@ -71,7 +72,7 @@ export abstract class SearchLib {
     const cachedResponse = new Response(JSON.stringify(items), {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${WorkerConstant.SEARCH_CACHE_TTL}`,
+        "Cache-Control": `public, max-age=${DuckDuckGoConstant.CACHE_TTL}`,
         "X-Cached-At": new Date().toISOString(),
       },
     });

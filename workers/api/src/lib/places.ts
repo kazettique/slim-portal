@@ -1,6 +1,8 @@
 import { PlaceItem } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
-import { Env, GooglePlacesResponse } from "../type";
+import { Env } from "../type";
+import { PlacesConstant } from "../external/places/constant";
+import { GooglePlacesResponse } from "../external/places/type";
 
 export abstract class PlacesLib {
   private static cacheKey(q: string, lat: number | null, lng: number | null): string {
@@ -34,24 +36,24 @@ export abstract class PlacesLib {
 
     const body: Record<string, unknown> = {
       textQuery: q,
-      maxResultCount: WorkerConstant.PLACES_MAX_RESULTS,
+      maxResultCount: PlacesConstant.MAX_RESULTS,
     };
 
     if (lat !== null && lng !== null) {
       body["locationBias"] = {
         circle: {
           center: { latitude: lat, longitude: lng },
-          radius: WorkerConstant.PLACES_SEARCH_RADIUS_METERS,
+          radius: PlacesConstant.SEARCH_RADIUS_METERS,
         },
       };
     }
 
-    const res = await fetch(WorkerConstant.PLACES_API_URL, {
+    const res = await fetch(PlacesConstant.API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": env.GOOGLE_PLACES_API_KEY,
-        "X-Goog-FieldMask": WorkerConstant.FIELD_MASK,
+        "X-Goog-FieldMask": PlacesConstant.FIELD_MASK,
       },
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
@@ -79,7 +81,7 @@ export abstract class PlacesLib {
     const cached_response = new Response(JSON.stringify(items), {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${WorkerConstant.PLACES_CACHE_TTL}`,
+        "Cache-Control": `public, max-age=${PlacesConstant.CACHE_TTL}`,
         "X-Cached-At": new Date().toISOString(),
       },
     });
