@@ -1,7 +1,8 @@
 import { SearchItem } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
 import { DuckDuckGoConstant } from "../external/duckduckgo/constant";
-import { DdgRelatedTopic, DdgResponse } from "../external/duckduckgo/type";
+import { DdgRelatedTopic } from "../external/duckduckgo/type.common";
+import { DdgResponse } from "../external/duckduckgo/type";
 
 export abstract class SearchLib {
   private static cacheKey(q: string): string {

@@ -1,19 +1,8 @@
-export interface DdgResult {
-  FirstURL: string;
-  Text: string;
-}
+import { DdgRelatedTopic, DdgResult } from "./type.common";
 
-export interface DdgRelatedTopicLeaf {
-  FirstURL: string;
-  Text: string;
+export interface DdgRequest {
+  q: string;
 }
-
-export interface DdgRelatedTopicGroup {
-  Name: string;
-  Topics: DdgRelatedTopicLeaf[];
-}
-
-export type DdgRelatedTopic = DdgRelatedTopicLeaf | DdgRelatedTopicGroup;
 
 export interface DdgResponse {
   Answer?: string;

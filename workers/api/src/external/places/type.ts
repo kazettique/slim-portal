@@ -1,10 +1,9 @@
-export interface GooglePlace {
-  displayName?: { text?: string };
-  formattedAddress?: string;
-  rating?: number;
-  userRatingCount?: number;
-  location?: { latitude?: number; longitude?: number };
-  googleMapsUri?: string;
+import { GooglePlace } from "./type.common";
+
+export interface GooglePlacesRequest {
+  q: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface GooglePlacesResponse {

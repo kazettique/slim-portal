@@ -7,7 +7,7 @@ export async function handleSearch(request: Request, _env: Env, ctx: ExecutionCo
   const url = new URL(request.url);
   const q = url.searchParams.get("q") ?? "";
 
-  const result = DuckDuckGoValidator.QUERY_VALIDATOR.safeParse({ q });
+  const result = DuckDuckGoValidator.REQUEST_VALIDATOR.safeParse({ q });
   if (!result.success) {
     return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
       status: HttpStatusCode.BAD_REQUEST,

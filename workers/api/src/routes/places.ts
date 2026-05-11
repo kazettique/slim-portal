@@ -11,7 +11,7 @@ export async function handlePlaces(request: Request, env: Env, ctx: ExecutionCon
   const lat = latRaw !== null ? parseFloat(latRaw) : undefined;
   const lng = lngRaw !== null ? parseFloat(lngRaw) : undefined;
 
-  const result = PlacesValidator.QUERY_VALIDATOR.safeParse({ q, lat, lng });
+  const result = PlacesValidator.REQUEST_VALIDATOR.safeParse({ q, lat, lng });
   if (!result.success) {
     return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
       status: HttpStatusCode.BAD_REQUEST,
