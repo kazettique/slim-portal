@@ -22,3 +22,20 @@ export interface SearchItem {
   url: string;
   snippet: string;
 }
+
+export interface TransitLeg {
+  line: string;
+  from: string;
+  to: string;
+  depart: string | null;
+  arrive: string | null;
+  platform: string;
+}
+
+export interface TransitRoute {
+  legs: TransitLeg[];
+  totalTime: number;
+  transfers: number;
+  depart: string;
+  arrive: string;
+}
