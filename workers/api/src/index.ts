@@ -5,6 +5,16 @@ import { handleTransit } from "./routes/transit";
 import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
 import { WorkerUtil } from "./util";
 
+type RouteHandler = (request: Request, env: Env, ctx: ExecutionContext) => Promise<Response>;
+
+// TODO: base url, page url constant in app
+const GET_ROUTES: Record<string, RouteHandler> = {
+  "/api/news": handleNews,
+  "/api/places": handlePlaces,
+  "/api/search": handleSearch,
+  "/api/transit": handleTransit,
+};
+
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -15,41 +25,14 @@ export default {
       return new Response(null, { status: HttpStatusCode.NO_CONTENT, headers: cors });
     }
 
-    // TODO: base url, page url constant in app
-    if (request.method === HttpRequestMethod.GET && url.pathname === "/api/news") {
-      const response = await handleNews(request, env, ctx);
-      const headers = new Headers(response.headers);
-      for (const [k, v] of Object.entries(cors)) {
-        headers.set(k, v);
+    if (request.method === HttpRequestMethod.GET) {
+      const handler = GET_ROUTES[url.pathname];
+      if (handler) {
+        const response = await handler(request, env, ctx);
+        const headers = new Headers(response.headers);
+        for (const [k, v] of Object.entries(cors)) headers.set(k, v);
+        return new Response(response.body, { status: response.status, headers });
       }
-      return new Response(response.body, { status: response.status, headers });
-    }
-
-    if (request.method === HttpRequestMethod.GET && url.pathname === "/api/places") {
-      const response = await handlePlaces(request, env, ctx);
-      const headers = new Headers(response.headers);
-      for (const [k, v] of Object.entries(cors)) {
-        headers.set(k, v);
-      }
-      return new Response(response.body, { status: response.status, headers });
-    }
-
-    if (request.method === HttpRequestMethod.GET && url.pathname === "/api/search") {
-      const response = await handleSearch(request, env, ctx);
-      const headers = new Headers(response.headers);
-      for (const [k, v] of Object.entries(cors)) {
-        headers.set(k, v);
-      }
-      return new Response(response.body, { status: response.status, headers });
-    }
-
-    if (request.method === HttpRequestMethod.GET && url.pathname === "/api/transit") {
-      const response = await handleTransit(request, env, ctx);
-      const headers = new Headers(response.headers);
-      for (const [k, v] of Object.entries(cors)) {
-        headers.set(k, v);
-      }
-      return new Response(response.body, { status: response.status, headers });
     }
 
     return new Response("Not Found", { status: HttpStatusCode.NOT_FOUND });
