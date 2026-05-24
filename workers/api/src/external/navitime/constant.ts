@@ -1,5 +1,5 @@
 export abstract class NavitimeConstant {
-  public static readonly API_URL: string = "https://navitime-route-transit.p.rapidapi.com/v1/route_transit";
+  public static readonly API_URL: string = "https://navitime-route-totalnavi.p.rapidapi.com/route_transit";
   public static readonly API_HOST: string = "navitime-route-transit.p.rapidapi.com";
   public static readonly CACHE_TTL: number = 3_600;
   public static readonly MAX_RESULTS: number = 5;

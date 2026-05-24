@@ -2,7 +2,7 @@ import { TransitRoute } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
 import { Env } from "../type";
 import { NavitimeConstant } from "../external/navitime/constant";
-import { NavitimeSection, NavitimeTransitResponse } from "../external/navitime/type";
+import { NavitimeMoveSection, NavitimePointSection, NavitimeSection, NavitimeTransitResponse } from "../external/navitime/type";
 
 export abstract class TransitLib {
   private static cacheKey(from: string, to: string, startTime: string): string {
@@ -20,16 +20,16 @@ export abstract class TransitLib {
     const legs: TransitRoute["legs"] = [];
     sections.forEach((s, i) => {
       if (s.type !== "move") return;
-      const from = sections[i - 1]?.name ?? "";
-      const to = sections[i + 1]?.name ?? "";
-      const link = s.transport?.links?.[0];
+      const move = s as NavitimeMoveSection;
+      const from = (sections[i - 1] as NavitimePointSection | undefined)?.name ?? "";
+      const to = (sections[i + 1] as NavitimePointSection | undefined)?.name ?? "";
       legs.push({
-        line: s.transport?.name ?? s.line_name ?? "",
+        line: move.transport?.name ?? move.line_name ?? "",
         from,
         to,
-        depart: link?.from_time ?? null,
-        arrive: link?.to_time ?? null,
-        platform: s.transport?.destination?.name ?? "",
+        depart: move.from_time ?? null,
+        arrive: move.to_time ?? null,
+        platform: move.transport?.destination?.name ?? "",
       });
     });
     return legs;
@@ -64,7 +64,7 @@ export abstract class TransitLib {
 
     const res = await fetch(`${NavitimeConstant.API_URL}?${params}`, {
       headers: {
-        "X-RapidAPI-Key": env.NAVITIME_API_KEY,
+        "X-RapidAPI-Key": env.RAPIDAPI_KEY,
         "X-RapidAPI-Host": NavitimeConstant.API_HOST,
       },
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),

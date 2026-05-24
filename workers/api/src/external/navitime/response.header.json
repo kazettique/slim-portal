@@ -1,0 +1,20 @@
+{
+  "cache-control": "no-store",
+  "content-security-policy": "default-src 'self'",
+  "content-type": "application/json",
+  "date": "Thu, 23 Apr 2020 05:21:01 GMT",
+  "server": "RapidAPI-1.1.0",
+  "strict-transport-security": "max-age=31536000 ;includeSubDomains",
+  "via": "1.1 0c88657c2af66b08e91c901fabaeae8b.cloudfront.net (CloudFront)",
+  "x-amz-apigw-id": "LbLVlG3mtjMFrLw=",
+  "x-amz-cf-id": "2DqCWRyTsvkNu8kT1tl2ZC-bwarhyk9b_xmPdOpK0xlyn8Qjn5Nv2A==",
+  "x-amz-cf-pop": "NRT12-C4",
+  "x-amzn-requestid": "ec93962c-1081-4d3d-8917-dcebed7abccb",
+  "x-amzn-trace-id": "Root=1-5ea125bd-35a9e5662780a81cbd064eb3;Sampled=0",
+  "x-cache": "Miss from cloudfront",
+  "x-rapidapi-region": "AWS - ap-northeast-1",
+  "x-rapidapi-version": "1.1.0",
+  "x-xss-protection": "1; mode = block",
+  "content-length": "14978",
+  "connection": "Close"
+}

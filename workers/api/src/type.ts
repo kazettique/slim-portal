@@ -6,7 +6,7 @@ export interface Feed {
 export interface Env {
   ALLOWED_ORIGIN_DEV?: string;
   GOOGLE_PLACES_API_KEY: string;
-  NAVITIME_API_KEY: string;
+  RAPIDAPI_KEY: string;
   // Future:
   // NEWS_CACHE: KVNamespace;
 }
