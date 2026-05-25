@@ -23,6 +23,30 @@ export interface SearchItem {
   snippet: string;
 }
 
+export interface TransportNode {
+  id: string;
+  name: string;
+  ruby?: string;
+  types: string[];
+  coord: { lat: number; lng: number };
+}
+
+export interface TransportAroundNode extends TransportNode {
+  distanceMeters: number;
+  walkMinutes: number;
+}
+
+export interface TransportAutocompleteNode extends TransportNode {
+  numbering?: Array<{ number: string; symbol: string }>;
+}
+
+export interface TransportSearchResult {
+  total: number;
+  offset: number;
+  limit: number;
+  items: TransportNode[];
+}
+
 export interface TransitLeg {
   line: string;
   from: string;

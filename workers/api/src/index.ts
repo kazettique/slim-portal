@@ -1,7 +1,7 @@
 import { handleNews } from "./routes/news";
 import { handlePlaces } from "./routes/places";
 import { handleSearch } from "./routes/search";
-import { handleTransit } from "./routes/transit";
+import { handleTransit, handleTransitSearch, handleTransitAround, handleTransitAutocomplete } from "./routes/transit";
 import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
 import { WorkerUtil } from "./util";
 
@@ -13,6 +13,9 @@ const GET_ROUTES: Record<string, RouteHandler> = {
   "/api/places": handlePlaces,
   "/api/search": handleSearch,
   "/api/transit": handleTransit,
+  "/api/transit/search": handleTransitSearch,
+  "/api/transit/around": handleTransitAround,
+  "/api/transit/autocomplete": handleTransitAutocomplete,
 };
 
 export default {
