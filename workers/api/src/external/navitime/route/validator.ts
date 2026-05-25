@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { NavitimeLang, NavitimeSortOrder } from "./type.common";
+import { NavitimeLang, NavitimeSortOrder } from "../type.common";
 import { TransitSearchRequest } from "./type";
 
 export abstract class NavitimeValidator {

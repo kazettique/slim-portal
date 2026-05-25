@@ -1,11 +1,6 @@
-import { NavitimeLang, NavitimeSortOrder } from "./type.common";
+import { NavitimeCoord, NavitimeLang, NavitimeSortOrder } from "../type.common";
 
 // ── Primitives ──────────────────────────────────────────────────────────────
-
-export interface NavitimeCoord {
-  lat: number;
-  lon: number;
-}
 
 export interface NavitimeLinkStation {
   id: string;

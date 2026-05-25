@@ -1,0 +1,156 @@
+{
+  "count": {
+    "total": 61,
+    "offset": 0,
+    "limit": 10
+  },
+  "items": [
+    {
+      "id": "00006668",
+      "name": "東京",
+      "ruby": "とうきょう",
+      "types": [
+        "station"
+      ],
+      "address_name": "東京都千代田区丸の内",
+      "address_code": "13101055000",
+      "coord": {
+        "lat": 35.681041,
+        "lon": 139.767106
+      }
+    },
+    {
+      "id": "00006669",
+      "name": "東京テレポート",
+      "ruby": "とうきょうてれぽーと",
+      "types": [
+        "station"
+      ],
+      "address_name": "東京都江東区青海",
+      "address_code": "13108045000",
+      "coord": {
+        "lat": 35.627526,
+        "lon": 139.778848
+      }
+    },
+    {
+      "id": "00002666",
+      "name": "東京ビッグサイト(ゆりかもめ)",
+      "ruby": "とうきょうびっぐさいと",
+      "types": [
+        "station"
+      ],
+      "address_name": "東京都江東区有明",
+      "address_code": "13108001000",
+      "coord": {
+        "lat": 35.630215,
+        "lon": 139.791404
+      }
+    },
+    {
+      "id": "00009257",
+      "name": "東京ディズニーシー",
+      "ruby": "とうきょうでぃずにーしー",
+      "types": [
+        "station"
+      ],
+      "address_name": "千葉県浦安市舞浜",
+      "address_code": "12227017000",
+      "coord": {
+        "lat": 35.627435,
+        "lon": 139.889449
+      }
+    },
+    {
+      "id": "00009258",
+      "name": "東京ディズニーランド",
+      "ruby": "とうきょうでぃずにーらんど",
+      "types": [
+        "station"
+      ],
+      "address_name": "千葉県浦安市舞浜",
+      "address_code": "12227017000",
+      "coord": {
+        "lat": 35.635914,
+        "lon": 139.87863
+      }
+    },
+    {
+      "id": "00005281",
+      "name": "東京国際クルーズターミナル",
+      "ruby": "とうきょうこくさいくるーずたーみなる",
+      "types": [
+        "station"
+      ],
+      "address_name": "東京都江東区青海",
+      "address_code": "13108045000",
+      "coord": {
+        "lat": 35.621345,
+        "lon": 139.773125
+      }
+    },
+    {
+      "id": "00035132",
+      "name": "東京港竹芝客船ターミナル",
+      "ruby": "とうきょうこうたけしばきゃくせんたーみなる",
+      "types": [
+        "port"
+      ],
+      "address_name": "東京都港区海岸",
+      "address_code": "13103007000",
+      "coord": {
+        "lat": 35.654275,
+        "lon": 139.762864
+      }
+    },
+    {
+      "id": "00062655",
+      "name": "東京駅八重洲北口〔鉄鋼ビル〕",
+      "ruby": "とうきょうえきやえすきたぐちてっこうびる",
+      "types": [
+        "highway_busstop",
+        "shuttle_busstop"
+      ],
+      "address_name": "東京都千代田区丸の内",
+      "address_code": "13101055000",
+      "coord": {
+        "lat": 35.682634,
+        "lon": 139.770024
+      }
+    },
+    {
+      "id": "00035133",
+      "name": "東京有明ＦＴ",
+      "ruby": "とうきょうありあけふぇりーたーみなる",
+      "types": [
+        "port"
+      ],
+      "address_name": "東京都江東区有明",
+      "address_code": "13108001000",
+      "coord": {
+        "lat": 35.617327,
+        "lon": 139.795651
+      }
+    },
+    {
+      "id": "00017241",
+      "name": "東京駅丸の内北口",
+      "ruby": "とうきょうえきまるのうちきたぐち",
+      "types": [
+        "busstop",
+        "highway_busstop",
+        "shuttle_busstop"
+      ],
+      "address_name": "東京都千代田区丸の内",
+      "address_code": "13101055000",
+      "coord": {
+        "lat": 35.682086,
+        "lon": 139.765418
+      }
+    }
+  ],
+  "unit": {
+    "datum": "wgs84",
+    "coord_unit": "degree"
+  }
+}

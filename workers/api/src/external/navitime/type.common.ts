@@ -1,3 +1,8 @@
+export interface NavitimeCoord {
+  lat: number;
+  lon: number;
+}
+
 export enum NavitimeSortOrder {
   TIME_OPTIMIZED = "time_optimized",
   TIME = "time",

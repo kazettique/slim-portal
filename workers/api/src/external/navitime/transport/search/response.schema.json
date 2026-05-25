@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ruby": {
+            "type": "string"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "address_name": {
+            "type": "string"
+          },
+          "address_code": {
+            "type": "string"
+          },
+          "coord": {
+            "type": "object",
+            "properties": {
+              "lat": {
+                "type": "number"
+              },
+              "lon": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "datum": {
+          "type": "string"
+        },
+        "coord_unit": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { TransitRoute } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
 import { Env } from "../type";
-import { NavitimeConstant } from "../external/navitime/constant";
-import { NavitimeMoveSection, NavitimePointSection, NavitimeSection, NavitimeTransitResponse } from "../external/navitime/type";
+import { NavitimeRouteConstant } from "../external/navitime/route/constant";
+import { NavitimeMoveSection, NavitimePointSection, NavitimeSection, NavitimeTransitResponse } from "../external/navitime/route/type";
 
 export abstract class TransitLib {
   private static cacheKey(from: string, to: string, startTime: string): string {
@@ -58,14 +58,14 @@ export abstract class TransitLib {
       start: from,
       goal: to,
       start_time: startTime,
-      limit: String(NavitimeConstant.MAX_RESULTS),
-      lang: NavitimeConstant.DEFAULT_LANG,
+      limit: String(NavitimeRouteConstant.MAX_RESULTS),
+      lang: NavitimeRouteConstant.DEFAULT_LANG,
     });
 
-    const res = await fetch(`${NavitimeConstant.API_URL}?${params}`, {
+    const res = await fetch(`${NavitimeRouteConstant.API_URL}?${params}`, {
       headers: {
         "X-RapidAPI-Key": env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": NavitimeConstant.API_HOST,
+        "X-RapidAPI-Host": NavitimeRouteConstant.API_HOST,
       },
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
@@ -84,7 +84,7 @@ export abstract class TransitLib {
     const cachedResponse = new Response(JSON.stringify(routes), {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${NavitimeConstant.CACHE_TTL}`,
+        "Cache-Control": `public, max-age=${NavitimeRouteConstant.CACHE_TTL}`,
         "X-Cached-At": new Date().toISOString(),
       },
     });

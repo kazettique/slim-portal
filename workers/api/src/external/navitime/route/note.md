@@ -1,10 +1,12 @@
-# Navitime API (from RapidAPI)
+# Navitime API (provided by RapidAPI)
 
-## Official API document
+## Totalnavi
+
+### Official API document
 
 <https://api-sdk.navitime.co.jp/api/specs/api_guide/route_transit.html>
 
-## Request Example
+### Request Example
 
 ```js
 const url = 'https://navitime-route-totalnavi.p.rapidapi.com/route_transit?start=35.665251%2C139.712092&goal=35.661971%2C139.703795&datum=wgs84&term=1440&limit=5&start_time=2020-08-19T10%3A00%3A00&coord_unit=degree';
@@ -26,25 +28,25 @@ try {
 }
 ```
 
-## Response
+### Response
 
-### Response Data
+#### Response Data
 
 Real data from real-world request: refer to [response.body.json](./response.body.json)
 
-### Response Schema
+#### Response Schema
 
 Provided by Rapid API
 
 Refer to [response.type.json](./response.schema.json)
 
-### Response Header
+#### Response Header
 
 Provided by Rapid API
 
 Refer to [response.header.json](./response.header.json)
 
-## Schema vs Actual Response
+### Schema vs Actual Response
 
 **Verdict: no contradictions — schema is incomplete, not wrong.**
 
@@ -52,14 +54,14 @@ The schema was auto-generated from an early/partial example. It correctly descri
 envelope but left `summary.move` and `sections[]` items as bare `object` without enumerating their
 properties.
 
-### Gaps in the schema
+#### Gaps in the schema
 
 | Path                    | Schema                       | Actual body                                                                                                                     |
 | ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `items[*].summary.move` | bare `object`                | `transit_count`, `walk_distance`, `type`, `from_time`, `to_time`, `time`, `distance`, `move_type[]`, `fare?`, `reference_fare?` |
 | `items[*].sections[]`   | items typed as bare `object` | discriminated `"point"` / `"move"` structure — see `type.ts` for full shape                                                     |
 
-### What the schema covers correctly
+#### What the schema covers correctly
 
 | Path                                                                          | Schema type    | Matches body        |
 | ----------------------------------------------------------------------------- | -------------- | ------------------- |
@@ -68,7 +70,7 @@ properties.
 | `items[*].summary.start` / `.goal` — `coord.lat`, `coord.lon`, `name`, `type` | typed fields   | ✓                   |
 | `items` / `unit` top-level structure                                          | array / object | ✓                   |
 
-### Source of truth
+#### Source of truth
 
 `response.schema.json` is a reference-only file and is not imported or validated in code.
 The TypeScript interfaces in [`type.ts`](./type.ts) are the authoritative definition and cover all

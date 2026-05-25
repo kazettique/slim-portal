@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "datum": {
+          "type": "string"
+        },
+        "coord_unit": {
+          "type": "string"
+        },
+        "distance": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

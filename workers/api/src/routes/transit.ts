@@ -1,7 +1,7 @@
 import { TransitLib } from "../lib/transit";
 import { Env, HttpStatusCode } from "../type";
-import { NavitimeConstant } from "../external/navitime/constant";
-import { NavitimeValidator } from "../external/navitime/validator";
+import { NavitimeRouteConstant } from "../external/navitime/route/constant";
+import { NavitimeValidator } from "../external/navitime/route/validator";
 
 export async function handleTransit(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
@@ -31,7 +31,7 @@ export async function handleTransit(request: Request, env: Env, ctx: ExecutionCo
     );
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "Cache-Control": `public, max-age=${NavitimeConstant.CACHE_TTL}`,
+      "Cache-Control": `public, max-age=${NavitimeRouteConstant.CACHE_TTL}`,
       "X-Content-Type-Options": "nosniff",
     };
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
