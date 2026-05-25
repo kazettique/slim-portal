@@ -1,0 +1,344 @@
+---
+import Base from "../layouts/Base.astro";
+import { AppConstant } from "../constant";
+---
+
+<Base title={AppConstant.TRANSIT_PAGE_META.title} description={AppConstant.TRANSIT_PAGE_META.description}>
+  <h1>{AppConstant.TRANSIT_PAGE_META.title}</h1>
+  <p>{AppConstant.TRANSIT_PAGE_META.description}</p>
+
+  <form id="transit-form" class="transit-form">
+    <div class="transit-form__group">
+      <label class="transit-form__label" for="from-input">From</label>
+      <div class="transit-form__row">
+        <div class="transit-form__autocomplete-wrap">
+          <input
+            id="from-input"
+            type="search"
+            class="transit-form__input"
+            placeholder="Station name"
+            autocomplete="off"
+          />
+          <ul id="from-suggestions" class="transit-autocomplete" style="display:none"></ul>
+        </div>
+        <button type="button" id="locate-btn" class="locate-btn">Use location</button>
+      </div>
+    </div>
+
+    <div class="transit-form__group">
+      <label class="transit-form__label" for="to-input">To</label>
+      <div class="transit-form__row">
+        <div class="transit-form__autocomplete-wrap">
+          <input
+            id="to-input"
+            type="search"
+            class="transit-form__input"
+            placeholder="Station name"
+            autocomplete="off"
+          />
+          <ul id="to-suggestions" class="transit-autocomplete" style="display:none"></ul>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" id="search-btn" class="transit-form__submit">Search routes</button>
+  </form>
+
+  <p id="transit-status" class="status" aria-live="polite"></p>
+
+  <div id="transit-toolbar" class="toolbar" style="display:none">
+    <button id="refresh-btn" class="refresh-btn" aria-label="Refresh results">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M1 4v6h6M23 20v-6h-6"></path>
+        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+      </svg>
+      Refresh
+    </button>
+    <span id="cache-status" class="cache-status" aria-live="polite"></span>
+  </div>
+
+  <ul id="transit-route-list" class="transit-route-list"></ul>
+</Base>
+
+<script>
+  import { AppConstant } from "../constant";
+  import { AppUtil } from "../util";
+  import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
+
+  const form = document.getElementById("transit-form") as HTMLFormElement | null;
+  const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
+  const toInput = document.getElementById("to-input") as HTMLInputElement | null;
+  const fromSuggestions = document.getElementById("from-suggestions") as HTMLUListElement | null;
+  const toSuggestions = document.getElementById("to-suggestions") as HTMLUListElement | null;
+  const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
+  const searchBtn = document.getElementById("search-btn") as HTMLButtonElement | null;
+  const routeList = document.getElementById("transit-route-list") as HTMLUListElement | null;
+  const statusEl = document.getElementById("transit-status") as HTMLParagraphElement | null;
+  const toolbar = document.getElementById("transit-toolbar") as HTMLDivElement | null;
+  const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
+
+  let fromCoord: string | null = null;
+  let toCoord: string | null = null;
+  let lastFrom: string | null = null;
+  let lastTo: string | null = null;
+  let fromTimer: ReturnType<typeof setTimeout> | null = null;
+  let toTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function setStatus(msg: string): void {
+    if (statusEl) statusEl.textContent = msg;
+  }
+
+  function clearSuggestions(listEl: HTMLUListElement): void {
+    listEl.innerHTML = "";
+    listEl.style.display = "none";
+  }
+
+  function formatTime(iso: string | null): string {
+    if (!iso) return "—";
+    try {
+      return new Date(iso).toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" });
+    } catch {
+      return iso;
+    }
+  }
+
+  function isWalkLeg(leg: TransitLeg): boolean {
+    const l = leg.line.toLowerCase();
+    return l === "walk" || l === "徒歩" || l === "walking";
+  }
+
+  function renderLegs(legs: TransitLeg[]): string {
+    return legs
+      .map((leg) => {
+        const cls = isWalkLeg(leg) ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
+        const timeRange =
+          leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
+        const platform = leg.platform ? ` · ${leg.platform}` : "";
+        return `<li class="${cls}">${leg.line} · ${leg.from} → ${leg.to}${timeRange}${platform}</li>`;
+      })
+      .join("");
+  }
+
+  function renderRoutes(routes: TransitRoute[]): void {
+    if (!routeList) return;
+    if (routes.length === 0) {
+      routeList.innerHTML = "";
+      setStatus("No routes found.");
+      return;
+    }
+    setStatus("");
+    routeList.innerHTML = routes
+      .map(
+        (r, i) => `
+        <li class="transit-route">
+          <div class="transit-route__summary">
+            <span class="transit-route__time">${r.totalTime} min</span>
+            <span class="transit-route__meta">
+              · ${r.transfers === 0 ? "No transfers" : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`}
+              · ${formatTime(r.depart)} → ${formatTime(r.arrive)}
+            </span>
+          </div>
+          <ul class="transit-route__legs">${renderLegs(r.legs)}</ul>
+        </li>
+      `,
+      )
+      .join("");
+  }
+
+  async function fetchAutocomplete(
+    word: string,
+    listEl: HTMLUListElement,
+    inputEl: HTMLInputElement,
+    onSelect: (coord: string) => void,
+  ): Promise<void> {
+    if (word.length < 1) {
+      clearSuggestions(listEl);
+      return;
+    }
+    try {
+      const params = new URLSearchParams({ word });
+      const res = await fetch(`${AppConstant.API_BASE_URL}/transit/autocomplete?${params}`, {
+        signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
+      });
+      if (!res.ok) return;
+      const items = (await res.json()) as TransportAutocompleteNode[];
+      if (items.length === 0) {
+        clearSuggestions(listEl);
+        return;
+      }
+      listEl.innerHTML = items
+        .slice(0, 6)
+        .map((node) => {
+          const numbering =
+            node.numbering && node.numbering.length > 0
+              ? node.numbering.map((n) => `${n.symbol}${n.number}`).join(" ")
+              : "";
+          const sub = [node.ruby, numbering].filter(Boolean).join(" · ");
+          return `
+            <li
+              class="transit-autocomplete__item"
+              data-coord="${node.coord.lat},${node.coord.lng}"
+              data-name="${node.name}"
+              tabindex="0"
+            >
+              ${node.name}
+              ${sub ? `<div class="transit-autocomplete__sub">${sub}</div>` : ""}
+            </li>
+          `;
+        })
+        .join("");
+      listEl.style.display = "block";
+
+      listEl.querySelectorAll<HTMLLIElement>(".transit-autocomplete__item").forEach((li) => {
+        li.addEventListener("click", () => {
+          const coord = li.dataset["coord"] ?? "";
+          const name = li.dataset["name"] ?? "";
+          inputEl.value = name;
+          onSelect(coord);
+          clearSuggestions(listEl);
+        });
+        li.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            const coord = li.dataset["coord"] ?? "";
+            const name = li.dataset["name"] ?? "";
+            inputEl.value = name;
+            onSelect(coord);
+            clearSuggestions(listEl);
+          }
+        });
+      });
+    } catch {
+      // silently ignore autocomplete errors
+    }
+  }
+
+  async function doSearch(bypassCache: boolean): Promise<void> {
+    if (!fromCoord || !toCoord) {
+      setStatus("Please select both a departure and destination station.");
+      return;
+    }
+    setStatus("Searching…");
+    if (routeList) routeList.innerHTML = "";
+    if (cacheStatus) cacheStatus.textContent = "";
+    if (toolbar) toolbar.style.display = "none";
+
+    try {
+      const params = new URLSearchParams({ from: fromCoord, to: toCoord });
+      const res = await fetch(`${AppConstant.API_BASE_URL}/transit?${params}`, {
+        cache: bypassCache ? "no-store" : "default",
+        signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const routes = (await res.json()) as TransitRoute[];
+      renderRoutes(routes);
+
+      if (routes.length > 0) {
+        lastFrom = fromCoord;
+        lastTo = toCoord;
+        if (toolbar) toolbar.style.display = "flex";
+        const cacheDate = res.headers.get("X-Cache-Date");
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate) : "";
+      }
+    } catch {
+      setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);
+    }
+  }
+
+  // Geolocation
+  if (locateBtn) {
+    if (!navigator.geolocation) {
+      locateBtn.style.display = "none";
+    } else {
+      locateBtn.addEventListener("click", () => {
+        locateBtn.disabled = true;
+        locateBtn.textContent = "Locating…";
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            fromCoord = `${pos.coords.latitude},${pos.coords.longitude}`;
+            if (fromInput) fromInput.value = "Current location";
+            if (fromSuggestions) clearSuggestions(fromSuggestions);
+            locateBtn.textContent = "Location set ✓";
+          },
+          () => {
+            locateBtn.disabled = false;
+            locateBtn.textContent = "Use location";
+            setStatus("Could not get location.");
+          },
+          { timeout: AppConstant.REQUEST_TIMEOUT },
+        );
+      });
+    }
+  }
+
+  // Autocomplete wiring — From
+  if (fromInput && fromSuggestions) {
+    fromInput.addEventListener("input", () => {
+      if (fromTimer) clearTimeout(fromTimer);
+      fromCoord = null; // reset coord when user types
+      fromTimer = setTimeout(() => {
+        fetchAutocomplete(fromInput.value.trim(), fromSuggestions, fromInput, (coord) => {
+          fromCoord = coord;
+        });
+      }, 300);
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!fromInput.contains(e.target as Node) && !fromSuggestions.contains(e.target as Node)) {
+        clearSuggestions(fromSuggestions);
+      }
+    });
+  }
+
+  // Autocomplete wiring — To
+  if (toInput && toSuggestions) {
+    toInput.addEventListener("input", () => {
+      if (toTimer) clearTimeout(toTimer);
+      toCoord = null; // reset coord when user types
+      toTimer = setTimeout(() => {
+        fetchAutocomplete(toInput.value.trim(), toSuggestions, toInput, (coord) => {
+          toCoord = coord;
+        });
+      }, 300);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!toInput.contains(e.target as Node) && !toSuggestions.contains(e.target as Node)) {
+        clearSuggestions(toSuggestions);
+      }
+    });
+  }
+
+  // Form submit
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (searchBtn) searchBtn.disabled = true;
+      await doSearch(false);
+      if (searchBtn) searchBtn.disabled = false;
+    });
+  }
+
+  // Refresh
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", async () => {
+      if (!lastFrom || !lastTo) return;
+      fromCoord = lastFrom;
+      toCoord = lastTo;
+      refreshBtn.disabled = true;
+      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      await doSearch(true);
+      refreshBtn.disabled = false;
+      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+    });
+  }
+</script>

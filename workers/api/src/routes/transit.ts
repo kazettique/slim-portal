@@ -7,11 +7,7 @@ import { NavitimeTransportSearchValidator } from "../external/navitime/transport
 import { NavitimeTransportAroundValidator } from "../external/navitime/transport/around/validator";
 import { NavitimeAutocompleteValidator } from "../external/navitime/transport/autocomplete/validator";
 
-export async function handleTransit(
-  request: Request,
-  env: Env,
-  ctx: ExecutionContext,
-): Promise<Response> {
+export async function handleTransit(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const result = NavitimeValidator.REQUEST_VALIDATOR.safeParse({
     from: url.searchParams.get("from") ?? undefined,
@@ -46,18 +42,15 @@ export async function handleTransit(
     return new Response(JSON.stringify(routes), { status: HttpStatusCode.OK, headers });
   } catch (err) {
     console.error("handleTransit error:", err);
-    return new Response(JSON.stringify({ error: "Failed to fetch transit routes" }), {
+    const detail = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: "Failed to fetch transit routes", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
       headers: { "Content-Type": "application/json" },
     });
   }
 }
 
-export async function handleTransitSearch(
-  request: Request,
-  env: Env,
-  ctx: ExecutionContext,
-): Promise<Response> {
+export async function handleTransitSearch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const result = NavitimeTransportSearchValidator.REQUEST_VALIDATOR.safeParse({
     word: url.searchParams.get("word") ?? undefined,
@@ -76,11 +69,7 @@ export async function handleTransitSearch(
   }
 
   try {
-    const { result: searchResult, cachedAt } = await TransitLib.stationSearch(
-      result.data,
-      env,
-      ctx,
-    );
+    const { result: searchResult, cachedAt } = await TransitLib.stationSearch(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${NavitimeTransportConstant.CACHE_TTL}`,
@@ -90,18 +79,15 @@ export async function handleTransitSearch(
     return new Response(JSON.stringify(searchResult), { status: HttpStatusCode.OK, headers });
   } catch (err) {
     console.error("handleTransitSearch error:", err);
-    return new Response(JSON.stringify({ error: "Failed to fetch transport nodes" }), {
+    const detail = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: "Failed to fetch transport nodes", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
       headers: { "Content-Type": "application/json" },
     });
   }
 }
 
-export async function handleTransitAround(
-  request: Request,
-  env: Env,
-  ctx: ExecutionContext,
-): Promise<Response> {
+export async function handleTransitAround(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const result = NavitimeTransportAroundValidator.REQUEST_VALIDATOR.safeParse({
     coord: url.searchParams.get("coord") ?? undefined,
@@ -131,18 +117,15 @@ export async function handleTransitAround(
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
     console.error("handleTransitAround error:", err);
-    return new Response(JSON.stringify({ error: "Failed to fetch nearby transport nodes" }), {
+    const detail = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: "Failed to fetch nearby transport nodes", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
       headers: { "Content-Type": "application/json" },
     });
   }
 }
 
-export async function handleTransitAutocomplete(
-  request: Request,
-  env: Env,
-  ctx: ExecutionContext,
-): Promise<Response> {
+export async function handleTransitAutocomplete(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const result = NavitimeAutocompleteValidator.REQUEST_VALIDATOR.safeParse({
     word: url.searchParams.get("word") ?? undefined,
@@ -172,7 +155,8 @@ export async function handleTransitAutocomplete(
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
     console.error("handleTransitAutocomplete error:", err);
-    return new Response(JSON.stringify({ error: "Failed to fetch autocomplete suggestions" }), {
+    const detail = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: "Failed to fetch autocomplete suggestions", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
       headers: { "Content-Type": "application/json" },
     });

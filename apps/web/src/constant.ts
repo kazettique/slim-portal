@@ -35,11 +35,18 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_SEARCH,
   };
 
+  public static readonly TRANSIT_PAGE_META: PageMeta = {
+    title: "Transit",
+    description: "Find train and bus routes between stations.",
+    url: ShareConstant.PAGE_URL_TRANSIT,
+  };
+
   public static readonly NAV_LIST: PageMeta[] = [
     this.HOME_PAGE_META,
     this.NEWS_PAGE_META,
     this.PLACES_PAGE_META,
     this.SEARCH_PAGE_META,
+    this.TRANSIT_PAGE_META,
   ];
 
   public static readonly FOOTER_MESSAGE: string = "Slim Portal - optimized for slow networks";
@@ -49,6 +56,9 @@ export abstract class AppConstant {
   public static readonly ERROR_MSG_SEARCH_FAILED: string = "Search failed. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";
+
+  public static readonly ERROR_MSG_TRANSIT_SEARCH_FAILED: string = "Could not find routes. Please try again.";
+  public static readonly ERROR_MSG_TRANSIT_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";
 
   public static readonly REFRESH_ICON: string = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>`;
 }

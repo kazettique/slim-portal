@@ -26,11 +26,16 @@ export abstract class TransitLib {
     return `https://slim-portal-transit-cache/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${encodeURIComponent(startTime)}`;
   }
 
-  private static roundToHour(isoLocal: string): string {
-    const d = new Date(isoLocal);
-    d.setMinutes(0, 0, 0);
-    // Navitime expects "YYYY-MM-DDThh:mm:ss" without timezone
-    return d.toISOString().slice(0, 19);
+  /** Convert a Date to "YYYY-MM-DDThh:mm:ss" in JST (UTC+9), no timezone suffix */
+  private static toJSTString(date: Date): string {
+    const jst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    return jst.toISOString().slice(0, 19);
+  }
+
+  /** Round a "YYYY-MM-DDThh:mm:ss" string (already JST local) down to the hour */
+  private static roundToHour(isoNoOffset: string): string {
+    // "2026-05-25T10:30:00" → "2026-05-25T10:00:00"
+    return isoNoOffset.slice(0, 14) + "00:00";
   }
 
   private static mapSections(sections: NavitimeSection[]): TransitRoute["legs"] {
@@ -77,9 +82,7 @@ export abstract class TransitLib {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<{ routes: TransitRoute[]; cachedAt: string | null }> {
-    const startTime = datetime
-      ? this.roundToHour(datetime)
-      : this.roundToHour(new Date().toISOString());
+    const startTime = datetime ? this.roundToHour(datetime) : this.roundToHour(this.toJSTString(new Date()));
 
     const cache = await caches.open("transit");
     const key = this.cacheKey(from, to, startTime);
@@ -94,7 +97,6 @@ export abstract class TransitLib {
       goal: to,
       start_time: startTime,
       limit: String(NavitimeRouteConstant.MAX_RESULTS),
-      lang: NavitimeRouteConstant.DEFAULT_LANG,
     });
 
     const res = await fetch(`${NavitimeRouteConstant.API_URL}?${params}`, {
@@ -105,7 +107,10 @@ export abstract class TransitLib {
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
 
-    if (!res.ok) throw new Error(`Navitime API error: ${res.status}`);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Navitime API error: ${res.status} — ${body}`);
+    }
 
     const raw = await res.json();
     const parsed = NavitimeValidator.RESPONSE_VALIDATOR.safeParse(raw);
@@ -161,7 +166,10 @@ export abstract class TransitLib {
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
 
-    if (!res.ok) throw new Error(`Navitime transport/search API error: ${res.status}`);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Navitime transport/search API error: ${res.status} — ${body}`);
+    }
 
     const raw = await res.json();
     const parsed = NavitimeTransportSearchValidator.RESPONSE_VALIDATOR.safeParse(raw);
@@ -209,18 +217,18 @@ export abstract class TransitLib {
       return { items: (await cached.json()) as TransportAroundNode[], cachedAt };
     }
 
-    const res = await fetch(
-      `${NavitimeTransportConstant.API_ENDPOINT}/transport_node/around?${params}`,
-      {
-        headers: {
-          "X-RapidAPI-Key": env.RAPIDAPI_KEY,
-          "X-RapidAPI-Host": NavitimeTransportConstant.API_HOST,
-        },
-        signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
+    const res = await fetch(`${NavitimeTransportConstant.API_ENDPOINT}/transport_node/around?${params}`, {
+      headers: {
+        "X-RapidAPI-Key": env.RAPIDAPI_KEY,
+        "X-RapidAPI-Host": NavitimeTransportConstant.API_HOST,
       },
-    );
+      signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
+    });
 
-    if (!res.ok) throw new Error(`Navitime transport/around API error: ${res.status}`);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Navitime transport/around API error: ${res.status} — ${body}`);
+    }
 
     const raw = await res.json();
     const parsed = NavitimeTransportAroundValidator.RESPONSE_VALIDATOR.safeParse(raw);
@@ -267,25 +275,23 @@ export abstract class TransitLib {
       return { items: (await cached.json()) as TransportAutocompleteNode[], cachedAt };
     }
 
-    const res = await fetch(
-      `${NavitimeTransportConstant.API_ENDPOINT}/transport_node/autocomplete?${params}`,
-      {
-        headers: {
-          "X-RapidAPI-Key": env.RAPIDAPI_KEY,
-          "X-RapidAPI-Host": NavitimeTransportConstant.API_HOST,
-        },
-        signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
+    const res = await fetch(`${NavitimeTransportConstant.API_ENDPOINT}/transport_node/autocomplete?${params}`, {
+      headers: {
+        "X-RapidAPI-Key": env.RAPIDAPI_KEY,
+        "X-RapidAPI-Host": NavitimeTransportConstant.API_HOST,
       },
-    );
+      signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
+    });
 
-    if (!res.ok) throw new Error(`Navitime transport/autocomplete API error: ${res.status}`);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Navitime transport/autocomplete API error: ${res.status} — ${body}`);
+    }
 
     const raw = await res.json();
     const parsed = NavitimeAutocompleteValidator.RESPONSE_VALIDATOR.safeParse(raw);
     if (!parsed.success) {
-      throw new Error(
-        `Navitime transport/autocomplete response validation failed: ${parsed.error.message}`,
-      );
+      throw new Error(`Navitime transport/autocomplete response validation failed: ${parsed.error.message}`);
     }
 
     const items: TransportAutocompleteNode[] = parsed.data.items.map((node) => ({
