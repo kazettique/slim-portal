@@ -2,7 +2,8 @@ import { TransitRoute } from "@slim-portal/share";
 import { WorkerConstant } from "../constant";
 import { Env } from "../type";
 import { NavitimeRouteConstant } from "../external/navitime/route/constant";
-import { NavitimeMoveSection, NavitimePointSection, NavitimeSection, NavitimeTransitResponse } from "../external/navitime/route/type";
+import { NavitimeMoveSection, NavitimePointSection, NavitimeSection } from "../external/navitime/route/type";
+import { NavitimeValidator } from "../external/navitime/route/validator";
 
 export abstract class TransitLib {
   private static cacheKey(from: string, to: string, startTime: string): string {
@@ -72,7 +73,12 @@ export abstract class TransitLib {
 
     if (!res.ok) throw new Error(`Navitime API error: ${res.status}`);
 
-    const data = (await res.json()) as NavitimeTransitResponse;
+    const raw = await res.json();
+    const parsed = NavitimeValidator.RESPONSE_VALIDATOR.safeParse(raw);
+    if (!parsed.success) {
+      throw new Error(`Navitime response validation failed: ${parsed.error.message}`);
+    }
+    const data = parsed.data;
     const routes: TransitRoute[] = (data.items ?? []).map((item) => ({
       legs: this.mapSections(item.sections),
       totalTime: item.summary.move.time,

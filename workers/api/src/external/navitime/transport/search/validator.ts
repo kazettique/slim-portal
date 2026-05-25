@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 import { NavitimeLang } from "../../type.common";
-import { NavitimeTransportSearchRequest } from "./type";
+import { NavitimeCommonValidator } from "../../validator.common";
+import { NavitimeTransportSearchRequest, NavitimeTransportSearchResponse } from "./type";
 
 export abstract class NavitimeTransportSearchValidator {
   public static readonly REQUEST_VALIDATOR: z.ZodType<NavitimeTransportSearchRequest> = z.object({
@@ -11,4 +12,11 @@ export abstract class NavitimeTransportSearchValidator {
     datum: z.string().optional(),
     coord_unit: z.string().optional(),
   });
+
+  public static readonly RESPONSE_VALIDATOR: z.ZodType<NavitimeTransportSearchResponse> =
+    z.object({
+      count: NavitimeCommonValidator.TRANSPORT_COUNT_VALIDATOR,
+      items: NavitimeCommonValidator.TRANSPORT_NODE_VALIDATOR.array(),
+      unit: NavitimeCommonValidator.TRANSPORT_UNIT_VALIDATOR.optional(),
+    });
 }
