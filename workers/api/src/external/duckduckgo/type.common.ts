@@ -1,16 +1,16 @@
+export interface DdgSublink {
+  snippet: string;
+  targetUrl: string;
+  text: string;
+}
+
 export interface DdgResult {
-  FirstURL: string;
-  Text: string;
+  position: number;
+  url: string;
+  title: string;
+  description: string;
+  description_html: string;
+  types: string;
+  host: string;
+  sublinks: DdgSublink[];
 }
-
-export interface DdgRelatedTopicLeaf {
-  FirstURL: string;
-  Text: string;
-}
-
-export interface DdgRelatedTopicGroup {
-  Name: string;
-  Topics: DdgRelatedTopicLeaf[];
-}
-
-export type DdgRelatedTopic = DdgRelatedTopicLeaf | DdgRelatedTopicGroup;

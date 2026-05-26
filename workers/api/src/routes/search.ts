@@ -3,7 +3,7 @@ import { Env, HttpStatusCode } from "../type";
 import { DuckDuckGoConstant } from "../external/duckduckgo/constant";
 import { DuckDuckGoValidator } from "../external/duckduckgo/validator";
 
-export async function handleSearch(request: Request, _env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handleSearch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const q = url.searchParams.get("q") ?? "";
 
@@ -16,7 +16,7 @@ export async function handleSearch(request: Request, _env: Env, ctx: ExecutionCo
   }
 
   try {
-    const { items, cachedAt } = await SearchLib.search(result.data.q, ctx);
+    const { items, cachedAt } = await SearchLib.search(result.data.q, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${DuckDuckGoConstant.CACHE_TTL}`,
