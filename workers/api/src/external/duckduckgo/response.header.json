@@ -1,0 +1,23 @@
+{
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "*",
+  "alt-svc": "h3=\":443\"; ma=86400",
+  "cf-cache-status": "DYNAMIC",
+  "cf-ray": "85d09ada8d348c33-EWR",
+  "content-type": "application/json",
+  "date": "Thu, 29 Feb 2024 11:35:38 GMT",
+  "nel": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+  "referrer-policy": "same-origin, same-origin",
+  "report-to": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=g9MuquafOOvaK%2B3BKgBX0%2FISaOvKa4xdzTk23v18LUpCZ7ZMp2VzRCZoiEqN6833ohgcZyZ%2FZ51RCsuZ25pDiYKVxzOZnlPAyYxYu3rBR1ciQoquS3nddZ33w5LafVxT%2FXMbng%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+  "server": "RapidAPI-1.2.8",
+  "vary": "Accept-Encoding",
+  "x-content-type-options": "nosniff, nosniff",
+  "x-frame-options": "SAMEORIGIN, SAMEORIGIN",
+  "x-permitted-cross-domain-policies": "master-only, master-only",
+  "x-rapidapi-region": "AWS - eu-central-1",
+  "x-rapidapi-version": "1.2.8",
+  "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+  "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499997",
+  "x-ratelimit-rapid-free-plans-hard-limit-reset": "2263808",
+  "x-xss-protection": "1; mode=block, 1; mode=block"
+}

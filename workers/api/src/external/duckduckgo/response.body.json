@@ -1,0 +1,247 @@
+{
+  "status": "success",
+  "query": "Nike",
+  "results": [
+    {
+      "position": 1,
+      "url": "https://www.nike.com/",
+      "title": "Nike. Just Do It. Nike.com",
+      "description": "Shop for Nike shoes, clothing, accessories and more at the official Nike online store. Find the latest releases, exclusive deals, member benefits and more for your favorite sports and styles.",
+      "description_html": "Shop for <b>Nike</b> shoes, clothing, accessories and more at the official <b>Nike</b> online store. Find the latest releases, exclusive deals, member benefits and more for your favorite sports and styles.",
+      "types": "",
+      "host": "www.nike.com",
+      "sublinks": [
+        {
+          "snippet": "Nike Air Max Plus Drift Men's Shoes. $185. Nike Air Max 1 Men's Shoes. $140. Book 1 \"Mirage V2\" Basketball Shoes. $140. Nike Dunk Low Retro Men's Shoes. $115. Nike Dunk Low Retro Men's Shoes. $115. Nike Zoom Vomero 5 Men's Shoes. $160. Nike Air Max Dn Men's Shoes. $160. Nike G.T. Cut 3 ASW Basketball Shoes. $200. Nike Pegasus 40",
+          "targetUrl": "https://www.nike.com/men",
+          "text": "Men"
+        },
+        {
+          "snippet": "Explore the latest styles and innovations from Nike Women, featuring the hottest shoes, clothing, gear and accessories for every level of activity.",
+          "targetUrl": "https://www.nike.com/women",
+          "text": "Women"
+        },
+        {
+          "snippet": "Nike Dunk Low Little Kids' Shoes. $70. Featured. KIDS' DUNK LOW RETRO. The classic color combo is back and ready to play. Shop. Featured. KIDS' DUNK LOW RETRO. The classic color combo is back and ready to play. Shop. More to Explore. Nike Pro Leak Protection. Shop. Shoes $70 & Under. Shop. Graphic Tees & Shorts. Shop. Icons for Any Season. 1/6.",
+          "targetUrl": "https://www.nike.com/kids",
+          "text": "Kids"
+        },
+        {
+          "snippet": "Men's Nike College Crew-Neck Long-Sleeve T-Shirt. 1 Color. $31.97. $35. Nike Sportswear Club Fleece Holiday Shine Hoodie. Nike Sportswear Club Fleece Holiday Shine Hoodie. Toddler Hoodie. 4 Colors. $34.97. $44. 20% off. Nike Sportswear Windrunner. Nike Sportswear Windrunner. Big Kids' (Boys') Loose Hip-Length Hooded Jacket (Extended Size)",
+          "targetUrl": "https://www.nike.com/w/sale-3yaep",
+          "text": "Sale"
+        },
+        {
+          "snippet": "Shop the latest back to school styles for shoes, backpacks, and gear at Nike.com Free delivery and returns.",
+          "targetUrl": "https://www.nike.com/back-to-school",
+          "text": "Back to School"
+        },
+        {
+          "snippet": "Nike Air Max 97 \"Something For Thee Hotties\" By You. Custom Shoes. 4 Colors. $210. Jordan 11 Mid TD. Jordan 11 Mid TD. Men's Football Cleats. 1 Color. $200. Nike Superfly 9 Elite Mercurial Dream Speed. Nike Superfly 9 Elite Mercurial Dream Speed. FG High-Top Soccer Cleats. 1 Color. $295. Nike Dunk Low Retro. Available in SNKRS. Nike Dunk Low Retro.",
+          "targetUrl": "https://www.nike.com/w/new-3n82y",
+          "text": "New & Featured"
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "url": "https://www.nike.com/w/shoes-y7ok",
+      "title": "Nike Shoes & Sneakers. Nike.com",
+      "description": "Shop for Nike shoes and sneakers for men, women and kids at the official Nike site. Find your favorite styles, colors and sizes of Air Force 1, Dunk, Jordan, Air Max and more.",
+      "description_html": "Shop for <b>Nike</b> shoes and sneakers for men, women and kids at the official <b>Nike</b> site. Find your favorite styles, colors and sizes of Air Force 1, Dunk, Jordan, Air Max and more.",
+      "types": "",
+      "host": "www.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 3,
+      "url": "https://www.nike.com/w/mens-shoes-nik1zy7ok",
+      "title": "Men's Shoes & Sneakers. Nike.com",
+      "description": "Shop for the latest designs of men's shoes and sneakers from Nike.com, featuring Air Jordan, Air Max, Dunk, Air Force 1 and more. Find your perfect fit, color and style for training, sport and lifestyle.",
+      "description_html": "Shop for the latest designs of men's shoes and sneakers from <b>Nike</b>.com, featuring Air Jordan, Air Max, Dunk, Air Force 1 and more. Find your perfect fit, color and style for training, sport and lifestyle.",
+      "types": "",
+      "host": "www.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 4,
+      "url": "https://www.nike.com/retail",
+      "title": "Find Your Nearest Nike Store. Nike.com",
+      "description": "Search for Nike stores by location, filter by categories and view store hours and directions. Shop in-store for the latest Nike products and services in Canada and worldwide.",
+      "description_html": "Search for <b>Nike</b> stores by location, filter by categories and view store hours and directions. Shop in-store for the latest <b>Nike</b> products and services in Canada and worldwide.",
+      "types": "",
+      "host": "www.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 5,
+      "url": "https://www.nike.com/w/usa-10ciy",
+      "title": "USA. Nike.com",
+      "description": "Shop for Nike soccer jerseys, shoes, apparel and accessories for the USWNT and USMNT. Find exclusive deals, sustainable materials and store pickup options.",
+      "description_html": "Shop for <b>Nike</b> soccer jerseys, shoes, apparel and accessories for the USWNT and USMNT. Find exclusive deals, sustainable materials and store pickup options.",
+      "types": "translations",
+      "host": "www.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 6,
+      "url": "https://www.nordstrom.com/brands/nike--535",
+      "title": "Shop Nike Online | Nordstrom",
+      "description": "Browse and buy Nike shoes, clothing, accessories and more at Nordstrom.com. Find Nike deals, new arrivals, limited-time sales and exclusive styles for men, women and kids.",
+      "description_html": "Browse and buy <b>Nike</b> shoes, clothing, accessories and more at Nordstrom.com. Find <b>Nike</b> deals, new arrivals, limited-time sales and exclusive styles for men, women and kids.",
+      "types": "",
+      "host": "www.nordstrom.com",
+      "sublinks": []
+    },
+    {
+      "position": 7,
+      "url": "https://www.nordstrom.com/brands/nike/shoes",
+      "title": "Nike Shoes | Nordstrom",
+      "description": "Browse a wide selection of Nike shoes for men, women and kids at Nordstrom. Find new, markdown and limited-time sale items, from classic styles like Air Force 1 and Air Max to trendy models like Dunk and Waffle.",
+      "description_html": "Browse a wide selection of <b>Nike</b> shoes for men, women and kids at Nordstrom. Find new, markdown and limited-time sale items, from classic styles like Air Force 1 and Air Max to trendy models like Dunk and Waffle.",
+      "types": "",
+      "host": "www.nordstrom.com",
+      "sublinks": []
+    },
+    {
+      "position": 8,
+      "url": "https://www.nordstromrack.com/brands/nike",
+      "title": "Shop Nike Online | Nordstrom Rack",
+      "description": "Find Nike shoes, clothing and accessories for men, women and kids at Nordstrom Rack. Browse Nike products by category, price, size and style and save up to 62% off select items.",
+      "description_html": "Find <b>Nike</b> shoes, clothing and accessories for men, women and kids at Nordstrom Rack. Browse <b>Nike</b> products by category, price, size and style and save up to 62% off select items.",
+      "types": "",
+      "host": "www.nordstromrack.com",
+      "sublinks": []
+    },
+    {
+      "position": 9,
+      "url": "https://www.footlocker.com/category/brands/nike.html",
+      "title": "Nike Shoes, Apparel, and Accessories | Foot Locker",
+      "description": "Shop for Nike shoes, clothing, and accessories at Foot Locker, the leading retailer of sneakers and streetwear. Browse the latest Nike releases, exclusive collaborations, and customer ratings.",
+      "description_html": "Shop for <b>Nike</b> shoes, clothing, and accessories at Foot Locker, the leading retailer of sneakers and streetwear. Browse the latest <b>Nike</b> releases, exclusive collaborations, and customer ratings.",
+      "types": "",
+      "host": "www.footlocker.com",
+      "sublinks": []
+    },
+    {
+      "position": 10,
+      "url": "https://www.dickssportinggoods.com/c/nike",
+      "title": "Shop Nike Shoes, Clothing, Accessories & Gear at DICK'S",
+      "description": "Athletes of all stripes can explore Nike's breakthrough gear for men, women and kids. As an athlete, footwear is your ultimate tool. The collection of Nike shoes includes shoes optimized for running, training, basketball and more. Shop sport-specific Nike cleats and shoes, including Nike basketball shoes and football cleats.",
+      "description_html": "Athletes of all stripes can explore <b>Nike's</b> breakthrough gear for men, women and kids. As an athlete, footwear is your ultimate tool. The collection of <b>Nike</b> shoes includes shoes optimized for running, training, basketball and more. Shop sport-specific <b>Nike</b> cleats and shoes, including <b>Nike</b> basketball shoes and football cleats.",
+      "types": "",
+      "host": "www.dickssportinggoods.com",
+      "sublinks": []
+    },
+    {
+      "position": 11,
+      "url": "https://about.nike.com/",
+      "title": "About Nike - The official website for NIKE, Inc., Converse and Jordan ...",
+      "description": "Based in Beaverton, Oregon, NIKE, Inc. includes the Nike, Converse, and Jordan brands. Nike is the leading sports brand in the world because we keep athletes at the center of everything we do. We empower people through innovative products, services and experiences, engineered for the future of sport.",
+      "description_html": "Based in Beaverton, Oregon, <b>NIKE</b>, Inc. includes the <b>Nike</b>, Converse, and Jordan brands. <b>Nike</b> is the leading sports brand in the world because we keep athletes at the center of everything we do. We empower people through innovative products, services and experiences, engineered for the future of sport.",
+      "types": "",
+      "host": "about.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 12,
+      "url": "https://en.wikipedia.org/wiki/Nike,_Inc.",
+      "title": "Nike, Inc. - Wikipedia",
+      "description": "Nike, Inc. (stylized as NIKE) is an American athletic footwear and apparel corporation headquartered near Beaverton, Oregon, United States. It is the world's largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment, with revenue in excess of US$46 billion in its fiscal year 2022.. The company was founded on January 25, 1964, as \"Blue Ribbon Sports\", by Bill ...",
+      "description_html": "<b>Nike</b>, Inc. (stylized as <b>NIKE</b>) is an American athletic footwear and apparel corporation headquartered near Beaverton, Oregon, United States. It is the world's largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment, with revenue in excess of US$46 billion in its fiscal year 2022.. The company was founded on January 25, 1964, as \"Blue Ribbon Sports\", by Bill ...",
+      "types": "en_wikipedia_queries,nlp_fathead,nlp_wiki,wikinlp",
+      "host": "en.wikipedia.org",
+      "sublinks": []
+    },
+    {
+      "position": 13,
+      "url": "https://about.nike.com/en/company",
+      "title": "Welcome to NIKE, Inc. - NIKE, Inc.",
+      "description": "Welcome to NIKE, Inc. - NIKE, Inc. Nike. We're the leading sports brand in the world because we keep athletes at the center of everything we do. We empower people through innovative products, services and experiences, engineered for the future of sport.",
+      "description_html": "Welcome to <b>NIKE</b>, Inc. - <b>NIKE</b>, Inc. <b>Nike</b>. We're the leading sports brand in the world because we keep athletes at the center of everything we do. We empower people through innovative products, services and experiences, engineered for the future of sport.",
+      "types": "",
+      "host": "about.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 14,
+      "url": "https://www.amazon.com/nike-shoes/s?k=nike+shoes",
+      "title": "Amazon.com: Nike Shoes",
+      "description": "Nike. Men's Running Shoes. 4.6 out of 5 stars 424. $97.74 $ 97. 74. FREE delivery Wed, Mar 6 . Or fastest delivery Fri, Mar 1 +16. Nike. mens Air Force 1 Low Retro. 4.6 out of 5 stars 1,645. 100+ bought in past month. $115.00 $ 115. 00. FREE delivery Tue, Mar 5 . Prime Try Before You Buy.",
+      "description_html": "<b>Nike</b>. Men's Running Shoes. 4.6 out of 5 stars 424. $97.74 $ 97. 74. FREE delivery Wed, Mar 6 . Or fastest delivery Fri, Mar 1 +16. <b>Nike</b>. mens Air Force 1 Low Retro. 4.6 out of 5 stars 1,645. 100+ bought in past month. $115.00 $ 115. 00. FREE delivery Tue, Mar 5 . Prime Try Before You Buy.",
+      "types": "products",
+      "host": "www.amazon.com",
+      "sublinks": []
+    },
+    {
+      "position": 15,
+      "url": "https://www.nike.com/in/",
+      "title": "Nike. Just Do It. Nike IN",
+      "description": "Shop Nike shoes, clothing, accessories and more for sports and lifestyle. Explore the latest collections, innovations and stories from Nike and its athletes.",
+      "description_html": "Shop <b>Nike</b> shoes, clothing, accessories and more for sports and lifestyle. Explore the latest collections, innovations and stories from <b>Nike</b> and its athletes.",
+      "types": "",
+      "host": "www.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 16,
+      "url": "https://about.nike.com/en/topics/company",
+      "title": "Company - NIKE, Inc.",
+      "description": "Based in Beaverton, Oregon, NIKE, Inc. includes the Nike, Converse, and Jordan brands.",
+      "description_html": "Based in Beaverton, Oregon, <b>NIKE</b>, Inc. includes the <b>Nike</b>, Converse, and Jordan brands.",
+      "types": "",
+      "host": "about.nike.com",
+      "sublinks": []
+    },
+    {
+      "position": 17,
+      "url": "https://en.wikipedia.org/wiki/Nike_(mythology)",
+      "title": "Nike (mythology) - Wikipedia",
+      "description": "In Greek mythology and ancient religion, Nike (Ancient Greek: Νίκη, romanized: Nike, lit. 'victory'; pronounced [nǐː.kɛː], modern:) is the goddess who personifies victory in any field including art, music, war, and athletics. She is often portrayed in Greek art as Winged Victory in the motion of flight; however, she can also appear without wings as \"Wingless Victory\" when she is being ...",
+      "description_html": "In Greek mythology and ancient religion, <b>Nike</b> (Ancient Greek: Νίκη, romanized: <b>Nike</b>, lit. 'victory'; pronounced [nǐː.kɛː], modern:) is the goddess who personifies victory in any field including art, music, war, and athletics. She is often portrayed in Greek art as Winged Victory in the motion of flight; however, she can also appear without wings as \"Wingless Victory\" when she is being ...",
+      "types": "en_wikipedia_queries,nlp_fathead,nlp_wiki,wikinlp",
+      "host": "en.wikipedia.org",
+      "sublinks": []
+    },
+    {
+      "position": 18,
+      "url": "https://www.washingtonpost.com/local/nike-missile-silos-washington/2021/10/16/b0068528-2dda-11ec-985d-3150f7e106b2_story.html",
+      "title": "Nike missiles around Washington - The Washington Post",
+      "description": "In the 1950s, Nike anti-aircraft sites — such as this one in Lorton, Va. — protected U.S. cities from Soviet bombers. (Library of Congress) April 14, 1955, was a good day to not be driving on ...",
+      "description_html": "In the 1950s, <b>Nike</b> anti-aircraft sites — such as this one in Lorton, Va. — protected U.S. cities from Soviet bombers. (Library of Congress) April 14, 1955, was a good day to not be driving on ...",
+      "types": "news,translations",
+      "host": "www.washingtonpost.com",
+      "sublinks": []
+    },
+    {
+      "position": 19,
+      "url": "https://www.atlasobscura.com/places/great-falls-nike-missile-launch-site-w-83",
+      "title": "Nike Missile Launch Site W-83 - Herndon, Virginia - Atlas Obscura",
+      "description": "Discover Nike Missile Launch Site W-83 in Herndon, Virginia: An out-of-place Air Force radar dome is all that denotes this park as a former missile launch site.",
+      "description_html": "Discover <b>Nike</b> Missile Launch Site W-83 in Herndon, Virginia: An out-of-place Air Force radar dome is all that denotes this park as a former missile launch site.",
+      "types": "",
+      "host": "www.atlasobscura.com",
+      "sublinks": []
+    },
+    {
+      "position": 20,
+      "url": "https://www.atlasobscura.com/places/great-falls-nike-integrated-fire-control-site-w-83",
+      "title": "Great Falls Nike Fire Control Site W-83 - Atlas Obscura",
+      "description": "Activated in 1955, the Great Falls Nike Integrated Fire Control Site was one of many Nike Integrated Fire Control Sites crafted during the Cold War and was designed to defend against an air attack ...",
+      "description_html": "Activated in 1955, the Great Falls <b>Nike</b> Integrated Fire Control Site was one of many <b>Nike</b> Integrated Fire Control Sites crafted during the Cold War and was designed to defend against an air attack ...",
+      "types": "",
+      "host": "www.atlasobscura.com",
+      "sublinks": []
+    },
+    {
+      "position": 21,
+      "url": "https://www.restonnow.com/2021/04/12/at-three-fairfax-county-parks-ghosts-of-cold-war-missiles-linger/",
+      "title": "At three Fairfax County parks, ghosts of Cold War missiles linger",
+      "description": "Located 1199 Utterback Store Road, Great Falls Nike Park is one of three Fairfax County parks that were once home to anti-aircraft missiles designed to bring down Russian projectiles aimed at D.C ...",
+      "description_html": "Located 1199 Utterback Store Road, Great Falls <b>Nike</b> Park is one of three Fairfax County parks that were once home to anti-aircraft missiles designed to bring down Russian projectiles aimed at D.C ...",
+      "types": "translations",
+      "host": "www.restonnow.com",
+      "sublinks": []
+    }
+  ]
+}
