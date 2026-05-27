@@ -52,6 +52,10 @@ export abstract class TransitLib {
         depart: move.from_time ?? null,
         arrive: move.to_time ?? null,
         platform: move.transport?.destination?.name ?? "",
+        color: move.transport?.color ?? null,
+        getoff: move.transport?.getoff ?? null,
+        distance: move.distance ?? null,
+        duration: move.time ?? null,
       });
     });
     return legs;
@@ -82,7 +86,7 @@ export abstract class TransitLib {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<{ routes: TransitRoute[]; cachedAt: string | null }> {
-    const startTime = datetime ? this.roundToHour(datetime) : this.roundToHour(this.toJSTString(new Date()));
+    const startTime = datetime ?? this.toJSTString(new Date());
 
     const cache = await caches.open("transit");
     const key = this.cacheKey(from, to, startTime);
@@ -124,6 +128,12 @@ export abstract class TransitLib {
       transfers: item.summary.move.transit_count,
       depart: item.summary.move.from_time,
       arrive: item.summary.move.to_time,
+      referenceFare: item.summary.move.reference_fare
+        ? {
+            ticket: item.summary.move.reference_fare.lowest_total_ticket,
+            ic: item.summary.move.reference_fare.lowest_total_ic,
+          }
+        : null,
     }));
 
     const cachedResponse = new Response(JSON.stringify(routes), {

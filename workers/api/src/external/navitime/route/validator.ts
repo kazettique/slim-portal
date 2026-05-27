@@ -126,7 +126,7 @@ export abstract class NavitimeValidator {
   public static readonly REQUEST_VALIDATOR: z.ZodType<TransitSearchRequest> = z.object({
     from: z.string().regex(this.LAT_LNG_PATTERN, "must be 'lat,lng'"),
     to: z.string().regex(this.LAT_LNG_PATTERN, "must be 'lat,lng'"),
-    datetime: z.iso.datetime({ offset: false }).optional(),
+    datetime: z.iso.datetime({ local: true, offset: false }).optional(),
     lang: z.enum(NavitimeLang).optional(),
     order: z.enum(NavitimeSortOrder).optional(),
     limit: z.coerce.number().int().min(1).max(10).optional(),

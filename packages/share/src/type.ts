@@ -70,6 +70,10 @@ export interface TransitLeg {
   depart: string | null;
   arrive: string | null;
   platform: string;
+  color: string | null;
+  getoff: string | null;
+  distance: number | null;
+  duration: number | null;
 }
 
 export interface TransitRoute {
@@ -78,4 +82,5 @@ export interface TransitRoute {
   transfers: number;
   depart: string;
   arrive: string;
+  referenceFare: { ticket: number; ic: number } | null;
 }

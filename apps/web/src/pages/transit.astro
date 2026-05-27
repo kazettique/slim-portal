@@ -41,6 +41,15 @@ import { AppConstant } from "../constant";
       </div>
     </div>
 
+    <div class="transit-form__group">
+      <label class="transit-form__label" for="datetime-input">Departure</label>
+      <input
+        id="datetime-input"
+        type="datetime-local"
+        class="transit-form__input"
+      />
+    </div>
+
     <button type="submit" id="search-btn" class="transit-form__submit">Search routes</button>
   </form>
 
@@ -76,6 +85,7 @@ import { AppConstant } from "../constant";
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
   const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
   const toInput = document.getElementById("to-input") as HTMLInputElement | null;
+  const datetimeInput = document.getElementById("datetime-input") as HTMLInputElement | null;
   const fromSuggestions = document.getElementById("from-suggestions") as HTMLUListElement | null;
   const toSuggestions = document.getElementById("to-suggestions") as HTMLUListElement | null;
   const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
@@ -92,6 +102,11 @@ import { AppConstant } from "../constant";
   let lastTo: string | null = null;
   let fromTimer: ReturnType<typeof setTimeout> | null = null;
   let toTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function toDatetimeLocalValue(date: Date): string {
+    const pad = (n: number): string => String(n).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
 
   function setStatus(msg: string): void {
     if (statusEl) statusEl.textContent = msg;
@@ -119,11 +134,16 @@ import { AppConstant } from "../constant";
   function renderLegs(legs: TransitLeg[]): string {
     return legs
       .map((leg) => {
-        const cls = isWalkLeg(leg) ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
+        const isWalk = isWalkLeg(leg);
+        const cls = isWalk ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
+        const colorStyle = !isWalk && leg.color ? ` style="--leg-color:${leg.color}"` : "";
         const timeRange =
           leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
+        const durationText = leg.duration !== null ? ` · ${leg.duration}分` : "";
         const platform = leg.platform ? ` · ${leg.platform}` : "";
-        return `<li class="${cls}">${leg.line} · ${leg.from} → ${leg.to}${timeRange}${platform}</li>`;
+        const getoffText = leg.getoff ? ` · 降 ${leg.getoff}号車` : "";
+        const distanceText = isWalk && leg.distance !== null ? AppUtil.formatDistance(leg.distance) : "";
+        return `<li class="${cls}"${colorStyle}>${leg.line} · ${leg.from} → ${leg.to}${timeRange}${durationText}${platform}${getoffText}${distanceText}</li>`;
       })
       .join("");
   }
@@ -138,18 +158,23 @@ import { AppConstant } from "../constant";
     setStatus("");
     routeList.innerHTML = routes
       .map(
-        (r, i) => `
+        (r) => {
+          const fareText = r.referenceFare
+            ? ` · IC ¥${r.referenceFare.ic.toLocaleString()} / 切符 ¥${r.referenceFare.ticket.toLocaleString()}`
+            : "";
+          return `
         <li class="transit-route">
           <div class="transit-route__summary">
             <span class="transit-route__time">${r.totalTime} min</span>
             <span class="transit-route__meta">
               · ${r.transfers === 0 ? "No transfers" : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`}
-              · ${formatTime(r.depart)} → ${formatTime(r.arrive)}
+              · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
             </span>
           </div>
           <ul class="transit-route__legs">${renderLegs(r.legs)}</ul>
         </li>
-      `,
+      `;
+        },
       )
       .join("");
   }
@@ -228,11 +253,13 @@ import { AppConstant } from "../constant";
     }
 
     // Sync URL — pushState for new searches, replaceState for refresh
+    const datetimeValue = datetimeInput?.value ?? "";
     const stateParams = new URLSearchParams({
       from: fromCoord,
       to: toCoord,
       from_name: fromInput?.value ?? "",
       to_name: toInput?.value ?? "",
+      datetime: datetimeValue,
     });
     if (bypassCache) {
       history.replaceState(null, "", `?${stateParams.toString()}`);
@@ -247,6 +274,7 @@ import { AppConstant } from "../constant";
 
     try {
       const params = new URLSearchParams({ from: fromCoord, to: toCoord });
+      if (datetimeValue) params.set("datetime", `${datetimeValue}:00`);
       const res = await fetch(`${AppConstant.API_BASE_URL}/transit?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
@@ -362,6 +390,8 @@ import { AppConstant } from "../constant";
     const t = urlP.get("to");
     const fn = urlP.get("from_name");
     const tn = urlP.get("to_name");
+    const dt = urlP.get("datetime");
+    if (datetimeInput) datetimeInput.value = dt ?? toDatetimeLocalValue(new Date());
     if (f && t && fn && tn) {
       fromCoord = f;
       toCoord = t;
@@ -379,12 +409,16 @@ import { AppConstant } from "../constant";
     }
   });
 
-  // On load: restore from URL
+  // On load: restore from URL or default to now
   const initialParams = new URLSearchParams(window.location.search);
   const initialFrom = initialParams.get("from");
   const initialTo = initialParams.get("to");
   const initialFromName = initialParams.get("from_name");
   const initialToName = initialParams.get("to_name");
+  const initialDatetime = initialParams.get("datetime");
+  if (datetimeInput) {
+    datetimeInput.value = initialDatetime ?? toDatetimeLocalValue(new Date());
+  }
   if (initialFrom && initialTo && initialFromName && initialToName) {
     fromCoord = initialFrom;
     toCoord = initialTo;

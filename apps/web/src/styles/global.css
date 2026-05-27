@@ -320,9 +320,9 @@ footer {
 }
 
 .transit-leg--transit {
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--leg-color, var(--accent));
   padding-inline-start: 0.5em;
-  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  background: color-mix(in srgb, var(--leg-color, var(--accent)) 8%, var(--bg));
 }
 
 .cache-status {
