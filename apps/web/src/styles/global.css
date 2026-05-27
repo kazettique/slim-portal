@@ -12,6 +12,7 @@
   --muted: #555555;
   --border: #d0d0d0;
   --accent: #0057b7;
+  --danger: #c0392b;
   --radius: 4px;
   --space: 1rem;
   --max-w: 680px;
@@ -146,6 +147,15 @@ nav a[aria-current="page"] {
 .refresh-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+.refresh-btn--danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.refresh-btn--danger:hover {
+  background: var(--danger);
+  color: var(--bg);
+  border-color: var(--danger);
 }
 
 footer {
@@ -698,6 +708,51 @@ footer {
   border-top: 1px solid var(--border);
   font-weight: 700;
   padding-block-start: 0.5em;
+}
+
+.settings-chart-toggle {
+  display: flex;
+  gap: 0.25rem;
+  margin-block: calc(var(--space) * 0.5);
+}
+
+.settings-chart-btn {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.settings-chart-btn--active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.settings-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-block: calc(var(--space) * 0.5);
+}
+
+.settings-chart-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.settings-chart-legend__swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 /* ── Search page ── */

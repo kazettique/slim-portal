@@ -3,6 +3,14 @@ export enum TimeFormat {
   TWENTY_FOUR_HOUR = "24h",
 }
 
+export interface NetworkEntry {
+  page: NetworkPage;
+  bytes: number;
+  ts: string; // ISO 8601
+}
+
+export const MAX_LOG_ENTRIES = 500;
+
 export enum NetworkPage {
   NEWS = "news",
   PLACES_SEARCH = "places/search",
@@ -25,11 +33,13 @@ const LS_KEY_TIME_FORMAT = "setting:timeFormat";
 const LS_KEY_NETWORK_USAGE = "setting:networkUsage";
 const LS_KEY_CACHE_CLEARED_AT = "setting:cacheClearedAt";
 const LS_KEY_NETWORK_SINCE = "setting:networkSince";
+const LS_KEY_NETWORK_LOG = "setting:networkLog";
 const LS_SETTING_KEYS = [
   LS_KEY_TIME_FORMAT,
   LS_KEY_NETWORK_USAGE,
   LS_KEY_CACHE_CLEARED_AT,
   LS_KEY_NETWORK_SINCE,
+  LS_KEY_NETWORK_LOG,
 ] as const;
 
 const DEFAULTS = {
@@ -72,14 +82,29 @@ export abstract class AppSettings {
 
   public static addNetworkBytes(page: NetworkPage, bytes: number): void {
     try {
+      const now = new Date().toISOString();
       if (!localStorage.getItem(LS_KEY_NETWORK_SINCE)) {
-        localStorage.setItem(LS_KEY_NETWORK_SINCE, new Date().toISOString());
+        localStorage.setItem(LS_KEY_NETWORK_SINCE, now);
       }
       const usage = AppSettings.getNetworkUsage();
       usage[page] = (usage[page] ?? 0) + bytes;
       localStorage.setItem(LS_KEY_NETWORK_USAGE, JSON.stringify(usage));
+      const log = AppSettings.getNetworkLog();
+      log.push({ page, bytes, ts: now });
+      if (log.length > MAX_LOG_ENTRIES) log.splice(0, log.length - MAX_LOG_ENTRIES);
+      localStorage.setItem(LS_KEY_NETWORK_LOG, JSON.stringify(log));
     } catch {
       // ignore
+    }
+  }
+
+  public static getNetworkLog(): NetworkEntry[] {
+    try {
+      const raw = localStorage.getItem(LS_KEY_NETWORK_LOG);
+      if (!raw) return [];
+      return JSON.parse(raw) as NetworkEntry[];
+    } catch {
+      return [];
     }
   }
 
@@ -87,6 +112,7 @@ export abstract class AppSettings {
     try {
       localStorage.removeItem(LS_KEY_NETWORK_USAGE);
       localStorage.removeItem(LS_KEY_NETWORK_SINCE);
+      localStorage.removeItem(LS_KEY_NETWORK_LOG);
     } catch {
       // ignore
     }

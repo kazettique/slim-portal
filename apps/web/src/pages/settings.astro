@@ -32,7 +32,7 @@ import { AppConstant } from "../constant";
     <p>The service worker caches pages and API responses for offline use.</p>
     <div class="settings-group">
       <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-        <button id="clear-cache-btn" class="refresh-btn">Clear all caches</button>
+        <button id="clear-cache-btn" class="refresh-btn refresh-btn--danger">Clear all caches</button>
         <span id="cache-msg" class="status" aria-live="polite" style="margin:0; padding:0;"></span>
       </div>
       <p id="cache-cleared-at" class="status" style="margin-block-start:0.25rem"></p>
@@ -44,6 +44,14 @@ import { AppConstant } from "../constant";
     <h2>Network Usage</h2>
     <p>Cumulative data fetched by each page since last reset. Autocomplete calls are excluded.</p>
     <p id="network-since" class="status" style="margin-block-start:-0.5rem; margin-block-end:0.5rem"></p>
+
+    <div class="settings-chart-toggle" role="group" aria-label="Chart grouping">
+      <button id="chart-by-hour" class="settings-chart-btn settings-chart-btn--active">By Hour</button>
+      <button id="chart-by-day" class="settings-chart-btn">By Day</button>
+    </div>
+    <div id="usage-chart" aria-live="polite"></div>
+    <div id="usage-legend" class="settings-chart-legend"></div>
+
     <table class="settings-usage-table" aria-label="Network usage by page">
       <thead>
         <tr>
@@ -60,7 +68,7 @@ import { AppConstant } from "../constant";
       </tfoot>
     </table>
     <div class="settings-group" style="margin-block-start:calc(var(--space)*0.75)">
-      <button id="reset-usage-btn" class="refresh-btn">Reset usage data</button>
+      <button id="reset-usage-btn" class="refresh-btn refresh-btn--danger">Reset usage data</button>
     </div>
   </section>
 
@@ -70,7 +78,7 @@ import { AppConstant } from "../constant";
     <p>Restore all settings to their default values.</p>
     <div class="settings-group">
       <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-        <button id="reset-all-btn" class="refresh-btn">Reset to defaults</button>
+        <button id="reset-all-btn" class="refresh-btn refresh-btn--danger">Reset to defaults</button>
         <span id="reset-msg" class="status" aria-live="polite" style="margin:0; padding:0;"></span>
       </div>
     </div>
@@ -81,6 +89,142 @@ import { AppConstant } from "../constant";
   import { AppSettings, TimeFormat, NetworkPage, NETWORK_PAGE_LABELS } from "../settings";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
+
+  // ── Chart ─────────────────────────────────────────────────────
+  const PAGE_COLORS: Record<NetworkPage, string> = {
+    [NetworkPage.NEWS]:           "#0057b7",
+    [NetworkPage.PLACES_SEARCH]:  "#2e8b57",
+    [NetworkPage.PLACES_NEARBY]:  "#6a5acd",
+    [NetworkPage.PLACES_DETAILS]: "#e67e22",
+    [NetworkPage.TRANSIT]:        "#c0392b",
+    [NetworkPage.SEARCH]:         "#16a085",
+  };
+
+  type GroupBy = "hour" | "day";
+  let currentGroupBy: GroupBy = "hour";
+
+  function renderChart(groupBy: GroupBy): void {
+    const log = AppSettings.getNetworkLog();
+    const chartEl = document.getElementById("usage-chart");
+    const legendEl = document.getElementById("usage-legend");
+    if (!chartEl) return;
+
+    if (log.length === 0) {
+      chartEl.innerHTML = `<p class="status" style="margin-block:0.5rem">No data yet. Use a page to start tracking.</p>`;
+      if (legendEl) legendEl.innerHTML = "";
+      return;
+    }
+
+    // Build bucket keys
+    const now = new Date();
+    const buckets: string[] = [];
+    if (groupBy === "hour") {
+      for (let i = 23; i >= 0; i--) {
+        const d = new Date(now);
+        d.setHours(now.getHours() - i, 0, 0, 0);
+        buckets.push(d.toISOString().slice(0, 13)); // "2026-05-27T14"
+      }
+    } else {
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        buckets.push(d.toISOString().slice(0, 10)); // "2026-05-27"
+      }
+    }
+
+    // Aggregate bytes per bucket per page
+    const agg: Record<string, Record<string, number>> = {};
+    for (const b of buckets) agg[b] = {};
+    for (const entry of log) {
+      const key = groupBy === "hour" ? entry.ts.slice(0, 13) : entry.ts.slice(0, 10);
+      if (agg[key] !== undefined) {
+        agg[key][entry.page] = (agg[key][entry.page] ?? 0) + entry.bytes;
+      }
+    }
+
+    const maxBytes = Math.max(
+      1,
+      ...buckets.map((b) => Object.values(agg[b]).reduce((s, v) => s + v, 0)),
+    );
+
+    // SVG dimensions
+    const W = 560, H = 160;
+    const PAD = { top: 8, right: 8, bottom: 24, left: 42 };
+    const chartW = W - PAD.left - PAD.right;
+    const chartH = H - PAD.top - PAD.bottom;
+    const gap = 2;
+    const barW = Math.max(1, Math.floor(chartW / buckets.length) - gap);
+    const pages = Object.values(NetworkPage);
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Network usage ${groupBy === "hour" ? "by hour (last 24h)" : "by day (last 7 days)"}">`;
+
+    // Y-axis gridlines + labels
+    for (let step = 0; step <= 4; step++) {
+      const y = PAD.top + (chartH / 4) * step;
+      const val = (maxBytes * (4 - step)) / 4;
+      svg += `<line x1="${PAD.left}" y1="${y.toFixed(1)}" x2="${W - PAD.right}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`;
+      svg += `<text x="${PAD.left - 4}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${formatKb(val)}</text>`;
+    }
+
+    // Stacked bars + x-axis labels
+    for (let bi = 0; bi < buckets.length; bi++) {
+      const bucket = buckets[bi];
+      const x = PAD.left + bi * (barW + gap);
+      let yBase = PAD.top + chartH;
+
+      for (const page of pages) {
+        const bytes = agg[bucket]?.[page] ?? 0;
+        if (bytes === 0) continue;
+        const bh = (bytes / maxBytes) * chartH;
+        yBase -= bh;
+        svg += `<rect x="${x.toFixed(1)}" y="${yBase.toFixed(1)}" width="${barW}" height="${bh.toFixed(1)}" fill="${PAGE_COLORS[page]}"/>`;
+      }
+
+      // X label: every 6h for hourly, every day for daily
+      const showLabel = groupBy === "hour" ? bi % 6 === 0 : true;
+      if (showLabel) {
+        const label = groupBy === "hour" ? bucket.slice(11) + "h" : bucket.slice(5);
+        svg += `<text x="${(x + barW / 2).toFixed(1)}" y="${H - 4}" text-anchor="middle" font-size="9" fill="var(--muted)">${label}</text>`;
+      }
+    }
+
+    svg += `</svg>`;
+    chartEl.innerHTML = svg;
+
+    // Legend
+    if (legendEl) {
+      legendEl.innerHTML = pages
+        .map(
+          (p) =>
+            `<span class="settings-chart-legend__item">` +
+            `<span class="settings-chart-legend__swatch" style="background:${PAGE_COLORS[p]}"></span>` +
+            `${NETWORK_PAGE_LABELS[p]}` +
+            `</span>`,
+        )
+        .join("");
+    }
+  }
+
+  const btnHour = document.getElementById("chart-by-hour") as HTMLButtonElement | null;
+  const btnDay = document.getElementById("chart-by-day") as HTMLButtonElement | null;
+
+  function setActiveToggle(active: GroupBy): void {
+    btnHour?.classList.toggle("settings-chart-btn--active", active === "hour");
+    btnDay?.classList.toggle("settings-chart-btn--active", active === "day");
+  }
+
+  btnHour?.addEventListener("click", () => {
+    currentGroupBy = "hour";
+    setActiveToggle("hour");
+    renderChart("hour");
+  });
+  btnDay?.addEventListener("click", () => {
+    currentGroupBy = "day";
+    setActiveToggle("day");
+    renderChart("day");
+  });
+
+  renderChart(currentGroupBy);
 
   // ── Time format ───────────────────────────────────────────────
   const tf24 = document.getElementById("tf-24h") as HTMLInputElement | null;
@@ -173,8 +317,11 @@ import { AppConstant } from "../constant";
         .map((page) => {
           const bytes = usage[page] ?? 0;
           totalBytes += bytes;
+          const label = page === NetworkPage.NEWS
+            ? `${NETWORK_PAGE_LABELS[page]} <span style="font-size:0.75em;color:var(--muted)">(refresh only)</span>`
+            : NETWORK_PAGE_LABELS[page];
           return `<tr>
-            <td>${NETWORK_PAGE_LABELS[page]}</td>
+            <td>${label}</td>
             <td style="text-align:right">${formatKb(bytes)}</td>
           </tr>`;
         })
@@ -191,6 +338,7 @@ import { AppConstant } from "../constant";
       AppSettings.resetNetworkUsage();
       renderUsage();
       renderNetworkSince();
+      renderChart(currentGroupBy);
     });
   }
 
@@ -206,6 +354,7 @@ import { AppConstant } from "../constant";
       renderUsage();
       renderNetworkSince();
       renderCacheClearedAt();
+      renderChart(currentGroupBy);
       if (resetMsg) resetMsg.textContent = AppConstant.MSG_SETTINGS_RESET;
       setTimeout(() => {
         if (resetMsg) resetMsg.textContent = "";
