@@ -1,4 +1,4 @@
-import { SwConstant } from "./sw-constant";
+import { SwConstant } from "./constant.sw";
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 

@@ -1,5 +1,5 @@
 import { AppConstant } from "./constant";
-import { TimeFormat } from "./settings";
+import { TimeFormat } from "./type.settings";
 
 export abstract class AppUtil {
   public static getPageTitle(title: string): string {
@@ -39,5 +39,28 @@ export abstract class AppUtil {
       return `Cached at ${h % 12 || 12}:${mm} ${h >= 12 ? "PM" : "AM"}`;
     }
     return `Cached at ${String(d.getHours()).padStart(2, "0")}:${mm}`;
+  }
+
+  public static formatDistanceKm(km: number): string {
+    return km < 1 ? ` · ${km.toFixed(2)} km` : ` · ${km.toFixed(1)} km`;
+  }
+
+  public static formatKb(bytes: number): string {
+    if (bytes === 0) return "0 KB";
+    const kb = bytes / 1024;
+    return kb < 1000 ? `${kb.toFixed(1)} KB` : `${(kb / 1024).toFixed(2)} MB`;
+  }
+
+  public static toDatetimeLocalValue(date: Date): string {
+    const pad = (n: number): string => String(n).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
+
+  public static statusClass(status: string | null): string {
+    if (!status) return "place-details__status";
+    const lower = status.toLowerCase();
+    if (lower.includes("operational") || lower.includes("open")) return "place-details__status place-details__status--open";
+    if (lower.includes("closed") || lower.includes("temporarily")) return "place-details__status place-details__status--closed";
+    return "place-details__status";
   }
 }

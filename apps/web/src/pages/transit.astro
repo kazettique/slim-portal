@@ -77,11 +77,13 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
-  import { AppSettings, NetworkPage, TimeFormat } from "../settings";
-  import { AppBookmarks } from "../bookmarks";
-  import { BookmarkPage } from "../type";
+  import { SettingsUtil } from "../util.settings";
+  import { NetworkPage, TimeFormat } from "../type.settings";
+  import { BookmarkUtil } from "../util.bookmark";
+  import { BookmarkPage } from "../type.bookmark";
+  import { TransitUtil } from "../util.transit";
   import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
-  import type { Bookmark, TransitBookmarkParams } from "../type";
+  import type { Bookmark, TransitBookmarkParams } from "../type.bookmark";
 
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
   const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
@@ -105,11 +107,6 @@ import { AppConstant } from "../constant";
   let fromTimer: ReturnType<typeof setTimeout> | null = null;
   let toTimer: ReturnType<typeof setTimeout> | null = null;
 
-  function toDatetimeLocalValue(date: Date): string {
-    const pad = (n: number): string => String(n).padStart(2, "0");
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-  }
-
   function setStatus(msg: string): void {
     if (statusEl) statusEl.textContent = msg;
   }
@@ -122,7 +119,7 @@ import { AppConstant } from "../constant";
   function formatTime(iso: string | null): string {
     if (!iso) return "—";
     try {
-      const fmt = AppSettings.getTimeFormat();
+      const fmt = SettingsUtil.getTimeFormat();
       return new Date(iso).toLocaleTimeString("ja-JP", {
         hour: "2-digit",
         minute: "2-digit",
@@ -133,15 +130,10 @@ import { AppConstant } from "../constant";
     }
   }
 
-  function isWalkLeg(leg: TransitLeg): boolean {
-    const l = leg.line.toLowerCase();
-    return l === "walk" || l === "徒歩" || l === "walking";
-  }
-
   function renderLegs(legs: TransitLeg[]): string {
     return legs
       .map((leg) => {
-        const isWalk = isWalkLeg(leg);
+        const isWalk = TransitUtil.isWalkLeg(leg);
         const cls = isWalk ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
         const colorStyle = !isWalk && leg.color ? ` style="--leg-color:${leg.color}"` : "";
         const timeRange = leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
@@ -285,7 +277,7 @@ import { AppConstant } from "../constant";
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      AppSettings.addNetworkBytes(NetworkPage.TRANSIT, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.TRANSIT, new Blob([text]).size);
       const routes = JSON.parse(text) as TransitRoute[];
       renderRoutes(routes);
 
@@ -295,7 +287,7 @@ import { AppConstant } from "../constant";
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
         if (cacheStatus)
-          cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
+          cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);
@@ -391,7 +383,7 @@ import { AppConstant } from "../constant";
       params,
       createdAt: new Date().toISOString(),
     };
-    AppBookmarks.add(bookmark);
+    BookmarkUtil.add(bookmark);
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
@@ -424,7 +416,7 @@ import { AppConstant } from "../constant";
     const tn = urlP.get("to_name");
     const dt = urlP.get("datetime");
     const isRestore = urlP.get("restore") === "1";
-    if (datetimeInput) datetimeInput.value = dt ?? toDatetimeLocalValue(new Date());
+    if (datetimeInput) datetimeInput.value = dt ?? AppUtil.toDatetimeLocalValue(new Date());
     if (f && t && fn && tn) {
       fromCoord = f;
       toCoord = t;
@@ -451,7 +443,7 @@ import { AppConstant } from "../constant";
   const initialDatetime = initialParams.get("datetime");
   const isInitialRestore = initialParams.get("restore") === "1";
   if (datetimeInput) {
-    datetimeInput.value = initialDatetime ?? toDatetimeLocalValue(new Date());
+    datetimeInput.value = initialDatetime ?? AppUtil.toDatetimeLocalValue(new Date());
   }
   if (initialFrom && initialTo && initialFromName && initialToName) {
     fromCoord = initialFrom;

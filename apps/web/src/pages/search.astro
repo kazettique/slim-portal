@@ -50,11 +50,12 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
-  import { AppSettings, NetworkPage } from "../settings";
-  import { AppBookmarks } from "../bookmarks";
-  import { BookmarkPage } from "../type";
+  import { SettingsUtil } from "../util.settings";
+  import { NetworkPage } from "../type.settings";
+  import { BookmarkUtil } from "../util.bookmark";
+  import { BookmarkPage } from "../type.bookmark";
   import type { SearchItem } from "@slim-portal/share";
-  import type { Bookmark, SearchBookmarkParams } from "../type";
+  import type { Bookmark, SearchBookmarkParams } from "../type.bookmark";
 
   const form = document.getElementById("search-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
@@ -107,7 +108,7 @@ import { AppConstant } from "../constant";
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      AppSettings.addNetworkBytes(NetworkPage.SEARCH, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.SEARCH, new Blob([text]).size);
       const items = JSON.parse(text) as SearchItem[];
       renderResults(items);
 
@@ -115,7 +116,7 @@ import { AppConstant } from "../constant";
         lastQ = q;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_SEARCH_FAILED);
@@ -144,7 +145,7 @@ import { AppConstant } from "../constant";
       params,
       createdAt: new Date().toISOString(),
     };
-    AppBookmarks.add(bookmark);
+    BookmarkUtil.add(bookmark);
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {

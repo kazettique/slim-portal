@@ -41,8 +41,7 @@ import { AppConstant } from "../../constant";
 </Base>
 
 <script>
-  // 1 坪 = 400/121 ㎡ (exact)
-  const TSUBO_TO_SQM = 400 / 121;
+  import { AreaConverterUtil } from "../../util.converter";
 
   const tatamiTypeEl = document.getElementById("tatami-type") as HTMLSelectElement | null;
   const tsuboInput = document.getElementById("area-tsubo") as HTMLInputElement | null;
@@ -51,41 +50,33 @@ import { AppConstant } from "../../constant";
 
   let updating = false;
 
-  function getTatamiM2(): number {
-    return parseFloat(tatamiTypeEl?.value ?? "1.62");
-  }
-
-  function round(n: number, decimals: number): string {
-    return n.toFixed(decimals);
-  }
-
   function fromTsubo(tsubo: number): void {
     if (updating) return;
     updating = true;
-    const sqm = tsubo * TSUBO_TO_SQM;
-    const tatami = sqm / getTatamiM2();
-    if (sqmInput) sqmInput.value = round(sqm, 2);
-    if (tatamiInput) tatamiInput.value = round(tatami, 2);
+    const sqm = tsubo * AreaConverterUtil.TSUBO_TO_SQM;
+    const tatami = sqm / AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
+    if (sqmInput) sqmInput.value = AreaConverterUtil.round(sqm, 2);
+    if (tatamiInput) tatamiInput.value = AreaConverterUtil.round(tatami, 2);
     updating = false;
   }
 
   function fromSqm(sqm: number): void {
     if (updating) return;
     updating = true;
-    const tsubo = sqm / TSUBO_TO_SQM;
-    const tatami = sqm / getTatamiM2();
-    if (tsuboInput) tsuboInput.value = round(tsubo, 2);
-    if (tatamiInput) tatamiInput.value = round(tatami, 2);
+    const tsubo = sqm / AreaConverterUtil.TSUBO_TO_SQM;
+    const tatami = sqm / AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
+    if (tsuboInput) tsuboInput.value = AreaConverterUtil.round(tsubo, 2);
+    if (tatamiInput) tatamiInput.value = AreaConverterUtil.round(tatami, 2);
     updating = false;
   }
 
   function fromTatami(tatami: number): void {
     if (updating) return;
     updating = true;
-    const sqm = tatami * getTatamiM2();
-    const tsubo = sqm / TSUBO_TO_SQM;
-    if (tsuboInput) tsuboInput.value = round(tsubo, 2);
-    if (sqmInput) sqmInput.value = round(sqm, 2);
+    const sqm = tatami * AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
+    const tsubo = sqm / AreaConverterUtil.TSUBO_TO_SQM;
+    if (tsuboInput) tsuboInput.value = AreaConverterUtil.round(tsubo, 2);
+    if (sqmInput) sqmInput.value = AreaConverterUtil.round(sqm, 2);
     updating = false;
   }
 
@@ -95,8 +86,8 @@ import { AppConstant } from "../../constant";
     if (!isNaN(sqm) && sqm > 0) {
       if (updating) return;
       updating = true;
-      const tatami = sqm / getTatamiM2();
-      if (tatamiInput) tatamiInput.value = round(tatami, 2);
+      const tatami = sqm / AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
+      if (tatamiInput) tatamiInput.value = AreaConverterUtil.round(tatami, 2);
       updating = false;
     }
   }

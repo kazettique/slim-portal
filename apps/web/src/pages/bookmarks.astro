@@ -19,9 +19,9 @@ import { AppConstant } from "../constant";
 
 <script>
   import { AppConstant } from "../constant";
-  import { AppBookmarks } from "../bookmarks";
-  import { BookmarkPage } from "../type";
-  import type { Bookmark } from "../type";
+  import { BookmarkUtil } from "../util.bookmark";
+  import { BookmarkPage } from "../type.bookmark";
+  import type { Bookmark } from "../type.bookmark";
 
   const actionsEl = document.getElementById("bookmarks-actions") as HTMLDivElement | null;
   const deleteSelectedBtn = document.getElementById("delete-selected-btn") as HTMLButtonElement | null;
@@ -29,30 +29,6 @@ import { AppConstant } from "../constant";
   const statusEl = document.getElementById("bookmarks-status") as HTMLParagraphElement | null;
   const container = document.getElementById("bookmarks-container") as HTMLDivElement | null;
 
-  const BOOKMARK_PAGE_LABELS: Record<BookmarkPage, string> = {
-    [BookmarkPage.TRANSIT]: "Transit",
-    [BookmarkPage.PLACES]: "Places",
-    [BookmarkPage.SEARCH]: "Search",
-  };
-
-  const PAGE_ORDER: BookmarkPage[] = [BookmarkPage.TRANSIT, BookmarkPage.PLACES, BookmarkPage.SEARCH];
-
-  function buildUrl(bookmark: Bookmark): string {
-    if (bookmark.page === BookmarkPage.TRANSIT) {
-      const p = bookmark.params as { from: string; to: string; from_name: string; to_name: string };
-      const sp = new URLSearchParams({ from: p.from, to: p.to, from_name: p.from_name, to_name: p.to_name, restore: "1" });
-      return `/transit?${sp.toString()}`;
-    }
-    if (bookmark.page === BookmarkPage.PLACES) {
-      const p = bookmark.params as { q: string };
-      const sp = new URLSearchParams({ q: p.q, restore: "1" });
-      return `/places?${sp.toString()}`;
-    }
-    // SEARCH
-    const p = bookmark.params as { q: string };
-    const sp = new URLSearchParams({ q: p.q, restore: "1" });
-    return `/search?${sp.toString()}`;
-  }
 
   function getCheckedIds(): string[] {
     if (!container) return [];
@@ -87,7 +63,7 @@ import { AppConstant } from "../constant";
   function render(): void {
     if (!container) return;
 
-    const bookmarks = AppBookmarks.getAll();
+    const bookmarks = BookmarkUtil.getAll();
 
     if (bookmarks.length === 0) {
       showEmptyState();
@@ -98,12 +74,12 @@ import { AppConstant } from "../constant";
     if (statusEl) statusEl.textContent = "";
 
     const grouped = new Map<BookmarkPage, Bookmark[]>();
-    for (const page of PAGE_ORDER) grouped.set(page, []);
+    for (const page of BookmarkUtil.PAGE_ORDER) grouped.set(page, []);
     for (const bm of bookmarks) {
       grouped.get(bm.page)?.push(bm);
     }
 
-    container.innerHTML = PAGE_ORDER.filter((page) => (grouped.get(page)?.length ?? 0) > 0)
+    container.innerHTML = BookmarkUtil.PAGE_ORDER.filter((page) => (grouped.get(page)?.length ?? 0) > 0)
       .map((page) => {
         const items = grouped.get(page) ?? [];
         const rows = items
@@ -113,7 +89,7 @@ import { AppConstant } from "../constant";
             <label class="bookmark-item__check">
               <input type="checkbox" class="bookmark-checkbox" value="${bm.id}" aria-label="Select ${bm.label}" />
             </label>
-            <a href="${buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>
+            <a href="${BookmarkUtil.buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>
             <button class="bookmark-item__delete refresh-btn" data-id="${bm.id}" aria-label="Delete ${bm.label}">Delete</button>
           </li>
         `,
@@ -121,7 +97,7 @@ import { AppConstant } from "../constant";
           .join("");
         return `
         <section class="bookmarks-group" data-page="${page}">
-          <h2>${BOOKMARK_PAGE_LABELS[page]}</h2>
+          <h2>${BookmarkUtil.BOOKMARK_PAGE_LABELS[page]}</h2>
           <ul class="bookmarks-list">${rows}</ul>
         </section>
       `;
@@ -142,10 +118,10 @@ import { AppConstant } from "../constant";
     const id = btn.dataset["id"];
     if (!id) return;
     if (!confirm(AppConstant.CONFIRM_DELETE_BOOKMARK)) return;
-    AppBookmarks.delete(id);
+    BookmarkUtil.delete(id);
     removeItemFromDom(id);
     updateDeleteSelectedState();
-    if (AppBookmarks.getAll().length === 0) showEmptyState();
+    if (BookmarkUtil.getAll().length === 0) showEmptyState();
   });
 
   // Delete selected
@@ -153,16 +129,16 @@ import { AppConstant } from "../constant";
     const ids = getCheckedIds();
     if (ids.length === 0) return;
     if (!confirm(AppConstant.CONFIRM_DELETE_SELECTED_BOOKMARKS(ids.length))) return;
-    AppBookmarks.deleteMany(ids);
+    BookmarkUtil.deleteMany(ids);
     for (const id of ids) removeItemFromDom(id);
     updateDeleteSelectedState();
-    if (AppBookmarks.getAll().length === 0) showEmptyState();
+    if (BookmarkUtil.getAll().length === 0) showEmptyState();
   });
 
   // Delete all
   deleteAllBtn?.addEventListener("click", () => {
     if (!confirm(AppConstant.CONFIRM_DELETE_ALL_BOOKMARKS)) return;
-    AppBookmarks.deleteAll();
+    BookmarkUtil.deleteAll();
     showEmptyState();
   });
 

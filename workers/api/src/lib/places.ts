@@ -15,14 +15,14 @@ import { GMapSearchNearbyConstant } from "../external/googleMap/places/searchNea
 import { SearchNearbyRequest } from "../external/googleMap/places/searchNearby/type";
 import { GMapSearchNearbyValidator } from "../external/googleMap/places/searchNearby/validator";
 
-const RAPIDAPI_HEADERS = (key: string, host: string): Record<string, string> => ({
-  "x-rapidapi-key": key,
-  "x-rapidapi-host": host,
-  "Content-Type": "application/json",
-  "X-Goog-FieldMask": "*",
-});
-
 export abstract class PlacesLib {
+  private static RAPIDAPI_HEADERS = (key: string, host: string): Record<string, string> => ({
+    "x-rapidapi-key": key,
+    "x-rapidapi-host": host,
+    "Content-Type": "application/json",
+    "X-Goog-FieldMask": "*",
+  });
+
   // ── Helpers ──────────────────────────────────────────────────────────────────
 
   private static haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
@@ -43,10 +43,7 @@ export abstract class PlacesLib {
       rating: p.rating ?? null,
       totalRatings: p.userRatingCount ?? 0,
       distanceMeters:
-        lat !== null &&
-        lng !== null &&
-        p.location?.latitude !== undefined &&
-        p.location?.longitude !== undefined
+        lat !== null && lng !== null && p.location?.latitude !== undefined && p.location?.longitude !== undefined
           ? this.haversineMeters(lat, lng, p.location.latitude, p.location.longitude)
           : null,
       mapsUrl: p.googleMapsUri ?? "",
@@ -67,10 +64,7 @@ export abstract class PlacesLib {
     ctx: ExecutionContext,
   ): Promise<{ items: PlaceItem[]; cachedAt: string | null }> {
     const cache = await caches.open("places");
-    const key = this.cacheKey(
-      "search",
-      `${encodeURIComponent(req.q)}?lat=${req.lat ?? ""}&lng=${req.lng ?? ""}`,
-    );
+    const key = this.cacheKey("search", `${encodeURIComponent(req.q)}?lat=${req.lat ?? ""}&lng=${req.lng ?? ""}`);
     const cached = await cache.match(key);
     if (cached) {
       return { items: (await cached.json()) as PlaceItem[], cachedAt: cached.headers.get("X-Cached-At") };
@@ -91,7 +85,7 @@ export abstract class PlacesLib {
 
     const res = await fetch(GMapSearchTextConstant.API_URL, {
       method: "POST",
-      headers: RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapSearchTextConstant.API_HOST),
+      headers: this.RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapSearchTextConstant.API_HOST),
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
@@ -149,7 +143,7 @@ export abstract class PlacesLib {
 
     const res = await fetch(GMapAutocompleteConstant.API_URL, {
       method: "POST",
-      headers: RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapAutocompleteConstant.API_HOST),
+      headers: this.RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapAutocompleteConstant.API_HOST),
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
@@ -202,7 +196,7 @@ export abstract class PlacesLib {
 
     const res = await fetch(`${GMapDetailsConstant.API_BASE_URL}/${encodeURIComponent(req.id)}`, {
       method: "GET",
-      headers: RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapDetailsConstant.API_HOST),
+      headers: this.RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapDetailsConstant.API_HOST),
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
     if (!res.ok) {
@@ -275,7 +269,7 @@ export abstract class PlacesLib {
 
     const res = await fetch(GMapSearchNearbyConstant.API_URL, {
       method: "POST",
-      headers: RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapSearchNearbyConstant.API_HOST),
+      headers: this.RAPIDAPI_HEADERS(env.RAPIDAPI_KEY, GMapSearchNearbyConstant.API_HOST),
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(WorkerConstant.REQUEST_TIMEOUT),
     });
@@ -290,9 +284,7 @@ export abstract class PlacesLib {
       throw new Error(`Google Map searchNearby response validation failed: ${parsed.error.message}`);
     }
 
-    const items: PlaceItem[] = (parsed.data.places ?? []).map((p) =>
-      this.mapPlaceToItem(p, req.lat, req.lng),
-    );
+    const items: PlaceItem[] = (parsed.data.places ?? []).map((p) => this.mapPlaceToItem(p, req.lat, req.lng));
 
     const cachedResponse = new Response(JSON.stringify(items), {
       headers: {

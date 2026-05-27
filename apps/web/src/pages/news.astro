@@ -69,7 +69,8 @@ try {
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
-  import { AppSettings, NetworkPage } from "../settings";
+  import { SettingsUtil } from "../util.settings";
+  import { NetworkPage } from "../type.settings";
 
   const btn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
@@ -87,7 +88,7 @@ try {
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const text = await res.text();
-        AppSettings.addNetworkBytes(NetworkPage.NEWS, new Blob([text]).size);
+        SettingsUtil.addNetworkBytes(NetworkPage.NEWS, new Blob([text]).size);
         const fresh = JSON.parse(text) as Array<{
           title: string;
           summary: string;
@@ -96,7 +97,7 @@ try {
           source: string;
         }>;
 
-        const fmt = AppSettings.getTimeFormat();
+        const fmt = SettingsUtil.getTimeFormat();
         if (list) {
           list.innerHTML = fresh
             .map(

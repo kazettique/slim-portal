@@ -47,7 +47,8 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
-  import { AppSettings, NetworkPage } from "../settings";
+  import { SettingsUtil } from "../util.settings";
+  import { NetworkPage } from "../type.settings";
   import type { BathroomItem } from "@slim-portal/share";
 
   const radiusSelect = document.getElementById("radius-select") as HTMLSelectElement | null;
@@ -65,9 +66,6 @@ import { AppConstant } from "../constant";
     if (statusEl) statusEl.textContent = msg;
   }
 
-  function formatDistanceKm(km: number): string {
-    return km < 1 ? ` · ${km.toFixed(2)} km` : ` · ${km.toFixed(1)} km`;
-  }
 
   function renderBathrooms(items: BathroomItem[]): void {
     if (!list) return;
@@ -91,7 +89,7 @@ import { AppConstant } from "../constant";
           <li class="place-item">
             <div class="place-item__name">
               <span>${b.name}</span>
-              <span class="place-item__distance">${formatDistanceKm(b.distanceKm)}</span>
+              <span class="place-item__distance">${AppUtil.formatDistanceKm(b.distanceKm)}</span>
             </div>
             <div class="place-item__address">${b.city}, ${b.state}</div>
             ${tags ? `<div class="place-item__meta">${tags}</div>` : ""}
@@ -122,7 +120,7 @@ import { AppConstant } from "../constant";
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      AppSettings.addNetworkBytes(NetworkPage.BATHROOMS, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.BATHROOMS, new Blob([text]).size);
       const items = JSON.parse(text) as BathroomItem[];
       renderBathrooms(items);
 
@@ -131,7 +129,7 @@ import { AppConstant } from "../constant";
         const cacheDate = res.headers.get("X-Cache-Date");
         if (cacheStatus)
           cacheStatus.textContent = cacheDate
-            ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat())
+            ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat())
             : "";
       }
     } catch {

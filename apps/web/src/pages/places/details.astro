@@ -33,7 +33,8 @@ import { AppConstant } from "../../constant";
 <script>
   import { AppConstant } from "../../constant";
   import { AppUtil } from "../../util";
-  import { AppSettings, NetworkPage } from "../../settings";
+  import { SettingsUtil } from "../../util.settings";
+  import { NetworkPage } from "../../type.settings";
   import type { PlaceDetails } from "@slim-portal/share";
 
   const statusEl = document.getElementById("details-status") as HTMLParagraphElement | null;
@@ -49,13 +50,6 @@ import { AppConstant } from "../../constant";
     if (statusEl) statusEl.textContent = msg;
   }
 
-  function statusClass(status: string | null): string {
-    if (!status) return "place-details__status";
-    const lower = status.toLowerCase();
-    if (lower.includes("operational") || lower.includes("open")) return "place-details__status place-details__status--open";
-    if (lower.includes("closed") || lower.includes("temporarily")) return "place-details__status place-details__status--closed";
-    return "place-details__status";
-  }
 
   function renderDetails(p: PlaceDetails): void {
     if (!container) return;
@@ -110,15 +104,15 @@ import { AppConstant } from "../../constant";
         <div class="place-details__section">
           <span class="place-details__label">Status</span>
           <div class="place-details__value">
-            <span class="${statusClass(p.businessStatus)}">${p.businessStatus.replace(/_/g, " ")}</span>
+            <span class="${AppUtil.statusClass(p.businessStatus)}">${p.businessStatus.replace(/_/g, " ")}</span>
           </div>
         </div>
       `);
     }
 
     if (p.openingHours && p.openingHours.length > 0) {
-      const fmt = AppSettings.getTimeFormat();
-      const hours = p.openingHours.map((h) => `<li>${AppSettings.convertHoursString(h, fmt)}</li>`).join("");
+      const fmt = SettingsUtil.getTimeFormat();
+      const hours = p.openingHours.map((h) => `<li>${SettingsUtil.convertHoursString(h, fmt)}</li>`).join("");
       sections.push(`
         <div class="place-details__section">
           <span class="place-details__label">Opening Hours</span>
@@ -155,13 +149,13 @@ import { AppConstant } from "../../constant";
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      AppSettings.addNetworkBytes(NetworkPage.PLACES_DETAILS, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.PLACES_DETAILS, new Blob([text]).size);
       const item = JSON.parse(text) as PlaceDetails;
       setStatus("");
       renderDetails(item);
       if (toolbar) toolbar.style.display = "flex";
       const cacheDate = res.headers.get("X-Cache-Date");
-      if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
+      if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAILS);
     }

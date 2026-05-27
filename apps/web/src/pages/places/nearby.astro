@@ -48,7 +48,8 @@ import { AppConstant } from "../../constant";
 <script>
   import { AppConstant } from "../../constant";
   import { AppUtil } from "../../util";
-  import { AppSettings, NetworkPage } from "../../settings";
+  import { SettingsUtil } from "../../util.settings";
+  import { NetworkPage } from "../../type.settings";
   import type { PlaceItem } from "@slim-portal/share";
 
   const radiusSelect = document.getElementById("radius-select") as HTMLSelectElement | null;
@@ -117,14 +118,14 @@ import { AppConstant } from "../../constant";
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      AppSettings.addNetworkBytes(NetworkPage.PLACES_NEARBY, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.PLACES_NEARBY, new Blob([text]).size);
       const items = JSON.parse(text) as PlaceItem[];
       renderPlaces(items);
 
       if (items.length > 0) {
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACES_NEARBY);

@@ -107,7 +107,8 @@ import { AppConstant } from "../constant";
 </Base>
 
 <script>
-  import { AppSettings, TimeFormat, Theme, NetworkPage, NETWORK_PAGE_LABELS } from "../settings";
+  import { SettingsUtil } from "../util.settings";
+  import { TimeFormat, Theme, NetworkPage, type GroupBy } from "../type.settings";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
 
@@ -125,35 +126,25 @@ import { AppConstant } from "../constant";
     if (el) el.checked = true;
   }
 
-  applyThemeToUI(AppSettings.getTheme());
+  applyThemeToUI(SettingsUtil.getTheme());
 
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((radio) => {
     radio.addEventListener("change", () => {
       const value = radio.value as Theme;
-      AppSettings.setTheme(value);
+      SettingsUtil.setTheme(value);
       applyTheme(value);
     });
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-    if (AppSettings.getTheme() === Theme.SYSTEM) applyTheme(Theme.SYSTEM);
+    if (SettingsUtil.getTheme() === Theme.SYSTEM) applyTheme(Theme.SYSTEM);
   });
 
   // ── Chart ─────────────────────────────────────────────────────
-  const PAGE_COLORS: Record<NetworkPage, string> = {
-    [NetworkPage.NEWS]:           "#0057b7",
-    [NetworkPage.PLACES_SEARCH]:  "#2e8b57",
-    [NetworkPage.PLACES_NEARBY]:  "#6a5acd",
-    [NetworkPage.PLACES_DETAILS]: "#e67e22",
-    [NetworkPage.TRANSIT]:        "#c0392b",
-    [NetworkPage.SEARCH]:         "#16a085",
-  };
-
-  type GroupBy = "hour" | "day";
   let currentGroupBy: GroupBy = "hour";
 
   function renderChart(groupBy: GroupBy): void {
-    const log = AppSettings.getNetworkLog();
+    const log = SettingsUtil.getNetworkLog();
     const chartEl = document.getElementById("usage-chart");
     const legendEl = document.getElementById("usage-legend");
     if (!chartEl) return;
@@ -212,7 +203,7 @@ import { AppConstant } from "../constant";
       const y = PAD.top + (chartH / 4) * step;
       const val = (maxBytes * (4 - step)) / 4;
       svg += `<line x1="${PAD.left}" y1="${y.toFixed(1)}" x2="${W - PAD.right}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`;
-      svg += `<text x="${PAD.left - 4}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${formatKb(val)}</text>`;
+      svg += `<text x="${PAD.left - 4}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${AppUtil.formatKb(val)}</text>`;
     }
 
     // Stacked bars + x-axis labels
@@ -226,7 +217,7 @@ import { AppConstant } from "../constant";
         if (bytes === 0) continue;
         const bh = (bytes / maxBytes) * chartH;
         yBase -= bh;
-        svg += `<rect x="${x.toFixed(1)}" y="${yBase.toFixed(1)}" width="${barW}" height="${bh.toFixed(1)}" fill="${PAGE_COLORS[page]}"/>`;
+        svg += `<rect x="${x.toFixed(1)}" y="${yBase.toFixed(1)}" width="${barW}" height="${bh.toFixed(1)}" fill="${SettingsUtil.PAGE_COLORS[page]}"/>`;
       }
 
       // X label: every 6h for hourly, every day for daily
@@ -246,8 +237,8 @@ import { AppConstant } from "../constant";
         .map(
           (p) =>
             `<span class="settings-chart-legend__item">` +
-            `<span class="settings-chart-legend__swatch" style="background:${PAGE_COLORS[p]}"></span>` +
-            `${NETWORK_PAGE_LABELS[p]}` +
+            `<span class="settings-chart-legend__swatch" style="background:${SettingsUtil.PAGE_COLORS[p]}"></span>` +
+            `${SettingsUtil.NETWORK_PAGE_LABELS[p]}` +
             `</span>`,
         )
         .join("");
@@ -284,14 +275,14 @@ import { AppConstant } from "../constant";
     if (tf12) tf12.checked = format === TimeFormat.TWELVE_HOUR;
   }
 
-  applyTimeFormatToUI(AppSettings.getTimeFormat());
+  applyTimeFormatToUI(SettingsUtil.getTimeFormat());
 
   document.querySelectorAll<HTMLInputElement>('input[name="timeFormat"]').forEach((radio) => {
     radio.addEventListener("change", () => {
       const value = radio.value === TimeFormat.TWELVE_HOUR
         ? TimeFormat.TWELVE_HOUR
         : TimeFormat.TWENTY_FOUR_HOUR;
-      AppSettings.setTimeFormat(value);
+      SettingsUtil.setTimeFormat(value);
     });
   });
 
@@ -301,10 +292,10 @@ import { AppConstant } from "../constant";
   const cacheClearedAtEl = document.getElementById("cache-cleared-at") as HTMLParagraphElement | null;
 
   function renderCacheClearedAt(): void {
-    const ts = AppSettings.getCacheClearedAt();
+    const ts = SettingsUtil.getCacheClearedAt();
     if (cacheClearedAtEl) {
       cacheClearedAtEl.textContent = ts
-        ? `Last cleared: ${AppUtil.formatDate(ts, AppSettings.getTimeFormat())}`
+        ? `Last cleared: ${AppUtil.formatDate(ts, SettingsUtil.getTimeFormat())}`
         : "";
     }
   }
@@ -322,7 +313,7 @@ import { AppConstant } from "../constant";
       try {
         const keys = await caches.keys();
         await Promise.all(keys.map((k) => caches.delete(k)));
-        AppSettings.setCacheClearedAt();
+        SettingsUtil.setCacheClearedAt();
         renderCacheClearedAt();
         if (cacheMsg) cacheMsg.textContent = AppConstant.MSG_CACHE_CLEARED;
       } catch {
@@ -341,24 +332,19 @@ import { AppConstant } from "../constant";
   const networkSinceEl = document.getElementById("network-since") as HTMLParagraphElement | null;
 
   function renderNetworkSince(): void {
-    const ts = AppSettings.getNetworkSince();
+    const ts = SettingsUtil.getNetworkSince();
     if (networkSinceEl) {
       networkSinceEl.textContent = ts
-        ? `Since ${AppUtil.formatDate(ts, AppSettings.getTimeFormat())}`
+        ? `Since ${AppUtil.formatDate(ts, SettingsUtil.getTimeFormat())}`
         : "";
     }
   }
 
   renderNetworkSince();
 
-  function formatKb(bytes: number): string {
-    if (bytes === 0) return "0 KB";
-    const kb = bytes / 1024;
-    return kb < 1000 ? `${kb.toFixed(1)} KB` : `${(kb / 1024).toFixed(2)} MB`;
-  }
 
   function renderUsage(): void {
-    const usage = AppSettings.getNetworkUsage();
+    const usage = SettingsUtil.getNetworkUsage();
     let totalBytes = 0;
 
     if (tbody) {
@@ -367,24 +353,24 @@ import { AppConstant } from "../constant";
           const bytes = usage[page] ?? 0;
           totalBytes += bytes;
           const label = page === NetworkPage.NEWS
-            ? `${NETWORK_PAGE_LABELS[page]} <span style="font-size:0.75em;color:var(--muted)">(refresh only)</span>`
-            : NETWORK_PAGE_LABELS[page];
+            ? `${SettingsUtil.NETWORK_PAGE_LABELS[page]} <span style="font-size:0.75em;color:var(--muted)">(refresh only)</span>`
+            : SettingsUtil.NETWORK_PAGE_LABELS[page];
           return `<tr>
             <td>${label}</td>
-            <td style="text-align:right">${formatKb(bytes)}</td>
+            <td style="text-align:right">${AppUtil.formatKb(bytes)}</td>
           </tr>`;
         })
         .join("");
     }
 
-    if (totalCell) totalCell.textContent = formatKb(totalBytes);
+    if (totalCell) totalCell.textContent = AppUtil.formatKb(totalBytes);
   }
 
   renderUsage();
 
   if (resetUsageBtn) {
     resetUsageBtn.addEventListener("click", () => {
-      AppSettings.resetNetworkUsage();
+      SettingsUtil.resetNetworkUsage();
       renderUsage();
       renderNetworkSince();
       renderChart(currentGroupBy);
@@ -398,10 +384,10 @@ import { AppConstant } from "../constant";
   if (resetAllBtn) {
     resetAllBtn.addEventListener("click", () => {
       if (!window.confirm("Reset all settings to defaults? This cannot be undone.")) return;
-      AppSettings.resetAll();
-      applyThemeToUI(AppSettings.getTheme());
-      applyTheme(AppSettings.getTheme());
-      applyTimeFormatToUI(AppSettings.getTimeFormat());
+      SettingsUtil.resetAll();
+      applyThemeToUI(SettingsUtil.getTheme());
+      applyTheme(SettingsUtil.getTheme());
+      applyTimeFormatToUI(SettingsUtil.getTimeFormat());
       renderUsage();
       renderNetworkSince();
       renderCacheClearedAt();
