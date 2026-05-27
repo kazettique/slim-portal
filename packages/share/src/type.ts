@@ -84,3 +84,16 @@ export interface TransitRoute {
   arrive: string;
   referenceFare: { ticket: number; ic: number } | null;
 }
+
+export interface BathroomItem {
+  id: number;
+  name: string;
+  city: string;
+  state: string;
+  lat: number;
+  lng: number;
+  accessible: boolean;
+  changingTable: boolean;
+  unisex: boolean;
+  distanceKm: number;
+}

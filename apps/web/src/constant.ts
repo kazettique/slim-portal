@@ -65,6 +65,12 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_SETTINGS,
   };
 
+  public static readonly BATHROOMS_PAGE_META: PageMeta = {
+    title: "Bathrooms",
+    description: "Find public bathrooms near your location.",
+    url: ShareConstant.PAGE_URL_BATHROOMS,
+  };
+
   public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
     title: "年份換算",
     description: "Convert between Western, ROC (Taiwan), and Japanese era years.",
@@ -84,6 +90,7 @@ export abstract class AppConstant {
     this.SEARCH_PAGE_META,
     this.TRANSIT_PAGE_META,
     this.CONVERTER_PAGE_META,
+    this.BATHROOMS_PAGE_META,
     this.SETTINGS_PAGE_META,
   ];
 
@@ -101,6 +108,8 @@ export abstract class AppConstant {
   public static readonly MSG_CACHE_CLEARED: string = "Cache cleared.";
   public static readonly MSG_CACHE_CLEAR_FAILED: string = "Failed to clear cache.";
   public static readonly MSG_SETTINGS_RESET: string = "Settings reset to defaults.";
+
+  public static readonly ERROR_MSG_LOAD_BATHROOMS: string = "Could not load nearby bathrooms. Please try again.";
 
   public static readonly ERROR_MSG_TRANSIT_SEARCH_FAILED: string = "Could not find routes. Please try again.";
   public static readonly ERROR_MSG_TRANSIT_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";

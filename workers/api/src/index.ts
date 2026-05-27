@@ -7,6 +7,7 @@ import {
 } from "./routes/places";
 import { handleSearch } from "./routes/search";
 import { handleTransit, handleTransitSearch, handleTransitAround, handleTransitAutocomplete } from "./routes/transit";
+import { handleBathroomsNearby } from "./routes/bathrooms";
 import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
 import { WorkerUtil } from "./util";
 
@@ -24,6 +25,7 @@ const GET_ROUTES: Record<string, RouteHandler> = {
   "/api/transit/search": handleTransitSearch,
   "/api/transit/around": handleTransitAround,
   "/api/transit/autocomplete": handleTransitAutocomplete,
+  "/api/bathrooms/nearby": handleBathroomsNearby,
 };
 
 export default {

@@ -24,6 +24,7 @@ export enum NetworkPage {
   PLACES_DETAILS = "places/details",
   TRANSIT = "transit",
   SEARCH = "search",
+  BATHROOMS = "bathrooms/nearby",
 }
 
 export const NETWORK_PAGE_LABELS: Record<NetworkPage, string> = {
@@ -33,6 +34,7 @@ export const NETWORK_PAGE_LABELS: Record<NetworkPage, string> = {
   [NetworkPage.PLACES_DETAILS]: "Places – Details",
   [NetworkPage.TRANSIT]: "Transit",
   [NetworkPage.SEARCH]: "Search",
+  [NetworkPage.BATHROOMS]: "Bathrooms – Nearby",
 };
 
 const LS_KEY_TIME_FORMAT = "setting:timeFormat";

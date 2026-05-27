@@ -1,0 +1,122 @@
+[
+  {
+    "id": 53632,
+    "name": "Donki Shinjuku South Exit",
+    "city": "Tokyo",
+    "state": "Tokyo",
+    "latitude": 35.6900453,
+    "longitude": 139.7020005,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 1,
+    "distance": 0.05953568977154391
+  },
+  {
+    "id": 66074,
+    "name": "7/11 Okubo 2 Chome Meiji Dori",
+    "city": "Shinjuku City",
+    "state": "Tokyo",
+    "latitude": 35.7026192,
+    "longitude": 139.7086166,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 0,
+    "distance": 0.8864436907415603
+  },
+  {
+    "id": 82372,
+    "name": "YM Square Harajuku",
+    "city": "Shibuya Ward",
+    "state": "Tokyo",
+    "latitude": 35.6678688,
+    "longitude": 139.7109231,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 1,
+    "distance": 1.663776591227145
+  },
+  {
+    "id": 65454,
+    "name": "MEGA Don Quijote Shibuya Honten",
+    "city": "Shibuya City",
+    "state": "Tokyo",
+    "latitude": 35.6605137,
+    "longitude": 139.6978782,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 1,
+    "distance": 2.1128855927208003
+  },
+  {
+    "id": 39132,
+    "name": "Wendy’s",
+    "city": "Shibuya",
+    "state": "Tokyo",
+    "latitude": 35.6601135,
+    "longitude": 139.6991205,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 1,
+    "distance": 2.1335325774819105
+  },
+  {
+    "id": 58948,
+    "name": "2-chōme-23-5 Ōhara, Setagaya City, Tokyo 156-0041, Japan",
+    "city": "Setagaya City",
+    "state": "Tokyo",
+    "latitude": 35.6716849,
+    "longitude": 139.6603948,
+    "accessible": 1,
+    "changing_table": 1,
+    "unisex": 1,
+    "distance": 2.696753606000795
+  },
+  {
+    "id": 58958,
+    "name": "Kurumi clinic ",
+    "city": "Setagaya City",
+    "state": "Tokyo",
+    "latitude": 35.6716849,
+    "longitude": 139.6603948,
+    "accessible": 1,
+    "changing_table": 1,
+    "unisex": 1,
+    "distance": 2.696753606000795
+  },
+  {
+    "id": 65459,
+    "name": "Mansei Building Public Toilet",
+    "city": "Chiyoda City",
+    "state": "Tokyo",
+    "latitude": 35.6959109,
+    "longitude": 139.7722367,
+    "accessible": 1,
+    "changing_table": 1,
+    "unisex": 1,
+    "distance": 3.9442106689249457
+  },
+  {
+    "id": 65352,
+    "name": "Suzukien Asakusa",
+    "city": "Taito City",
+    "state": "Tokyo Prefecture",
+    "latitude": 35.7163685,
+    "longitude": 139.7970277,
+    "accessible": 0,
+    "changing_table": 0,
+    "unisex": 1,
+    "distance": 5.603249659828096
+  },
+  {
+    "id": 50854,
+    "name": "AQUA CITY ODAIBA, 1-chōme-7-1 Daiba, 港区 Minato-ku, Tōkyō-to 135-0091, Japan",
+    "city": "Minato-ku",
+    "state": "Tōkyō-to",
+    "latitude": 35.6278192,
+    "longitude": 139.7735683,
+    "accessible": 1,
+    "changing_table": 1,
+    "unisex": 0,
+    "distance": 5.918930512697174
+  }
+]
