@@ -4,10 +4,28 @@
     static PAGE_URL_HOME = "/";
     static PAGE_URL_NEWS = "/news";
     static PAGE_URL_PLACES = "/places";
+    static PAGE_URL_PLACES_NEARBY = "/places/nearby";
+    static PAGE_URL_PLACES_DETAILS = "/places/details";
+    static PAGE_URL_SEARCH = "/search";
+    static PAGE_URL_TRANSIT = "/transit";
+    static PAGE_URL_CONVERTER = "/converter";
+    static PAGE_URL_YEAR_CONVERTER = "/converter/year-converter";
+    static PAGE_URL_AREA_CONVERTER = "/converter/area-converter";
+    static PAGE_URL_SETTINGS = "/settings";
+    static PAGE_URL_BATHROOMS = "/bathrooms";
+    static PAGE_URL_BOOKMARKS = "/bookmarks";
     static PAGE_URLS = [
       this.PAGE_URL_HOME,
       this.PAGE_URL_NEWS,
-      this.PAGE_URL_PLACES
+      this.PAGE_URL_PLACES,
+      this.PAGE_URL_SEARCH,
+      this.PAGE_URL_TRANSIT,
+      this.PAGE_URL_CONVERTER,
+      this.PAGE_URL_YEAR_CONVERTER,
+      this.PAGE_URL_AREA_CONVERTER,
+      this.PAGE_URL_SETTINGS,
+      this.PAGE_URL_BATHROOMS,
+      this.PAGE_URL_BOOKMARKS
     ];
   }
 

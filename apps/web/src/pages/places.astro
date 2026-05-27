@@ -46,6 +46,7 @@ import { AppConstant } from "../constant";
       </svg>
       Refresh
     </button>
+    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark">Save</button>
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
@@ -56,7 +57,10 @@ import { AppConstant } from "../constant";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
   import { AppSettings, NetworkPage } from "../settings";
+  import { AppBookmarks } from "../bookmarks";
+  import { BookmarkPage } from "../type";
   import type { PlaceItem, PlacePrediction } from "@slim-portal/share";
+  import type { Bookmark, PlacesBookmarkParams } from "../type";
 
   const form = document.getElementById("places-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
@@ -67,6 +71,7 @@ import { AppConstant } from "../constant";
   const status = document.getElementById("places-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("places-toolbar") as HTMLDivElement | null;
   const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const bookmarkBtn = document.getElementById("bookmark-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
 
   let userLat: number | null = null;
@@ -260,6 +265,30 @@ import { AppConstant } from "../constant";
     });
   }
 
+  // Bookmark
+  function saveBookmark(): void {
+    const q = input?.value.trim() ?? "";
+    if (!q) return;
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const params: PlacesBookmarkParams = { q };
+    const bookmark: Bookmark = {
+      id,
+      page: BookmarkPage.PLACES,
+      label: q,
+      params,
+      createdAt: new Date().toISOString(),
+    };
+    AppBookmarks.add(bookmark);
+    if (bookmarkBtn) {
+      bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
+      setTimeout(() => {
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }, 1500);
+    }
+  }
+
+  bookmarkBtn?.addEventListener("click", saveBookmark);
+
   // Refresh
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
@@ -277,6 +306,7 @@ import { AppConstant } from "../constant";
     const q = urlP.get("q") ?? "";
     const lat = urlP.get("lat");
     const lng = urlP.get("lng");
+    const isRestore = urlP.get("restore") === "1";
     if (input) input.value = q;
     if (lat && lng) {
       userLat = parseFloat(lat);
@@ -293,14 +323,14 @@ import { AppConstant } from "../constant";
         locateBtn.disabled = false;
       }
     }
-    if (q) {
+    if (q && !isRestore) {
       const params = new URLSearchParams({ q });
       if (userLat !== null && userLng !== null) {
         params.set("lat", String(userLat));
         params.set("lng", String(userLng));
       }
       doSearch(params, false);
-    } else {
+    } else if (!q) {
       if (list) list.innerHTML = "";
       if (toolbar) toolbar.style.display = "none";
       setStatus("");
@@ -312,6 +342,7 @@ import { AppConstant } from "../constant";
   const initialQ = initialParams.get("q");
   const initialLat = initialParams.get("lat");
   const initialLng = initialParams.get("lng");
+  const isInitialRestore = initialParams.get("restore") === "1";
   if (initialLat && initialLng) {
     userLat = parseFloat(initialLat);
     userLng = parseFloat(initialLng);
@@ -322,11 +353,13 @@ import { AppConstant } from "../constant";
   }
   if (initialQ && input) {
     input.value = initialQ;
-    const params = new URLSearchParams({ q: initialQ });
-    if (userLat !== null && userLng !== null) {
-      params.set("lat", String(userLat));
-      params.set("lng", String(userLng));
+    if (!isInitialRestore) {
+      const params = new URLSearchParams({ q: initialQ });
+      if (userLat !== null && userLng !== null) {
+        params.set("lat", String(userLat));
+        params.set("lng", String(userLng));
+      }
+      doSearch(params, false);
     }
-    doSearch(params, false);
   }
 </script>

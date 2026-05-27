@@ -11,6 +11,7 @@ export abstract class ShareConstant {
   public static readonly PAGE_URL_AREA_CONVERTER: string = "/converter/area-converter";
   public static readonly PAGE_URL_SETTINGS: string = "/settings";
   public static readonly PAGE_URL_BATHROOMS: string = "/bathrooms";
+  public static readonly PAGE_URL_BOOKMARKS: string = "/bookmarks";
   public static readonly PAGE_URLS: string[] = [
     this.PAGE_URL_HOME,
     this.PAGE_URL_NEWS,
@@ -22,5 +23,6 @@ export abstract class ShareConstant {
     this.PAGE_URL_AREA_CONVERTER,
     this.PAGE_URL_SETTINGS,
     this.PAGE_URL_BATHROOMS,
+    this.PAGE_URL_BOOKMARKS,
   ];
 }

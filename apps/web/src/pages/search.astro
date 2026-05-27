@@ -40,6 +40,7 @@ import { AppConstant } from "../constant";
       </svg>
       Refresh
     </button>
+    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark">Save</button>
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
@@ -50,7 +51,10 @@ import { AppConstant } from "../constant";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
   import { AppSettings, NetworkPage } from "../settings";
+  import { AppBookmarks } from "../bookmarks";
+  import { BookmarkPage } from "../type";
   import type { SearchItem } from "@slim-portal/share";
+  import type { Bookmark, SearchBookmarkParams } from "../type";
 
   const form = document.getElementById("search-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
@@ -58,6 +62,7 @@ import { AppConstant } from "../constant";
   const status = document.getElementById("search-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("search-toolbar") as HTMLDivElement | null;
   const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const bookmarkBtn = document.getElementById("bookmark-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
 
   let lastQ: string | null = null;
@@ -127,6 +132,29 @@ import { AppConstant } from "../constant";
     });
   }
 
+  // Bookmark
+  function saveBookmark(): void {
+    if (!lastQ) return;
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const params: SearchBookmarkParams = { q: lastQ };
+    const bookmark: Bookmark = {
+      id,
+      page: BookmarkPage.SEARCH,
+      label: lastQ,
+      params,
+      createdAt: new Date().toISOString(),
+    };
+    AppBookmarks.add(bookmark);
+    if (bookmarkBtn) {
+      bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
+      setTimeout(() => {
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }, 1500);
+    }
+  }
+
+  bookmarkBtn?.addEventListener("click", saveBookmark);
+
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       if (!lastQ) return;
@@ -139,11 +167,13 @@ import { AppConstant } from "../constant";
   }
 
   window.addEventListener("popstate", () => {
-    const q = new URLSearchParams(window.location.search).get("q") ?? "";
+    const urlP = new URLSearchParams(window.location.search);
+    const q = urlP.get("q") ?? "";
+    const isRestore = urlP.get("restore") === "1";
     if (input) input.value = q;
-    if (q) {
+    if (q && !isRestore) {
       doSearch(q, false);
-    } else {
+    } else if (!q) {
       if (list) list.innerHTML = "";
       if (toolbar) toolbar.style.display = "none";
       setStatus("");
@@ -153,8 +183,9 @@ import { AppConstant } from "../constant";
   // On load: restore from URL
   const initialParams = new URLSearchParams(window.location.search);
   const initialQ = initialParams.get("q");
+  const isInitialRestore = initialParams.get("restore") === "1";
   if (initialQ && input) {
     input.value = initialQ;
-    doSearch(initialQ, false);
+    if (!isInitialRestore) doSearch(initialQ, false);
   }
 </script>

@@ -67,6 +67,7 @@ import { AppConstant } from "../constant";
       </svg>
       Refresh
     </button>
+    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark">Save</button>
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
@@ -77,7 +78,10 @@ import { AppConstant } from "../constant";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
   import { AppSettings, NetworkPage, TimeFormat } from "../settings";
+  import { AppBookmarks } from "../bookmarks";
+  import { BookmarkPage } from "../type";
   import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
+  import type { Bookmark, TransitBookmarkParams } from "../type";
 
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
   const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
@@ -91,6 +95,7 @@ import { AppConstant } from "../constant";
   const statusEl = document.getElementById("transit-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("transit-toolbar") as HTMLDivElement | null;
   const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const bookmarkBtn = document.getElementById("bookmark-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
 
   let fromCoord: string | null = null;
@@ -372,6 +377,31 @@ import { AppConstant } from "../constant";
     });
   }
 
+  // Bookmark
+  function saveBookmark(): void {
+    if (!fromCoord || !toCoord) return;
+    const fromName = fromInput?.value ?? "";
+    const toName = toInput?.value ?? "";
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const params: TransitBookmarkParams = { from: fromCoord, to: toCoord, from_name: fromName, to_name: toName };
+    const bookmark: Bookmark = {
+      id,
+      page: BookmarkPage.TRANSIT,
+      label: `${fromName} → ${toName}`,
+      params,
+      createdAt: new Date().toISOString(),
+    };
+    AppBookmarks.add(bookmark);
+    if (bookmarkBtn) {
+      bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
+      setTimeout(() => {
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }, 1500);
+    }
+  }
+
+  bookmarkBtn?.addEventListener("click", saveBookmark);
+
   // Refresh
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
@@ -393,13 +423,14 @@ import { AppConstant } from "../constant";
     const fn = urlP.get("from_name");
     const tn = urlP.get("to_name");
     const dt = urlP.get("datetime");
+    const isRestore = urlP.get("restore") === "1";
     if (datetimeInput) datetimeInput.value = dt ?? toDatetimeLocalValue(new Date());
     if (f && t && fn && tn) {
       fromCoord = f;
       toCoord = t;
       if (fromInput) fromInput.value = fn;
       if (toInput) toInput.value = tn;
-      doSearch(false);
+      if (!isRestore) doSearch(false);
     } else {
       fromCoord = null;
       toCoord = null;
@@ -418,6 +449,7 @@ import { AppConstant } from "../constant";
   const initialFromName = initialParams.get("from_name");
   const initialToName = initialParams.get("to_name");
   const initialDatetime = initialParams.get("datetime");
+  const isInitialRestore = initialParams.get("restore") === "1";
   if (datetimeInput) {
     datetimeInput.value = initialDatetime ?? toDatetimeLocalValue(new Date());
   }
@@ -426,6 +458,6 @@ import { AppConstant } from "../constant";
     toCoord = initialTo;
     if (fromInput) fromInput.value = initialFromName;
     if (toInput) toInput.value = initialToName;
-    doSearch(false);
+    if (!isInitialRestore) doSearch(false);
   }
 </script>

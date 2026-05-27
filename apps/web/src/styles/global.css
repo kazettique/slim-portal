@@ -894,3 +894,76 @@ footer {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* ── Bookmark button (in toolbar) ── */
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4em 0.8em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 0.875rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.bookmark-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Bookmarks page ── */
+.bookmarks-actions {
+  display: flex;
+  gap: calc(var(--space) * 0.5);
+  margin-block-end: var(--space);
+}
+
+.bookmarks-group {
+  margin-block: var(--space);
+  padding-block-start: var(--space);
+  border-top: 1px solid var(--border);
+}
+
+.bookmarks-group:first-of-type {
+  border-top: none;
+  padding-block-start: 0;
+}
+
+.bookmarks-list {
+  list-style: none;
+  margin-block-start: calc(var(--space) * 0.5);
+}
+
+.bookmark-item {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.6);
+  border-bottom: 1px solid var(--border);
+  padding-block: calc(var(--space) * 0.6);
+  font-size: 0.95rem;
+}
+
+.bookmark-item:last-child {
+  border-bottom: none;
+}
+
+.bookmark-item__check {
+  flex-shrink: 0;
+}
+
+.bookmark-item__label {
+  flex: 1;
+  color: var(--accent);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-item__delete {
+  flex-shrink: 0;
+}
