@@ -31,7 +31,7 @@
 
   // src/constant.sw.ts
   class SwConstant {
-    static SHELL_CACHE = "shell-v2";
+    static SHELL_CACHE = "shell-v3";
     static API_CACHE = "api-v1";
     static SHELL_URLS = ShareConstant.PAGE_URLS.map((url) => url === "/" ? url : `${url}/`);
   }
@@ -41,7 +41,7 @@
 
   class SwHandler {
     static install(event) {
-      event.waitUntil(caches.open(SwConstant.SHELL_CACHE).then((cache) => cache.addAll(SwConstant.SHELL_URLS)).then(() => sw.skipWaiting()));
+      event.waitUntil(caches.open(SwConstant.SHELL_CACHE).then((cache) => Promise.allSettled(SwConstant.SHELL_URLS.map((url) => cache.add(url)))).then(() => sw.skipWaiting()));
     }
     static activate(event) {
       const keep = [SwConstant.SHELL_CACHE, SwConstant.API_CACHE];

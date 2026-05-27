@@ -7,7 +7,10 @@ abstract class SwHandler {
     event.waitUntil(
       caches
         .open(SwConstant.SHELL_CACHE)
-        .then((cache) => cache.addAll(SwConstant.SHELL_URLS))
+        // allSettled instead of cache.addAll: individual fetch failures don't
+        // abort the install, so skipWaiting() always runs and the new SW
+        // always activates (missed entries are filled in by cacheFirst at runtime).
+        .then((cache) => Promise.allSettled(SwConstant.SHELL_URLS.map((url) => cache.add(url))))
         .then(() => sw.skipWaiting()),
     );
   }
