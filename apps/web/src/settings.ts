@@ -3,6 +3,12 @@ export enum TimeFormat {
   TWENTY_FOUR_HOUR = "24h",
 }
 
+export enum Theme {
+  LIGHT = "light",
+  DARK = "dark",
+  SYSTEM = "system",
+}
+
 export interface NetworkEntry {
   page: NetworkPage;
   bytes: number;
@@ -34,17 +40,20 @@ const LS_KEY_NETWORK_USAGE = "setting:networkUsage";
 const LS_KEY_CACHE_CLEARED_AT = "setting:cacheClearedAt";
 const LS_KEY_NETWORK_SINCE = "setting:networkSince";
 const LS_KEY_NETWORK_LOG = "setting:networkLog";
+const LS_KEY_THEME = "setting:theme";
 const LS_SETTING_KEYS = [
   LS_KEY_TIME_FORMAT,
   LS_KEY_NETWORK_USAGE,
   LS_KEY_CACHE_CLEARED_AT,
   LS_KEY_NETWORK_SINCE,
   LS_KEY_NETWORK_LOG,
+  LS_KEY_THEME,
 ] as const;
 
 const DEFAULTS = {
   timeFormat: TimeFormat.TWENTY_FOUR_HOUR,
   networkUsage: {} as Record<string, number>,
+  theme: Theme.SYSTEM,
 } as const;
 
 export abstract class AppSettings {
@@ -63,6 +72,26 @@ export abstract class AppSettings {
   public static setTimeFormat(value: TimeFormat): void {
     try {
       localStorage.setItem(LS_KEY_TIME_FORMAT, value);
+    } catch {
+      // ignore
+    }
+  }
+
+  // ── Theme ─────────────────────────────────────────────────────
+
+  public static getTheme(): Theme {
+    try {
+      const stored = localStorage.getItem(LS_KEY_THEME);
+      if (stored === Theme.LIGHT || stored === Theme.DARK || stored === Theme.SYSTEM) return stored;
+    } catch {
+      // localStorage unavailable (private mode, etc.)
+    }
+    return DEFAULTS.theme;
+  }
+
+  public static setTheme(value: Theme): void {
+    try {
+      localStorage.setItem(LS_KEY_THEME, value);
     } catch {
       // ignore
     }

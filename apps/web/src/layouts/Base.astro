@@ -15,9 +15,18 @@ const canonicalPath = Astro.url.pathname;
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline>
+      (function () {
+        var stored = "";
+        try { stored = localStorage.getItem("setting:theme") || ""; } catch (_) {}
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var isDark = stored === "dark" || (stored !== "light" && prefersDark);
+        if (isDark) document.documentElement.setAttribute("data-theme", "dark");
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta id="theme-color-meta" name="theme-color" content="#ffffff" />
     <meta name="description" content={description} />
     <link rel="manifest" href="/manifest.json" />
     <title>{AppUtil.getPageTitle(title)}</title>
@@ -54,6 +63,12 @@ const canonicalPath = Astro.url.pathname;
           navigator.serviceWorker.register("/sw.js");
         });
       }
+      // Sync theme-color meta to current data-theme
+      (function () {
+        var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        var meta = document.getElementById("theme-color-meta");
+        if (meta) meta.content = isDark ? "#121212" : "#ffffff";
+      })();
     </script>
   </body>
 </html>

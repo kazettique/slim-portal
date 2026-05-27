@@ -19,6 +19,15 @@
   --font: system-ui, -apple-system, sans-serif;
 }
 
+[data-theme="dark"] {
+  --bg: #121212;
+  --fg: #e8e8e8;
+  --muted: #a0a0a0;
+  --border: #2e2e2e;
+  --accent: #4d9ef6;
+  --danger: #e74c3c;
+}
+
 html {
   font-size: 16px;
 }

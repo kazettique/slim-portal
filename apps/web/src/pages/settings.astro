@@ -9,6 +9,27 @@ import { AppConstant } from "../constant";
 >
   <h1>{AppConstant.SETTINGS_PAGE_META.title}</h1>
 
+  <!-- ── Appearance ── -->
+  <section class="settings-section">
+    <h2>Appearance</h2>
+    <p>Choose the color scheme for the app.</p>
+    <div class="settings-group" role="group">
+      <span class="settings-group__legend">Color scheme</span>
+      <label class="settings-group__option">
+        <input type="radio" name="theme" id="theme-system" value="system" />
+        System default
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="theme" id="theme-light" value="light" />
+        Light
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="theme" id="theme-dark" value="dark" />
+        Dark
+      </label>
+    </div>
+  </section>
+
   <!-- ── Time Format ── -->
   <section class="settings-section">
     <h2>Time Format</h2>
@@ -86,9 +107,37 @@ import { AppConstant } from "../constant";
 </Base>
 
 <script>
-  import { AppSettings, TimeFormat, NetworkPage, NETWORK_PAGE_LABELS } from "../settings";
+  import { AppSettings, TimeFormat, Theme, NetworkPage, NETWORK_PAGE_LABELS } from "../settings";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
+
+  // ── Theme ─────────────────────────────────────────────────────
+  function applyTheme(value: Theme): void {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = value === Theme.DARK || (value === Theme.SYSTEM && prefersDark);
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "");
+    const meta = document.getElementById("theme-color-meta") as HTMLMetaElement | null;
+    if (meta) meta.content = isDark ? "#121212" : "#ffffff";
+  }
+
+  function applyThemeToUI(value: Theme): void {
+    const el = document.getElementById(`theme-${value}`) as HTMLInputElement | null;
+    if (el) el.checked = true;
+  }
+
+  applyThemeToUI(AppSettings.getTheme());
+
+  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const value = radio.value as Theme;
+      AppSettings.setTheme(value);
+      applyTheme(value);
+    });
+  });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (AppSettings.getTheme() === Theme.SYSTEM) applyTheme(Theme.SYSTEM);
+  });
 
   // ── Chart ─────────────────────────────────────────────────────
   const PAGE_COLORS: Record<NetworkPage, string> = {
@@ -350,6 +399,8 @@ import { AppConstant } from "../constant";
     resetAllBtn.addEventListener("click", () => {
       if (!window.confirm("Reset all settings to defaults? This cannot be undone.")) return;
       AppSettings.resetAll();
+      applyThemeToUI(AppSettings.getTheme());
+      applyTheme(AppSettings.getTheme());
       applyTimeFormatToUI(AppSettings.getTimeFormat());
       renderUsage();
       renderNetworkSince();
