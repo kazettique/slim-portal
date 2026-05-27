@@ -251,6 +251,7 @@ import { AppConstant } from "../constant";
         params.set("lat", String(userLat));
         params.set("lng", String(userLng));
       }
+      history.pushState(null, "", `?${params.toString()}`);
       await doSearch(params, false);
       if (searchBtn) searchBtn.disabled = false;
     });
@@ -266,5 +267,63 @@ import { AppConstant } from "../constant";
       refreshBtn.disabled = false;
       refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
     });
+  }
+
+  window.addEventListener("popstate", () => {
+    const urlP = new URLSearchParams(window.location.search);
+    const q = urlP.get("q") ?? "";
+    const lat = urlP.get("lat");
+    const lng = urlP.get("lng");
+    if (input) input.value = q;
+    if (lat && lng) {
+      userLat = parseFloat(lat);
+      userLng = parseFloat(lng);
+      if (locateBtn) {
+        locateBtn.textContent = "Location set ✓";
+        locateBtn.disabled = true;
+      }
+    } else {
+      userLat = null;
+      userLng = null;
+      if (locateBtn) {
+        locateBtn.textContent = "Use my location";
+        locateBtn.disabled = false;
+      }
+    }
+    if (q) {
+      const params = new URLSearchParams({ q });
+      if (userLat !== null && userLng !== null) {
+        params.set("lat", String(userLat));
+        params.set("lng", String(userLng));
+      }
+      doSearch(params, false);
+    } else {
+      if (list) list.innerHTML = "";
+      if (toolbar) toolbar.style.display = "none";
+      setStatus("");
+    }
+  });
+
+  // On load: restore from URL
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialQ = initialParams.get("q");
+  const initialLat = initialParams.get("lat");
+  const initialLng = initialParams.get("lng");
+  if (initialLat && initialLng) {
+    userLat = parseFloat(initialLat);
+    userLng = parseFloat(initialLng);
+    if (locateBtn) {
+      locateBtn.textContent = "Location set ✓";
+      locateBtn.disabled = true;
+    }
+  }
+  if (initialQ && input) {
+    input.value = initialQ;
+    const params = new URLSearchParams({ q: initialQ });
+    if (userLat !== null && userLng !== null) {
+      params.set("lat", String(userLat));
+      params.set("lng", String(userLng));
+    }
+    doSearch(params, false);
   }
 </script>

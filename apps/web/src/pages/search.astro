@@ -119,6 +119,7 @@ import { AppConstant } from "../constant";
       e.preventDefault();
       const q = input?.value.trim() ?? "";
       if (!q) return;
+      history.pushState(null, "", `?${new URLSearchParams({ q }).toString()}`);
       await doSearch(q, false);
     });
   }
@@ -132,5 +133,25 @@ import { AppConstant } from "../constant";
       refreshBtn.disabled = false;
       refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
     });
+  }
+
+  window.addEventListener("popstate", () => {
+    const q = new URLSearchParams(window.location.search).get("q") ?? "";
+    if (input) input.value = q;
+    if (q) {
+      doSearch(q, false);
+    } else {
+      if (list) list.innerHTML = "";
+      if (toolbar) toolbar.style.display = "none";
+      setStatus("");
+    }
+  });
+
+  // On load: restore from URL
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialQ = initialParams.get("q");
+  if (initialQ && input) {
+    input.value = initialQ;
+    doSearch(initialQ, false);
   }
 </script>

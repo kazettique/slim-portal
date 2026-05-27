@@ -226,6 +226,20 @@ import { AppConstant } from "../constant";
       setStatus("Please select both a departure and destination station.");
       return;
     }
+
+    // Sync URL — pushState for new searches, replaceState for refresh
+    const stateParams = new URLSearchParams({
+      from: fromCoord,
+      to: toCoord,
+      from_name: fromInput?.value ?? "",
+      to_name: toInput?.value ?? "",
+    });
+    if (bypassCache) {
+      history.replaceState(null, "", `?${stateParams.toString()}`);
+    } else {
+      history.pushState(null, "", `?${stateParams.toString()}`);
+    }
+
     setStatus("Searching…");
     if (routeList) routeList.innerHTML = "";
     if (cacheStatus) cacheStatus.textContent = "";
@@ -340,5 +354,42 @@ import { AppConstant } from "../constant";
       refreshBtn.disabled = false;
       refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
     });
+  }
+
+  window.addEventListener("popstate", () => {
+    const urlP = new URLSearchParams(window.location.search);
+    const f = urlP.get("from");
+    const t = urlP.get("to");
+    const fn = urlP.get("from_name");
+    const tn = urlP.get("to_name");
+    if (f && t && fn && tn) {
+      fromCoord = f;
+      toCoord = t;
+      if (fromInput) fromInput.value = fn;
+      if (toInput) toInput.value = tn;
+      doSearch(false);
+    } else {
+      fromCoord = null;
+      toCoord = null;
+      if (fromInput) fromInput.value = "";
+      if (toInput) toInput.value = "";
+      if (routeList) routeList.innerHTML = "";
+      if (toolbar) toolbar.style.display = "none";
+      setStatus("");
+    }
+  });
+
+  // On load: restore from URL
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialFrom = initialParams.get("from");
+  const initialTo = initialParams.get("to");
+  const initialFromName = initialParams.get("from_name");
+  const initialToName = initialParams.get("to_name");
+  if (initialFrom && initialTo && initialFromName && initialToName) {
+    fromCoord = initialFrom;
+    toCoord = initialTo;
+    if (fromInput) fromInput.value = initialFromName;
+    if (toInput) toInput.value = initialToName;
+    doSearch(false);
   }
 </script>

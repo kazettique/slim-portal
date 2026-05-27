@@ -315,11 +315,14 @@ footer {
 
 .transit-leg--walk {
   color: var(--muted);
+  border-left: 3px dashed var(--border);
+  padding-inline-start: 0.5em;
 }
 
 .transit-leg--transit {
   border-left: 3px solid var(--accent);
   padding-inline-start: 0.5em;
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
 }
 
 .cache-status {
@@ -637,4 +640,125 @@ footer {
   display: inline-block;
   font-size: 0.875rem;
   margin-block-end: var(--space);
+}
+
+/* ── Search page ── */
+
+.search-form {
+  margin-block-end: var(--space);
+}
+
+.search-form__row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.search-form__input {
+  flex: 1;
+  padding: 0.45em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.search-form__input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.search-form__submit {
+  padding: 0.5em 1.2em;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.search-form__submit:hover {
+  opacity: 0.88;
+}
+
+.search-list {
+  list-style: none;
+  margin-block-start: var(--space);
+}
+
+.search-item {
+  border-bottom: 1px solid var(--border);
+  padding-block: calc(var(--space) * 0.75);
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item__title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.search-item__snippet {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-block-start: 0.25rem;
+}
+
+.search-item__url {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-block-start: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Home page ── */
+
+.home-list {
+  list-style: none;
+  margin-block-start: var(--space);
+}
+
+.home-list__item {
+  border-bottom: 1px solid var(--border);
+  padding-block: calc(var(--space) * 0.6);
+  font-size: 0.95rem;
+}
+
+.home-list__item:last-child {
+  border-bottom: none;
+}
+
+.home-list__item span {
+  color: var(--muted);
+}
+
+/* ── Converter hub list ── */
+
+.converter-list {
+  list-style: none;
+  margin-block-start: var(--space);
+}
+
+.converter-list__item {
+  border-bottom: 1px solid var(--border);
+  padding-block: calc(var(--space) * 0.6);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.converter-list__item:last-child {
+  border-bottom: none;
+}
+
+.converter-list__item a {
+  color: var(--accent);
+  font-weight: 600;
 }

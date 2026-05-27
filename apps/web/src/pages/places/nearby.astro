@@ -128,6 +128,12 @@ import { AppConstant } from "../../constant";
     }
   }
 
+  // On load: restore saved radius from URL
+  const savedRadius = new URLSearchParams(window.location.search).get("radius");
+  if (savedRadius && radiusSelect) {
+    radiusSelect.value = savedRadius;
+  }
+
   // Auto-request location on load
   if (!navigator.geolocation) {
     setStatus("Geolocation is not supported by your browser.");
@@ -148,6 +154,7 @@ import { AppConstant } from "../../constant";
   // Re-fetch on radius change
   if (radiusSelect) {
     radiusSelect.addEventListener("change", () => {
+      history.replaceState(null, "", `?radius=${radiusSelect.value}`);
       if (userLat !== null && userLng !== null) doFetch(false);
     });
   }
