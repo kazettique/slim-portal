@@ -49,6 +49,7 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
+  import { AppSettings, NetworkPage } from "../settings";
   import type { SearchItem } from "@slim-portal/share";
 
   const form = document.getElementById("search-form") as HTMLFormElement | null;
@@ -100,14 +101,16 @@ import { AppConstant } from "../constant";
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const items = (await res.json()) as SearchItem[];
+      const text = await res.text();
+      AppSettings.addNetworkBytes(NetworkPage.SEARCH, new Blob([text]).size);
+      const items = JSON.parse(text) as SearchItem[];
       renderResults(items);
 
       if (items.length > 0) {
         lastQ = q;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate) : "";
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_SEARCH_FAILED);

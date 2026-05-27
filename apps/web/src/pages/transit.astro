@@ -80,6 +80,7 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
+  import { AppSettings, NetworkPage, TimeFormat } from "../settings";
   import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
 
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
@@ -120,7 +121,12 @@ import { AppConstant } from "../constant";
   function formatTime(iso: string | null): string {
     if (!iso) return "—";
     try {
-      return new Date(iso).toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" });
+      const fmt = AppSettings.getTimeFormat();
+      return new Date(iso).toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: fmt === TimeFormat.TWELVE_HOUR,
+      });
     } catch {
       return iso;
     }
@@ -280,7 +286,9 @@ import { AppConstant } from "../constant";
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const routes = (await res.json()) as TransitRoute[];
+      const text = await res.text();
+      AppSettings.addNetworkBytes(NetworkPage.TRANSIT, new Blob([text]).size);
+      const routes = JSON.parse(text) as TransitRoute[];
       renderRoutes(routes);
 
       if (routes.length > 0) {
@@ -288,7 +296,7 @@ import { AppConstant } from "../constant";
         lastTo = toCoord;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate) : "";
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);

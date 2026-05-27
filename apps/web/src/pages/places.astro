@@ -55,6 +55,7 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
+  import { AppSettings, NetworkPage } from "../settings";
   import type { PlaceItem, PlacePrediction } from "@slim-portal/share";
 
   const form = document.getElementById("places-form") as HTMLFormElement | null;
@@ -182,14 +183,16 @@ import { AppConstant } from "../constant";
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const items = (await res.json()) as PlaceItem[];
+      const text = await res.text();
+      AppSettings.addNetworkBytes(NetworkPage.PLACES_SEARCH, new Blob([text]).size);
+      const items = JSON.parse(text) as PlaceItem[];
       renderPlaces(items);
 
       if (items.length > 0) {
         lastParams = params;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate) : "";
+        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACES);

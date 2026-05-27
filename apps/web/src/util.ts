@@ -1,17 +1,19 @@
 import { AppConstant } from "./constant";
+import { TimeFormat } from "./settings";
 
 export abstract class AppUtil {
   public static getPageTitle(title: string): string {
     return [title, AppConstant.APP_TITLE].join(" - ");
   }
 
-  public static formatDate(iso: string): string {
+  public static formatDate(iso: string, format: TimeFormat = TimeFormat.TWENTY_FOUR_HOUR): string {
     try {
       return new Date(iso).toLocaleString("en-US", {
         month: "short",
         day: "numeric",
         hour: "2-digit",
         minute: "2-digit",
+        hour12: format === TimeFormat.TWELVE_HOUR,
       });
     } catch {
       return iso;
@@ -29,10 +31,13 @@ export abstract class AppUtil {
     return `★ ${rating.toFixed(1)} · ${total.toLocaleString()} reviews`;
   }
 
-  public static formatCacheTime(isoTs: string): string {
+  public static formatCacheTime(isoTs: string, format: TimeFormat = TimeFormat.TWENTY_FOUR_HOUR): string {
     const d = new Date(isoTs);
-    const hh = String(d.getHours()).padStart(2, "0");
     const mm = String(d.getMinutes()).padStart(2, "0");
-    return `Cached at ${hh}:${mm}`;
+    if (format === TimeFormat.TWELVE_HOUR) {
+      const h = d.getHours();
+      return `Cached at ${h % 12 || 12}:${mm} ${h >= 12 ? "PM" : "AM"}`;
+    }
+    return `Cached at ${String(d.getHours()).padStart(2, "0")}:${mm}`;
   }
 }

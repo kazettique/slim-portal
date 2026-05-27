@@ -1,0 +1,215 @@
+---
+import Base from "../layouts/Base.astro";
+import { AppConstant } from "../constant";
+---
+
+<Base
+  title={AppConstant.SETTINGS_PAGE_META.title}
+  description={AppConstant.SETTINGS_PAGE_META.description}
+>
+  <h1>{AppConstant.SETTINGS_PAGE_META.title}</h1>
+
+  <!-- ── Time Format ── -->
+  <section class="settings-section">
+    <h2>Time Format</h2>
+    <p>Applied to opening hours, transit times, and cached-at timestamps.</p>
+    <div class="settings-group" role="group">
+      <span class="settings-group__legend">Display time as</span>
+      <label class="settings-group__option">
+        <input type="radio" name="timeFormat" id="tf-24h" value="24h" />
+        24-hour &nbsp;<span class="settings-group__example">(09:00 – 18:00)</span>
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="timeFormat" id="tf-12h" value="12h" />
+        12-hour &nbsp;<span class="settings-group__example">(9:00 AM – 6:00 PM)</span>
+      </label>
+    </div>
+  </section>
+
+  <!-- ── Cache ── -->
+  <section class="settings-section">
+    <h2>Cache</h2>
+    <p>The service worker caches pages and API responses for offline use.</p>
+    <div class="settings-group">
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <button id="clear-cache-btn" class="refresh-btn">Clear all caches</button>
+        <span id="cache-msg" class="status" aria-live="polite" style="margin:0; padding:0;"></span>
+      </div>
+      <p id="cache-cleared-at" class="status" style="margin-block-start:0.25rem"></p>
+    </div>
+  </section>
+
+  <!-- ── Network Usage ── -->
+  <section class="settings-section">
+    <h2>Network Usage</h2>
+    <p>Cumulative data fetched by each page since last reset. Autocomplete calls are excluded.</p>
+    <p id="network-since" class="status" style="margin-block-start:-0.5rem; margin-block-end:0.5rem"></p>
+    <table class="settings-usage-table" aria-label="Network usage by page">
+      <thead>
+        <tr>
+          <th scope="col">Page</th>
+          <th scope="col" style="text-align:right">Usage</th>
+        </tr>
+      </thead>
+      <tbody id="usage-tbody"></tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Total</th>
+          <td id="usage-total" style="text-align:right">—</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="settings-group" style="margin-block-start:calc(var(--space)*0.75)">
+      <button id="reset-usage-btn" class="refresh-btn">Reset usage data</button>
+    </div>
+  </section>
+
+  <!-- ── Reset All ── -->
+  <section class="settings-section">
+    <h2>Reset</h2>
+    <p>Restore all settings to their default values.</p>
+    <div class="settings-group">
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <button id="reset-all-btn" class="refresh-btn">Reset to defaults</button>
+        <span id="reset-msg" class="status" aria-live="polite" style="margin:0; padding:0;"></span>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { AppSettings, TimeFormat, NetworkPage, NETWORK_PAGE_LABELS } from "../settings";
+  import { AppConstant } from "../constant";
+  import { AppUtil } from "../util";
+
+  // ── Time format ───────────────────────────────────────────────
+  const tf24 = document.getElementById("tf-24h") as HTMLInputElement | null;
+  const tf12 = document.getElementById("tf-12h") as HTMLInputElement | null;
+
+  function applyTimeFormatToUI(format: TimeFormat): void {
+    if (tf24) tf24.checked = format === TimeFormat.TWENTY_FOUR_HOUR;
+    if (tf12) tf12.checked = format === TimeFormat.TWELVE_HOUR;
+  }
+
+  applyTimeFormatToUI(AppSettings.getTimeFormat());
+
+  document.querySelectorAll<HTMLInputElement>('input[name="timeFormat"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const value = radio.value === TimeFormat.TWELVE_HOUR
+        ? TimeFormat.TWELVE_HOUR
+        : TimeFormat.TWENTY_FOUR_HOUR;
+      AppSettings.setTimeFormat(value);
+    });
+  });
+
+  // ── Cache clear ───────────────────────────────────────────────
+  const clearBtn = document.getElementById("clear-cache-btn") as HTMLButtonElement | null;
+  const cacheMsg = document.getElementById("cache-msg") as HTMLSpanElement | null;
+  const cacheClearedAtEl = document.getElementById("cache-cleared-at") as HTMLParagraphElement | null;
+
+  function renderCacheClearedAt(): void {
+    const ts = AppSettings.getCacheClearedAt();
+    if (cacheClearedAtEl) {
+      cacheClearedAtEl.textContent = ts
+        ? `Last cleared: ${AppUtil.formatDate(ts, AppSettings.getTimeFormat())}`
+        : "";
+    }
+  }
+
+  renderCacheClearedAt();
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", async () => {
+      if (!window.confirm("Clear all caches? Pages will reload from the network on next visit.")) return;
+
+      clearBtn.disabled = true;
+      clearBtn.textContent = "Clearing…";
+      if (cacheMsg) cacheMsg.textContent = "";
+
+      try {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((k) => caches.delete(k)));
+        AppSettings.setCacheClearedAt();
+        renderCacheClearedAt();
+        if (cacheMsg) cacheMsg.textContent = AppConstant.MSG_CACHE_CLEARED;
+      } catch {
+        if (cacheMsg) cacheMsg.textContent = AppConstant.MSG_CACHE_CLEAR_FAILED;
+      } finally {
+        clearBtn.disabled = false;
+        clearBtn.textContent = "Clear all caches";
+      }
+    });
+  }
+
+  // ── Network usage ─────────────────────────────────────────────
+  const tbody = document.getElementById("usage-tbody") as HTMLTableSectionElement | null;
+  const totalCell = document.getElementById("usage-total") as HTMLTableCellElement | null;
+  const resetUsageBtn = document.getElementById("reset-usage-btn") as HTMLButtonElement | null;
+  const networkSinceEl = document.getElementById("network-since") as HTMLParagraphElement | null;
+
+  function renderNetworkSince(): void {
+    const ts = AppSettings.getNetworkSince();
+    if (networkSinceEl) {
+      networkSinceEl.textContent = ts
+        ? `Since ${AppUtil.formatDate(ts, AppSettings.getTimeFormat())}`
+        : "";
+    }
+  }
+
+  renderNetworkSince();
+
+  function formatKb(bytes: number): string {
+    if (bytes === 0) return "0 KB";
+    const kb = bytes / 1024;
+    return kb < 1000 ? `${kb.toFixed(1)} KB` : `${(kb / 1024).toFixed(2)} MB`;
+  }
+
+  function renderUsage(): void {
+    const usage = AppSettings.getNetworkUsage();
+    let totalBytes = 0;
+
+    if (tbody) {
+      tbody.innerHTML = Object.values(NetworkPage)
+        .map((page) => {
+          const bytes = usage[page] ?? 0;
+          totalBytes += bytes;
+          return `<tr>
+            <td>${NETWORK_PAGE_LABELS[page]}</td>
+            <td style="text-align:right">${formatKb(bytes)}</td>
+          </tr>`;
+        })
+        .join("");
+    }
+
+    if (totalCell) totalCell.textContent = formatKb(totalBytes);
+  }
+
+  renderUsage();
+
+  if (resetUsageBtn) {
+    resetUsageBtn.addEventListener("click", () => {
+      AppSettings.resetNetworkUsage();
+      renderUsage();
+      renderNetworkSince();
+    });
+  }
+
+  // ── Reset all settings ────────────────────────────────────────
+  const resetAllBtn = document.getElementById("reset-all-btn") as HTMLButtonElement | null;
+  const resetMsg = document.getElementById("reset-msg") as HTMLSpanElement | null;
+
+  if (resetAllBtn) {
+    resetAllBtn.addEventListener("click", () => {
+      if (!window.confirm("Reset all settings to defaults? This cannot be undone.")) return;
+      AppSettings.resetAll();
+      applyTimeFormatToUI(AppSettings.getTimeFormat());
+      renderUsage();
+      renderNetworkSince();
+      renderCacheClearedAt();
+      if (resetMsg) resetMsg.textContent = AppConstant.MSG_SETTINGS_RESET;
+      setTimeout(() => {
+        if (resetMsg) resetMsg.textContent = "";
+      }, 3000);
+    });
+  }
+</script>

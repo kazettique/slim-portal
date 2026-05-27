@@ -59,6 +59,12 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_CONVERTER,
   };
 
+  public static readonly SETTINGS_PAGE_META: PageMeta = {
+    title: "Settings",
+    description: "Cache, time format, and network usage settings.",
+    url: ShareConstant.PAGE_URL_SETTINGS,
+  };
+
   public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
     title: "年份換算",
     description: "Convert between Western, ROC (Taiwan), and Japanese era years.",
@@ -78,6 +84,7 @@ export abstract class AppConstant {
     this.SEARCH_PAGE_META,
     this.TRANSIT_PAGE_META,
     this.CONVERTER_PAGE_META,
+    this.SETTINGS_PAGE_META,
   ];
 
   public static readonly FOOTER_MESSAGE: string = "Slim Portal - optimized for slow networks";
@@ -90,6 +97,10 @@ export abstract class AppConstant {
   public static readonly ERROR_MSG_SEARCH_FAILED: string = "Search failed. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";
+
+  public static readonly MSG_CACHE_CLEARED: string = "Cache cleared.";
+  public static readonly MSG_CACHE_CLEAR_FAILED: string = "Failed to clear cache.";
+  public static readonly MSG_SETTINGS_RESET: string = "Settings reset to defaults.";
 
   public static readonly ERROR_MSG_TRANSIT_SEARCH_FAILED: string = "Could not find routes. Please try again.";
   public static readonly ERROR_MSG_TRANSIT_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";

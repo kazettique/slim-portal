@@ -642,6 +642,64 @@ footer {
   margin-block-end: var(--space);
 }
 
+/* ── Settings page ── */
+
+.settings-section {
+  margin-block: calc(var(--space) * 1.5);
+  padding-block-start: calc(var(--space) * 0.75);
+  border-top: 1px solid var(--border);
+}
+
+.settings-section:first-of-type {
+  border-top: none;
+  padding-block-start: 0;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 0.4);
+  margin-block-start: calc(var(--space) * 0.5);
+}
+
+.settings-group__legend {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.settings-group__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.settings-usage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-block-start: calc(var(--space) * 0.5);
+}
+
+.settings-usage-table th,
+.settings-usage-table td {
+  padding: 0.35em 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.settings-usage-table tfoot th,
+.settings-usage-table tfoot td {
+  border-bottom: none;
+  border-top: 1px solid var(--border);
+  font-weight: 700;
+  padding-block-start: 0.5em;
+}
+
 /* ── Search page ── */
 
 .search-form {
