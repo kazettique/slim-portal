@@ -26,11 +26,17 @@ const canonicalPath = Astro.url.pathname;
     <header>
       <nav aria-label="Main">
         {
-          AppConstant.NAV_LIST.map((navItem) => (
-            <a href={navItem.url} aria-current={canonicalPath === navItem.url ? "page" : undefined}>
-              {navItem.title}
-            </a>
-          ))
+          AppConstant.NAV_LIST.map((navItem) => {
+            const isActive =
+              navItem.url === "/"
+                ? canonicalPath === "/"
+                : canonicalPath === navItem.url || canonicalPath.startsWith(navItem.url + "/");
+            return (
+              <a href={navItem.url} aria-current={isActive ? "page" : undefined}>
+                {navItem.title}
+              </a>
+            );
+          })
         }
         <!-- <a href="/" aria-current={canonicalPath === "/" ? "page" : undefined}>Home</a> -->
         <!-- <a href="/news" aria-current={canonicalPath === "/news" ? "page" : undefined}>News</a> -->

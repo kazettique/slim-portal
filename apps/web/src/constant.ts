@@ -53,12 +53,31 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_TRANSIT,
   };
 
+  public static readonly CONVERTER_PAGE_META: PageMeta = {
+    title: "Convert",
+    description: "Year and area unit converters for daily use.",
+    url: ShareConstant.PAGE_URL_CONVERTER,
+  };
+
+  public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
+    title: "年份換算",
+    description: "Convert between Western, ROC (Taiwan), and Japanese era years.",
+    url: ShareConstant.PAGE_URL_YEAR_CONVERTER,
+  };
+
+  public static readonly AREA_CONVERTER_PAGE_META: PageMeta = {
+    title: "面積換算",
+    description: "Convert between 坪 (tsubo), ㎡ (square meters), and 畳 (tatami).",
+    url: ShareConstant.PAGE_URL_AREA_CONVERTER,
+  };
+
   public static readonly NAV_LIST: PageMeta[] = [
     this.HOME_PAGE_META,
     this.NEWS_PAGE_META,
     this.PLACES_PAGE_META,
     this.SEARCH_PAGE_META,
     this.TRANSIT_PAGE_META,
+    this.CONVERTER_PAGE_META,
   ];
 
   public static readonly FOOTER_MESSAGE: string = "Slim Portal - optimized for slow networks";

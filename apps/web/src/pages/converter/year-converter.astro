@@ -1,0 +1,171 @@
+---
+import Base from "../../layouts/Base.astro";
+import { AppConstant } from "../../constant";
+---
+
+<Base title={AppConstant.YEAR_CONVERTER_PAGE_META.title} description={AppConstant.YEAR_CONVERTER_PAGE_META.description}>
+  <h1>{AppConstant.YEAR_CONVERTER_PAGE_META.title}</h1>
+  <p>{AppConstant.YEAR_CONVERTER_PAGE_META.description}</p>
+  <a href={AppConstant.CONVERTER_PAGE_META.url} class="converter-back">← Back to Converters</a>
+
+  <div class="converter-grid">
+    <div class="converter-group">
+      <label for="year-western">西元 (Western)</label>
+      <input id="year-western" type="number" min="1868" max="9999" placeholder="e.g. 2024" />
+    </div>
+
+    <div class="converter-group">
+      <label for="year-roc">民國 (ROC)</label>
+      <input id="year-roc" type="number" min="1" placeholder="e.g. 113" />
+    </div>
+
+    <div class="converter-group">
+      <label for="year-era-num">日本年號 (Japanese era)</label>
+      <div class="converter-group__row year__row">
+        <select id="year-era" aria-label="Era name">
+          <option>明治</option>
+          <option>大正</option>
+          <option>昭和</option>
+          <option>平成</option>
+          <option selected>令和</option>
+        </select>
+        <input id="year-era-num" type="number" min="1" placeholder="e.g. 6" aria-label="Era year" />
+      </div>
+    </div>
+  </div>
+
+  <p id="year-note" class="converter-note" aria-live="polite"></p>
+</Base>
+
+<script>
+  interface Era {
+    name: string;
+    start: number;
+    end: number | null;
+  }
+
+  const ERAS: Era[] = [
+    { name: "明治", start: 1868, end: 1912 },
+    { name: "大正", start: 1912, end: 1926 },
+    { name: "昭和", start: 1926, end: 1989 },
+    { name: "平成", start: 1989, end: 2019 },
+    { name: "令和", start: 2019, end: null },
+  ];
+
+  // Years where two eras overlap (transition years)
+  const TRANSITION_YEARS: Record<number, string> = {
+    1912: "明治45 or 大正1",
+    1926: "大正15 or 昭和1",
+    1989: "昭和64 or 平成1",
+    2019: "平成31 or 令和1",
+  };
+
+  function westernToEra(western: number): { era: Era; eraYear: number } | null {
+    // Find the latest era that covers this year (for transition years, prefer the newer era)
+    for (let i = ERAS.length - 1; i >= 0; i--) {
+      const era = ERAS[i];
+      if (western >= era.start && (era.end === null || western <= era.end)) {
+        return { era, eraYear: western - era.start + 1 };
+      }
+    }
+    return null;
+  }
+
+  const westernInput = document.getElementById("year-western") as HTMLInputElement | null;
+  const rocInput = document.getElementById("year-roc") as HTMLInputElement | null;
+  const eraSelect = document.getElementById("year-era") as HTMLSelectElement | null;
+  const eraNumInput = document.getElementById("year-era-num") as HTMLInputElement | null;
+  const noteEl = document.getElementById("year-note") as HTMLParagraphElement | null;
+
+  let updating = false;
+
+  function setNote(western: number): void {
+    if (!noteEl) return;
+    const msg = TRANSITION_YEARS[western];
+    noteEl.textContent = msg ? `⚠ ${western} = ${msg} (depends on the month)` : "";
+  }
+
+  function fromWestern(western: number): void {
+    if (updating) return;
+    updating = true;
+
+    // ROC
+    if (rocInput) {
+      rocInput.value = western >= 1912 ? String(western - 1911) : "";
+    }
+
+    // Japanese era
+    const result = westernToEra(western);
+    if (eraSelect && eraNumInput) {
+      if (result) {
+        eraSelect.value = result.era.name;
+        eraNumInput.value = String(result.eraYear);
+      } else {
+        eraNumInput.value = "";
+      }
+    }
+
+    setNote(western);
+    updating = false;
+  }
+
+  function fromRoc(roc: number): void {
+    if (updating) return;
+    updating = true;
+    const western = roc + 1911;
+    if (westernInput) westernInput.value = String(western);
+
+    const result = westernToEra(western);
+    if (eraSelect && eraNumInput) {
+      if (result) {
+        eraSelect.value = result.era.name;
+        eraNumInput.value = String(result.eraYear);
+      } else {
+        eraNumInput.value = "";
+      }
+    }
+
+    setNote(western);
+    updating = false;
+  }
+
+  function fromEra(): void {
+    if (updating) return;
+    updating = true;
+
+    const eraName = eraSelect?.value ?? "";
+    const eraYear = parseInt(eraNumInput?.value ?? "", 10);
+    const era = ERAS.find((e) => e.name === eraName);
+
+    if (era && !isNaN(eraYear) && eraYear >= 1) {
+      const western = era.start + eraYear - 1;
+      if (westernInput) westernInput.value = String(western);
+      if (rocInput) rocInput.value = western >= 1912 ? String(western - 1911) : "";
+      setNote(western);
+    } else {
+      if (westernInput) westernInput.value = "";
+      if (rocInput) rocInput.value = "";
+      if (noteEl) noteEl.textContent = "";
+    }
+
+    updating = false;
+  }
+
+  westernInput?.addEventListener("input", () => {
+    const v = parseInt(westernInput.value, 10);
+    if (!isNaN(v) && v >= 1868) fromWestern(v);
+  });
+
+  rocInput?.addEventListener("input", () => {
+    const v = parseInt(rocInput.value, 10);
+    if (!isNaN(v) && v >= 1) fromRoc(v);
+  });
+
+  eraNumInput?.addEventListener("input", fromEra);
+  eraSelect?.addEventListener("change", fromEra);
+
+  // Initialize with current year
+  const currentYear = new Date().getFullYear();
+  if (westernInput) westernInput.value = String(currentYear);
+  fromWestern(currentYear);
+</script>

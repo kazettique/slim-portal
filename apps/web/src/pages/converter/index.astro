@@ -1,0 +1,21 @@
+---
+import Base from "../../layouts/Base.astro";
+import { AppConstant } from "../../constant";
+---
+
+<Base
+  title={AppConstant.CONVERTER_PAGE_META.title}
+  description={AppConstant.CONVERTER_PAGE_META.description}
+>
+  <h1>{AppConstant.CONVERTER_PAGE_META.title}</h1>
+  <p>{AppConstant.CONVERTER_PAGE_META.description}</p>
+
+  <ul>
+    <li>
+      <a href={AppConstant.YEAR_CONVERTER_PAGE_META.url}>年份換算</a> — 西元 / 民國 / 日本年號
+    </li>
+    <li>
+      <a href={AppConstant.AREA_CONVERTER_PAGE_META.url}>面積換算</a> — 坪 / ㎡ / 畳
+    </li>
+  </ul>
+</Base>

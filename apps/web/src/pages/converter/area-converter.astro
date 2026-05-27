@@ -1,0 +1,120 @@
+---
+import Base from "../../layouts/Base.astro";
+import { AppConstant } from "../../constant";
+---
+
+<Base
+  title={AppConstant.AREA_CONVERTER_PAGE_META.title}
+  description={AppConstant.AREA_CONVERTER_PAGE_META.description}
+>
+  <h1>{AppConstant.AREA_CONVERTER_PAGE_META.title}</h1>
+  <p>{AppConstant.AREA_CONVERTER_PAGE_META.description}</p>
+  <a href={AppConstant.CONVERTER_PAGE_META.url} class="converter-back">← Back to Converters</a>
+
+  <div class="converter-group" style="margin-block: var(--space)">
+    <label for="tatami-type">畳の種類 (Tatami standard)</label>
+    <select id="tatami-type">
+      <option value="1.62">不動産標準 (1.62 ㎡/畳) — real estate legal minimum</option>
+      <option value="1.5488">江戸間 (1.5488 ㎡/畳) — Kanto / Tokyo</option>
+      <option value="1.6562">中京間 (1.6562 ㎡/畳) — Nagoya area</option>
+      <option value="1.8241">京間 (1.8241 ㎡/畳) — Kansai / Kyoto</option>
+      <option value="1.445">団地間 (1.445 ㎡/畳) — public housing</option>
+    </select>
+  </div>
+
+  <div class="converter-grid">
+    <div class="converter-group">
+      <label for="area-tsubo">坪 (Tsubo)</label>
+      <input id="area-tsubo" type="number" min="0" step="0.01" placeholder="e.g. 20" />
+    </div>
+
+    <div class="converter-group">
+      <label for="area-sqm">㎡ (Square Meters)</label>
+      <input id="area-sqm" type="number" min="0" step="0.01" placeholder="e.g. 66.12" />
+    </div>
+
+    <div class="converter-group">
+      <label for="area-tatami">畳 (Tatami)</label>
+      <input id="area-tatami" type="number" min="0" step="0.1" placeholder="e.g. 40.8" />
+    </div>
+  </div>
+</Base>
+
+<script>
+  // 1 坪 = 400/121 ㎡ (exact)
+  const TSUBO_TO_SQM = 400 / 121;
+
+  const tatamiTypeEl = document.getElementById("tatami-type") as HTMLSelectElement | null;
+  const tsuboInput = document.getElementById("area-tsubo") as HTMLInputElement | null;
+  const sqmInput = document.getElementById("area-sqm") as HTMLInputElement | null;
+  const tatamiInput = document.getElementById("area-tatami") as HTMLInputElement | null;
+
+  let updating = false;
+
+  function getTatamiM2(): number {
+    return parseFloat(tatamiTypeEl?.value ?? "1.62");
+  }
+
+  function round(n: number, decimals: number): string {
+    return n.toFixed(decimals);
+  }
+
+  function fromTsubo(tsubo: number): void {
+    if (updating) return;
+    updating = true;
+    const sqm = tsubo * TSUBO_TO_SQM;
+    const tatami = sqm / getTatamiM2();
+    if (sqmInput) sqmInput.value = round(sqm, 2);
+    if (tatamiInput) tatamiInput.value = round(tatami, 2);
+    updating = false;
+  }
+
+  function fromSqm(sqm: number): void {
+    if (updating) return;
+    updating = true;
+    const tsubo = sqm / TSUBO_TO_SQM;
+    const tatami = sqm / getTatamiM2();
+    if (tsuboInput) tsuboInput.value = round(tsubo, 2);
+    if (tatamiInput) tatamiInput.value = round(tatami, 2);
+    updating = false;
+  }
+
+  function fromTatami(tatami: number): void {
+    if (updating) return;
+    updating = true;
+    const sqm = tatami * getTatamiM2();
+    const tsubo = sqm / TSUBO_TO_SQM;
+    if (tsuboInput) tsuboInput.value = round(tsubo, 2);
+    if (sqmInput) sqmInput.value = round(sqm, 2);
+    updating = false;
+  }
+
+  function onTatamiTypeChange(): void {
+    // Recalculate 畳 from current ㎡ value; leave 坪/㎡ unchanged
+    const sqm = parseFloat(sqmInput?.value ?? "");
+    if (!isNaN(sqm) && sqm > 0) {
+      if (updating) return;
+      updating = true;
+      const tatami = sqm / getTatamiM2();
+      if (tatamiInput) tatamiInput.value = round(tatami, 2);
+      updating = false;
+    }
+  }
+
+  tsuboInput?.addEventListener("input", () => {
+    const v = parseFloat(tsuboInput.value);
+    if (!isNaN(v) && v >= 0) fromTsubo(v);
+  });
+
+  sqmInput?.addEventListener("input", () => {
+    const v = parseFloat(sqmInput.value);
+    if (!isNaN(v) && v >= 0) fromSqm(v);
+  });
+
+  tatamiInput?.addEventListener("input", () => {
+    const v = parseFloat(tatamiInput.value);
+    if (!isNaN(v) && v >= 0) fromTatami(v);
+  });
+
+  tatamiTypeEl?.addEventListener("change", onTatamiTypeChange);
+</script>
