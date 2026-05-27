@@ -3,8 +3,8 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.BATHROOM_PAGE_META.title} description={AppConstant.BATHROOM_PAGE_META.description}>
-  <h1>{AppConstant.BATHROOM_PAGE_META.title}</h1>
+<Base icon={AppConstant.BATHROOM_PAGE_META.icon} title={AppConstant.BATHROOM_PAGE_META.title} description={AppConstant.BATHROOM_PAGE_META.description}>
+  <h1>{AppConstant.BATHROOM_PAGE_META.icon} {AppConstant.BATHROOM_PAGE_META.title}</h1>
   <p>{AppConstant.BATHROOM_PAGE_META.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">

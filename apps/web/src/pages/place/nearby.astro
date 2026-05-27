@@ -3,10 +3,10 @@ import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
 ---
 
-<Base title={AppConstant.PLACE_NEARBY_PAGE_META.title} description={AppConstant.PLACE_NEARBY_PAGE_META.description}>
+<Base icon={AppConstant.PLACE_NEARBY_PAGE_META.icon} title={AppConstant.PLACE_NEARBY_PAGE_META.title} description={AppConstant.PLACE_NEARBY_PAGE_META.description}>
   <p class="place-details__back"><a href="/place">← Back to search</a></p>
 
-  <h1>{AppConstant.PLACE_NEARBY_PAGE_META.title}</h1>
+  <h1>{AppConstant.PLACE_NEARBY_PAGE_META.icon} {AppConstant.PLACE_NEARBY_PAGE_META.title}</h1>
   <p>{AppConstant.PLACE_NEARBY_PAGE_META.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">

@@ -12,79 +12,92 @@ export abstract class AppConstant {
   public static readonly REQUEST_TIMEOUT: number = 8_000;
 
   public static readonly HOME_PAGE_META: PageMeta = {
-    title: "🏠 Home",
+    icon: "🏠",
+    title: "Home",
     description: "A lightweight web portal for slow networks.",
     url: ShareConstant.PAGE_URL_HOME,
   };
 
   public static readonly NEWS_PAGE_META: PageMeta = {
-    title: "📰 News",
+    icon: "📰",
+    title: "News",
     description: "Text-based news reader - top headlines from NHK and BBC.",
     url: ShareConstant.PAGE_URL_NEWS,
   };
 
   public static readonly PLACE_PAGE_META: PageMeta = {
-    title: "🗺️ Places",
+    icon: "🗺️",
+    title: "Places",
     description: "Search nearby locations with ratings.",
     url: ShareConstant.PAGE_URL_PLACE,
   };
 
   public static readonly PLACE_NEARBY_PAGE_META: PageMeta = {
-    title: "🧭 Nearby",
+    icon: "🧭",
+    title: "Nearby",
     description: "Places near your current location.",
     url: ShareConstant.PAGE_URL_PLACE_NEARBY,
   };
 
   public static readonly PLACE_DETAIL_PAGE_META: PageMeta = {
-    title: "📋 Place Details",
+    icon: "📋",
+    title: "Place Details",
     description: "Detailed information about a place.",
     url: ShareConstant.PAGE_URL_PLACE_DETAIL,
   };
 
   public static readonly SEARCH_PAGE_META: PageMeta = {
-    title: "🔎 Search",
+    icon: "🔎",
+    title: "Search",
     description: "Text search powered by DuckDuckGo.",
     url: ShareConstant.PAGE_URL_SEARCH,
   };
 
   public static readonly TRANSIT_PAGE_META: PageMeta = {
-    title: "🚃 Transit",
+    icon: "🚃",
+    title: "Transit",
     description: "Find train and bus routes between stations.",
     url: ShareConstant.PAGE_URL_TRANSIT,
   };
 
   public static readonly CONVERTER_PAGE_META: PageMeta = {
-    title: "🔁 Convert",
+    icon: "🔁",
+    title: "Convert",
     description: "Year and area unit converters for daily use.",
     url: ShareConstant.PAGE_URL_CONVERTER,
   };
 
   public static readonly SETTINGS_PAGE_META: PageMeta = {
-    title: "⚙️ Settings",
+    icon: "⚙️",
+    title: "Settings",
     description: "Cache, time format, and network usage settings.",
     url: ShareConstant.PAGE_URL_SETTINGS,
   };
 
   public static readonly BATHROOM_PAGE_META: PageMeta = {
-    title: "🚻 Bathrooms",
+    icon: "🚻",
+    title: "Bathrooms",
     description: "Find public bathrooms near your location.",
     url: ShareConstant.PAGE_URL_BATHROOM,
   };
 
   public static readonly BOOKMARK_PAGE_META: PageMeta = {
-    title: "🔖 Bookmarks",
+    icon: "🔖",
+    title: "Bookmarks",
     description: "Your saved searches.",
     url: ShareConstant.PAGE_URL_BOOKMARK,
   };
 
   public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
-    title: "🗓️ 年份換算",
+    icon: "🗓️",
+    title: "年份換算",
     description: "Convert between Western, ROC (Taiwan), and Japanese era years.",
     url: ShareConstant.PAGE_URL_YEAR_CONVERTER,
   };
 
   public static readonly AREA_CONVERTER_PAGE_META: PageMeta = {
-    title: "🍕 面積換算",
+    icon: "🍕",
+    title: "面積換算",
     description: "Convert between 坪 (tsubo), ㎡ (square meters), and 畳 (tatami).",
     url: ShareConstant.PAGE_URL_AREA_CONVERTER,
   };

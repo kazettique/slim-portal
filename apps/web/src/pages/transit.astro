@@ -3,8 +3,8 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.TRANSIT_PAGE_META.title} description={AppConstant.TRANSIT_PAGE_META.description}>
-  <h1>{AppConstant.TRANSIT_PAGE_META.title}</h1>
+<Base icon={AppConstant.TRANSIT_PAGE_META.icon} title={AppConstant.TRANSIT_PAGE_META.title} description={AppConstant.TRANSIT_PAGE_META.description}>
+  <h1>{AppConstant.TRANSIT_PAGE_META.icon} {AppConstant.TRANSIT_PAGE_META.title}</h1>
   <p>{AppConstant.TRANSIT_PAGE_META.description}</p>
 
   <form id="transit-form" class="transit-form">

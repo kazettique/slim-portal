@@ -4,10 +4,11 @@ import { AppConstant } from "../constant";
 ---
 
 <Base
+  icon={AppConstant.SETTINGS_PAGE_META.icon}
   title={AppConstant.SETTINGS_PAGE_META.title}
   description={AppConstant.SETTINGS_PAGE_META.description}
 >
-  <h1>{AppConstant.SETTINGS_PAGE_META.title}</h1>
+  <h1>{AppConstant.SETTINGS_PAGE_META.icon} {AppConstant.SETTINGS_PAGE_META.title}</h1>
 
   <!-- ── Appearance ── -->
   <section class="settings-section">

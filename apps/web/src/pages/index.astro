@@ -3,7 +3,7 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.HOME_PAGE_META.title} description={AppConstant.HOME_PAGE_META.description}>
+<Base icon={AppConstant.HOME_PAGE_META.icon} title={AppConstant.HOME_PAGE_META.title} description={AppConstant.HOME_PAGE_META.description}>
   <h1>{AppConstant.APP_TITLE}</h1>
   <p>{AppConstant.APP_DESCRIPTION}</p>
   <ul class="home-list">
@@ -12,7 +12,7 @@ import { AppConstant } from "../constant";
         (feature, index) =>
           index !== 0 && (
             <li class="home-list__item">
-              <a href={feature.url}>{feature.title}</a>
+              <a href={feature.url}>{feature.icon} {feature.title}</a>
               <span> — </span>
               <span>{feature.description}</span>
             </li>

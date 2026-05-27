@@ -3,8 +3,8 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.NEWS_PAGE_META.title} description={AppConstant.NEWS_PAGE_META.description}>
-  <h1>{AppConstant.NEWS_PAGE_META.title}</h1>
+<Base icon={AppConstant.NEWS_PAGE_META.icon} title={AppConstant.NEWS_PAGE_META.title} description={AppConstant.NEWS_PAGE_META.description}>
+  <h1>{AppConstant.NEWS_PAGE_META.icon} {AppConstant.NEWS_PAGE_META.title}</h1>
 
   <p class="status" id="news-status" aria-live="polite">Loading…</p>
 

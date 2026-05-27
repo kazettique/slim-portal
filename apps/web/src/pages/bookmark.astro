@@ -3,8 +3,8 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.BOOKMARK_PAGE_META.title} description={AppConstant.BOOKMARK_PAGE_META.description}>
-  <h1>{AppConstant.BOOKMARK_PAGE_META.title}</h1>
+<Base icon={AppConstant.BOOKMARK_PAGE_META.icon} title={AppConstant.BOOKMARK_PAGE_META.title} description={AppConstant.BOOKMARK_PAGE_META.description}>
+  <h1>{AppConstant.BOOKMARK_PAGE_META.icon} {AppConstant.BOOKMARK_PAGE_META.title}</h1>
   <p>{AppConstant.BOOKMARK_PAGE_META.description}</p>
 
   <div id="bookmarks-actions" class="bookmarks-actions" style="display:none">

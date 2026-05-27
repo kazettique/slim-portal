@@ -4,11 +4,12 @@ import { AppConstant } from "../constant";
 import { AppUtil } from "../util";
 
 interface Props {
+  icon?: string;
   title: string;
   description?: string;
 }
 
-const { title, description = AppConstant.HOME_PAGE_META.description } = Astro.props;
+const { icon, title, description = AppConstant.HOME_PAGE_META.description } = Astro.props;
 const canonicalPath = Astro.url.pathname;
 ---
 
@@ -29,7 +30,7 @@ const canonicalPath = Astro.url.pathname;
     <meta id="theme-color-meta" name="theme-color" content="#ffffff" />
     <meta name="description" content={description} />
     <link rel="manifest" href="/manifest.json" />
-    <title>{AppUtil.getPageTitle(title)}</title>
+    <title>{AppUtil.getPageTitle(icon ? `${icon} ${title}` : title)}</title>
   </head>
   <body>
     <header>
@@ -42,7 +43,7 @@ const canonicalPath = Astro.url.pathname;
                 : canonicalPath === navItem.url || canonicalPath.startsWith(navItem.url + "/");
             return (
               <a href={navItem.url} aria-current={isActive ? "page" : undefined}>
-                {navItem.title}
+                {navItem.icon} {navItem.title}
               </a>
             );
           })
