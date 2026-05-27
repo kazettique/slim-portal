@@ -38,8 +38,11 @@ body {
   color: var(--fg);
   line-height: 1.6;
   max-width: var(--max-w);
+  height: 100vh;
   margin: 0 auto;
   padding: 0 var(--space);
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -65,11 +68,9 @@ a:hover {
 header {
   border-bottom: 1px solid var(--border);
   padding-block: calc(var(--space) * 0.5);
-  margin-block-end: var(--space);
-  position: sticky;
-  top: 0;
   background: var(--bg);
   overflow-x: auto;
+  flex-shrink: 0;
 }
 
 nav {
@@ -82,6 +83,11 @@ nav a {
 }
 nav a[aria-current="page"] {
   color: var(--accent);
+}
+
+main {
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .news-list {
@@ -144,7 +150,6 @@ nav a[aria-current="page"] {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  /* margin-block-start: var(--space); */
   padding: 0.4em 0.8em;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -174,9 +179,9 @@ nav a[aria-current="page"] {
 footer {
   border-top: 1px solid var(--border);
   padding-block: calc(var(--space) * 0.5);
-  margin-block-start: calc(var(--space) * 2);
   font-size: 0.8rem;
   color: var(--muted);
+  flex-shrink: 0;
 }
 
 @media (max-width: 400px) {

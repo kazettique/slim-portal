@@ -85,12 +85,12 @@ export abstract class AppConstant {
 
   public static readonly NAV_LIST: PageMeta[] = [
     this.HOME_PAGE_META,
-    this.NEWS_PAGE_META,
+    this.TRANSIT_PAGE_META,
     this.PLACES_PAGE_META,
     this.SEARCH_PAGE_META,
-    this.TRANSIT_PAGE_META,
-    this.CONVERTER_PAGE_META,
+    this.NEWS_PAGE_META,
     this.BATHROOMS_PAGE_META,
+    this.CONVERTER_PAGE_META,
     this.SETTINGS_PAGE_META,
   ];
 
