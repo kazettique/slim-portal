@@ -3,37 +3,37 @@
   class ShareConstant {
     static PAGE_URL_HOME = "/";
     static PAGE_URL_NEWS = "/news";
-    static PAGE_URL_PLACES = "/places";
-    static PAGE_URL_PLACES_NEARBY = "/places/nearby";
-    static PAGE_URL_PLACES_DETAILS = "/places/details";
+    static PAGE_URL_PLACE = "/place";
+    static PAGE_URL_PLACE_NEARBY = "/place/nearby";
+    static PAGE_URL_PLACE_DETAIL = "/place/detail";
     static PAGE_URL_SEARCH = "/search";
     static PAGE_URL_TRANSIT = "/transit";
     static PAGE_URL_CONVERTER = "/converter";
     static PAGE_URL_YEAR_CONVERTER = "/converter/year-converter";
     static PAGE_URL_AREA_CONVERTER = "/converter/area-converter";
     static PAGE_URL_SETTINGS = "/settings";
-    static PAGE_URL_BATHROOMS = "/bathrooms";
-    static PAGE_URL_BOOKMARKS = "/bookmarks";
+    static PAGE_URL_BATHROOM = "/bathroom";
+    static PAGE_URL_BOOKMARK = "/bookmark";
     static PAGE_URLS = [
       this.PAGE_URL_HOME,
       this.PAGE_URL_NEWS,
-      this.PAGE_URL_PLACES,
+      this.PAGE_URL_PLACE,
       this.PAGE_URL_SEARCH,
       this.PAGE_URL_TRANSIT,
       this.PAGE_URL_CONVERTER,
       this.PAGE_URL_YEAR_CONVERTER,
       this.PAGE_URL_AREA_CONVERTER,
       this.PAGE_URL_SETTINGS,
-      this.PAGE_URL_BATHROOMS,
-      this.PAGE_URL_BOOKMARKS
+      this.PAGE_URL_BATHROOM,
+      this.PAGE_URL_BOOKMARK
     ];
   }
 
-  // src/sw-constant.ts
+  // src/constant.sw.ts
   class SwConstant {
-    static SHELL_CACHE = "shell-v1";
+    static SHELL_CACHE = "shell-v2";
     static API_CACHE = "api-v1";
-    static SHELL_URLS = ShareConstant.PAGE_URLS;
+    static SHELL_URLS = ShareConstant.PAGE_URLS.map((url) => url === "/" ? url : `${url}/`);
   }
 
   // src/sw.ts
@@ -72,6 +72,12 @@
         return cached;
       try {
         const response = await fetch(request);
+        if (response.redirected) {
+          const clean = await fetch(response.url);
+          if (clean.ok)
+            cache.put(request, clean.clone());
+          return clean;
+        }
         if (response.ok) {
           cache.put(request, response.clone());
         }

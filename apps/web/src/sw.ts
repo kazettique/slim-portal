@@ -49,6 +49,13 @@ abstract class SwHandler {
 
     try {
       const response = await fetch(request);
+      // Safari rejects any response with redirected:true served by a SW.
+      // Re-fetch from the final URL to get a clean non-redirected response.
+      if (response.redirected) {
+        const clean = await fetch(response.url);
+        if (clean.ok) cache.put(request, clean.clone());
+        return clean;
+      }
       if (response.ok) {
         cache.put(request, response.clone());
       }
