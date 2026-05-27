@@ -7,6 +7,7 @@ export interface NewsItem {
 }
 
 export interface PlaceItem {
+  id: string | null;
   name: string;
   address: string;
   rating: number | null;
@@ -15,6 +16,21 @@ export interface PlaceItem {
   mapsUrl: string;
   lat: number | null;
   lng: number | null;
+}
+
+export interface PlacePrediction {
+  placeId?: string;
+  text: string;
+  mainText: string;
+  secondaryText: string;
+  distanceMeters?: number;
+}
+
+export interface PlaceDetails extends PlaceItem {
+  phoneNumber: string | null;
+  website: string | null;
+  openingHours: string[] | null;
+  businessStatus: string | null;
 }
 
 export interface SearchItem {

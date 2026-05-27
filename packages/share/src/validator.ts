@@ -11,6 +11,7 @@ export abstract class ShareValidator {
   });
 
   public static PLACE_ITEM_VALIDATOR: z.ZodType<PlaceItem> = z.object({
+    id: z.string().nullable(),
     name: z.string(),
     address: z.string(),
     rating: z.number().nullable(),

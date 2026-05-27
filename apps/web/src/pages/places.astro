@@ -9,19 +9,24 @@ import { AppConstant } from "../constant";
 
   <form id="places-form" class="places-form">
     <div class="places-form__row">
-      <input
-        id="query-input"
-        type="search"
-        name="q"
-        placeholder="e.g. ramen, coffee, pharmacy"
-        autocomplete="off"
-        required
-        class="places-form__input"
-      />
-      <button type="submit" class="places-form__submit">Search</button>
+      <div class="places-form__autocomplete-wrap">
+        <input
+          id="query-input"
+          type="search"
+          name="q"
+          placeholder="e.g. ramen, coffee, pharmacy"
+          autocomplete="off"
+          required
+          class="places-form__input"
+        />
+        <ul id="places-suggestions" class="places-autocomplete" style="display:none"></ul>
+      </div>
+      <button type="submit" id="search-btn" class="places-form__submit">Search</button>
     </div>
     <button type="button" id="locate-btn" class="locate-btn">Use my location</button>
   </form>
+
+  <a href="/places/nearby" class="places-nearby-link">Find places nearby →</a>
 
   <p id="places-status" class="status" aria-live="polite"></p>
 
@@ -50,11 +55,13 @@ import { AppConstant } from "../constant";
 <script>
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
-  import type { PlaceItem } from "@slim-portal/share";
+  import type { PlaceItem, PlacePrediction } from "@slim-portal/share";
 
   const form = document.getElementById("places-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
+  const suggestions = document.getElementById("places-suggestions") as HTMLUListElement | null;
   const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
+  const searchBtn = document.getElementById("search-btn") as HTMLButtonElement | null;
   const list = document.getElementById("places-list") as HTMLUListElement | null;
   const status = document.getElementById("places-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("places-toolbar") as HTMLDivElement | null;
@@ -64,9 +71,17 @@ import { AppConstant } from "../constant";
   let userLat: number | null = null;
   let userLng: number | null = null;
   let lastParams: URLSearchParams | null = null;
+  let autocompleteTimer: ReturnType<typeof setTimeout> | null = null;
 
   function setStatus(msg: string): void {
     if (status) status.textContent = msg;
+  }
+
+  function clearSuggestions(): void {
+    if (suggestions) {
+      suggestions.innerHTML = "";
+      suggestions.style.display = "none";
+    }
   }
 
   function renderPlaces(items: PlaceItem[]): void {
@@ -78,20 +93,82 @@ import { AppConstant } from "../constant";
     }
     setStatus("");
     list.innerHTML = items
-      .map(
-        (p) => `
-      <li class="place-item">
-        <div class="place-item__name">
-          <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
-          ${p.lat !== null && p.lng !== null ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>` : ""}
-          ${AppUtil.formatDistance(p.distanceMeters)}
-        </div>
-        <div class="place-item__address">${p.address}</div>
-        <div class="place-item__meta">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
-      </li>
-    `,
-      )
+      .map((p) => {
+        const detailsLink = p.id
+          ? `<a href="/places/details?id=${encodeURIComponent(p.id)}">Details</a>`
+          : "";
+        const appleMapsLink =
+          p.lat !== null && p.lng !== null
+            ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`
+            : "";
+        return `
+          <li class="place-item">
+            <div class="place-item__name">
+              <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+              <span class="place-item__distance">${AppUtil.formatDistance(p.distanceMeters)}</span>
+            </div>
+            <div class="place-item__address">${p.address}</div>
+            <div class="place-item__meta">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
+            ${detailsLink || appleMapsLink ? `<div class="place-item__actions">${detailsLink}${appleMapsLink}</div>` : ""}
+          </li>
+        `;
+      })
       .join("");
+  }
+
+  async function fetchAutocomplete(word: string): Promise<void> {
+    if (!suggestions) return;
+    if (word.length < 1) {
+      clearSuggestions();
+      return;
+    }
+    try {
+      const params = new URLSearchParams({ input: word });
+      if (userLat !== null && userLng !== null) {
+        params.set("lat", String(userLat));
+        params.set("lng", String(userLng));
+      }
+      const res = await fetch(`${AppConstant.API_BASE_URL}/places/autocomplete?${params}`, {
+        signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
+      });
+      if (!res.ok) return;
+      const items = (await res.json()) as PlacePrediction[];
+      if (items.length === 0) {
+        clearSuggestions();
+        return;
+      }
+      suggestions.innerHTML = items
+        .slice(0, 6)
+        .map((item) => {
+          const sub = item.secondaryText || "";
+          return `
+            <li
+              class="places-autocomplete__item"
+              data-text="${item.mainText || item.text}"
+              tabindex="0"
+            >
+              ${item.mainText || item.text}
+              ${sub ? `<div class="places-autocomplete__sub">${sub}</div>` : ""}
+            </li>
+          `;
+        })
+        .join("");
+      suggestions.style.display = "block";
+
+      suggestions.querySelectorAll<HTMLLIElement>(".places-autocomplete__item").forEach((li) => {
+        const selectItem = (): void => {
+          const text = li.dataset["text"] ?? "";
+          if (input) input.value = text;
+          clearSuggestions();
+        };
+        li.addEventListener("click", selectItem);
+        li.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") selectItem();
+        });
+      });
+    } catch {
+      // silently ignore autocomplete errors
+    }
   }
 
   async function doSearch(params: URLSearchParams, bypassCache: boolean): Promise<void> {
@@ -100,7 +177,7 @@ import { AppConstant } from "../constant";
     if (cacheStatus) cacheStatus.textContent = "";
 
     try {
-      const res = await fetch(`${AppConstant.API_BASE_URL}/places?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/places/search?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
@@ -119,6 +196,23 @@ import { AppConstant } from "../constant";
     }
   }
 
+  // Autocomplete wiring
+  if (input && suggestions) {
+    input.addEventListener("input", () => {
+      if (autocompleteTimer) clearTimeout(autocompleteTimer);
+      autocompleteTimer = setTimeout(() => {
+        fetchAutocomplete(input.value.trim());
+      }, 300);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!input.contains(e.target as Node) && !suggestions.contains(e.target as Node)) {
+        clearSuggestions();
+      }
+    });
+  }
+
+  // Geolocation
   if (locateBtn) {
     if (!navigator.geolocation) {
       locateBtn.style.display = "none";
@@ -143,22 +237,26 @@ import { AppConstant } from "../constant";
     }
   }
 
+  // Form submit
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      clearSuggestions();
       const q = input?.value.trim() ?? "";
       if (!q) return;
 
+      if (searchBtn) searchBtn.disabled = true;
       const params = new URLSearchParams({ q });
       if (userLat !== null && userLng !== null) {
         params.set("lat", String(userLat));
         params.set("lng", String(userLng));
       }
-
       await doSearch(params, false);
+      if (searchBtn) searchBtn.disabled = false;
     });
   }
 
+  // Refresh
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       if (!lastParams) return;

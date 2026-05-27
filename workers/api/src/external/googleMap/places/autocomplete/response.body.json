@@ -1,0 +1,233 @@
+{
+  "suggestions": [
+    {
+      "queryPrediction": {
+        "text": {
+          "text": "restaurants",
+          "matches": [
+            {
+              "endOffset": 10
+            }
+          ]
+        },
+        "structuredFormat": {
+          "mainText": {
+            "text": "restaurants",
+            "matches": [
+              {
+                "endOffset": 10
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "placePrediction": {
+        "place": "places/ChIJcX89deuLGGARJ5LJ94jSZ6A",
+        "placeId": "ChIJcX89deuLGGARJ5LJ94jSZ6A",
+        "text": {
+          "text": "Japan, Tokyo, Shibuya, Dogenzaka, 1 Chome−12−1 BAKERY RESTAURANT C 渋谷マークシティ店",
+          "matches": [
+            {
+              "startOffset": 42,
+              "endOffset": 46
+            },
+            {
+              "startOffset": 54,
+              "endOffset": 64
+            }
+          ]
+        },
+        "structuredFormat": {
+          "mainText": {
+            "text": "BAKERY RESTAURANT C 渋谷マークシティ店",
+            "matches": [
+              {
+                "startOffset": 7,
+                "endOffset": 17
+              }
+            ]
+          },
+          "secondaryText": {
+            "text": "Japan, Tokyo, Shibuya, Dogenzaka, 1 Chome−12−1",
+            "matches": [
+              {
+                "startOffset": 42,
+                "endOffset": 46
+              }
+            ]
+          }
+        },
+        "types": [
+          "bakery",
+          "cafeteria",
+          "establishment",
+          "snack_bar",
+          "cafe",
+          "point_of_interest",
+          "dessert_restaurant",
+          "restaurant",
+          "coffee_shop",
+          "food",
+          "store",
+          "meal_takeaway",
+          "food_store"
+        ],
+        "distanceMeters": 14265386
+      }
+    },
+    {
+      "placePrediction": {
+        "place": "places/ChIJmRERReSLGGARGHhkgoZO5EE",
+        "placeId": "ChIJmRERReSLGGARGHhkgoZO5EE",
+        "text": {
+          "text": "Japan, Tokyo, Chuo City, Ginza, 2 Chome−4−12 RESTAURANT DAZZLE",
+          "matches": [
+            {
+              "startOffset": 40,
+              "endOffset": 44
+            },
+            {
+              "startOffset": 45,
+              "endOffset": 55
+            }
+          ]
+        },
+        "structuredFormat": {
+          "mainText": {
+            "text": "RESTAURANT DAZZLE",
+            "matches": [
+              {
+                "endOffset": 10
+              }
+            ]
+          },
+          "secondaryText": {
+            "text": "Japan, Tokyo, Chuo City, Ginza, 2 Chome−4−12",
+            "matches": [
+              {
+                "startOffset": 40,
+                "endOffset": 44
+              }
+            ]
+          }
+        },
+        "types": [
+          "italian_restaurant",
+          "wedding_venue",
+          "food",
+          "restaurant",
+          "event_venue",
+          "service",
+          "establishment",
+          "point_of_interest",
+          "bar"
+        ],
+        "distanceMeters": 14269413
+      }
+    },
+    {
+      "placePrediction": {
+        "place": "places/ChIJs1qA7BKLGGARjxN0ECfpfj0",
+        "placeId": "ChIJs1qA7BKLGGARjxN0ECfpfj0",
+        "text": {
+          "text": "Japan, Tokyo, Shibuya, Ebisu, 2 Chome−22−10 Restaurant ALADDIN (レストラン アラジン)",
+          "matches": [
+            {
+              "startOffset": 38,
+              "endOffset": 43
+            },
+            {
+              "startOffset": 44,
+              "endOffset": 54
+            }
+          ]
+        },
+        "structuredFormat": {
+          "mainText": {
+            "text": "Restaurant ALADDIN (レストラン アラジン)",
+            "matches": [
+              {
+                "endOffset": 10
+              }
+            ]
+          },
+          "secondaryText": {
+            "text": "Japan, Tokyo, Shibuya, Ebisu, 2 Chome−22−10",
+            "matches": [
+              {
+                "startOffset": 38,
+                "endOffset": 43
+              }
+            ]
+          }
+        },
+        "types": [
+          "restaurant",
+          "food",
+          "establishment",
+          "point_of_interest",
+          "french_restaurant"
+        ],
+        "distanceMeters": 14267647
+      }
+    },
+    {
+      "placePrediction": {
+        "place": "places/ChIJ6XMftUGLGGARnPedcszijJs",
+        "placeId": "ChIJ6XMftUGLGGARnPedcszijJs",
+        "text": {
+          "text": "Japan, Tokyo, Shibuya, Ebisu, 1 Chome−8−12 restaurant & Bar lounge MEDUSA",
+          "matches": [
+            {
+              "startOffset": 38,
+              "endOffset": 42
+            },
+            {
+              "startOffset": 43,
+              "endOffset": 53
+            }
+          ]
+        },
+        "structuredFormat": {
+          "mainText": {
+            "text": "restaurant & Bar lounge MEDUSA",
+            "matches": [
+              {
+                "endOffset": 10
+              }
+            ]
+          },
+          "secondaryText": {
+            "text": "Japan, Tokyo, Shibuya, Ebisu, 1 Chome−8−12",
+            "matches": [
+              {
+                "startOffset": 38,
+                "endOffset": 42
+              }
+            ]
+          }
+        },
+        "types": [
+          "point_of_interest",
+          "seafood_restaurant",
+          "japanese_restaurant",
+          "food",
+          "event_venue",
+          "steak_house",
+          "bar_and_grill",
+          "establishment",
+          "japanese_izakaya_restaurant",
+          "restaurant",
+          "banquet_hall",
+          "oyster_bar_restaurant",
+          "bar",
+          "noodle_shop",
+          "italian_restaurant"
+        ],
+        "distanceMeters": 14266916
+      }
+    }
+  ]
+}

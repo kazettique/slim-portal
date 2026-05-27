@@ -1,0 +1,957 @@
+{
+  "places": [
+    {
+      "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI",
+      "id": "ChIJF-Xb7dqMGGARrzNdUa_u0DI",
+      "types": [
+        "japanese_restaurant",
+        "restaurant",
+        "point_of_interest",
+        "food",
+        "establishment"
+      ],
+      "nationalPhoneNumber": "03-3354-0611",
+      "internationalPhoneNumber": "+81 3-3354-0611",
+      "formattedAddress": "3-chōme-35-2 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan",
+      "addressComponents": [
+        {
+          "longText": "2",
+          "shortText": "2",
+          "types": [
+            "premise"
+          ],
+          "languageCode": "en-US"
+        },
+        {
+          "longText": "35",
+          "shortText": "35",
+          "types": [
+            "sublocality_level_4",
+            "sublocality",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "3-chōme",
+          "shortText": "3-chōme",
+          "types": [
+            "sublocality_level_3",
+            "sublocality",
+            "political"
+          ],
+          "languageCode": "ja-Latn"
+        },
+        {
+          "longText": "Shinjuku",
+          "shortText": "Shinjuku",
+          "types": [
+            "sublocality_level_2",
+            "sublocality",
+            "political"
+          ],
+          "languageCode": "ja-Latn"
+        },
+        {
+          "longText": "Shinjuku City",
+          "shortText": "Shinjuku City",
+          "types": [
+            "locality",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Tokyo",
+          "shortText": "Tokyo",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Japan",
+          "shortText": "JP",
+          "types": [
+            "country",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "160-0022",
+          "shortText": "160-0022",
+          "types": [
+            "postal_code"
+          ],
+          "languageCode": "en-US"
+        }
+      ],
+      "plusCode": {
+        "globalCode": "8Q7XMPQ3+W5",
+        "compoundCode": "MPQ3+W5 Shinjuku City, Tokyo, Japan"
+      },
+      "location": {
+        "latitude": 35.689828299999995,
+        "longitude": 139.7029648
+      },
+      "viewport": {
+        "low": {
+          "latitude": 35.6884531197085,
+          "longitude": 139.70162266970851
+        },
+        "high": {
+          "latitude": 35.6911510802915,
+          "longitude": 139.70432063029151
+        }
+      },
+      "rating": 4.4,
+      "googleMapsUri": "https://maps.google.com/?cid=3661688933803963311&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+      "websiteUri": "https://m.facebook.com/pages/%E3%81%9F%E3%81%A4%E3%82%84%E6%96%B0%E5%AE%BF%E5%BA%97/1474372816125603",
+      "regularOpeningHours": {
+        "openNow": true,
+        "periods": [
+          {
+            "open": {
+              "day": 0,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 0,
+              "hour": 20,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 1,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 1,
+              "hour": 21,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 2,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 2,
+              "hour": 21,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 3,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 3,
+              "hour": 21,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 4,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 4,
+              "hour": 21,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 5,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 5,
+              "hour": 21,
+              "minute": 0
+            }
+          },
+          {
+            "open": {
+              "day": 6,
+              "hour": 10,
+              "minute": 0
+            },
+            "close": {
+              "day": 6,
+              "hour": 20,
+              "minute": 0
+            }
+          }
+        ],
+        "weekdayDescriptions": [
+          "Monday: 10:00 AM – 9:00 PM",
+          "Tuesday: 10:00 AM – 9:00 PM",
+          "Wednesday: 10:00 AM – 9:00 PM",
+          "Thursday: 10:00 AM – 9:00 PM",
+          "Friday: 10:00 AM – 9:00 PM",
+          "Saturday: 10:00 AM – 8:00 PM",
+          "Sunday: 10:00 AM – 8:00 PM"
+        ],
+        "nextCloseTime": "2026-05-27T12:00:00Z"
+      },
+      "utcOffsetMinutes": 540,
+      "adrFormatAddress": "<span class=\"street-address\">3-chōme-35-2 Shinjuku, Shinjuku City</span>, <span class=\"region\">Tokyo</span> <span class=\"postal-code\">160-0022</span>, <span class=\"country-name\">Japan</span>",
+      "businessStatus": "OPERATIONAL",
+      "priceLevel": "PRICE_LEVEL_INEXPENSIVE",
+      "userRatingCount": 1558,
+      "iconMaskBaseUri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "iconBackgroundColor": "#FF9E67",
+      "displayName": {
+        "text": "Tatsuya Shinjuku",
+        "languageCode": "en"
+      },
+      "primaryTypeDisplayName": {
+        "text": "Japanese Restaurant",
+        "languageCode": "en-US"
+      },
+      "takeout": true,
+      "delivery": false,
+      "dineIn": true,
+      "reservable": false,
+      "servesBreakfast": true,
+      "servesLunch": true,
+      "servesDinner": true,
+      "servesBeer": false,
+      "servesWine": false,
+      "servesBrunch": true,
+      "servesVegetarianFood": false,
+      "currentOpeningHours": {
+        "openNow": true,
+        "periods": [
+          {
+            "open": {
+              "day": 0,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 31
+              }
+            },
+            "close": {
+              "day": 0,
+              "hour": 20,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 31
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 1,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 6,
+                "day": 1
+              }
+            },
+            "close": {
+              "day": 1,
+              "hour": 21,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 6,
+                "day": 1
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 2,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 6,
+                "day": 2
+              }
+            },
+            "close": {
+              "day": 2,
+              "hour": 21,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 6,
+                "day": 2
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 3,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 27
+              }
+            },
+            "close": {
+              "day": 3,
+              "hour": 21,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 27
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 4,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 28
+              }
+            },
+            "close": {
+              "day": 4,
+              "hour": 21,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 28
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 5,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 29
+              }
+            },
+            "close": {
+              "day": 5,
+              "hour": 21,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 29
+              }
+            }
+          },
+          {
+            "open": {
+              "day": 6,
+              "hour": 10,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 30
+              }
+            },
+            "close": {
+              "day": 6,
+              "hour": 20,
+              "minute": 0,
+              "date": {
+                "year": 2026,
+                "month": 5,
+                "day": 30
+              }
+            }
+          }
+        ],
+        "weekdayDescriptions": [
+          "Monday: 10:00 AM – 9:00 PM",
+          "Tuesday: 10:00 AM – 9:00 PM",
+          "Wednesday: 10:00 AM – 9:00 PM",
+          "Thursday: 10:00 AM – 9:00 PM",
+          "Friday: 10:00 AM – 9:00 PM",
+          "Saturday: 10:00 AM – 8:00 PM",
+          "Sunday: 10:00 AM – 8:00 PM"
+        ],
+        "nextCloseTime": "2026-05-27T12:00:00Z"
+      },
+      "primaryType": "japanese_restaurant",
+      "shortFormattedAddress": "3-chōme-35-2 Shinjuku, Shinjuku City",
+      "reviews": [
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT2xCdWJ6SkVlVEZ3WkdWVk9WWkpZWEZMWDFFekxWRRAB",
+          "relativePublishTimeDescription": "3 months ago",
+          "rating": 4,
+          "text": {
+            "text": "A simple, no frills restaurant that serves affordable katsudon and gyudon! It's a cash only restaurant with limited seats but service is extremely fast and the seats open up fairly quickly, as the patrons typically waste no time finishing their bowl. I ordered the gyudon and asked for a raw egg on top, which didn't cost extra (yay)!\n\nTheir English menu doesn't translate in it's entirety, so I recommend using Google translate if you're curious about the extra add-ons to your meal.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "A simple, no frills restaurant that serves affordable katsudon and gyudon! It's a cash only restaurant with limited seats but service is extremely fast and the seats open up fairly quickly, as the patrons typically waste no time finishing their bowl. I ordered the gyudon and asked for a raw egg on top, which didn't cost extra (yay)!\n\nTheir English menu doesn't translate in it's entirety, so I recommend using Google translate if you're curious about the extra add-ons to your meal.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Kelly Curiel",
+            "uri": "https://www.google.com/maps/contrib/100709764212075408961/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUhPJfcJ838QF6jk5_eZ12bflBanG6atUWEutrNc9kbkHQOX0E=s128-c0x00000000-cc-rp-mo-ba5"
+          },
+          "publishTime": "2026-02-06T01:19:41.260406120Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2xCdWJ6SkVlVEZ3WkdWVk9WWkpZWEZMWDFFekxWRRAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xCdWJ6SkVlVEZ3WkdWVk9WWkpZWEZMWDFFekxWRRAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT2xaV1dYVkhUMjFaVFUxaU4wTllla1pMWmpOa2VFRRAB",
+          "relativePublishTimeDescription": "5 months ago",
+          "rating": 5,
+          "text": {
+            "text": "Great beef and katsu bowl. Cheap but delicious and high quality. Cute older man serving. Very sweet. No English but good picture menu and easy to communicate.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Great beef and katsu bowl. Cheap but delicious and high quality. Cute older man serving. Very sweet. No English but good picture menu and easy to communicate.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "T.J. Eames",
+            "uri": "https://www.google.com/maps/contrib/104813013018640120494/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVwpd8G2KtmoEDhFYH6MoT_M_8JSimvvYyoBoU3Jo0NNnF8xxI__A=s128-c0x00000000-cc-rp-mo-ba3"
+          },
+          "publishTime": "2025-12-22T06:33:18.565645432Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2xaV1dYVkhUMjFaVFUxaU4wTllla1pMWmpOa2VFRRAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xaV1dYVkhUMjFaVFUxaU4wTllla1pMWmpOa2VFRRAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT21WbE5DMWhjRUZmWlVkNmVGZFNiSGw0Y0ZwemVHYxAB",
+          "relativePublishTimeDescription": "6 months ago",
+          "rating": 4,
+          "text": {
+            "text": "Delicious and filling katsudon for a very affordable price. Owner was very friendly and served us our food quickly. The pork was a little too thin against the thick breading though, but for its price (¥630), it is already satisfying 👍👍",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Delicious and filling katsudon for a very affordable price. Owner was very friendly and served us our food quickly. The pork was a little too thin against the thick breading though, but for its price (¥630), it is already satisfying 👍👍",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Jesette Kho",
+            "uri": "https://www.google.com/maps/contrib/116541346712225715369/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVoozwP4tzgbVrUa8ujyThszgz0V68SAduIkCaQEJ_5wkFulLsj=s128-c0x00000000-cc-rp-mo-ba2"
+          },
+          "publishTime": "2025-11-12T02:48:14.374241921Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT21WbE5DMWhjRUZmWlVkNmVGZFNiSGw0Y0ZwemVHYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21WbE5DMWhjRUZmWlVkNmVGZFNiSGw0Y0ZwemVHYxAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT25WSGQxcEJPVjl2VTE5Nk5WTTRVVlEyU1hGMFZHYxAB",
+          "relativePublishTimeDescription": "6 months ago",
+          "rating": 5,
+          "text": {
+            "text": "Great food at an incredible price served so fast. Came in just around opening time at 10:30 and it took 2 minutes to get my gyudon + katsu bowl.\n\nWill definitely be coming back",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Great food at an incredible price served so fast. Came in just around opening time at 10:30 and it took 2 minutes to get my gyudon + katsu bowl.\n\nWill definitely be coming back",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Kevin Gao",
+            "uri": "https://www.google.com/maps/contrib/105885529614720819827/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIzhAcPFRvctySWH8muap8tYdB7cGKuID7kJOguY9cGlK0xhg=s128-c0x00000000-cc-rp-mo"
+          },
+          "publishTime": "2025-11-24T02:06:50.393010863Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT25WSGQxcEJPVjl2VTE5Nk5WTTRVVlEyU1hGMFZHYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25WSGQxcEJPVjl2VTE5Nk5WTTRVVlEyU1hGMFZHYxAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT214cFZ6TnNjM0JVVldKa2RWOXVORlJyTVU1MGJGRRAB",
+          "relativePublishTimeDescription": "6 months ago",
+          "rating": 5,
+          "text": {
+            "text": "For the price: incredible!\nI ordered the chicken don and enjoyed it thoroughly. The service was energetic, friendly and fast. The price was crazy cheap and the food was still delicious.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "For the price: incredible!\nI ordered the chicken don and enjoyed it thoroughly. The service was energetic, friendly and fast. The price was crazy cheap and the food was still delicious.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Adam",
+            "uri": "https://www.google.com/maps/contrib/106804973678663460112/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW2SZeT-GgPg_1eQLHpX5eLj0ySq9jzqE5VLi4KU2aPOThrPRY=s128-c0x00000000-cc-rp-mo-ba2"
+          },
+          "publishTime": "2025-11-22T03:07:14.844587089Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT214cFZ6TnNjM0JVVldKa2RWOXVORlJyTVU1MGJGRRAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT214cFZ6TnNjM0JVVldKa2RWOXVORlJyTVU1MGJGRRAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        }
+      ],
+      "photos": [
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-ufxNTN5CY1Q2DOZGIrj-FuSGXG450FaMWhubsToGQ4k_1mI3yw1Smzngwv6XsTge3x0TrZ3Q3U9K1MtLd5m_r5f25ZUZb_KDpyeDZ2GZ9pWDU5076JuhdCvSiot1ySa-gmeFsU9Ykj1IZJNfgf3n-JQTfd9zXFyR8AgUGpzPmg5u5IyvZfJDrTi7NVToxvDfj0TlaJ9GwnCSw64fsCHmKuFfKqKjFwcGC3RbkbnKzrtcA0n-Zxcle23mGlUaHb8jpdCYWDQfde3BqyubjX1fwVQrW5FwBPWJj2gqKe2GL6itTm-yAUCiFIDpuOnIDbfGlGfWlAb55xvp0DuutbbVQ_ZOGDuQO52XijlNbtZOJyKc87CAGnQx2_0hie9FrNLYeN0Bf6_UEpUUPU2SC_YjcseG53jVhs9r4rLBQciC3V-AY",
+          "widthPx": 3024,
+          "heightPx": 4032,
+          "authorAttributions": [
+            {
+              "displayName": "竹部崇",
+              "uri": "https://maps.google.com/maps/contrib/100264204371785280359",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUsXbUsqnJ-QqNOknDi3UQx2iuR9wWuLTDN4XmaZLftxdRwALg=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDBxsWBmAE&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDBxsWBmAE!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-t868u7ZNWgcZTTDaMfELnkrLYACJjbLfrR3cufIRGwlTBJieJQaDoA_b416HAbxPlSdRZzc24zSVn1rtJaxTMTEBJIfXnMuPayULCWXWzGwejU7E5NlM8qyZInjJjsUvBf6NqOlbhtPzjBh5ZVWWroLiJJhWOE_W7ZE9RXYXVLVq8R8bpqAtqPBg13ibBs1YX0r_yX0hmOlSAalWqdWzLYTIWHQzUksW53mJppuX6TwsMxLYOe7n2xXi0pe5vUpHyGfFUUM7d13H1wAR4w2XLP3FFzBahDggH8ly_AvDYgnUPDsktDqKgiCgSCSzsTBVm5DhV_ptTnVIknhMqjZEBr3MoiDlPSm92z4aksNXTGzrM1qrKNgi4XCDrnkunqytwJugqNbxd9IYTV0ERlT5_xGycyVG1dF8bO6xfcOMTwRQ",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "BH_ BRDP",
+              "uri": "https://maps.google.com/maps/contrib/111664274635590886718",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVKf962ierP_iJvnawjynWSmpB2nAzGMCeVRt958WEV33WIo7V7=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICk9fSsNA&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICk9fSsNA!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tAL2XoYfNNGuX_qXEkm3fl9eZdSctfg5F7JAzaikpmwxQk_04qc4NVUkbttzUbYKlu9xudr9gaszLQ5-CsCZfKwVYzcdkWTf7E_x8gwDrZAiVynNRAIiFYe4L4-lQQXedMIvNS-Z6aZ4WZGkw352thWnt6XyWd3ZuAGEfQO0VWe2elyZCPfFWwibu77t53CVxse713Ph_Q2nuLyyjaYKDu1ppm4VnyvT-ABH_A3Ax-SCnYwFnOri1slIw0LgtL6d4t495yXQWp1l74NjByJrg5Q0LBM1LVhYBxDTwViB37UVWLkiVdvrGoJxFmBc9ZbkxVj3VpbUvoF84sV7qHWNV9gCRuOq5-yRBrUX9I2xD6PyrNXnTj867ER-vGYXmdIAY6DDOnpsMKZxiORfges5-MbX8wbHfrPnh3beJxiS74hn1aMeMiAOa-3SUhiw",
+          "widthPx": 4000,
+          "heightPx": 1848,
+          "authorAttributions": [
+            {
+              "displayName": "Ellen Choi",
+              "uri": "https://maps.google.com/maps/contrib/110578676628675093258",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX8GKHnFc_aMK5m18JC5jrE5nnAJl5vq58brVt_aYUYAWgdqTVBvg=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhB2qxXDJmwPB_n9t1HKg67a&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhB2qxXDJmwPB_n9t1HKg67a!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-vtKZjhySqLH0uUVgCDFDOLVCOtVJKW9Z2I4f_bM0w5JGCtxvZXg25XPWJiFswU4zVnILlgX2mXkbgG-Jo1y-YCw6e1FE2GGTOTbeLz7mtSbbgACwhl9Qcd_jgfU5kXeEmvMTAPOzoR8ekU56z36Aa_j9pMvwPrhNvJEreIeTJIzUIIuQabJ1kbLddoadyRByb2niAd395RnFpPJTXeeIia0uK-RhQBkY5Nwo0CYV5UrTR7inGhRokL87ZLW8U1tcD_4i7WnUL2TeSCvELBCNr6Jhq7IA4Y7cfc5C5awA4OZ_1yujmkKUnQAkn8N1JzzzLH-bmaLLt0Q2-V4uR58nJy6IJVLLmsWwxnlCQRPhN9DDFD44qZb-DpmwTR9TSOkRyL4HFEd0s5NUhlaYebHm0Qdw28N-S5CXfJ3SoM2z2iClI2TRGuAOtN0S_eNA",
+          "widthPx": 3024,
+          "heightPx": 4032,
+          "authorAttributions": [
+            {
+              "displayName": "照り",
+              "uri": "https://maps.google.com/maps/contrib/115443293949371713270",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUFO6fmTD39-5Qsyva-lK8hZh97KSOUW5iTqgpl2r5fil9AuyY=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhD9naVIPx54ExMfXTtMCyxp&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhD9naVIPx54ExMfXTtMCyxp!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tYalAW1LLgCBDVdBhgq6lDbpUT4MtFiD9F3q9Bqz-Ph6yHkV_D1qxelhrdKGAFccWvkQuLOmIQpGet8Km8iSHqujeygBGXbOTUFi9a6qX3zPPRizAWHAON3PCYhBN8wFeaq5UCxg3TLJwKObcx9-YPCWuDF59ZekBetcSW6GhQ234u11EL6Z_2IwM611_nWN34aFXMwc9unMs13_Mi7Iuq2ePkmKnxwyWotr7EIyTPkkQgHGxH2TlV6tsrjWc3q17MqYXysBqgQn9AsnAlYOklemufPYjdSzgDLsvurBbrDIJCSPgcFg8_ZtAIky1mcwMFcFBsA9bphV-no_FpC3VtHpjAiyr0JWFzJopLPTVJI63PKFSnrt65JPUZntm-b20EZo4seDdkZhTDxLufO_oGLIfe-kTVCLecG5HcDi4f5-KIAwp-vQ-Y8cxLqtVq",
+          "widthPx": 3024,
+          "heightPx": 4032,
+          "authorAttributions": [
+            {
+              "displayName": "水谷憲勝",
+              "uri": "https://maps.google.com/maps/contrib/103472697116544275213",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIC13CQkrB5MLuG7YlCFvKkwdqW6J9mIdz3TeIKgN_NZE2Ggg=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDpRXFzg7HScvfZw6O0CWHT&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDpRXFzg7HScvfZw6O0CWHT!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-sy633DWy5oAzq4eFe__q_c_HVrzz5UqS00ySZpC6GdkqZBHesGIM_wzKI8Oo2-i4dA3ot5YNFtK2-oDwELnnCklAnjJThDAM42XOWs6x_9mrmmOCb5w82nE2HfhTC6qNqD06u6ZKBOZ94Qn_wzhsrS1wIInqqIDzRQjiJNQlHiUac5LsINgc-yCdjbsVZwk30N8gSbU_WFV2sXHRRWvbozfnEo_u9_43X4dhVJixeOwdPPArwoTvIoM4tDRjAZjMdFCSsAQ4wAPdKzgH8XZIDWp1gBGGjjLPpdo843YIESgE-Qt1tlq6OnOemAJZesNERSNZDwXPpUojRssYRQxa08q_uPBYq5AYf7NlyM5XAYJwuL9QZa0KV3xojVrWK37dAzRWP5nuQDz5fN_N_WR9UXgiUBYO_KZITtF94_J2IDGYWpkt-jNQqdwCs0DQ",
+          "widthPx": 4000,
+          "heightPx": 3000,
+          "authorAttributions": [
+            {
+              "displayName": "フットボーラー",
+              "uri": "https://maps.google.com/maps/contrib/105476252990252639386",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLOJLEXV2niTO5qpJdlpjTRMGa9NyVXQUSnAkOiXk5uaJ0khg=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhAnxY8DMncgKwzGEe5b6WAk&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhAnxY8DMncgKwzGEe5b6WAk!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tXRL26DXrL8vZmps2LMcKqMqhv5S6THnkAtlbeQO_Nz4c4FgRpL5xkx2Kp1I9_8tlTEBhTVFKVGnf3giVca-20H44R0nCWvmYkX7lfXXDuD5zGffRTpfv_iyUTrBUBXRyJWQpE_iDTDqS-JbfNLoNBbCXd24NqiB979a_JAeNf5xWEwl1Pde1Y2M_8GLudcPgirxTThSt-e_wHHr78OQp7Wabf1C7DqxLH4-T-OEoU15zxI4ccIi2qJWWk2vvkthQY7yZG35uZGa7jPhpig6RJky5QAcldRI7IJ2tNeLC_LH-S466AadCf4gYjf-jIdATURtp1AW9YqGGud6Ssi4Rcz-rBBn2_DVOCjgKUvBoQJYRSnziGEMoCoAf4HpIL_O2UXZ0vqI8QGn8L1Uaar-E7vIyWitPrZ_xAT3Wf_tGVJVXRFUV2AjWvsWSZAvCF",
+          "widthPx": 3024,
+          "heightPx": 4032,
+          "authorAttributions": [
+            {
+              "displayName": "コウコウ",
+              "uri": "https://maps.google.com/maps/contrib/104195813074291401775",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWLnvnXw-Xa5dJ-uvo2dx5Ak4gOSs6k8UO2oU9BItPzxeiyB8Q=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhCf3IiuwVaEUeoOdF_3YW9A&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhCf3IiuwVaEUeoOdF_3YW9A!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-usLkCauzCBJiKbl_n0eEm82cHuk3GDju3fQernaiCdkLQ7FMvzAA8BOel-YPXeS8m87DPvhPtb-WP1jUtU-lCnYsC0jkYXAAihNkBhm3Lxx3e4tKTFIL32yNyrz9dG9e7sOn6GAiQpbbGiVzHl4CZNxRFG1RgB8y_Vkb0pskq-ISHeJyeQpmTkS-ttZxQZwVMcUEda7fBKEK8qclJYc1C_CL4XLl10PU0G1i6AD8wFxtaSZn7Rr6jv6rfbQs9GqVvB3hl7EW5d50J096VWbNst4iGTWVEDPONMkalWjHdOrl87M7zzbIB0BM-InU7BqrYUkdoVulIu2hrFpZy470vwCvP8tbRaqPNB5cbJ8x7HcwpPlOhX9q8qu15AWauhNXX5CWkpkwGhWBuNscNxBCSGRNvbRSkpBJpRki8vh0pwuXDOtynG4Nijs5Jg5E3F",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Mitsuto T",
+              "uri": "https://maps.google.com/maps/contrib/116931031815556381223",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW40o3ZmjnVGxcVw5jxrp20WMzSaWe1hBUWt6R59Smepe7Vwvs=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhB6YSsCNveddu4XhmM2d-xI&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhB6YSsCNveddu4XhmM2d-xI!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tmcaMTcQMEofpOv9qNwO9LufunPAffXSj_vdh3KhFZS2W2a1iJqO8-beRQpcRCcwBRsnju_uRNhqf2JcMJ_S4M0VIB2jucBxeTZkKhnNCSK2-wEd1ud3EI6dJdMK58mMP_zNo3pDon9DMe6llhdC2eVN009UFM3SAao-RafejNTIqgMXHPgP7hJ7eX4q0HoL-cGzhL7rtKFMUYc5kFXvTT3hO_7PVyB5eCNZJwFw1SaGCAzSIxSD-6nkytDETYqeVW8yiTDsoxHrwvfssPyjWBYWXe09Xg1U8EvQ19oS-C1_Asxgebnjr62e3naRBu__ESuxLAXJxD4WI5gySpH9-oJDatqcGi8S15VNRCxBdSXMvw0EoJIIqhS8TW5TXsPN_FdGnKUZowJ93HlqOkuA6VsgxO2oNnTo8Pccif_S16XssQSWH2lmkafEWbjkM7",
+          "widthPx": 4800,
+          "heightPx": 3600,
+          "authorAttributions": [
+            {
+              "displayName": "Kazu Okubo (kazudry)",
+              "uri": "https://maps.google.com/maps/contrib/112814656145188894420",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdacZE1UCetnyj_Qd715Yy_92uUmQVj-SNEGlTe_9EjsYB15l_Gg=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhCp9rew22IdcKt7YR16WUzj&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhCp9rew22IdcKt7YR16WUzj!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-sm6U5Swxw4wMCtwmE2fbNvIezIaonIBYhZflbJUg5qI0CY-ymHuDX3hwpMLIrKs0CHkY4mvp4ohefWqV_aC0UQ5OoP9ruWkNOFeTXXoR9VY4zwjyA20l9_axPE3xdawa25qA3sGvmbp4i-4Rd6_CytqXjVhzWJ_nvAhu_dPpWybtK8P9Y4pG5eQTBmt0uCNaBribmSKbwdE8RH2xGVXdnXkv--qYMaun6OLsF8-jm0c467_K0JUBXJG54_swTFrXM9mU5JPx4QwJnRA4nrSyhAS0af2cs0S6NHnIn1CuBsesg09kta_HzCKpNdV2hVoGpYa4FfO-rHqqmLVUCisg2hjRgLUE6x7uOiltbtTsnbAj5oyFE6AUfckEtjyf0EE195Gu4j7GNQp2fMTi8zCoHk38Xl4YpwAIghOD5DjgIbekcb40cEVCvL8w0JhMgz",
+          "widthPx": 1200,
+          "heightPx": 900,
+          "authorAttributions": [
+            {
+              "displayName": "あき’ターボ",
+              "uri": "https://maps.google.com/maps/contrib/107213519530742811106",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX8TpuKKXKuQ6cUwG1P_oavIgZs4I0aRAY4PHq1VqNn-qZdOCs=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhCKpwCuw5D9ezgdrFXQmF2H&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhCKpwCuw5D9ezgdrFXQmF2H!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        }
+      ],
+      "outdoorSeating": false,
+      "liveMusic": false,
+      "menuForChildren": false,
+      "servesCocktails": false,
+      "servesDessert": false,
+      "servesCoffee": false,
+      "goodForChildren": false,
+      "allowsDogs": false,
+      "restroom": true,
+      "goodForGroups": false,
+      "goodForWatchingSports": false,
+      "paymentOptions": {
+        "acceptsCreditCards": false,
+        "acceptsCashOnly": true
+      },
+      "accessibilityOptions": {
+        "wheelchairAccessibleParking": false,
+        "wheelchairAccessibleEntrance": false,
+        "wheelchairAccessibleRestroom": false,
+        "wheelchairAccessibleSeating": false
+      },
+      "addressDescriptor": {
+        "landmarks": [
+          {
+            "name": "places/ChIJH7qx1tCMGGAR1f2s7PGhMhw",
+            "placeId": "ChIJH7qx1tCMGGAR1f2s7PGhMhw",
+            "displayName": {
+              "text": "Shinjuku Station",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest",
+              "subway_station",
+              "train_station",
+              "transit_station"
+            ],
+            "spatialRelationship": "DOWN_THE_ROAD",
+            "straightLineDistanceMeters": 217.51102,
+            "travelDistanceMeters": 91.833015
+          },
+          {
+            "name": "places/ChIJ7TIU-9qMGGARCK3vtkqNzUI",
+            "placeId": "ChIJ7TIU-9qMGGARCK3vtkqNzUI",
+            "displayName": {
+              "text": "IDC Otsuka Shinjuku Showroom",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "furniture_store",
+              "home_goods_store",
+              "point_of_interest",
+              "store"
+            ],
+            "spatialRelationship": "AROUND_THE_CORNER",
+            "straightLineDistanceMeters": 64.26079,
+            "travelDistanceMeters": 102.88613
+          },
+          {
+            "name": "places/ChIJ9ztrpduMGGARte1BM8ccdIs",
+            "placeId": "ChIJ9ztrpduMGGARte1BM8ccdIs",
+            "displayName": {
+              "text": "Isetan Shinjuku",
+              "languageCode": "en"
+            },
+            "types": [
+              "department_store",
+              "establishment",
+              "point_of_interest",
+              "store"
+            ],
+            "straightLineDistanceMeters": 246.13667,
+            "travelDistanceMeters": 267.89273
+          },
+          {
+            "name": "places/ChIJpai7jtqMGGAR_kpulDewfSU",
+            "placeId": "ChIJpai7jtqMGGAR_kpulDewfSU",
+            "displayName": {
+              "text": "TAITO STATION Shinjuku GameWorld",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest"
+            ],
+            "spatialRelationship": "AROUND_THE_CORNER",
+            "straightLineDistanceMeters": 64.56621,
+            "travelDistanceMeters": 118.636185
+          },
+          {
+            "name": "places/ChIJI0ExXtuMGGARdqRRCha2xzo",
+            "placeId": "ChIJI0ExXtuMGGARdqRRCha2xzo",
+            "displayName": {
+              "text": "Shinjuku-sanchome Station",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest",
+              "subway_station",
+              "transit_station"
+            ],
+            "spatialRelationship": "AROUND_THE_CORNER",
+            "straightLineDistanceMeters": 208.89107,
+            "travelDistanceMeters": 26.69035
+          }
+        ],
+        "areas": [
+          {
+            "name": "places/ChIJew9W7dqMGGARKNsNpiek3mg",
+            "placeId": "ChIJew9W7dqMGGARKNsNpiek3mg",
+            "displayName": {
+              "text": "35",
+              "languageCode": "en"
+            },
+            "containment": "WITHIN"
+          },
+          {
+            "name": "places/ChIJRQMDUNqMGGARuen0E2J47TA",
+            "placeId": "ChIJRQMDUNqMGGARuen0E2J47TA",
+            "displayName": {
+              "text": "3 Chome",
+              "languageCode": "en"
+            },
+            "containment": "OUTSKIRTS"
+          },
+          {
+            "name": "places/ChIJLbQAHdyMGGARtbqNkkWqBis",
+            "placeId": "ChIJLbQAHdyMGGARtbqNkkWqBis",
+            "displayName": {
+              "text": "Shinjuku",
+              "languageCode": "en"
+            },
+            "containment": "OUTSKIRTS"
+          }
+        ]
+      },
+      "googleMapsLinks": {
+        "directionsUri": "https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af!3e0?g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+        "placeUri": "https://maps.google.com/?cid=3661688933803963311&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+        "writeAReviewUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x60188cdaeddbe517:0x32d0eeaf515d33af!12e1?g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+        "reviewsUri": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x60188cdaeddbe517:0x32d0eeaf515d33af!9m1!1b1?g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+        "photosUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x60188cdaeddbe517:0x32d0eeaf515d33af!10e5?g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA"
+      },
+      "priceRange": {
+        "startPrice": {
+          "currencyCode": "JPY",
+          "units": "1"
+        },
+        "endPrice": {
+          "currencyCode": "JPY",
+          "units": "1000"
+        }
+      },
+      "reviewSummary": {
+        "text": {
+          "text": "Diners like this restaurant's delicious and hearty rice bowls, including gyudon, katsudon, and toridon, which are served quickly. They also highlight the affordable prices and generous portions, making it a great value. Guests mention the friendly and energetic staff, contributing to a welcoming and lively atmosphere.",
+          "languageCode": "en-US"
+        },
+        "flagContentUri": "https://www.google.com/local/content/rap/report?postId=5%401:CAIQACodChtyc19oOkdKNklzS05BenpBNVRtb2xLcDJZNWc%7CCAIQACoqChtyc19oOkdKNklzS05BenpBNVRtb2xLcDJZNWcSCwjd4cDQBhC42-8L&d=17924085&t=8",
+        "disclosureText": {
+          "text": "Summarized with Gemini",
+          "languageCode": "en-US"
+        },
+        "reviewsUri": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x60188cdaeddbe517:0x32d0eeaf515d33af!9m1!1b1"
+      },
+      "timeZone": {
+        "id": "Asia/Tokyo"
+      },
+      "postalAddress": {
+        "regionCode": "JP",
+        "languageCode": "en-US",
+        "postalCode": "160-0022",
+        "administrativeArea": "Tokyo",
+        "addressLines": [
+          "3 Chome-35-2 Shinjuku",
+          "Shinjuku City"
+        ]
+      },
+      "googleMapsTypeLabel": {
+        "text": "Gyudon Restaurant",
+        "languageCode": "en-US"
+      }
+    }
+  ],
+  "contextualContents": [
+    {
+      "photos": [
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-t0vG_XVgRmViqrr2WFJr1lrDA8h0I3_d5SMOCINPMovzbVd8eKh9JUoR35N_BTep--pBsfThfEf0LfelX510HpQUJp01QzZHwwT8avBHL5kTJfnq3fudDzyBMhZxdIh6IMI0JzpN4w-5tclQhGphEs5lV_fCvPEJIL7DaLOFMfXHAtpGMUG5y3bixiRVJGeD7Lxk8Tg2UWdeHydGzd2k2z7BTcLy8qkuzbcvDO6cjpFrfV-CtWxGYFAZg1BF5tYqKUQ2ICp_xUZh_joDWQFmm389Anl9UYBDf9jMSPK-N1Vdi2mRK-VXoxOTRbY38JHZIP0kVdRsn2aBBN6yxDWbyaoYjXV9sC-zatBVP_Havq7TC4ttMIuqEK0289x-B_oGJV00on8k-fnNpf8mh_",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Alright Food Reviews",
+              "uri": "https://maps.google.com/maps/contrib/112860856483578634735",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX9TwrWkqjPb6lTtnyyitnZsh-oOg2d2uemV5PT5iFJ_FoopQ=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places&image_key=!1e10!2sCIHM0ogKEICAgIDes8ubZw&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDes8ubZw!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tW1pj2IVFdSOuLqd6dLTmje35FQNmERcof3l9W9kBhlZKJZHV46k7-vu6frWW9TcVYFAWoLiSabgUhfc1qNSYZqNC2bSlR0HLW2C2m4NDhhDiX-6h-UF9xpX5vVgCTqPl6IcVGh4IHed6yTYKsd4LwI8bhL7TkzHmX9JRhbeCOcci39Tw7iwc03Xp2MJffy__bDvQW_oBY7dRBSOymRRZLaMsVbLBdNyNvGmui5qLPXRri9JAvY9chVz50TDVC0yLGd8sB_07nVT-DIyrqHpARGDHn5Tnew-6NWsDN_ziCKrJp1eSK_5ej1Eo6BQdw2SOFUvf_mn4abybutYxS2er3WrHX_Ls8rYyXp5MuBYUojw3FTEAdKA8JF0NS58MmtLXZCv1TjVQkpzgfvdsOYA",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Jake",
+              "uri": "https://maps.google.com/maps/contrib/112404614539742046055",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLH6dBzPgrtb33lLmbgDN5FDL-8azCbEb4cZxBe9LsR_8tbLQ=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places&image_key=!1e10!2sCIHM0ogKEICAgIDcw4j-yQE&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDcw4j-yQE!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-vZ2oo2XK232vWJtgSQ1Qw9ZO5yUKRQDEDnTxPy_cZOk6PsqT0qXWr-bfsAiBrTG7Wo67E2MbVHDe4WTHnsZ0w8OMvEDutnYumwSosJGVhqCeLEFk_aiXvCvEou-QJ1KmObdPkxrAYEPfcgM2QYloyra6agzg1uE_AeXhInKYi4Lz_RFtUWssbLbYlnSoB63vwD_FuhAvJMRo-v5cqIzipYQymLzvHBe_SlSOip6zFrML_DCbf0siGKz5Lw2mHaiQ7geNaNgFOEJslAi7kcXj2k_CtlmaJDzsix055V7te_KF2IYT-FpE-0sX7Nw8KbbXP0FaoCONUb4vFKY7J-m277rEwD6dzjc9Wm0hyAj_0-LQxx0hNki12wNxHQFA0LEy9yjG0hak8TxH1AxUrz-g",
+          "widthPx": 3333,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Jake",
+              "uri": "https://maps.google.com/maps/contrib/112404614539742046055",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLH6dBzPgrtb33lLmbgDN5FDL-8azCbEb4cZxBe9LsR_8tbLQ=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places&image_key=!1e10!2sCIHM0ogKEICAgID4tPORjgE&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID4tPORjgE!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-tbVoijvYpERh-Z5HPC5JgqOc9P_HuXO5ihdoi-g1-LQtCTYWfW3_LDOrDCeRFKcgms_C3MEHV-oG0rNZ5poFAqybtBR0gngmNPE6SrzbsdQju_leLHISpH3bOYGye-LaUicknbe1Ea0RPDQR9sLFOaoGsSFQfrdWPVl5GcrsoyzV1axo3FYzyoHjawsuLnk3GfiMxdyAyh33vZXzPMoubNQg7IcbIBTAZfJ2r4VDeTv1yzgbWjR60HZwznY20izIqLvkZ9vYw-HNbHWgCEuN0XVSsE1IWgX1RRg_9FBd8So2zRuDHL226_y1M2IY1vJvPN5EYao6qQZyxWiQPBOfJ1eTbJVEB12HogAZZ8dEFDUlWuhQyJXuQrM97QjMgQqdUYJCQSnh1FMoiBvE1J",
+          "widthPx": 3879,
+          "heightPx": 2909,
+          "authorAttributions": [
+            {
+              "displayName": "kaiser misaki",
+              "uri": "https://maps.google.com/maps/contrib/118004441572331933533",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXxAHVpxXcRRRS8n-fZjLRwwRxHoUIId9ebjhVMuoqqN3t6lqRQ=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places&image_key=!1e10!2sCIHM0ogKEICAgICU2671dg&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICU2671dg!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        },
+        {
+          "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/photos/Ab43m-vazca2S5U_TWCY0ZukVwLyBWt-bRVccV7lW1FbcCkVUgaMjJ4iWAhCLn_Fcup7I8ooTRVc_X-MEynv-lyeaaS6Zo7Ys81bQJFVFyvW0_4CiErpjwAykXbXT8dIjv45sWNQMwuv08kYQQEILPXaharjAE1g9HwSWzGLqVvf5sxW_mkLS2tkDX9AreHoi0d02urbWhnyfNOcKRmDAkksjEyYJGK6JgGWFhZlWBc7ZDcXQblKcIiqcIjyzvy-UVh8VHBngk3OWyrGAVDD9Rshb4GQCbhRGEEDU0uHiO6tI1Cg9G3YSL6-OS-nbp_417F7SY7d4hX8H07redjMK12gRN_lNUQxCsZtKbteDEpwoDXNBIj-skJeMxRz0P26TC54SE5iY64-5-pOVWQF62gRYTotzpthwdl4tc-52jo",
+          "widthPx": 4800,
+          "heightPx": 3600,
+          "authorAttributions": [
+            {
+              "displayName": "sanokuni",
+              "uri": "https://maps.google.com/maps/contrib/106404215225772247968",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXt12Tov3Ag3RQWjmtIbF82-UVciswiWIHl8c0Yh8lf_2Gx-v4=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places&image_key=!1e10!2sCIABIhDSIQCLg9OBv929Q7i9hKPe&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDSIQCLg9OBv929Q7i9hKPe!2e10!4m2!3m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+        }
+      ],
+      "justifications": [
+        {
+          "reviewJustification": {
+            "highlightedText": {
+              "text": "\"The beef was cooked well and service was excellent.\""
+            },
+            "review": {
+              "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI/reviews/Ci9DQUlRQUNvZENodHljRjlvT2tFeWNHWmpPVGhvUkhVdGVrcElMV0o0VTI4eFRHYxAB",
+              "relativePublishTimeDescription": "10 months ago",
+              "rating": 5,
+              "text": {
+                "text": "Satisfying gyudon for such an affordable price in the heart of Tokyo. I came here around lunch time with my brother who can speak Japanese (lucky me 🙂). There were a lot of locals especially salarymen - it reminds me of traditional Japanese restaurants I only see in films.  The beef was cooked well and service was excellent. The owner was very nice so I waved and said goodbye 😅 Wished there was more meat - I just don't know whether I could order and pay for extra meat. I'd love to try their other bowls when I'm back next time.",
+                "languageCode": "en"
+              },
+              "originalText": {
+                "text": "Satisfying gyudon for such an affordable price in the heart of Tokyo. I came here around lunch time with my brother who can speak Japanese (lucky me 🙂). There were a lot of locals especially salarymen - it reminds me of traditional Japanese restaurants I only see in films.  The beef was cooked well and service was excellent. The owner was very nice so I waved and said goodbye 😅 Wished there was more meat - I just don't know whether I could order and pay for extra meat. I'd love to try their other bowls when I'm back next time.",
+                "languageCode": "en"
+              },
+              "authorAttribution": {
+                "displayName": "Mara",
+                "uri": "https://www.google.com/maps/contrib/112641818147137059871/reviews",
+                "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWlRYcxYHkrNtUJEjqVGOsswLfsZCVQq3OLW70b3pPNZVPvD9xp=s128-c0x00000000-cc-rp-mo-ba5"
+              },
+              "publishTime": "2025-07-23T15:30:45.618336613Z",
+              "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2tFeWNHWmpPVGhvUkhVdGVrcElMV0o0VTI4eFRHYxAB&d=17924085&t=1",
+              "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2tFeWNHWmpPVGhvUkhVdGVrcElMV0o0VTI4eFRHYxAB!2m1!1s0x60188cdaeddbe517:0x32d0eeaf515d33af"
+            }
+          }
+        },
+        {
+          "businessAvailabilityAttributesJustification": {
+            "takeout": true,
+            "dineIn": true
+          }
+        }
+      ]
+    }
+  ],
+  "nextPageToken": "Ab43m-v64bZHYyXja_e5S5cHMJIMFHm4d096_o6ZsK4Vsa_S6dJ2fnF8FsYtDJGOqfa1_iZcCeE2W_8NrDpksyqi7ZHjFDfZFFQ4ggMC_9QLP-1BHg",
+  "searchUri": "https://www.google.com/maps/search/restaurants"
+}

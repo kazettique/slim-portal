@@ -29,6 +29,18 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_PLACES,
   };
 
+  public static readonly PLACES_NEARBY_PAGE_META: PageMeta = {
+    title: "Nearby",
+    description: "Places near your current location.",
+    url: ShareConstant.PAGE_URL_PLACES_NEARBY,
+  };
+
+  public static readonly PLACES_DETAILS_PAGE_META: PageMeta = {
+    title: "Place Details",
+    description: "Detailed information about a place.",
+    url: ShareConstant.PAGE_URL_PLACES_DETAILS,
+  };
+
   public static readonly SEARCH_PAGE_META: PageMeta = {
     title: "Search",
     description: "Text search powered by DuckDuckGo.",
@@ -53,6 +65,9 @@ export abstract class AppConstant {
 
   public static readonly ERROR_MSG_LOAD_NEWS: string = "Could not load news. Please try again later.";
   public static readonly ERROR_MSG_LOAD_PLACES: string = "Could not load places. Please try again.";
+  public static readonly ERROR_MSG_LOAD_PLACES_NEARBY: string = "Could not load nearby places. Please try again.";
+  public static readonly ERROR_MSG_LOAD_PLACE_DETAILS: string = "Could not load place details. Please try again.";
+  public static readonly ERROR_MSG_PLACES_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";
   public static readonly ERROR_MSG_SEARCH_FAILED: string = "Search failed. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";

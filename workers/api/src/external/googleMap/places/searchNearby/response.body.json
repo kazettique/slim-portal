@@ -1,0 +1,1227 @@
+{
+  "places": [
+    {
+      "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk",
+      "id": "ChIJu9ljKNeMGGARcFUr-NmJhAk",
+      "types": [
+        "transit_station",
+        "transportation_service",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "Shinjuku City, Tokyo, Japan",
+      "addressComponents": [
+        {
+          "longText": "Japan",
+          "shortText": "JP",
+          "types": [
+            "country",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Shinjuku City",
+          "shortText": "Shinjuku City",
+          "types": [
+            "locality",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Tokyo",
+          "shortText": "Tokyo",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ],
+          "languageCode": "en"
+        }
+      ],
+      "plusCode": {
+        "globalCode": "8Q7XMMRX+6R",
+        "compoundCode": "MMRX+6R Shinjuku City, Tokyo, Japan"
+      },
+      "location": {
+        "latitude": 35.6905539,
+        "longitude": 139.6995499
+      },
+      "viewport": {
+        "low": {
+          "latitude": 35.686903799999996,
+          "longitude": 139.6966271
+        },
+        "high": {
+          "latitude": 35.692514300000006,
+          "longitude": 139.7020351
+        }
+      },
+      "rating": 3.7,
+      "googleMapsUri": "https://maps.google.com/?cid=685824612531656048&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA",
+      "utcOffsetMinutes": 540,
+      "adrFormatAddress": "<span class=\"street-address\">Shinjuku City</span>, <span class=\"region\">Tokyo</span>, <span class=\"country-name\">Japan</span>",
+      "businessStatus": "OPERATIONAL",
+      "userRatingCount": 336,
+      "iconMaskBaseUri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "iconBackgroundColor": "#7B9EB0",
+      "displayName": {
+        "text": "Shinjuku Station",
+        "languageCode": "en"
+      },
+      "primaryTypeDisplayName": {
+        "text": "Transit station",
+        "languageCode": "en-US"
+      },
+      "primaryType": "transit_station",
+      "shortFormattedAddress": "Odakyu Shinjuku Station, Shinjuku City",
+      "reviews": [
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/reviews/Ci9DQUlRQUNvZENodHljRjlvT25sNVpqVllWVTFZUzBwRWVtVmxXRnBUY0VKS0xWRRAB",
+          "relativePublishTimeDescription": "6 months ago",
+          "rating": 5,
+          "text": {
+            "text": "I had no plan to visit Shinjuku station when I was in Tokyo but search for one thing brings me there. Now I feel I might have missed a great place to observe Tokyo from inside if I didn’t visit here.\n\nIt’s very close to Tokyo Haneda airport, about an hour by train. You can take monorail or other train lines to go to Shinjuku, there are many options.\n\nLike most of the Japanese stations, this is very busy, clean and always filled with many people. The subway is very busy and convenient east and west gates.\n\nOutside you can experience life in Japan, it’s busy but there is a rhythm to it. There are so many shops, restaurants to enjoy and it’s a great opportunity for experience Japan closely.\n\nIf you’re looking for good Japanese whiskey you are most likely to get here, including Yamasaki. This place also known for its great food options including ramen.\n\nThe big scene in front of the east gate is must watch. It’s hard to believe not real, perfect human ingenuity.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "I had no plan to visit Shinjuku station when I was in Tokyo but search for one thing brings me there. Now I feel I might have missed a great place to observe Tokyo from inside if I didn’t visit here.\n\nIt’s very close to Tokyo Haneda airport, about an hour by train. You can take monorail or other train lines to go to Shinjuku, there are many options.\n\nLike most of the Japanese stations, this is very busy, clean and always filled with many people. The subway is very busy and convenient east and west gates.\n\nOutside you can experience life in Japan, it’s busy but there is a rhythm to it. There are so many shops, restaurants to enjoy and it’s a great opportunity for experience Japan closely.\n\nIf you’re looking for good Japanese whiskey you are most likely to get here, including Yamasaki. This place also known for its great food options including ramen.\n\nThe big scene in front of the east gate is must watch. It’s hard to believe not real, perfect human ingenuity.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Avijit Nayek",
+            "uri": "https://www.google.com/maps/contrib/107600277856884336907/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVzJXbtzljlq7gzLTddctdQi7WavgBTmDq2Z4O9SBIrCaLdi88w=s128-c0x00000000-cc-rp-mo-ba5"
+          },
+          "publishTime": "2025-11-23T08:47:26.913786917Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT25sNVpqVllWVTFZUzBwRWVtVmxXRnBUY0VKS0xWRRAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25sNVpqVllWVTFZUzBwRWVtVmxXRnBUY0VKS0xWRRAB!2m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/reviews/Ci9DQUlRQUNvZENodHljRjlvT25BdGJqbHVaMkl4UVRKa1kwZ3dlRXBEZWpWblNuYxAB",
+          "relativePublishTimeDescription": "2 months ago",
+          "rating": 5,
+          "text": {
+            "text": "Shinjuku Station is truly one of the most impressive and dynamic transportation hubs that can be experienced in Japan. It is widely recognized as one of the busiest railway stations in the world, and this can be clearly felt the moment it is entered. An incredible flow of passengers is handled every day with remarkable efficiency, and despite the large crowds, movement is generally smooth and well organized.\n\nMultiple railway companies operate within the station, including JR lines, private railways, and subway services. Because of this, access to almost every major area of Tokyo and surrounding prefectures is conveniently provided. It is especially convenient for those traveling to popular areas such as Shibuya, Tokyo, and Ikebukuro. Long-distance highway buses are also available from the nearby bus terminal, making regional travel extremely accessible.\n\nThe station itself is vast and complex, yet it is thoughtfully structured. Clear signboards in Japanese and English are placed throughout the premises, and colored line indicators make navigation easier for international visitors. Although it may feel overwhelming at first, guidance is sufficiently provided, and station staff members are usually helpful and polite when assistance is required. Maps and digital information boards are strategically installed, ensuring that train times and platform details are clearly displayed.\n\nA wide variety of facilities is offered inside the station. Numerous restaurants, cafés, bakeries, and convenience stores are located within the underground passages and upper floors. From quick snacks to full meals, many dining options are available to suit different tastes and budgets. Shopping opportunities are also abundant, with fashion boutiques, souvenir shops, bookstores, and electronic stores integrated into the station complex. It is possible to spend hours exploring the commercial areas alone.\n\nCleanliness is consistently maintained despite the heavy foot traffic. Platforms and common areas are regularly cleaned, and waste disposal systems are well managed. Restrooms are modern and hygienic, which adds to the overall positive experience. Safety measures are clearly visible, and platform screen doors are installed on several lines to ensure passenger security.\n\nAnother impressive feature is the seamless connection to surrounding landmarks. The station provides direct access to business districts, entertainment areas, and shopping centers in Shinjuku. The vibrant atmosphere outside the station, especially in the evening, creates an unforgettable urban experience with bright lights and lively streets.\n\nOverall, Shinjuku Station is not just a transportation point but a complete urban ecosystem. Efficiency, convenience, and variety are successfully combined in one location. Even though the size may initially feel intimidating, the organization and facilities provided make it manageable and comfortable. A visit to Tokyo would feel incomplete without passing through this iconic station, as it perfectly reflects the energy and precision of Japan’s railway system.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Shinjuku Station is truly one of the most impressive and dynamic transportation hubs that can be experienced in Japan. It is widely recognized as one of the busiest railway stations in the world, and this can be clearly felt the moment it is entered. An incredible flow of passengers is handled every day with remarkable efficiency, and despite the large crowds, movement is generally smooth and well organized.\n\nMultiple railway companies operate within the station, including JR lines, private railways, and subway services. Because of this, access to almost every major area of Tokyo and surrounding prefectures is conveniently provided. It is especially convenient for those traveling to popular areas such as Shibuya, Tokyo, and Ikebukuro. Long-distance highway buses are also available from the nearby bus terminal, making regional travel extremely accessible.\n\nThe station itself is vast and complex, yet it is thoughtfully structured. Clear signboards in Japanese and English are placed throughout the premises, and colored line indicators make navigation easier for international visitors. Although it may feel overwhelming at first, guidance is sufficiently provided, and station staff members are usually helpful and polite when assistance is required. Maps and digital information boards are strategically installed, ensuring that train times and platform details are clearly displayed.\n\nA wide variety of facilities is offered inside the station. Numerous restaurants, cafés, bakeries, and convenience stores are located within the underground passages and upper floors. From quick snacks to full meals, many dining options are available to suit different tastes and budgets. Shopping opportunities are also abundant, with fashion boutiques, souvenir shops, bookstores, and electronic stores integrated into the station complex. It is possible to spend hours exploring the commercial areas alone.\n\nCleanliness is consistently maintained despite the heavy foot traffic. Platforms and common areas are regularly cleaned, and waste disposal systems are well managed. Restrooms are modern and hygienic, which adds to the overall positive experience. Safety measures are clearly visible, and platform screen doors are installed on several lines to ensure passenger security.\n\nAnother impressive feature is the seamless connection to surrounding landmarks. The station provides direct access to business districts, entertainment areas, and shopping centers in Shinjuku. The vibrant atmosphere outside the station, especially in the evening, creates an unforgettable urban experience with bright lights and lively streets.\n\nOverall, Shinjuku Station is not just a transportation point but a complete urban ecosystem. Efficiency, convenience, and variety are successfully combined in one location. Even though the size may initially feel intimidating, the organization and facilities provided make it manageable and comfortable. A visit to Tokyo would feel incomplete without passing through this iconic station, as it perfectly reflects the energy and precision of Japan’s railway system.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "WMCJT Kithulwatta",
+            "uri": "https://www.google.com/maps/contrib/118017105233745466051/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV_q63nOZ_3iEASH80vdXClX37FZLU9ZMkCxVP3FNpCdWcH-5dA=s128-c0x00000000-cc-rp-mo-ba5"
+          },
+          "publishTime": "2026-03-02T03:37:52.187171202Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT25BdGJqbHVaMkl4UVRKa1kwZ3dlRXBEZWpWblNuYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25BdGJqbHVaMkl4UVRKa1kwZ3dlRXBEZWpWblNuYxAB!2m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/reviews/Ci9DQUlRQUNvZENodHljRjlvT2xwWGJreHJPVkZyZHpKclIyTkllbXQ0VUVWdU5tYxAB",
+          "relativePublishTimeDescription": "5 months ago",
+          "rating": 5,
+          "text": {
+            "text": "Always confusingly good ... juat enjoy the experience, getting lost a bit and the ride on the subway ... can always asks around if you are lost, Japanese will assist ...",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Always confusingly good ... juat enjoy the experience, getting lost a bit and the ride on the subway ... can always asks around if you are lost, Japanese will assist ...",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Jeffrie Trika",
+            "uri": "https://www.google.com/maps/contrib/112078283538622514315/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXtNG_SBHYfa3FBC0zUL4VkTXFlMh75f2WxcnGm_rKXfjiB791liQ=s128-c0x00000000-cc-rp-mo-ba8"
+          },
+          "publishTime": "2025-12-02T22:45:49.066727639Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2xwWGJreHJPVkZyZHpKclIyTkllbXQ0VUVWdU5tYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xwWGJreHJPVkZyZHpKclIyTkllbXQ0VUVWdU5tYxAB!2m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/reviews/Ci9DQUlRQUNvZENodHljRjlvT21OdFVtTTBTSE5wVFd4UFdYTTNSRkZDY2tkdlJHYxAB",
+          "relativePublishTimeDescription": "7 months ago",
+          "rating": 4,
+          "text": {
+            "text": "I love getting lost & found in the heart of Shinjuku and Tokyo—wandering through neon-lit alleys, restaurants, electronic stores and endless crossings, walking my 3,000 steps a day as if on a quiet fitness retreat, a subtle training for whatever life may bring.\nJapan’s metro is the ultimate life-skills training ground. The morning rush at Shinjuku and Tokyo Stations is a living lesson in patience, rhythm, and resilience. If you can master the art of navigating Japan’s vast labyrinth without losing your way, you’ve proven yourself ready for anything—even life itself. And somewhere amid the organized chaos, you hear it—the soft call of rush hours, clutching an upside-down map, searching for the right platform in a city that never slows down.\nJapan doesn’t just change you—it leaves an ache you’ll forever be grateful for. You don’t truly leave Japan behind; you carry it within you. The memories and emotions of Japan live quietly in your heart, and they stay with you forever. ❤️",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "I love getting lost & found in the heart of Shinjuku and Tokyo—wandering through neon-lit alleys, restaurants, electronic stores and endless crossings, walking my 3,000 steps a day as if on a quiet fitness retreat, a subtle training for whatever life may bring.\nJapan’s metro is the ultimate life-skills training ground. The morning rush at Shinjuku and Tokyo Stations is a living lesson in patience, rhythm, and resilience. If you can master the art of navigating Japan’s vast labyrinth without losing your way, you’ve proven yourself ready for anything—even life itself. And somewhere amid the organized chaos, you hear it—the soft call of rush hours, clutching an upside-down map, searching for the right platform in a city that never slows down.\nJapan doesn’t just change you—it leaves an ache you’ll forever be grateful for. You don’t truly leave Japan behind; you carry it within you. The memories and emotions of Japan live quietly in your heart, and they stay with you forever. ❤️",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Charles Tran",
+            "uri": "https://www.google.com/maps/contrib/102056277956478472377/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVW4gKebTFj4hG5Lt_lRhDf0AN3j3N9Z1YcpISKlVkUmTNPaT8FsQ=s128-c0x00000000-cc-rp-mo-ba5"
+          },
+          "publishTime": "2025-10-12T23:33:59.320214448Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT21OdFVtTTBTSE5wVFd4UFdYTTNSRkZDY2tkdlJHYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21OdFVtTTBTSE5wVFd4UFdYTTNSRkZDY2tkdlJHYxAB!2m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/reviews/Ci9DQUlRQUNvZENodHljRjlvT25kVFdsVTVTMWxQVmt0eU9ISXdNVnBvTVhsQmVHYxAB",
+          "relativePublishTimeDescription": "7 months ago",
+          "rating": 5,
+          "text": {
+            "text": "Shinjuku Station is one of the busiest transportation hubs in the world, a pulsating heart of Tokyo that sees more than three million passengers pass through each day. It’s a maze of platforms, corridors, and exits—complex yet incredibly efficient, reflecting Japan’s mastery of organized chaos.\n\nFor travelers and photographers, Shinjuku Station offers endless visual energy. The contrast between sleek modern trains, neon reflections, and the constant flow of commuters creates a dynamic urban rhythm. Around the station, the skyline bursts with towers, billboards, and glowing signs, especially impressive after dark. Despite its overwhelming size, clear signage and helpful staff make navigation surprisingly smooth.\n\nFrom a photographic perspective, Shinjuku is an ever-changing canvas—motion, light, and humanity blending into one of Tokyo’s most iconic cityscapes.",
+            "languageCode": "en"
+          },
+          "originalText": {
+            "text": "Shinjuku Station is one of the busiest transportation hubs in the world, a pulsating heart of Tokyo that sees more than three million passengers pass through each day. It’s a maze of platforms, corridors, and exits—complex yet incredibly efficient, reflecting Japan’s mastery of organized chaos.\n\nFor travelers and photographers, Shinjuku Station offers endless visual energy. The contrast between sleek modern trains, neon reflections, and the constant flow of commuters creates a dynamic urban rhythm. Around the station, the skyline bursts with towers, billboards, and glowing signs, especially impressive after dark. Despite its overwhelming size, clear signage and helpful staff make navigation surprisingly smooth.\n\nFrom a photographic perspective, Shinjuku is an ever-changing canvas—motion, light, and humanity blending into one of Tokyo’s most iconic cityscapes.",
+            "languageCode": "en"
+          },
+          "authorAttribution": {
+            "displayName": "Paul Parent",
+            "uri": "https://www.google.com/maps/contrib/112967852528895859067/reviews",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX_Vkby0xHdMC4TM8sETrgivsRIzormalUSrG3fE52RQStVzrCElA=s128-c0x00000000-cc-rp-mo-ba7"
+          },
+          "publishTime": "2025-10-07T18:22:29.279447705Z",
+          "flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT25kVFdsVTVTMWxQVmt0eU9ISXdNVnBvTVhsQmVHYxAB&d=17924085&t=1",
+          "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25kVFdsVTVTMWxQVmt0eU9ISXdNVnBvTVhsQmVHYxAB!2m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        }
+      ],
+      "photos": [
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-u3_oBBx9s1YA9llcus0WhJjwL6BBkejomenbof6mgOFP4W5HE2I8QqmwwlfeyWXilomLyYTpvYvlIsAjpDrA20fv2P3gkq5ajRXFZCIfMjdQzD23a5asFUKIBBolPkS_TAc35KUSzx4xVa710NoixA6Xe65mODNZRDxQVD1YWLyXFjaOVGnOEkLl9OlXjxcx5VJC5_qSIplngOUqafiYwvMlGYevZ6b0brQ2OduLgPNbXGJ9oIRi9iIQEB3RhQtIumX-u93Uhn97lrgk_g0Le3UrRDCWhoIwrLvvGl1Qh99GR8Vy5w0asBtmw7T7SWu9Lbsy2zJLG7IjDH9n2fgRTmHoSIDH3Z36sX2GwoPrqDQ_D-quF2zZ5hN_V0J5CjVD_XMkIWwNt-mBd-p3sqDkXo_64IpI0KuEi1UVojzMZMuhbBPUq2yrJF7RqBIagA",
+          "widthPx": 4800,
+          "heightPx": 3193,
+          "authorAttributions": [
+            {
+              "displayName": "AN*HF",
+              "uri": "https://maps.google.com/maps/contrib/106646379471621882378",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX9jqC1WFhvGjCblZx1iG5ZPEVfpFkTvz86zv1sQGPXo_7QCWs=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDjfY5DTMRqw4k43QXuQYV3&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDjfY5DTMRqw4k43QXuQYV3!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-skLyN5IZeDnksRYwzTj7PGN_ecdN2Yf1Zzg86TBIY0G_j3WL5TCrxzWuxAMvAUF5AHfxUn4Nm0COIAI1dxvxDezzd9373HNr-rfEwNw3IDar8i9DbGvJtNa-4CIifIvfnvqb-JnVMu2SFtGWqvBzy0tCHJ-A6uN9BpKIX1MAQy5grOJPmzWQo9ovMZVlG0hq386Fy2igaC0MQvFrRmiD6x9KAQZ64wgj28MzG2_2uBd9fI7wz7j5CMs72Vf4CpPO9s4QmQ_-d-IUbqM9-q8w3IOUBg3KIFoBAo_o8U1s1wrqkwnSsVxOHFznYFiqT83Y2A_Fu_62dGQzNZq7yQkIrdyCgUa8Lzt8xr1fs2y0dSUdCS3kerSiomU0Llo4pJz1VSHciITvXLoDSINlKs3FBYbQyvOyA9sr4x5VyspQFViBLLDFLY2M_9QwtN918G",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "榎本明彦（えのも）",
+              "uri": "https://maps.google.com/maps/contrib/109355405927552336162",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUrI3VHSEukHgt7H5zHINI0PAKCbKyvqCGglDxJVmn0t17wsJ-M=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDp6wLTsqWn7t3rUG1WqL3n&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDp6wLTsqWn7t3rUG1WqL3n!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-uHoLhffwAb7ni5ghv4Jjg23geXqzyTX1u2NZ64LjP-qbG9k5B7TpEBI5IqESAD2obYeUyb5yobJ13qV3RNs0RDID0HRMN-8sb9Qr_lnzecrWUCCZPdXQ2BPelxqIhNFPS2nlZmd7EmdZqcv3xfWuaKUoigQ7YfpZtnjQJ3hdnrig36IJVp8dJtjO2AN8fZXLijpQlvEElyZnK1caJXdoeHDLvD4RWxk-gpue8oH_ttTTRb7jifkgLO4TQWFBOtJuef5nFXFhj3Ej40xZMF3or4LJlskVmHnQPD-kmySrwFlG_WHNqWj3BHVHZsQrynDIN35u8e1v-tNTJXqki-jlmoGrP1JvMvwewf0s5s2JrIZlCks5ALhb-00WZa1p-VxlYu99m2MHqhvmFZGBUyfhwuMt_0TrSrTxcuDQvZ7RaQ_froCmyCuFlUdrj7Jw",
+          "widthPx": 4800,
+          "heightPx": 3600,
+          "authorAttributions": [
+            {
+              "displayName": "ファイトガールズ",
+              "uri": "https://maps.google.com/maps/contrib/111003008359444559207",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJFTsqhcHmxv0VmzFwt3Wa0o0PplQcg6aJPeGm-mSsc5slDdA=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhCbdoVVsf6pLo0FOVstHI8p&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhCbdoVVsf6pLo0FOVstHI8p!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-uSfuv6o1MTuOAqtCA6rkA0RtfWEvcus4seMOw5e6CfaODdvzHY5OXlTmQbWbuF3Fk0FJF2SWD-4JdgJLpNYhSVJxZY51v4_ovsTPLQI92-ZWqLY2gG_xHsbMpgaUtNeHiSDHvLlt9CgxQmTf_pl2liPDQN_QFqxtd1QB6pL0RHzB4AzWHZZM8bJwL01Ex0dkYY0ynBbqGJfXHQXrRZfNJ2WhBbf43ge0Hnk0BAZvAr7QEIlrBfDBngkqJTP-aFKeTSu0qmmS-gG9M_oXMkPBEGeqJB-UbmEDBEfi_GTt7Ci-nbZw1L7hD8zgjIFWQh7SQ3EmJ44Gd3fUIa_ybiXthejtnMV1awtgsZVyv0Au2gwFWDsoWLpkfXFccuFOP8JSSddFbsRhm8n7Bx9v8IBGkhpN8HzezMFXg8UyF-3LId506HbbPKvV1VNXUeEHRp",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "リーブル",
+              "uri": "https://maps.google.com/maps/contrib/103752892990769167906",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWAD5SK9ff7cBBgUe1JCtpthmkspknuGY5T3CXUFcQwEuwe9CU1=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhBVWNMhxCkcu59OL_SJYU4C&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhBVWNMhxCkcu59OL_SJYU4C!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-tQ8h6Uc3t1asFckNCimk0y1EsYgneoiWXMEXD9asx0dAllvYQkOXP3hbZFNc3HsqpspO0ni6WJntvaAcQHdFxnzy5muT36XB_XQHc8vTsDen0qd4feVGV7l97p_ZT58KwzvYEuGUPYsB8nsh91M4titnNsp3X1hftbAMUQVXRKkg729ZRq-iqsPSFp0-HlFRNWasIOcFdRtL1DDOoB7qEAaqH82akdKsFffKxB7x-Z7XOl0-klt9B6wO3Gw-LvHAEngWQfILQ5Mzpu6SQ2lbst9SiVdft16wnk5wGrnU7coCVnJBsxWAUdnYeHOjg05S7ghQXGm8y3m6C9dagB2DIgJvm681KHiiMG4Q0ckaMpsyVkicYfOkWZ4kC316yn14GOGAkMZ1wyVzPLxUkDQtZudngYdTimFbLf4wUUN8hILj7FqvlBCmJ5mBlt1yoE",
+          "widthPx": 3862,
+          "heightPx": 2896,
+          "authorAttributions": [
+            {
+              "displayName": "HTJ JP (HTJJP)",
+              "uri": "https://maps.google.com/maps/contrib/114739530912741912914",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocImzaq2Pn3Be00Zk4gvMu0DkmWh6LdB_qiIvWHrNyM1ImRt=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDfyIqATQUuFC7efgZ30rox&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDfyIqATQUuFC7efgZ30rox!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-syVQRxybkV0SswT-Kpqon9TcCMuHxSuVwOKgDUA0QhvIVNUpmn7_jpIdmFoAkV1EKNNpxdszGC3xz2NaV6LegWn5KFcVnH8R3VZCilpuqrxCG58BhZzqlZbt2VyCEBWsUXdTboPjw13EBnhzV3zb-bMQupWikRaDmefHxBc3XK0QJ7_zqZ20K35iprlI8jlM9dDPvmLN25OAEO02937-rsx6f0B40dBHVM0G3-n1Q1bA-5lGpi1TyWxd1qq4z_lH-_H9oABVx9fYQq4VG34SdoXITKtw2xl_ROofT3gZV0GezoFhEW-Lnx4wY6-0eiOKVS2Onh4GZrkXGoKZ_FBWBkcpmMdOo_Mmvww6fAbxBST9pFjoP7fLSzsVtGhxLOKoS50e7mQOnSkzUiSTpDRuBZ0k_F3aeVcRX1maDrgDZKwACD",
+          "widthPx": 4000,
+          "heightPx": 2252,
+          "authorAttributions": [
+            {
+              "displayName": "鈴木健之",
+              "uri": "https://maps.google.com/maps/contrib/102722648443145867958",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIHDXZVtdJ0P91mvuP3VW-MfL5-MFKlOx0CzvXOVHSR9KdI-A=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDemK28ngE&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDemK28ngE!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-s77NcrSDYQzv4dQT2dQLdcocmZ2Gw19a0yioYZgOjgLiT_Uz5PqyLU4uAMt9WMowQ1iYjGmAVhHegh0qbDHiL3yI6etffdA6e0Xz7rba7wOdx0jC-ySgC6u3YpliDATXglLQ0yYc-LMF513jQ257sTPn1MOvX8YbZ4GVbG928iMlCekBggdvtWG1sxB9tB4QEzUVjUc2KcfHNW4HLmHHQM1r2R7NK5Oh-fBojgVBjQQ3u4pg74nY5R53PofCZ8d6yDM6zqY9KL1Gep5Z5vtTv-EzEa7SQz5_n_Nd2UigaDDXr0g9s-lq6FCD4orjBPVwzCA6GaqhaUXZ0v9RQFX97SntcB8oGe2t-tRn360JcmjtXZSSdsYsvFyBWaItWJNrBIsh7kJ4bvHG4w4o9N_b2sVY1Ae55OpXeyl8MuLesjFGVcWgPv5TUtFZ4WWw",
+          "widthPx": 4080,
+          "heightPx": 2296,
+          "authorAttributions": [
+            {
+              "displayName": "Chiu Jeremy",
+              "uri": "https://maps.google.com/maps/contrib/104546118863647357387",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWkyEB8W3K29cejQ07IkCnenVfuBKvY5BDxgMwmfVXKzD1o4cDnxw=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhAHw_-n11F1NSD21r-5fFVu&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhAHw_-n11F1NSD21r-5fFVu!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-tbJtiUIvUByQoa2TxXtVuw4IEky2wyGGcEXPbY6WGOY2EVCKzGal_1_Be3ifudlsGCdzyZS-VZpmpz2vbCdc01PaoX0ceibAAKjcJkxk0UcQlb_WX6i_DFMnkYDpCr_AXFVNZtufm8RlX85rGg1K3R7iM6e2tJ1oB_ZU0sprTH-CUT73hJ7GActJhTgqtHWWqS1-CbZx1KPiM5z9MsQcbn0ac0oQoWT_ezrBGmYgkmMIpg6F82hMbGUCW4dXdD2dMvDoP2n1tbfb2X5c3nioQeqkI2gIAo7AN-OgvUai-khZFTWtpsLCLXz3LI5LsqdwqHq3I1gN2jKcFZmqR5EYKno6KfGxNhkTfYC8UPMSj6BjhoK7eyh3Kvky-htDT0SNPHDFelDmjmOPWYW7OAGAp6Bck4VtelPMBe9xU36V-8pzKVP7wUDpOBIkjxeuxC",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Gaga Bichon",
+              "uri": "https://maps.google.com/maps/contrib/108222753306648686467",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWUGgMx7JT7AUQ0Zo-cu6SD1yoJyhj-WFQ6Gt6M7yBP_OfCfZc=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhBFknqefhoM_Kf6XZODepTI&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhBFknqefhoM_Kf6XZODepTI!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-tfHoTb78PcaWgV6BZYA_0mdTq4adOwv513ca9xXfDxHGy4EP9pbf9f4sEEooKwbcQQtaCCLEt-TgfmRZSyWCrLZuXaMoud-ER4IrkbEE6knOC_JimJe3IQb8qSxf5bn9LjqAcA0GBQsmCyI67Q64rcdajT-zgFeTamS7G_gNrta-lIiExk5t1UOvHTG80SEcydZ9PnZ3pN6a24rl7rDfeaoz1bYcPLiy_QCXoEgPDXq3nI6TXLvz4pQTDSNR3jw3ddBKQOq3fnMAUeu7r9bNOl2echQLleJH2cpgZuYRDcs6tDwi9ts46xtnfABr-b1TtRzt8fPk_0mnxtJcZ1b77wpinKXD-uD5cietLE1YylrksRSjx5W07k7R-VO-ITAVaWisRN5S909sQmjtGThOwGXGmPOe7siAa8adtwPSyb2cbnu2ECCRc5wiGJkHBf",
+          "widthPx": 4800,
+          "heightPx": 3600,
+          "authorAttributions": [
+            {
+              "displayName": "いきなりモニカ",
+              "uri": "https://maps.google.com/maps/contrib/106282084011105445309",
+              "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLiNqoxWeYfyOYDOxfzlIN7HQOogST4sfcO6vqY2t6mJesPHA=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDZo05ORIX-9Et7bL7CGINY&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDZo05ORIX-9Et7bL7CGINY!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        },
+        {
+          "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk/photos/Ab43m-vrQo0YoneE0fk2XRagp-ynktiTGSdS-rDCJ3cZrNAtY9NJ0vPk9LHq8Ne9HIXwomc2Iy-oBF66yG3CTrsAsAWWv55NJDwwe9b7Uzaiwf35h5-4DRCoGMRFmHEsKYK7mCDOXRyxw2RMkG0HVTev-_TH8YhRzmJBCI_a08x5bjoCLAQeijuHivs6dlqA-wE0cOg0M4VPLsRjxC6Qrej4Vsucs8nv3Zp0dBOK4UXiAM3rgWC4UFunmNSgODjGhLxrV4MELCAbHJi5s3WHreznL-f5Qg4uqGtDtbXhvpWZIhmPtVOcvxYxCTO3F11b9tNG1atFVkiLzYAerfe8WjRqzkhA5N9Z673pQ6HZeKyTRbzJ7Q03-apJaqrUVMGHvZjr-ZollZHYgsurBjehAghsgXU-sN4ZV5IhTwC7bhtugiHuOBs5lL1xsjWB39eFOjYO",
+          "widthPx": 4032,
+          "heightPx": 3024,
+          "authorAttributions": [
+            {
+              "displayName": "Adrian Navarrette",
+              "uri": "https://maps.google.com/maps/contrib/107813706213987977203",
+              "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW7Wv5VcrrbJrNEzLqSjO3f8hceQ-bng5LUwGAYqN5ALvY17NNs_Q=s100-p-k-no-mo"
+            }
+          ],
+          "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDcFGIQkTQuOr4Cy8XLJUHO&hl=en-US",
+          "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDcFGIQkTQuOr4Cy8XLJUHO!2e10!4m2!3m1!1s0x60188cd72863d9bb:0x98489d9f82b5570"
+        }
+      ],
+      "restroom": true,
+      "accessibilityOptions": {
+        "wheelchairAccessibleEntrance": true,
+        "wheelchairAccessibleRestroom": true
+      },
+      "addressDescriptor": {
+        "landmarks": [
+          {
+            "name": "places/ChIJH7qx1tCMGGAR1f2s7PGhMhw",
+            "placeId": "ChIJH7qx1tCMGGAR1f2s7PGhMhw",
+            "displayName": {
+              "text": "Shinjuku Station",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest",
+              "subway_station",
+              "train_station",
+              "transit_station"
+            ],
+            "spatialRelationship": "WITHIN",
+            "straightLineDistanceMeters": 140.00723
+          },
+          {
+            "name": "places/ChIJaxc82NaMGGARHv7OIktR18Y",
+            "placeId": "ChIJaxc82NaMGGARHv7OIktR18Y",
+            "displayName": {
+              "text": "Shinjuku Sta. West",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest",
+              "transit_station"
+            ],
+            "straightLineDistanceMeters": 67.982796
+          },
+          {
+            "name": "places/ChIJPZpT2tCMGGAREUHsWjiLPNU",
+            "placeId": "ChIJPZpT2tCMGGAREUHsWjiLPNU",
+            "displayName": {
+              "text": "Popondetta",
+              "languageCode": "en"
+            },
+            "types": [
+              "establishment",
+              "point_of_interest",
+              "store"
+            ],
+            "spatialRelationship": "BESIDE",
+            "straightLineDistanceMeters": 24.368526
+          },
+          {
+            "name": "places/ChIJF5O2JtGMGGAR0e6W4XI4hRA",
+            "placeId": "ChIJF5O2JtGMGGAR0e6W4XI4hRA",
+            "displayName": {
+              "text": "Odakyu Ace",
+              "languageCode": "en"
+            },
+            "types": [
+              "cafe",
+              "department_store",
+              "establishment",
+              "food",
+              "point_of_interest",
+              "restaurant",
+              "shopping_mall",
+              "store"
+            ],
+            "straightLineDistanceMeters": 81.91889
+          },
+          {
+            "name": "places/ChIJt6SGdMWMGGARQcuMekzvpYY",
+            "placeId": "ChIJt6SGdMWMGGARQcuMekzvpYY",
+            "displayName": {
+              "text": "Shinjuku Takashimaya",
+              "languageCode": "en"
+            },
+            "types": [
+              "cafe",
+              "clothing_store",
+              "department_store",
+              "establishment",
+              "food",
+              "grocery_or_supermarket",
+              "point_of_interest",
+              "restaurant",
+              "store"
+            ],
+            "straightLineDistanceMeters": 405.5513
+          }
+        ],
+        "areas": [
+          {
+            "name": "places/ChIJ21SrxNCMGGARimX9YsJ_sog",
+            "placeId": "ChIJ21SrxNCMGGARimX9YsJ_sog",
+            "displayName": {
+              "text": "1",
+              "languageCode": "en"
+            },
+            "containment": "WITHIN"
+          },
+          {
+            "name": "places/ChIJWdGoTNGMGGARVqbUFZyy2pg",
+            "placeId": "ChIJWdGoTNGMGGARVqbUFZyy2pg",
+            "displayName": {
+              "text": "1 Chome",
+              "languageCode": "en"
+            },
+            "containment": "OUTSKIRTS"
+          },
+          {
+            "name": "places/ChIJV_-6z9SMGGARPdOPQSpdOBI",
+            "placeId": "ChIJV_-6z9SMGGARPdOPQSpdOBI",
+            "displayName": {
+              "text": "Nishishinjuku",
+              "languageCode": "en"
+            },
+            "containment": "OUTSKIRTS"
+          }
+        ]
+      },
+      "googleMapsLinks": {
+        "directionsUri": "https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x60188cd72863d9bb:0x98489d9f82b5570!3e0?g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA",
+        "placeUri": "https://maps.google.com/?cid=685824612531656048&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA",
+        "writeAReviewUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x60188cd72863d9bb:0x98489d9f82b5570!12e1?g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA",
+        "reviewsUri": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x60188cd72863d9bb:0x98489d9f82b5570!9m1!1b1?g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA",
+        "photosUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x60188cd72863d9bb:0x98489d9f82b5570!10e5?g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAEgAA"
+      },
+      "timeZone": {
+        "id": "Asia/Tokyo"
+      },
+      "googleMapsTypeLabel": {
+        "text": "Transport hub",
+        "languageCode": "en-US"
+      },
+      "transitStation": {
+        "displayName": {
+          "text": "新宿駅",
+          "languageCode": "ja"
+        },
+        "agencies": [
+          {
+            "displayName": {
+              "text": "関東バス",
+              "languageCode": "ja"
+            },
+            "url": "http://www.kanto-bus.co.jp/",
+            "lines": [
+              {
+                "id": "ChIJubNtrLjyGGARul-XGc20sNc",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "宿０５",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJ10BifZTyGGARcA0wHYG4zuo",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "宿０４",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJc-gVWc_yGGARNvarlbWmb4o",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "宿０８",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJV6lbA5TyGGARsSduhcssCBQ",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "中０１－１／宿０５",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJi_1j18nyGGARYxkoDabc4yU",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "宿０２",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJca0lJCyNGGARAgdAkmigDTA",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "宿０１（関東バス）",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Seibu Bus",
+              "languageCode": "en"
+            },
+            "url": "http://www.seibubus.co.jp/",
+            "lines": [
+              {
+                "id": "ChIJG3wf7TaNGGAR0I-W09mTmGA",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿２０",
+                  "languageCode": "ja"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#54C3F1",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Keio Dentetsu Bus Co.,Ltd",
+              "languageCode": "en"
+            },
+            "url": "https://www.keio-bus.com/",
+            "lines": [
+              {
+                "id": "ChIJ0XfMC9fyGGARsadj53RjWWo",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿４６",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJ9V7niMeMGGARAyPgY72cEac",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "０３０",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJkekeWdjyGGAR6dSZOM2dnnY",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿３２",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJv870h7WMGGARR-5jiLgJPFY",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿５１",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJKd-61i7zGGARibgIcMCd46g",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿４１",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJx4zL0C7zGGARkGEfZ8l2ec8",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿４３",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJkekeWdjyGGARBDsdzm6eGq4",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿３３",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJySBVs-HyGGARzZzNjkMubuo",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿３３深夜",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJMcrldNfyGGARklLImOh04mM",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿４５",
+                  "languageCode": "ja"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "東京メトロ",
+              "languageCode": "ja"
+            },
+            "url": "http://www.tokyometro.jp/",
+            "lines": [
+              {
+                "id": "ChIJ4XM7oC2NGGARWfEoXzcDCBY",
+                "vehicleType": "SUBWAY",
+                "displayName": {
+                  "text": "Tokyo Metro Marunouchi Line",
+                  "languageCode": "en"
+                },
+                "shortDisplayName": {
+                  "text": "Marunouchi Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#F22D35",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-metro/M.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "リムジンバス",
+              "languageCode": "ja"
+            },
+            "lines": [
+              {
+                "id": "ChIJh2Oey5ouGWARifWoZtMx-1c",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "Haneda-Airport Limousine Bus",
+                  "languageCode": "en"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJX4km_Q_xHmARNse6SqmioQY",
+                "vehicleType": "BUS",
+                "displayName": {
+                  "text": "Narita Airport Limousine Bus",
+                  "languageCode": "en"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Odakyu Electric Railway Co., Ltd.",
+              "languageCode": "en"
+            },
+            "url": "http://www.odakyu.jp/",
+            "lines": [
+              {
+                "id": "ChIJ86dvLn3_GGARehrkaMRKk-c",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Odakyū Odawara Line",
+                  "languageCode": "en"
+                },
+                "shortDisplayName": {
+                  "text": "Odakyu Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#0085CE",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr-v2/odakyu/OH.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJH2HmdSv-GGARqcap1of8PfA",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Romancecar",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#F05322",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr-v2/odakyu/OH.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Tokyo Metropolitan Bureau of Transportation",
+              "languageCode": "en"
+            },
+            "url": "http://www.kotsu.metro.tokyo.jp/",
+            "lines": [
+              {
+                "id": "ChIJN7k3-O2MGGARAPbN3bR_nlY",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿７５",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#91A48D",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=138",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJe0RCkiPzGGAR6Bf4v7DkUwg",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿９１",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#63C07A",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=158",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJpbn2PiCNGGARjgvr_dhyWpI",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "早７７",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#DB3616",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=147",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJCw4vE9SMGGARX_K6WVShbHw",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "ＣＨ０１",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#E90087",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=10",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJMR1fEUuNGGARuNP7XiyrpLc",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "白６１",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#960085",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=122",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJG3FtJm6LGGARPfFUE8K3P9w",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "品９７",
+                  "languageCode": "ja"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#B1D25F",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=169",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJSekV7VWNGGARUhN4oplUK_c",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "王７８",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#728FB2",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=148",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              },
+              {
+                "id": "ChIJS7cdaN6MGGARmVgcbLK5-dQ",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿７４",
+                  "languageCode": "ja"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#02A051",
+                "url": "https://tobus.jp/blsys/navi?VCD=cresultapr&ECD=rsirslt&LCD=&RTMCD=135",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Seibu Bus",
+              "languageCode": "en"
+            },
+            "url": "http://www.seibubus.co.jp/",
+            "lines": [
+              {
+                "id": "ChIJD6Hjt8zyGGARjsh9xoY6hVY",
+                "vehicleType": "BUS",
+                "shortDisplayName": {
+                  "text": "宿２０－２",
+                  "languageCode": "ja"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#54C3F1",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/bus2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "East Japan Railway",
+              "languageCode": "en"
+            },
+            "url": "http://www.jreast.co.jp/",
+            "lines": [
+              {
+                "id": "ChIJz1ou49WdImARfEXIiTaGSHU",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Limited Express（For Boso)",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#F2DA00",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJ7Wk3HGGIGGARPzws8Lav0nw",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Chūō-Sōbu Line(Local)",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#F2C900",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr/JB.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJ0y-P4qgXGWARHZV9UZo-zN8",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Chūō Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#F25210",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr/JC.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJpTS5DI8nGWARClg2Tr85p6s",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Shonan-Shinjuku Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#E21F25",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr/JS.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJTVgGihfxGGARFdaMn5ng_hw",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Narita Express",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#ED3C2D",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJ0ecqTpK-HmARnD_LHnDK7W8",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Limited Express trains on the Chuo Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#763AB0",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJIf9n7LgMGGAR2VFqcTZhzgY",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Sazanami",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#005ED1",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJ2RJYCnmMGGARjDGhgOg_5bU",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Yamanote Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#73C11D",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr/JY.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJ0fdQlkjtGGAR16C-ZevwEiY",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Saikyō Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#00C3A7",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr/JA.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJIdvg8ySgImARDfHN8PSK9A0",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Wakashio",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#005ED1",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJh05um7pOGGARLixZRnLG_xM",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Odoriko",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#13AECC",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJqfX7uy-XGGARlvRZW5eLnEc",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Tobu Railway Express",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#F29E2C",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-jr/jp-tokyo-jreast.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJZQXBVAXQHmARRifFjHAYFLE",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Limited Express（For Takasaki)",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#328F0E",
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Keio Corporation",
+              "languageCode": "en"
+            },
+            "url": "http://www.keio.co.jp/",
+            "lines": [
+              {
+                "id": "ChIJ4WHNbVHlGGAR_NRKw5D-fWE",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Keiō Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#D5007F",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr-v2/keio/KO.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJpf48yy_zGGARgnDbbiD2fVA",
+                "vehicleType": "HEAVY_RAIL",
+                "displayName": {
+                  "text": "Keio New Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#D5007F",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp2ltr-v2/keio/KO.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              }
+            ]
+          },
+          {
+            "displayName": {
+              "text": "Tokyo Metropolitan Bureau of Transportation",
+              "languageCode": "en"
+            },
+            "url": "http://www.kotsu.metro.tokyo.jp/",
+            "lines": [
+              {
+                "id": "ChIJhRiUkCqJGGAR-1sOkHEeLTQ",
+                "vehicleType": "SUBWAY",
+                "displayName": {
+                  "text": "Toei Subway-Shinjuku Line",
+                  "languageCode": "en"
+                },
+                "shortDisplayName": {
+                  "text": "Shinjuku Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#000000",
+                "backgroundColor": "#ADEE2F",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-metro/S.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              },
+              {
+                "id": "ChIJSSGkKx-NGGAR_HmbYe3rqxQ",
+                "vehicleType": "SUBWAY",
+                "displayName": {
+                  "text": "Toei Ōedo Line",
+                  "languageCode": "en"
+                },
+                "shortDisplayName": {
+                  "text": "Oedo Line",
+                  "languageCode": "en"
+                },
+                "textColor": "#FFFFFF",
+                "backgroundColor": "#DC1E77",
+                "icon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/jp-tokyo-metro/E.svg"
+                },
+                "vehicleIcon": {
+                  "url": "https://maps.gstatic.com/mapfiles/transit/iw2/svg/rail2.svg"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
