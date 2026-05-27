@@ -12,73 +12,73 @@ export abstract class AppConstant {
   public static readonly REQUEST_TIMEOUT: number = 8_000;
 
   public static readonly HOME_PAGE_META: PageMeta = {
-    title: "Home",
+    title: "🏠 Home",
     description: "A lightweight web portal for slow networks.",
     url: ShareConstant.PAGE_URL_HOME,
   };
 
   public static readonly NEWS_PAGE_META: PageMeta = {
-    title: "News",
+    title: "📰 News",
     description: "Text-based news reader - top headlines from NHK and BBC.",
     url: ShareConstant.PAGE_URL_NEWS,
   };
 
   public static readonly PLACES_PAGE_META: PageMeta = {
-    title: "Places",
+    title: "🗺️ Places",
     description: "Search nearby locations with ratings.",
     url: ShareConstant.PAGE_URL_PLACES,
   };
 
   public static readonly PLACES_NEARBY_PAGE_META: PageMeta = {
-    title: "Nearby",
+    title: "🧭 Nearby",
     description: "Places near your current location.",
     url: ShareConstant.PAGE_URL_PLACES_NEARBY,
   };
 
   public static readonly PLACES_DETAILS_PAGE_META: PageMeta = {
-    title: "Place Details",
+    title: "📋 Place Details",
     description: "Detailed information about a place.",
     url: ShareConstant.PAGE_URL_PLACES_DETAILS,
   };
 
   public static readonly SEARCH_PAGE_META: PageMeta = {
-    title: "Search",
+    title: "🔎 Search",
     description: "Text search powered by DuckDuckGo.",
     url: ShareConstant.PAGE_URL_SEARCH,
   };
 
   public static readonly TRANSIT_PAGE_META: PageMeta = {
-    title: "Transit",
+    title: "🚃 Transit",
     description: "Find train and bus routes between stations.",
     url: ShareConstant.PAGE_URL_TRANSIT,
   };
 
   public static readonly CONVERTER_PAGE_META: PageMeta = {
-    title: "Convert",
+    title: "🔁 Convert",
     description: "Year and area unit converters for daily use.",
     url: ShareConstant.PAGE_URL_CONVERTER,
   };
 
   public static readonly SETTINGS_PAGE_META: PageMeta = {
-    title: "Settings",
+    title: "⚙️ Settings",
     description: "Cache, time format, and network usage settings.",
     url: ShareConstant.PAGE_URL_SETTINGS,
   };
 
   public static readonly BATHROOMS_PAGE_META: PageMeta = {
-    title: "Bathrooms",
+    title: "🚻 Bathrooms",
     description: "Find public bathrooms near your location.",
     url: ShareConstant.PAGE_URL_BATHROOMS,
   };
 
   public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
-    title: "年份換算",
+    title: "🗓️ 年份換算",
     description: "Convert between Western, ROC (Taiwan), and Japanese era years.",
     url: ShareConstant.PAGE_URL_YEAR_CONVERTER,
   };
 
   public static readonly AREA_CONVERTER_PAGE_META: PageMeta = {
-    title: "面積換算",
+    title: "🍕 面積換算",
     description: "Convert between 坪 (tsubo), ㎡ (square meters), and 畳 (tatami).",
     url: ShareConstant.PAGE_URL_AREA_CONVERTER,
   };

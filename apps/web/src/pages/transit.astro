@@ -43,11 +43,7 @@ import { AppConstant } from "../constant";
 
     <div class="transit-form__group">
       <label class="transit-form__label" for="datetime-input">Departure</label>
-      <input
-        id="datetime-input"
-        type="datetime-local"
-        class="transit-form__input"
-      />
+      <input id="datetime-input" type="datetime-local" class="transit-form__input" />
     </div>
 
     <button type="submit" id="search-btn" class="transit-form__submit">Search routes</button>
@@ -143,8 +139,7 @@ import { AppConstant } from "../constant";
         const isWalk = isWalkLeg(leg);
         const cls = isWalk ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
         const colorStyle = !isWalk && leg.color ? ` style="--leg-color:${leg.color}"` : "";
-        const timeRange =
-          leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
+        const timeRange = leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
         const durationText = leg.duration !== null ? ` · ${leg.duration}分` : "";
         const platform = leg.platform ? ` · ${leg.platform}` : "";
         const getoffText = leg.getoff ? ` · 降 ${leg.getoff}号車` : "";
@@ -163,12 +158,11 @@ import { AppConstant } from "../constant";
     }
     setStatus("");
     routeList.innerHTML = routes
-      .map(
-        (r) => {
-          const fareText = r.referenceFare
-            ? ` · IC ¥${r.referenceFare.ic.toLocaleString()} / 切符 ¥${r.referenceFare.ticket.toLocaleString()}`
-            : "";
-          return `
+      .map((r) => {
+        const fareText = r.referenceFare
+          ? ` · IC ¥${r.referenceFare.ic.toLocaleString()} / 切符 ¥${r.referenceFare.ticket.toLocaleString()}`
+          : "";
+        return `
         <li class="transit-route">
           <div class="transit-route__summary">
             <span class="transit-route__time">${r.totalTime} min</span>
@@ -180,8 +174,7 @@ import { AppConstant } from "../constant";
           <ul class="transit-route__legs">${renderLegs(r.legs)}</ul>
         </li>
       `;
-        },
-      )
+      })
       .join("");
   }
 
@@ -296,7 +289,8 @@ import { AppConstant } from "../constant";
         lastTo = toCoord;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
+        if (cacheStatus)
+          cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, AppSettings.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);

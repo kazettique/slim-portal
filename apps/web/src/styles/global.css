@@ -80,6 +80,7 @@ nav {
 nav a {
   font-weight: 600;
   color: var(--fg);
+  flex-shrink: 0;
 }
 nav a[aria-current="page"] {
   color: var(--accent);
