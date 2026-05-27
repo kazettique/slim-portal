@@ -60,6 +60,7 @@ header {
   position: sticky;
   top: 0;
   background: var(--bg);
+  overflow-x: auto;
 }
 
 nav {
