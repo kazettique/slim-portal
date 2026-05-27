@@ -5,7 +5,7 @@ import { PublicBathroomConstant } from "../external/publicBathroom/constant";
 import { PublicBathroomRequest } from "../external/publicBathroom/type";
 import { PublicBathroomValidator } from "../external/publicBathroom/validator";
 
-export abstract class BathroomsLib {
+export abstract class BathroomLib {
   private static readonly METERS_PER_MILE: number = 1_609.344;
   private static readonly MAX_RADIUS_MILES: number = 100;
 

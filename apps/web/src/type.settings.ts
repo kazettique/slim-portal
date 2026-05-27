@@ -11,12 +11,12 @@ export enum Theme {
 
 export enum NetworkPage {
   NEWS = "news",
-  PLACES_SEARCH = "places/search",
-  PLACES_NEARBY = "places/nearby",
-  PLACES_DETAILS = "places/details",
+  PLACE_SEARCH = "place/search",
+  PLACE_NEARBY = "place/nearby",
+  PLACE_DETAIL = "place/detail",
   TRANSIT = "transit",
   SEARCH = "search",
-  BATHROOMS = "bathrooms/nearby",
+  BATHROOM = "bathroom/nearby",
 }
 
 export interface NetworkEntry {

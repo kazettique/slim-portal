@@ -1,11 +1,11 @@
 ---
-import Base from "../layouts/Base.astro";
+import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.BATHROOMS_PAGE_META.title} description={AppConstant.BATHROOMS_PAGE_META.description}>
-  <h1>{AppConstant.BATHROOMS_PAGE_META.title}</h1>
-  <p>{AppConstant.BATHROOMS_PAGE_META.description}</p>
+<Base title={AppConstant.BATHROOM_PAGE_META.title} description={AppConstant.BATHROOM_PAGE_META.description}>
+  <h1>{AppConstant.BATHROOM_PAGE_META.title}</h1>
+  <p>{AppConstant.BATHROOM_PAGE_META.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">
     <div class="places-form__row">
@@ -114,13 +114,13 @@ import { AppConstant } from "../constant";
         lng: String(userLng),
         radius,
       });
-      const res = await fetch(`${AppConstant.API_BASE_URL}/bathrooms/nearby?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/bathroom/nearby?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      SettingsUtil.addNetworkBytes(NetworkPage.BATHROOMS, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.BATHROOM, new Blob([text]).size);
       const items = JSON.parse(text) as BathroomItem[];
       renderBathrooms(items);
 
@@ -133,7 +133,7 @@ import { AppConstant } from "../constant";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_BATHROOMS);
+      setStatus(AppConstant.ERROR_MSG_LOAD_BATHROOM);
     }
   }
 

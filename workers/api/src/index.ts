@@ -1,13 +1,13 @@
-import { handleNews } from "./routes/news";
+import { handleNews } from "./route/news";
 import {
-  handlePlacesSearch,
-  handlePlacesAutocomplete,
-  handlePlacesDetails,
-  handlePlacesNearby,
-} from "./routes/places";
-import { handleSearch } from "./routes/search";
-import { handleTransit, handleTransitSearch, handleTransitAround, handleTransitAutocomplete } from "./routes/transit";
-import { handleBathroomsNearby } from "./routes/bathrooms";
+  handlePlaceSearch,
+  handlePlaceAutocomplete,
+  handlePlaceDetail,
+  handlePlaceNearby,
+} from "./route/place";
+import { handleSearch } from "./route/search";
+import { handleTransit, handleTransitSearch, handleTransitAround, handleTransitAutocomplete } from "./route/transit";
+import { handleBathroomNearby } from "./route/bathroom";
 import { Env, HttpRequestMethod, HttpStatusCode } from "./type";
 import { WorkerUtil } from "./util";
 
@@ -16,16 +16,16 @@ type RouteHandler = (request: Request, env: Env, ctx: ExecutionContext) => Promi
 // TODO: base url, page url constant in app
 const GET_ROUTES: Record<string, RouteHandler> = {
   "/api/news": handleNews,
-  "/api/places/search": handlePlacesSearch,
-  "/api/places/autocomplete": handlePlacesAutocomplete,
-  "/api/places/details": handlePlacesDetails,
-  "/api/places/nearby": handlePlacesNearby,
+  "/api/place/search": handlePlaceSearch,
+  "/api/place/autocomplete": handlePlaceAutocomplete,
+  "/api/place/detail": handlePlaceDetail,
+  "/api/place/nearby": handlePlaceNearby,
   "/api/search": handleSearch,
   "/api/transit": handleTransit,
   "/api/transit/search": handleTransitSearch,
   "/api/transit/around": handleTransitAround,
   "/api/transit/autocomplete": handleTransitAutocomplete,
-  "/api/bathrooms/nearby": handleBathroomsNearby,
+  "/api/bathroom/nearby": handleBathroomNearby,
 };
 
 export default {

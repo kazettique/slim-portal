@@ -7,22 +7,22 @@ export abstract class SettingsUtil {
   public static readonly MAX_LOG_ENTRIES = 500;
   public static readonly NETWORK_PAGE_LABELS: Record<NetworkPage, string> = {
     [NetworkPage.NEWS]: "News",
-    [NetworkPage.PLACES_SEARCH]: "Places – Search",
-    [NetworkPage.PLACES_NEARBY]: "Places – Nearby",
-    [NetworkPage.PLACES_DETAILS]: "Places – Details",
+    [NetworkPage.PLACE_SEARCH]: "Places – Search",
+    [NetworkPage.PLACE_NEARBY]: "Places – Nearby",
+    [NetworkPage.PLACE_DETAIL]: "Places – Details",
     [NetworkPage.TRANSIT]: "Transit",
     [NetworkPage.SEARCH]: "Search",
-    [NetworkPage.BATHROOMS]: "Bathrooms – Nearby",
+    [NetworkPage.BATHROOM]: "Bathrooms – Nearby",
   };
 
   public static readonly PAGE_COLORS: Record<NetworkPage, string> = {
-    [NetworkPage.NEWS]:           "#0057b7",
-    [NetworkPage.PLACES_SEARCH]:  "#2e8b57",
-    [NetworkPage.PLACES_NEARBY]:  "#6a5acd",
-    [NetworkPage.PLACES_DETAILS]: "#e67e22",
-    [NetworkPage.TRANSIT]:        "#c0392b",
-    [NetworkPage.SEARCH]:         "#16a085",
-    [NetworkPage.BATHROOMS]:      "#78909c",
+    [NetworkPage.NEWS]:          "#0057b7",
+    [NetworkPage.PLACE_SEARCH]:  "#2e8b57",
+    [NetworkPage.PLACE_NEARBY]:  "#6a5acd",
+    [NetworkPage.PLACE_DETAIL]:  "#e67e22",
+    [NetworkPage.TRANSIT]:       "#c0392b",
+    [NetworkPage.SEARCH]:        "#16a085",
+    [NetworkPage.BATHROOM]:      "#78909c",
   };
 
   // ── Private LS keys ───────────────────────────────────────────

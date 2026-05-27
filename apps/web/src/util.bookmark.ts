@@ -1,30 +1,30 @@
-import { BookmarkPage, type Bookmark } from "./type.bookmark";
+import { BookmarkPage, type Bookmark, type TransitBookmarkParam } from "./type.bookmark";
 
 export abstract class BookmarkUtil {
   private static readonly LS_KEY: string = "bookmarks";
 
   public static readonly BOOKMARK_PAGE_LABELS: Record<BookmarkPage, string> = {
     [BookmarkPage.TRANSIT]: "Transit",
-    [BookmarkPage.PLACES]: "Places",
+    [BookmarkPage.PLACE]: "Places",
     [BookmarkPage.SEARCH]: "Search",
   };
 
   public static readonly PAGE_ORDER: BookmarkPage[] = [
     BookmarkPage.TRANSIT,
-    BookmarkPage.PLACES,
+    BookmarkPage.PLACE,
     BookmarkPage.SEARCH,
   ];
 
   public static buildUrl(bookmark: Bookmark): string {
     if (bookmark.page === BookmarkPage.TRANSIT) {
-      const p = bookmark.params as { from: string; to: string; from_name: string; to_name: string };
+      const p = bookmark.params as TransitBookmarkParam;
       const sp = new URLSearchParams({ from: p.from, to: p.to, from_name: p.from_name, to_name: p.to_name, restore: "1" });
       return `/transit?${sp.toString()}`;
     }
-    if (bookmark.page === BookmarkPage.PLACES) {
+    if (bookmark.page === BookmarkPage.PLACE) {
       const p = bookmark.params as { q: string };
       const sp = new URLSearchParams({ q: p.q, restore: "1" });
-      return `/places?${sp.toString()}`;
+      return `/place?${sp.toString()}`;
     }
     const p = bookmark.params as { q: string };
     const sp = new URLSearchParams({ q: p.q, restore: "1" });

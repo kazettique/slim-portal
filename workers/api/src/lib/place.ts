@@ -15,7 +15,7 @@ import { GMapSearchNearbyConstant } from "../external/googleMap/places/searchNea
 import { SearchNearbyRequest } from "../external/googleMap/places/searchNearby/type";
 import { GMapSearchNearbyValidator } from "../external/googleMap/places/searchNearby/validator";
 
-export abstract class PlacesLib {
+export abstract class PlaceLib {
   private static RAPIDAPI_HEADERS = (key: string, host: string): Record<string, string> => ({
     "x-rapidapi-key": key,
     "x-rapidapi-host": host,

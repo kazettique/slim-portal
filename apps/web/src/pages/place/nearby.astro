@@ -1,13 +1,13 @@
 ---
-import Base from "../../layouts/Base.astro";
+import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
 ---
 
-<Base title={AppConstant.PLACES_NEARBY_PAGE_META.title} description={AppConstant.PLACES_NEARBY_PAGE_META.description}>
-  <p class="place-details__back"><a href="/places">← Back to search</a></p>
+<Base title={AppConstant.PLACE_NEARBY_PAGE_META.title} description={AppConstant.PLACE_NEARBY_PAGE_META.description}>
+  <p class="place-details__back"><a href="/place">← Back to search</a></p>
 
-  <h1>{AppConstant.PLACES_NEARBY_PAGE_META.title}</h1>
-  <p>{AppConstant.PLACES_NEARBY_PAGE_META.description}</p>
+  <h1>{AppConstant.PLACE_NEARBY_PAGE_META.title}</h1>
+  <p>{AppConstant.PLACE_NEARBY_PAGE_META.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">
     <div class="places-form__row">
@@ -77,7 +77,7 @@ import { AppConstant } from "../../constant";
     list.innerHTML = items
       .map((p) => {
         const detailsLink = p.id
-          ? `<a href="/places/details?id=${encodeURIComponent(p.id)}">Details</a>`
+          ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>`
           : "";
         const appleMapsLink =
           p.lat !== null && p.lng !== null
@@ -112,13 +112,13 @@ import { AppConstant } from "../../constant";
         lng: String(userLng),
         radius,
       });
-      const res = await fetch(`${AppConstant.API_BASE_URL}/places/nearby?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/place/nearby?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      SettingsUtil.addNetworkBytes(NetworkPage.PLACES_NEARBY, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.PLACE_NEARBY, new Blob([text]).size);
       const items = JSON.parse(text) as PlaceItem[];
       renderPlaces(items);
 
@@ -128,7 +128,7 @@ import { AppConstant } from "../../constant";
         if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACES_NEARBY);
+      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_NEARBY);
     }
   }
 

@@ -1,10 +1,10 @@
 ---
-import Base from "../../layouts/Base.astro";
+import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
 ---
 
-<Base title={AppConstant.PLACES_DETAILS_PAGE_META.title} description={AppConstant.PLACES_DETAILS_PAGE_META.description}>
-  <p class="place-details__back"><a id="back-link" href="/places">← Back</a></p>
+<Base title={AppConstant.PLACE_DETAIL_PAGE_META.title} description={AppConstant.PLACE_DETAIL_PAGE_META.description}>
+  <p class="place-details__back"><a id="back-link" href="/place">← Back</a></p>
 
   <p id="details-status" class="status" aria-live="polite">Loading…</p>
 
@@ -126,7 +126,7 @@ import { AppConstant } from "../../constant";
       ${mapsLinks.length > 0 ? `<div class="place-details__maps">${mapsLinks.join("")}</div>` : ""}
       ${sections.join("")}
       <div class="place-details__section">
-        <a href="/places/nearby">Find nearby places</a>
+        <a href="/place/nearby">Find nearby places</a>
       </div>
     `;
   }
@@ -143,13 +143,13 @@ import { AppConstant } from "../../constant";
 
     try {
       const params = new URLSearchParams({ id: placeId });
-      const res = await fetch(`${AppConstant.API_BASE_URL}/places/details?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/place/detail?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      SettingsUtil.addNetworkBytes(NetworkPage.PLACES_DETAILS, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.PLACE_DETAIL, new Blob([text]).size);
       const item = JSON.parse(text) as PlaceDetails;
       setStatus("");
       renderDetails(item);
@@ -157,7 +157,7 @@ import { AppConstant } from "../../constant";
       const cacheDate = res.headers.get("X-Cache-Date");
       if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAILS);
+      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAIL);
     }
   }
 

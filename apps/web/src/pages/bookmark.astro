@@ -1,11 +1,11 @@
 ---
-import Base from "../layouts/Base.astro";
+import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.BOOKMARKS_PAGE_META.title} description={AppConstant.BOOKMARKS_PAGE_META.description}>
-  <h1>{AppConstant.BOOKMARKS_PAGE_META.title}</h1>
-  <p>{AppConstant.BOOKMARKS_PAGE_META.description}</p>
+<Base title={AppConstant.BOOKMARK_PAGE_META.title} description={AppConstant.BOOKMARK_PAGE_META.description}>
+  <h1>{AppConstant.BOOKMARK_PAGE_META.title}</h1>
+  <p>{AppConstant.BOOKMARK_PAGE_META.description}</p>
 
   <div id="bookmarks-actions" class="bookmarks-actions" style="display:none">
     <button id="delete-selected-btn" class="refresh-btn" disabled>Delete selected</button>

@@ -23,22 +23,22 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_NEWS,
   };
 
-  public static readonly PLACES_PAGE_META: PageMeta = {
+  public static readonly PLACE_PAGE_META: PageMeta = {
     title: "🗺️ Places",
     description: "Search nearby locations with ratings.",
-    url: ShareConstant.PAGE_URL_PLACES,
+    url: ShareConstant.PAGE_URL_PLACE,
   };
 
-  public static readonly PLACES_NEARBY_PAGE_META: PageMeta = {
+  public static readonly PLACE_NEARBY_PAGE_META: PageMeta = {
     title: "🧭 Nearby",
     description: "Places near your current location.",
-    url: ShareConstant.PAGE_URL_PLACES_NEARBY,
+    url: ShareConstant.PAGE_URL_PLACE_NEARBY,
   };
 
-  public static readonly PLACES_DETAILS_PAGE_META: PageMeta = {
+  public static readonly PLACE_DETAIL_PAGE_META: PageMeta = {
     title: "📋 Place Details",
     description: "Detailed information about a place.",
-    url: ShareConstant.PAGE_URL_PLACES_DETAILS,
+    url: ShareConstant.PAGE_URL_PLACE_DETAIL,
   };
 
   public static readonly SEARCH_PAGE_META: PageMeta = {
@@ -65,16 +65,16 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_SETTINGS,
   };
 
-  public static readonly BATHROOMS_PAGE_META: PageMeta = {
+  public static readonly BATHROOM_PAGE_META: PageMeta = {
     title: "🚻 Bathrooms",
     description: "Find public bathrooms near your location.",
-    url: ShareConstant.PAGE_URL_BATHROOMS,
+    url: ShareConstant.PAGE_URL_BATHROOM,
   };
 
-  public static readonly BOOKMARKS_PAGE_META: PageMeta = {
+  public static readonly BOOKMARK_PAGE_META: PageMeta = {
     title: "🔖 Bookmarks",
     description: "Your saved searches.",
-    url: ShareConstant.PAGE_URL_BOOKMARKS,
+    url: ShareConstant.PAGE_URL_BOOKMARK,
   };
 
   public static readonly YEAR_CONVERTER_PAGE_META: PageMeta = {
@@ -91,12 +91,12 @@ export abstract class AppConstant {
 
   public static readonly NAV_LIST: PageMeta[] = [
     this.HOME_PAGE_META,
-    this.BOOKMARKS_PAGE_META,
+    this.BOOKMARK_PAGE_META,
     this.TRANSIT_PAGE_META,
-    this.PLACES_PAGE_META,
+    this.PLACE_PAGE_META,
     this.SEARCH_PAGE_META,
     this.NEWS_PAGE_META,
-    this.BATHROOMS_PAGE_META,
+    this.BATHROOM_PAGE_META,
     this.CONVERTER_PAGE_META,
     this.SETTINGS_PAGE_META,
   ];
@@ -104,10 +104,10 @@ export abstract class AppConstant {
   public static readonly FOOTER_MESSAGE: string = "Slim Portal - optimized for slow networks";
 
   public static readonly ERROR_MSG_LOAD_NEWS: string = "Could not load news. Please try again later.";
-  public static readonly ERROR_MSG_LOAD_PLACES: string = "Could not load places. Please try again.";
-  public static readonly ERROR_MSG_LOAD_PLACES_NEARBY: string = "Could not load nearby places. Please try again.";
-  public static readonly ERROR_MSG_LOAD_PLACE_DETAILS: string = "Could not load place details. Please try again.";
-  public static readonly ERROR_MSG_PLACES_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";
+  public static readonly ERROR_MSG_LOAD_PLACE: string = "Could not load places. Please try again.";
+  public static readonly ERROR_MSG_LOAD_PLACE_NEARBY: string = "Could not load nearby places. Please try again.";
+  public static readonly ERROR_MSG_LOAD_PLACE_DETAIL: string = "Could not load place details. Please try again.";
+  public static readonly ERROR_MSG_PLACE_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";
   public static readonly ERROR_MSG_SEARCH_FAILED: string = "Search failed. Please try again.";
 
   public static readonly ERROR_MSG_REFRESH_FAILED: string = "Refresh failed. Check your connection.";
@@ -116,7 +116,7 @@ export abstract class AppConstant {
   public static readonly MSG_CACHE_CLEAR_FAILED: string = "Failed to clear cache.";
   public static readonly MSG_SETTINGS_RESET: string = "Settings reset to defaults.";
 
-  public static readonly ERROR_MSG_LOAD_BATHROOMS: string = "Could not load nearby bathrooms. Please try again.";
+  public static readonly ERROR_MSG_LOAD_BATHROOM: string = "Could not load nearby bathrooms. Please try again.";
 
   public static readonly ERROR_MSG_TRANSIT_SEARCH_FAILED: string = "Could not find routes. Please try again.";
   public static readonly ERROR_MSG_TRANSIT_AUTOCOMPLETE_FAILED: string = "Could not load suggestions.";

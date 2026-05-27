@@ -1,9 +1,9 @@
-import { BathroomsLib } from "../lib/bathrooms";
+import { BathroomLib } from "../lib/bathroom";
 import { Env, HttpStatusCode } from "../type";
 import { PublicBathroomConstant } from "../external/publicBathroom/constant";
 import { PublicBathroomValidator } from "../external/publicBathroom/validator";
 
-export async function handleBathroomsNearby(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handleBathroomNearby(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const latRaw = url.searchParams.get("lat");
   const lngRaw = url.searchParams.get("lng");
@@ -22,7 +22,7 @@ export async function handleBathroomsNearby(request: Request, env: Env, ctx: Exe
   }
 
   try {
-    const { items, cachedAt } = await BathroomsLib.nearby(result.data, env, ctx);
+    const { items, cachedAt } = await BathroomLib.nearby(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${PublicBathroomConstant.CACHE_TTL}`,
@@ -31,7 +31,7 @@ export async function handleBathroomsNearby(request: Request, env: Env, ctx: Exe
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
-    console.error("handleBathroomsNearby error:", err);
+    console.error("handleBathroomNearby error:", err);
     const detail = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: "Failed to fetch nearby bathrooms", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,

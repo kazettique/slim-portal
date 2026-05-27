@@ -1,11 +1,11 @@
 ---
-import Base from "../layouts/Base.astro";
+import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base title={AppConstant.PLACES_PAGE_META.title} description={AppConstant.PLACES_PAGE_META.description}>
-  <h1>{AppConstant.PLACES_PAGE_META.title}</h1>
-  <p>{AppConstant.PLACES_PAGE_META.description}</p>
+<Base title={AppConstant.PLACE_PAGE_META.title} description={AppConstant.PLACE_PAGE_META.description}>
+  <h1>{AppConstant.PLACE_PAGE_META.title}</h1>
+  <p>{AppConstant.PLACE_PAGE_META.description}</p>
 
   <form id="places-form" class="places-form">
     <div class="places-form__row">
@@ -26,7 +26,7 @@ import { AppConstant } from "../constant";
     <button type="button" id="locate-btn" class="locate-btn">Use my location</button>
   </form>
 
-  <a href="/places/nearby" class="places-nearby-link">Find places nearby →</a>
+  <a href="/place/nearby" class="places-nearby-link">Find places nearby →</a>
 
   <p id="places-status" class="status" aria-live="polite"></p>
 
@@ -61,7 +61,7 @@ import { AppConstant } from "../constant";
   import { BookmarkUtil } from "../util.bookmark";
   import { BookmarkPage } from "../type.bookmark";
   import type { PlaceItem, PlacePrediction } from "@slim-portal/share";
-  import type { Bookmark, PlacesBookmarkParams } from "../type.bookmark";
+  import type { Bookmark, PlaceBookmarkParam } from "../type.bookmark";
 
   const form = document.getElementById("places-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
@@ -102,7 +102,7 @@ import { AppConstant } from "../constant";
     list.innerHTML = items
       .map((p) => {
         const detailsLink = p.id
-          ? `<a href="/places/details?id=${encodeURIComponent(p.id)}">Details</a>`
+          ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>`
           : "";
         const appleMapsLink =
           p.lat !== null && p.lng !== null
@@ -135,7 +135,7 @@ import { AppConstant } from "../constant";
         params.set("lat", String(userLat));
         params.set("lng", String(userLng));
       }
-      const res = await fetch(`${AppConstant.API_BASE_URL}/places/autocomplete?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/place/autocomplete?${params}`, {
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) return;
@@ -184,13 +184,13 @@ import { AppConstant } from "../constant";
     if (cacheStatus) cacheStatus.textContent = "";
 
     try {
-      const res = await fetch(`${AppConstant.API_BASE_URL}/places/search?${params}`, {
+      const res = await fetch(`${AppConstant.API_BASE_URL}/place/search?${params}`, {
         cache: bypassCache ? "no-store" : "default",
         signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
-      SettingsUtil.addNetworkBytes(NetworkPage.PLACES_SEARCH, new Blob([text]).size);
+      SettingsUtil.addNetworkBytes(NetworkPage.PLACE_SEARCH, new Blob([text]).size);
       const items = JSON.parse(text) as PlaceItem[];
       renderPlaces(items);
 
@@ -201,7 +201,7 @@ import { AppConstant } from "../constant";
         if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACES);
+      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE);
     }
   }
 
@@ -271,10 +271,10 @@ import { AppConstant } from "../constant";
     const q = input?.value.trim() ?? "";
     if (!q) return;
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-    const params: PlacesBookmarkParams = { q };
+    const params: PlaceBookmarkParam = { q };
     const bookmark: Bookmark = {
       id,
-      page: BookmarkPage.PLACES,
+      page: BookmarkPage.PLACE,
       label: q,
       params,
       createdAt: new Date().toISOString(),

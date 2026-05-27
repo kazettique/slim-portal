@@ -1,4 +1,4 @@
-import { PlacesLib } from "../lib/places";
+import { PlaceLib } from "../lib/place";
 import { Env, HttpStatusCode } from "../type";
 import { GMapSearchTextConstant } from "../external/googleMap/places/searchText/constant";
 import { GMapSearchTextValidator } from "../external/googleMap/places/searchText/validator";
@@ -9,7 +9,7 @@ import { GMapDetailsValidator } from "../external/googleMap/places/details/valid
 import { GMapSearchNearbyConstant } from "../external/googleMap/places/searchNearby/constant";
 import { GMapSearchNearbyValidator } from "../external/googleMap/places/searchNearby/validator";
 
-export async function handlePlacesSearch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handlePlaceSearch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const latRaw = url.searchParams.get("lat");
   const lngRaw = url.searchParams.get("lng");
@@ -27,7 +27,7 @@ export async function handlePlacesSearch(request: Request, env: Env, ctx: Execut
   }
 
   try {
-    const { items, cachedAt } = await PlacesLib.search(result.data, env, ctx);
+    const { items, cachedAt } = await PlaceLib.search(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${GMapSearchTextConstant.CACHE_TTL}`,
@@ -36,7 +36,7 @@ export async function handlePlacesSearch(request: Request, env: Env, ctx: Execut
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
-    console.error("handlePlacesSearch error:", err);
+    console.error("handlePlaceSearch error:", err);
     const detail = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: "Failed to fetch places", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
@@ -45,7 +45,7 @@ export async function handlePlacesSearch(request: Request, env: Env, ctx: Execut
   }
 }
 
-export async function handlePlacesAutocomplete(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handlePlaceAutocomplete(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const latRaw = url.searchParams.get("lat");
   const lngRaw = url.searchParams.get("lng");
@@ -65,7 +65,7 @@ export async function handlePlacesAutocomplete(request: Request, env: Env, ctx: 
   }
 
   try {
-    const { items, cachedAt } = await PlacesLib.autocomplete(result.data, env, ctx);
+    const { items, cachedAt } = await PlaceLib.autocomplete(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${GMapAutocompleteConstant.CACHE_TTL}`,
@@ -74,7 +74,7 @@ export async function handlePlacesAutocomplete(request: Request, env: Env, ctx: 
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
-    console.error("handlePlacesAutocomplete error:", err);
+    console.error("handlePlaceAutocomplete error:", err);
     const detail = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: "Failed to fetch place predictions", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
@@ -83,7 +83,7 @@ export async function handlePlacesAutocomplete(request: Request, env: Env, ctx: 
   }
 }
 
-export async function handlePlacesDetails(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handlePlaceDetail(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
 
   const result = GMapDetailsValidator.REQUEST_VALIDATOR.safeParse({
@@ -97,7 +97,7 @@ export async function handlePlacesDetails(request: Request, env: Env, ctx: Execu
   }
 
   try {
-    const { item, cachedAt } = await PlacesLib.details(result.data, env, ctx);
+    const { item, cachedAt } = await PlaceLib.details(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${GMapDetailsConstant.CACHE_TTL}`,
@@ -106,7 +106,7 @@ export async function handlePlacesDetails(request: Request, env: Env, ctx: Execu
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(item), { status: HttpStatusCode.OK, headers });
   } catch (err) {
-    console.error("handlePlacesDetails error:", err);
+    console.error("handlePlaceDetail error:", err);
     const detail = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: "Failed to fetch place details", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
@@ -115,7 +115,7 @@ export async function handlePlacesDetails(request: Request, env: Env, ctx: Execu
   }
 }
 
-export async function handlePlacesNearby(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+export async function handlePlaceNearby(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const latRaw = url.searchParams.get("lat");
   const lngRaw = url.searchParams.get("lng");
@@ -136,7 +136,7 @@ export async function handlePlacesNearby(request: Request, env: Env, ctx: Execut
   }
 
   try {
-    const { items, cachedAt } = await PlacesLib.nearby(result.data, env, ctx);
+    const { items, cachedAt } = await PlaceLib.nearby(result.data, env, ctx);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "Cache-Control": `public, max-age=${GMapSearchNearbyConstant.CACHE_TTL}`,
@@ -145,7 +145,7 @@ export async function handlePlacesNearby(request: Request, env: Env, ctx: Execut
     if (cachedAt !== null) headers["X-Cache-Date"] = cachedAt;
     return new Response(JSON.stringify(items), { status: HttpStatusCode.OK, headers });
   } catch (err) {
-    console.error("handlePlacesNearby error:", err);
+    console.error("handlePlaceNearby error:", err);
     const detail = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: "Failed to fetch nearby places", detail }), {
       status: HttpStatusCode.BAD_GATEWAY,
