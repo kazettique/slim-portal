@@ -1,31 +1,12 @@
 ---
 import Base from "../layout/Base.astro";
-import type { NewsItem } from "@slim-portal/share";
 import { AppConstant } from "../constant";
-import { AppUtil } from "../util";
-
-// const WORKER_URL = import.meta.env.WORKER_URL ?? "";
-const apiUrl = AppConstant.WORKER_URL
-  ? AppConstant.WORKER_URL + AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url
-  : "http://localhost:8787" + AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url;
-
-let items: NewsItem[] = [];
-let error = "";
-
-try {
-  const res = await fetch(apiUrl, { signal: AbortSignal.timeout(AppConstant.REQUEST_TIMEOUT) });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  items = await res.json();
-} catch (e) {
-  error = AppConstant.ERROR_MSG_LOAD_NEWS;
-}
 ---
 
 <Base title={AppConstant.NEWS_PAGE_META.title} description={AppConstant.NEWS_PAGE_META.description}>
   <h1>{AppConstant.NEWS_PAGE_META.title}</h1>
 
-  {error && <p class="status">{error}</p>}
-  {!error && items.length === 0 && <p class="status">No articles found.</p>}
+  <p class="status" id="news-status" aria-live="polite">Loading…</p>
 
   <div class="news-toolbar toolbar" id="news-toolbar">
     <button id="refresh-btn" class="refresh-btn" aria-label="Refresh news">
@@ -46,27 +27,14 @@ try {
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
-  {
-    items.length > 0 && (
-      <ul class="news-list" id="news-list">
-        {items.map((item) => (
-          <li class="news-item">
-            <div class="news-item__title">
-              <a href={item.url} target="_blank" rel="noopener noreferrer">
-                {item.title}
-              </a>
-              <span class="badge">{item.source}</span>
-            </div>
-            <div class="news-item__meta">{AppUtil.formatDate(item.publishedAt)}</div>
-            {item.summary && <div class="news-item__summary">{item.summary}</div>}
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  <!-- Always in DOM so client-side fetch can populate it -->
+  <ul class="news-list" id="news-list"></ul>
+
+  <noscript><p class="status">JavaScript is required to load news.</p></noscript>
 </Base>
 
 <script>
+  import type { NewsItem } from "@slim-portal/share";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
   import { SettingsUtil } from "../util.settings";
@@ -74,55 +42,66 @@ try {
 
   const btn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
-  const list = document.getElementById("news-list");
+  const list = document.getElementById("news-list") as HTMLUListElement | null;
+  const statusEl = document.getElementById("news-status") as HTMLParagraphElement | null;
 
-  if (btn) {
-    btn.addEventListener("click", async () => {
+  function setStatus(msg: string): void {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.hidden = msg === "";
+  }
+
+  function renderItems(items: NewsItem[], fmt: string): void {
+    if (!list) return;
+    list.innerHTML = items
+      .map(
+        (item) => `
+        <li class="news-item">
+          <div class="news-item__title">
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+            <span class="badge">${item.source}</span>
+          </div>
+          <div class="news-item__meta">${AppUtil.formatDate(item.publishedAt, fmt)}</div>
+          ${item.summary ? `<div class="news-item__summary">${item.summary}</div>` : ""}
+        </li>`,
+      )
+      .join("");
+  }
+
+  async function fetchNews(noCache: boolean = false): Promise<void> {
+    if (btn) {
       btn.disabled = true;
       btn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
-      if (cacheStatus) cacheStatus.textContent = "";
+    }
+    if (cacheStatus) cacheStatus.textContent = "";
 
-      try {
-        const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url, {
-          cache: "no-store",
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        SettingsUtil.addNetworkBytes(NetworkPage.NEWS, new Blob([text]).size);
-        const fresh = JSON.parse(text) as Array<{
-          title: string;
-          summary: string;
-          url: string;
-          publishedAt: string;
-          source: string;
-        }>;
+    try {
+      const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url, {
+        cache: noCache ? "no-store" : "default",
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      SettingsUtil.addNetworkBytes(NetworkPage.NEWS, new Blob([text]).size);
+      const items = JSON.parse(text) as NewsItem[];
+      const fmt = SettingsUtil.getTimeFormat();
 
-        const fmt = SettingsUtil.getTimeFormat();
-        if (list) {
-          list.innerHTML = fresh
-            .map(
-              (item) => `
-            <li class="news-item">
-              <div class="news-item__title">
-                <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-                <span class="badge">${item.source}</span>
-              </div>
-              <div class="news-item__meta">${AppUtil.formatDate(item.publishedAt, fmt)}</div>
-              ${item.summary ? `<div class="news-item__summary">${item.summary}</div>` : ""}
-            </li>
-          `,
-            )
-            .join("");
-        }
+      setStatus(items.length === 0 ? "No articles found." : "");
+      renderItems(items, fmt);
 
-        const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, fmt) : "";
-      } catch {
-        alert(AppConstant.ERROR_MSG_REFRESH_FAILED);
-      } finally {
+      const cacheDate = res.headers.get("X-Cache-Date");
+      if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, fmt) : "";
+    } catch {
+      setStatus(AppConstant.ERROR_MSG_LOAD_NEWS);
+      if (noCache) alert(AppConstant.ERROR_MSG_REFRESH_FAILED);
+    } finally {
+      if (btn) {
         btn.disabled = false;
         btn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
       }
-    });
+    }
   }
+
+  // Load on page open, bypass SW cache on explicit refresh
+  fetchNews();
+  btn?.addEventListener("click", () => fetchNews(true));
 </script>
