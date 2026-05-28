@@ -80,6 +80,8 @@ const canonicalPath = Astro.url.pathname;
         var meta = document.getElementById("theme-color-meta");
         if (meta) meta.content = isDark ? "#121212" : "#ffffff";
       })();
+      // Keep active nav item visible when the nav overflows horizontally
+      document.querySelector('nav a[aria-current="page"]')?.scrollIntoView({ inline: "center", block: "nearest" });
     </script>
   </body>
 </html>
