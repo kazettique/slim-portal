@@ -11,6 +11,20 @@ abstract class SwHandler {
         // abort the install, so skipWaiting() always runs and the new SW
         // always activates (missed entries are filled in by cacheFirst at runtime).
         .then((cache) => Promise.allSettled(SwConstant.SHELL_URLS.map((url) => cache.add(url))))
+        .then(async () => {
+          // Extract hashed /_astro/ assets from the cached home page and pre-cache them.
+          // Astro uses content-hashed filenames unknown at SW build time, so we read
+          // them dynamically from the already-cached HTML instead of hardcoding paths.
+          const cache = await caches.open(SwConstant.SHELL_CACHE);
+          const home = await cache.match("/");
+          if (home) {
+            const html = await home.text();
+            const matches = html.match(/\/_astro\/[^"'\s]+\.(?:css|js)/g);
+            if (matches) {
+              await Promise.allSettled([...new Set(matches)].map((url) => cache.add(url)));
+            }
+          }
+        })
         .then(() => sw.skipWaiting()),
     );
   }
