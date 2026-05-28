@@ -55,7 +55,7 @@ import { AppConstant } from "../constant";
   import { BookmarkUtil } from "../util.bookmark";
   import { BookmarkPage } from "../type.bookmark";
   import type { SearchItem } from "@slim-portal/share";
-  import type { Bookmark, SearchBookmarkParams } from "../type.bookmark";
+  import type { Bookmark, SearchBookmarkParam } from "../type.bookmark";
 
   const form = document.getElementById("search-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
@@ -72,7 +72,7 @@ import { AppConstant } from "../constant";
     if (status) status.textContent = msg;
   }
 
-  function renderResults(items: SearchItem[]): void {
+  function renderResult(items: SearchItem[]): void {
     if (!list) return;
     if (items.length === 0) {
       list.innerHTML = "";
@@ -110,7 +110,7 @@ import { AppConstant } from "../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.SEARCH, new Blob([text]).size);
       const items = JSON.parse(text) as SearchItem[];
-      renderResults(items);
+      renderResult(items);
 
       if (items.length > 0) {
         lastQ = q;
@@ -137,7 +137,7 @@ import { AppConstant } from "../constant";
   function saveBookmark(): void {
     if (!lastQ) return;
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-    const params: SearchBookmarkParams = { q: lastQ };
+    const params: SearchBookmarkParam = { q: lastQ };
     const bookmark: Bookmark = {
       id,
       page: BookmarkPage.SEARCH,

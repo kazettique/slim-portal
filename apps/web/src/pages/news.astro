@@ -51,7 +51,7 @@ import { AppConstant } from "../constant";
     statusEl.hidden = msg === "";
   }
 
-  function renderItems(items: NewsItem[], fmt: string): void {
+  function renderItem(items: NewsItem[], fmt: string): void {
     if (!list) return;
     list.innerHTML = items
       .map(
@@ -86,7 +86,7 @@ import { AppConstant } from "../constant";
       const fmt = SettingsUtil.getTimeFormat();
 
       setStatus(items.length === 0 ? "No articles found." : "");
-      renderItems(items, fmt);
+      renderItem(items, fmt);
 
       const cacheDate = res.headers.get("X-Cache-Date");
       if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, fmt) : "";

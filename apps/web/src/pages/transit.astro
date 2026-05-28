@@ -19,7 +19,7 @@ import { AppConstant } from "../constant";
             placeholder="Station name"
             autocomplete="off"
           />
-          <ul id="from-suggestions" class="transit-autocomplete" style="display:none"></ul>
+          <ul id="from-suggestion-list" class="transit-autocomplete" style="display:none"></ul>
         </div>
         <button type="button" id="locate-btn" class="locate-btn">Use location</button>
       </div>
@@ -36,7 +36,7 @@ import { AppConstant } from "../constant";
             placeholder="Station name"
             autocomplete="off"
           />
-          <ul id="to-suggestions" class="transit-autocomplete" style="display:none"></ul>
+          <ul id="to-suggestion-list" class="transit-autocomplete" style="display:none"></ul>
         </div>
       </div>
     </div>
@@ -83,14 +83,14 @@ import { AppConstant } from "../constant";
   import { BookmarkPage } from "../type.bookmark";
   import { TransitUtil } from "../util.transit";
   import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
-  import type { Bookmark, TransitBookmarkParams } from "../type.bookmark";
+  import type { Bookmark, TransitBookmarkParam } from "../type.bookmark";
 
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
   const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
   const toInput = document.getElementById("to-input") as HTMLInputElement | null;
   const datetimeInput = document.getElementById("datetime-input") as HTMLInputElement | null;
-  const fromSuggestions = document.getElementById("from-suggestions") as HTMLUListElement | null;
-  const toSuggestions = document.getElementById("to-suggestions") as HTMLUListElement | null;
+  const fromSuggestionList = document.getElementById("from-suggestion-list") as HTMLUListElement | null;
+  const toSuggestionList = document.getElementById("to-suggestion-list") as HTMLUListElement | null;
   const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
   const searchBtn = document.getElementById("search-btn") as HTMLButtonElement | null;
   const routeList = document.getElementById("transit-route-list") as HTMLUListElement | null;
@@ -111,7 +111,7 @@ import { AppConstant } from "../constant";
     if (statusEl) statusEl.textContent = msg;
   }
 
-  function clearSuggestions(listEl: HTMLUListElement): void {
+  function clearSuggestion(listEl: HTMLUListElement): void {
     listEl.innerHTML = "";
     listEl.style.display = "none";
   }
@@ -130,7 +130,7 @@ import { AppConstant } from "../constant";
     }
   }
 
-  function renderLegs(legs: TransitLeg[]): string {
+  function renderLeg(legs: TransitLeg[]): string {
     return legs
       .map((leg) => {
         const isWalk = TransitUtil.isWalkLeg(leg);
@@ -146,7 +146,7 @@ import { AppConstant } from "../constant";
       .join("");
   }
 
-  function renderRoutes(routes: TransitRoute[]): void {
+  function renderRoute(routes: TransitRoute[]): void {
     if (!routeList) return;
     if (routes.length === 0) {
       routeList.innerHTML = "";
@@ -168,7 +168,7 @@ import { AppConstant } from "../constant";
               · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
             </span>
           </div>
-          <ul class="transit-route__legs">${renderLegs(r.legs)}</ul>
+          <ul class="transit-route__legs">${renderLeg(r.legs)}</ul>
         </li>
       `;
       })
@@ -182,7 +182,7 @@ import { AppConstant } from "../constant";
     onSelect: (coord: string) => void,
   ): Promise<void> {
     if (word.length < 1) {
-      clearSuggestions(listEl);
+      clearSuggestion(listEl);
       return;
     }
     try {
@@ -193,7 +193,7 @@ import { AppConstant } from "../constant";
       if (!res.ok) return;
       const items = (await res.json()) as TransportAutocompleteNode[];
       if (items.length === 0) {
-        clearSuggestions(listEl);
+        clearSuggestion(listEl);
         return;
       }
       listEl.innerHTML = items
@@ -225,7 +225,7 @@ import { AppConstant } from "../constant";
           const name = li.dataset["name"] ?? "";
           inputEl.value = name;
           onSelect(coord);
-          clearSuggestions(listEl);
+          clearSuggestion(listEl);
         });
         li.addEventListener("keydown", (e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -233,7 +233,7 @@ import { AppConstant } from "../constant";
             const name = li.dataset["name"] ?? "";
             inputEl.value = name;
             onSelect(coord);
-            clearSuggestions(listEl);
+            clearSuggestion(listEl);
           }
         });
       });
@@ -279,7 +279,7 @@ import { AppConstant } from "../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.TRANSIT, new Blob([text]).size);
       const routes = JSON.parse(text) as TransitRoute[];
-      renderRoutes(routes);
+      renderRoute(routes);
 
       if (routes.length > 0) {
         lastFrom = fromCoord;
@@ -306,7 +306,7 @@ import { AppConstant } from "../constant";
           (pos) => {
             fromCoord = `${pos.coords.latitude},${pos.coords.longitude}`;
             if (fromInput) fromInput.value = "Current location";
-            if (fromSuggestions) clearSuggestions(fromSuggestions);
+            if (fromSuggestionList) clearSuggestion(fromSuggestionList);
             locateBtn.textContent = "Location set ✓";
           },
           () => {
@@ -321,12 +321,12 @@ import { AppConstant } from "../constant";
   }
 
   // Autocomplete wiring — From
-  if (fromInput && fromSuggestions) {
+  if (fromInput && fromSuggestionList) {
     fromInput.addEventListener("input", () => {
       if (fromTimer) clearTimeout(fromTimer);
       fromCoord = null; // reset coord when user types
       fromTimer = setTimeout(() => {
-        fetchAutocomplete(fromInput.value.trim(), fromSuggestions, fromInput, (coord) => {
+        fetchAutocomplete(fromInput.value.trim(), fromSuggestionList, fromInput, (coord) => {
           fromCoord = coord;
         });
       }, 300);
@@ -334,27 +334,27 @@ import { AppConstant } from "../constant";
 
     // Close dropdown when clicking outside
     document.addEventListener("click", (e) => {
-      if (!fromInput.contains(e.target as Node) && !fromSuggestions.contains(e.target as Node)) {
-        clearSuggestions(fromSuggestions);
+      if (!fromInput.contains(e.target as Node) && !fromSuggestionList.contains(e.target as Node)) {
+        clearSuggestion(fromSuggestionList);
       }
     });
   }
 
   // Autocomplete wiring — To
-  if (toInput && toSuggestions) {
+  if (toInput && toSuggestionList) {
     toInput.addEventListener("input", () => {
       if (toTimer) clearTimeout(toTimer);
       toCoord = null; // reset coord when user types
       toTimer = setTimeout(() => {
-        fetchAutocomplete(toInput.value.trim(), toSuggestions, toInput, (coord) => {
+        fetchAutocomplete(toInput.value.trim(), toSuggestionList, toInput, (coord) => {
           toCoord = coord;
         });
       }, 300);
     });
 
     document.addEventListener("click", (e) => {
-      if (!toInput.contains(e.target as Node) && !toSuggestions.contains(e.target as Node)) {
-        clearSuggestions(toSuggestions);
+      if (!toInput.contains(e.target as Node) && !toSuggestionList.contains(e.target as Node)) {
+        clearSuggestion(toSuggestionList);
       }
     });
   }
@@ -375,7 +375,7 @@ import { AppConstant } from "../constant";
     const fromName = fromInput?.value ?? "";
     const toName = toInput?.value ?? "";
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-    const params: TransitBookmarkParams = { from: fromCoord, to: toCoord, from_name: fromName, to_name: toName };
+    const params: TransitBookmarkParam = { from: fromCoord, to: toCoord, from_name: fromName, to_name: toName };
     const bookmark: Bookmark = {
       id,
       page: BookmarkPage.TRANSIT,

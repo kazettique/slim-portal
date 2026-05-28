@@ -19,7 +19,7 @@ import { AppConstant } from "../constant";
           required
           class="places-form__input"
         />
-        <ul id="places-suggestions" class="places-autocomplete" style="display:none"></ul>
+        <ul id="places-suggestion-list" class="places-autocomplete" style="display:none"></ul>
       </div>
       <button type="submit" id="search-btn" class="places-form__submit">Search</button>
     </div>
@@ -65,7 +65,7 @@ import { AppConstant } from "../constant";
 
   const form = document.getElementById("places-form") as HTMLFormElement | null;
   const input = document.getElementById("query-input") as HTMLInputElement | null;
-  const suggestions = document.getElementById("places-suggestions") as HTMLUListElement | null;
+  const suggestionList = document.getElementById("places-suggestion-list") as HTMLUListElement | null;
   const locateBtn = document.getElementById("locate-btn") as HTMLButtonElement | null;
   const searchBtn = document.getElementById("search-btn") as HTMLButtonElement | null;
   const list = document.getElementById("places-list") as HTMLUListElement | null;
@@ -84,14 +84,14 @@ import { AppConstant } from "../constant";
     if (status) status.textContent = msg;
   }
 
-  function clearSuggestions(): void {
-    if (suggestions) {
-      suggestions.innerHTML = "";
-      suggestions.style.display = "none";
+  function clearSuggestion(): void {
+    if (suggestionList) {
+      suggestionList.innerHTML = "";
+      suggestionList.style.display = "none";
     }
   }
 
-  function renderPlaces(items: PlaceItem[]): void {
+  function renderPlace(items: PlaceItem[]): void {
     if (!list) return;
     if (items.length === 0) {
       list.innerHTML = "";
@@ -124,9 +124,9 @@ import { AppConstant } from "../constant";
   }
 
   async function fetchAutocomplete(word: string): Promise<void> {
-    if (!suggestions) return;
+    if (!suggestionList) return;
     if (word.length < 1) {
-      clearSuggestions();
+      clearSuggestion();
       return;
     }
     try {
@@ -141,10 +141,10 @@ import { AppConstant } from "../constant";
       if (!res.ok) return;
       const items = (await res.json()) as PlacePrediction[];
       if (items.length === 0) {
-        clearSuggestions();
+        clearSuggestion();
         return;
       }
-      suggestions.innerHTML = items
+      suggestionList.innerHTML = items
         .slice(0, 6)
         .map((item) => {
           const sub = item.secondaryText || "";
@@ -160,13 +160,13 @@ import { AppConstant } from "../constant";
           `;
         })
         .join("");
-      suggestions.style.display = "block";
+      suggestionList.style.display = "block";
 
-      suggestions.querySelectorAll<HTMLLIElement>(".places-autocomplete__item").forEach((li) => {
+      suggestionList.querySelectorAll<HTMLLIElement>(".places-autocomplete__item").forEach((li) => {
         const selectItem = (): void => {
           const text = li.dataset["text"] ?? "";
           if (input) input.value = text;
-          clearSuggestions();
+          clearSuggestion();
         };
         li.addEventListener("click", selectItem);
         li.addEventListener("keydown", (e) => {
@@ -192,7 +192,7 @@ import { AppConstant } from "../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.PLACE_SEARCH, new Blob([text]).size);
       const items = JSON.parse(text) as PlaceItem[];
-      renderPlaces(items);
+      renderPlace(items);
 
       if (items.length > 0) {
         lastParams = params;
@@ -206,7 +206,7 @@ import { AppConstant } from "../constant";
   }
 
   // Autocomplete wiring
-  if (input && suggestions) {
+  if (input && suggestionList) {
     input.addEventListener("input", () => {
       if (autocompleteTimer) clearTimeout(autocompleteTimer);
       autocompleteTimer = setTimeout(() => {
@@ -215,8 +215,8 @@ import { AppConstant } from "../constant";
     });
 
     document.addEventListener("click", (e) => {
-      if (!input.contains(e.target as Node) && !suggestions.contains(e.target as Node)) {
-        clearSuggestions();
+      if (!input.contains(e.target as Node) && !suggestionList.contains(e.target as Node)) {
+        clearSuggestion();
       }
     });
   }
@@ -250,7 +250,7 @@ import { AppConstant } from "../constant";
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      clearSuggestions();
+      clearSuggestion();
       const q = input?.value.trim() ?? "";
       if (!q) return;
 

@@ -66,7 +66,7 @@ import { AppConstant } from "../../constant";
     if (statusEl) statusEl.textContent = msg;
   }
 
-  function renderPlaces(items: PlaceItem[]): void {
+  function renderPlace(items: PlaceItem[]): void {
     if (!list) return;
     if (items.length === 0) {
       list.innerHTML = "";
@@ -120,7 +120,7 @@ import { AppConstant } from "../../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.PLACE_NEARBY, new Blob([text]).size);
       const items = JSON.parse(text) as PlaceItem[];
-      renderPlaces(items);
+      renderPlace(items);
 
       if (items.length > 0) {
         if (toolbar) toolbar.style.display = "flex";
