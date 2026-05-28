@@ -476,6 +476,7 @@ import { AppConstant } from "../constant";
 
   if (resetUsageBtn) {
     resetUsageBtn.addEventListener("click", () => {
+      if (!window.confirm("Reset usage data? This cannot be undone.")) return;
       SettingsUtil.resetNetworkUsage();
       renderUsage();
       renderNetworkSince();
