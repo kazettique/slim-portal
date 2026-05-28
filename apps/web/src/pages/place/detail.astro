@@ -163,7 +163,7 @@ import { AppConstant } from "../../constant";
       renderDetails(item);
       if (toolbar) toolbar.style.display = "flex";
       if (bookmarkBtn) {
-        bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
       }
       const cacheDate = res.headers.get("X-Cache-Date");
       if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
@@ -186,7 +186,7 @@ import { AppConstant } from "../../constant";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
       }, 1500);
     }
   }

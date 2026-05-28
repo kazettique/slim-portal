@@ -104,11 +104,15 @@ import { AppConstant } from "../constant";
     if (!container) return;
     const li = container.querySelector<HTMLLIElement>(`li[data-id="${id}"]`);
     if (!li) return;
-    const ul = li.parentElement;
+    const ul = li.parentElement;              // ul.bookmarks-list
+    const group = ul?.parentElement;          // section.bookmarks-group
+    const category = group?.parentElement;    // section.bookmarks-category
     li.remove();
-    // clean up empty group section
     if (ul && ul.children.length === 0) {
-      ul.parentElement?.remove();
+      group?.remove();
+      if (category && category.querySelectorAll(".bookmarks-group").length === 0) {
+        category.remove();
+      }
     }
   }
 
@@ -137,26 +141,37 @@ import { AppConstant } from "../constant";
       grouped.get(bm.page)?.push(bm);
     }
 
-    container.innerHTML = BookmarkUtil.PAGE_ORDER.filter((page) => (grouped.get(page)?.length ?? 0) > 0)
-      .map((page) => {
-        const items = grouped.get(page) ?? [];
-        const rows = items
-          .map(
-            (bm) => `
-          <li class="bookmark-item" data-id="${bm.id}">
-            <label class="bookmark-item__check">
-              <input type="checkbox" class="bookmark-checkbox" value="${bm.id}" aria-label="Select ${bm.label}" />
-            </label>
-            ${renderBookmarkContent(bm)}
-            <button class="bookmark-item__delete refresh-btn" data-id="${bm.id}" aria-label="Delete ${bm.label}">Delete</button>
-          </li>
-        `,
-          )
+    container.innerHTML = BookmarkUtil.CATEGORIES.map(({ label, pages }) => {
+        const groups = pages
+          .filter((page) => (grouped.get(page)?.length ?? 0) > 0)
+          .map((page) => {
+            const items = grouped.get(page) ?? [];
+            const rows = items
+              .map(
+                (bm) => `
+              <li class="bookmark-item" data-id="${bm.id}">
+                <label class="bookmark-item__check">
+                  <input type="checkbox" class="bookmark-checkbox" value="${bm.id}" aria-label="Select ${bm.label}" />
+                </label>
+                ${renderBookmarkContent(bm)}
+                <button class="bookmark-item__delete refresh-btn" data-id="${bm.id}" aria-label="Delete ${bm.label}">Delete</button>
+              </li>
+            `,
+              )
+              .join("");
+            return `
+            <section class="bookmarks-group" data-page="${page}">
+              <h3>${BookmarkUtil.BOOKMARK_PAGE_LABELS[page]}</h3>
+              <ul class="bookmarks-list">${rows}</ul>
+            </section>
+          `;
+          })
           .join("");
+        if (!groups) return "";
         return `
-        <section class="bookmarks-group" data-page="${page}">
-          <h2>${BookmarkUtil.BOOKMARK_PAGE_LABELS[page]}</h2>
-          <ul class="bookmarks-list">${rows}</ul>
+        <section class="bookmarks-category">
+          <h2>${label}</h2>
+          ${groups}
         </section>
       `;
       })

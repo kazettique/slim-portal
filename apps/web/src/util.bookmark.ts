@@ -19,6 +19,22 @@ export abstract class BookmarkUtil {
     BookmarkPage.SEARCH,
   ];
 
+  public static readonly QUERY_PAGES: BookmarkPage[] = [
+    BookmarkPage.TRANSIT,
+    BookmarkPage.PLACE,
+    BookmarkPage.SEARCH,
+  ];
+
+  public static readonly SNAPSHOT_PAGES: BookmarkPage[] = [
+    BookmarkPage.TRANSIT_ROUTE,
+    BookmarkPage.PLACE_DETAIL,
+  ];
+
+  public static readonly CATEGORIES: Array<{ label: string; pages: BookmarkPage[] }> = [
+    { label: "Searches", pages: this.QUERY_PAGES },
+    { label: "Snapshots", pages: this.SNAPSHOT_PAGES },
+  ];
+
   public static buildUrl(bookmark: Bookmark): string {
     if (bookmark.page === BookmarkPage.TRANSIT) {
       const p = bookmark.params as TransitBookmarkParam;

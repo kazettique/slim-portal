@@ -71,7 +71,7 @@ import { AppConstant } from "../constant";
       </svg>
       Refresh
     </button>
-    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark">Save</button>
+    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save search as bookmark">Save search</button>
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
@@ -172,7 +172,7 @@ import { AppConstant } from "../constant";
               · ${r.transfers === 0 ? "No transfers" : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`}
               · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
             </span>
-            <button class="transit-route__save bookmark-btn" data-index="${i}" aria-label="Save this route">${AppConstant.BOOKMARK_ICON} Save</button>
+            <button class="transit-route__save bookmark-btn" data-index="${i}" aria-label="Save this route">${AppConstant.BOOKMARK_ICON} Save route</button>
           </div>
           <ul class="transit-route__legs">${renderLeg(r.legs)}</ul>
         </li>
@@ -324,7 +324,7 @@ import { AppConstant } from "../constant";
     if (btn) {
       btn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (btn) btn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        if (btn) btn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save route`;
       }, 1500);
     }
   }
@@ -430,7 +430,7 @@ import { AppConstant } from "../constant";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save search`;
       }, 1500);
     }
   }

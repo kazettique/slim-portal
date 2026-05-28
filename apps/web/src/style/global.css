@@ -964,15 +964,30 @@ footer {
   margin-block-end: var(--space);
 }
 
-.bookmarks-group {
+.bookmarks-category {
   margin-block: var(--space);
   padding-block-start: var(--space);
   border-top: 1px solid var(--border);
 }
 
-.bookmarks-group:first-of-type {
+.bookmarks-category:first-of-type {
   border-top: none;
   padding-block-start: 0;
+}
+
+.bookmarks-group {
+  margin-block-start: calc(var(--space) * 0.75);
+}
+
+.bookmarks-group:first-of-type {
+  margin-block-start: calc(var(--space) * 0.25);
+}
+
+.bookmarks-group h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-block-end: calc(var(--space) * 0.3);
+  color: var(--muted);
 }
 
 .bookmarks-list {
