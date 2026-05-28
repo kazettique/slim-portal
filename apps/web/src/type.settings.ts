@@ -9,6 +9,18 @@ export enum Theme {
   SYSTEM = "system",
 }
 
+export enum MenuStyle {
+  ICON_ONLY = "icon-only",
+  BOTH = "both",
+  TEXT_ONLY = "text-only",
+}
+
+export enum TextSize {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
+
 export enum NetworkPage {
   NEWS = "news",
   PLACE_SEARCH = "place/search",

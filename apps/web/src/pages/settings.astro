@@ -13,7 +13,7 @@ import { AppConstant } from "../constant";
   <!-- ── Appearance ── -->
   <section class="settings-section">
     <h2>Appearance</h2>
-    <p>Choose the color scheme for the app.</p>
+    <p>Choose the color scheme, navigation style, and text size.</p>
     <div class="settings-group" role="group">
       <span class="settings-group__legend">Color scheme</span>
       <label class="settings-group__option">
@@ -27,6 +27,36 @@ import { AppConstant } from "../constant";
       <label class="settings-group__option">
         <input type="radio" name="theme" id="theme-dark" value="dark" />
         Dark
+      </label>
+    </div>
+    <div class="settings-group" role="group">
+      <span class="settings-group__legend">Navigation menu</span>
+      <label class="settings-group__option">
+        <input type="radio" name="menuStyle" id="menu-icon-only" value="icon-only" />
+        Icon only
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="menuStyle" id="menu-both" value="both" />
+        Icon + text
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="menuStyle" id="menu-text-only" value="text-only" />
+        Text only
+      </label>
+    </div>
+    <div class="settings-group" role="group">
+      <span class="settings-group__legend">Text size</span>
+      <label class="settings-group__option">
+        <input type="radio" name="textSize" id="text-small" value="small" />
+        Small (14px)
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="textSize" id="text-medium" value="medium" />
+        Medium (16px)
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="textSize" id="text-large" value="large" />
+        Large (18px)
       </label>
     </div>
   </section>
@@ -109,7 +139,7 @@ import { AppConstant } from "../constant";
 
 <script>
   import { SettingsUtil } from "../util.settings";
-  import { TimeFormat, Theme, NetworkPage, type GroupBy } from "../type.settings";
+  import { TimeFormat, Theme, MenuStyle, TextSize, NetworkPage, type GroupBy } from "../type.settings";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
 
@@ -139,6 +169,46 @@ import { AppConstant } from "../constant";
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     if (SettingsUtil.getTheme() === Theme.SYSTEM) applyTheme(Theme.SYSTEM);
+  });
+
+  // ── Menu style ────────────────────────────────────────────────
+  function applyMenuStyle(value: MenuStyle): void {
+    document.documentElement.setAttribute("data-menu", value);
+  }
+
+  function applyMenuStyleToUI(value: MenuStyle): void {
+    const el = document.getElementById(`menu-${value}`) as HTMLInputElement | null;
+    if (el) el.checked = true;
+  }
+
+  applyMenuStyleToUI(SettingsUtil.getMenuStyle());
+
+  document.querySelectorAll<HTMLInputElement>('input[name="menuStyle"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const value = radio.value as MenuStyle;
+      SettingsUtil.setMenuStyle(value);
+      applyMenuStyle(value);
+    });
+  });
+
+  // ── Text size ─────────────────────────────────────────────────
+  function applyTextSize(value: TextSize): void {
+    document.documentElement.setAttribute("data-text-size", value);
+  }
+
+  function applyTextSizeToUI(value: TextSize): void {
+    const el = document.getElementById(`text-${value}`) as HTMLInputElement | null;
+    if (el) el.checked = true;
+  }
+
+  applyTextSizeToUI(SettingsUtil.getTextSize());
+
+  document.querySelectorAll<HTMLInputElement>('input[name="textSize"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const value = radio.value as TextSize;
+      SettingsUtil.setTextSize(value);
+      applyTextSize(value);
+    });
   });
 
   // ── Chart ─────────────────────────────────────────────────────

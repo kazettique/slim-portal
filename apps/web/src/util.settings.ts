@@ -1,4 +1,4 @@
-import { TimeFormat, Theme, NetworkPage } from "./type.settings";
+import { TimeFormat, Theme, MenuStyle, TextSize, NetworkPage } from "./type.settings";
 import type { NetworkEntry } from "./type.settings";
 
 export abstract class SettingsUtil {
@@ -33,6 +33,8 @@ export abstract class SettingsUtil {
   private static readonly LS_KEY_NETWORK_SINCE = "setting:networkSince";
   private static readonly LS_KEY_NETWORK_LOG = "setting:networkLog";
   private static readonly LS_KEY_THEME = "setting:theme";
+  private static readonly LS_KEY_MENU_STYLE = "setting:menuStyle";
+  private static readonly LS_KEY_TEXT_SIZE = "setting:textSize";
   private static readonly LS_SETTING_KEYS = [
     SettingsUtil.LS_KEY_TIME_FORMAT,
     SettingsUtil.LS_KEY_NETWORK_USAGE,
@@ -40,12 +42,16 @@ export abstract class SettingsUtil {
     SettingsUtil.LS_KEY_NETWORK_SINCE,
     SettingsUtil.LS_KEY_NETWORK_LOG,
     SettingsUtil.LS_KEY_THEME,
+    SettingsUtil.LS_KEY_MENU_STYLE,
+    SettingsUtil.LS_KEY_TEXT_SIZE,
   ] as const;
 
   private static readonly DEFAULTS = {
     timeFormat: TimeFormat.TWENTY_FOUR_HOUR,
     networkUsage: {} as Record<string, number>,
     theme: Theme.SYSTEM,
+    menuStyle: MenuStyle.BOTH,
+    textSize: TextSize.MEDIUM,
   } as const;
 
   // ── Time format ──────────────────────────────────────────────
@@ -83,6 +89,46 @@ export abstract class SettingsUtil {
   public static setTheme(value: Theme): void {
     try {
       localStorage.setItem(SettingsUtil.LS_KEY_THEME, value);
+    } catch {
+      // ignore
+    }
+  }
+
+  // ── Menu style ────────────────────────────────────────────────
+
+  public static getMenuStyle(): MenuStyle {
+    try {
+      const stored = localStorage.getItem(SettingsUtil.LS_KEY_MENU_STYLE);
+      if (stored === MenuStyle.ICON_ONLY || stored === MenuStyle.BOTH || stored === MenuStyle.TEXT_ONLY) return stored;
+    } catch {
+      // localStorage unavailable (private mode, etc.)
+    }
+    return SettingsUtil.DEFAULTS.menuStyle;
+  }
+
+  public static setMenuStyle(value: MenuStyle): void {
+    try {
+      localStorage.setItem(SettingsUtil.LS_KEY_MENU_STYLE, value);
+    } catch {
+      // ignore
+    }
+  }
+
+  // ── Text size ─────────────────────────────────────────────────
+
+  public static getTextSize(): TextSize {
+    try {
+      const stored = localStorage.getItem(SettingsUtil.LS_KEY_TEXT_SIZE);
+      if (stored === TextSize.SMALL || stored === TextSize.MEDIUM || stored === TextSize.LARGE) return stored;
+    } catch {
+      // localStorage unavailable (private mode, etc.)
+    }
+    return SettingsUtil.DEFAULTS.textSize;
+  }
+
+  public static setTextSize(value: TextSize): void {
+    try {
+      localStorage.setItem(SettingsUtil.LS_KEY_TEXT_SIZE, value);
     } catch {
       // ignore
     }

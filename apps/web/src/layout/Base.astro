@@ -23,6 +23,12 @@ const canonicalPath = Astro.url.pathname;
         var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         var isDark = stored === "dark" || (stored !== "light" && prefersDark);
         if (isDark) document.documentElement.setAttribute("data-theme", "dark");
+        var menuStyle = "both";
+        try { menuStyle = localStorage.getItem("setting:menuStyle") || "both"; } catch (_) {}
+        if (menuStyle !== "both") document.documentElement.setAttribute("data-menu", menuStyle);
+        var textSize = "medium";
+        try { textSize = localStorage.getItem("setting:textSize") || "medium"; } catch (_) {}
+        if (textSize !== "medium") document.documentElement.setAttribute("data-text-size", textSize);
       })();
     </script>
     <meta charset="UTF-8" />
@@ -43,7 +49,8 @@ const canonicalPath = Astro.url.pathname;
                 : canonicalPath === navItem.url || canonicalPath.startsWith(navItem.url + "/");
             return (
               <a href={navItem.url} aria-current={isActive ? "page" : undefined}>
-                {navItem.icon} {navItem.title}
+                <span class="nav__icon">{navItem.icon}</span>
+                <span class="nav__text">{navItem.title}</span>
               </a>
             );
           })
