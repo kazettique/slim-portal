@@ -21,7 +21,13 @@ abstract class SwHandler {
             const html = await home.text();
             const matches = html.match(/\/_astro\/[^"'\s]+\.(?:css|js)/g);
             if (matches) {
-              await Promise.allSettled([...new Set(matches)].map((url) => cache.add(url)));
+              const assetUrls = [...new Set(matches)];
+              // Persist manifest so activate can evict stale /_astro/ entries on next SW update
+              await cache.put(
+                "/__sw_asset_manifest",
+                new Response(JSON.stringify(assetUrls), { headers: { "Content-Type": "application/json" } }),
+              );
+              await Promise.allSettled(assetUrls.map((url) => cache.add(url)));
             }
           }
         })
@@ -37,8 +43,36 @@ abstract class SwHandler {
         .then((keys) =>
           Promise.all(keys.filter((k) => !keep.includes(k)).map((k) => caches.delete(k))),
         )
+        .then(async () => {
+          // Evict stale /_astro/ entries from the shell cache using the manifest
+          // written during install. Prevents old content-hashed assets from accumulating
+          // across deployments.
+          const cache = await caches.open(SwConstant.SHELL_CACHE);
+          const manifest = await cache.match("/__sw_asset_manifest");
+          if (manifest) {
+            const current = new Set<string>(await manifest.json() as string[]);
+            const keys = await cache.keys();
+            await Promise.all(
+              keys
+                .filter((req) => {
+                  const { pathname } = new URL(req.url);
+                  return pathname.startsWith("/_astro/") && !current.has(pathname);
+                })
+                .map((req) => cache.delete(req)),
+            );
+          }
+        })
         .then(() => sw.clients.claim()),
     );
+  }
+
+  private static async trimApiCache(cache: Cache): Promise<void> {
+    const keys = await cache.keys();
+    if (keys.length > SwConstant.MAX_API_ENTRIES) {
+      await Promise.all(
+        keys.slice(0, keys.length - SwConstant.MAX_API_ENTRIES).map((k) => cache.delete(k)),
+      );
+    }
   }
 
   public static async networkFirst(request: Request): Promise<Response> {
@@ -47,6 +81,7 @@ abstract class SwHandler {
       const response = await fetch(request);
       if (response.ok) {
         cache.put(request, response.clone());
+        SwHandler.trimApiCache(cache);
       }
       return response;
     } catch {
@@ -105,6 +140,7 @@ abstract class SwHandler {
       const response = await fetch(request);
       if (response.ok) {
         cache.put(request, response.clone());
+        SwHandler.trimApiCache(cache);
       }
       return response;
     } catch {
