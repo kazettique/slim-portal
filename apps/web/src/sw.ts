@@ -66,11 +66,12 @@ abstract class SwHandler {
     );
   }
 
-  private static async trimApiCache(cache: Cache): Promise<void> {
+  private static async guardApiCache(cache: Cache): Promise<void> {
     const keys = await cache.keys();
-    if (keys.length > SwConstant.MAX_API_ENTRIES) {
+    if (keys.length >= SwConstant.MAX_API_ENTRIES) {
+      // Evict exactly 1 slot before the upcoming put so the cache never exceeds MAX
       await Promise.all(
-        keys.slice(0, keys.length - SwConstant.MAX_API_ENTRIES).map((k) => cache.delete(k)),
+        keys.slice(0, keys.length - SwConstant.MAX_API_ENTRIES + 1).map((k) => cache.delete(k)),
       );
     }
   }
@@ -80,8 +81,8 @@ abstract class SwHandler {
     try {
       const response = await fetch(request);
       if (response.ok) {
+        await SwHandler.guardApiCache(cache);
         cache.put(request, response.clone());
-        SwHandler.trimApiCache(cache);
       }
       return response;
     } catch {
@@ -139,8 +140,8 @@ abstract class SwHandler {
     try {
       const response = await fetch(request);
       if (response.ok) {
+        await SwHandler.guardApiCache(cache);
         cache.put(request, response.clone());
-        SwHandler.trimApiCache(cache);
       }
       return response;
     } catch {
