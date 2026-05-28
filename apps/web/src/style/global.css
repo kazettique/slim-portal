@@ -88,7 +88,7 @@ header {
 nav {
   display: flex;
   gap: var(--space);
-  font-size: 14px; /* px — opt out of html-level text-size scaling */
+  font-size: 16px; /* px — opt out of html-level text-size scaling */
 }
 nav a {
   font-weight: 600;
@@ -100,6 +100,12 @@ nav a[aria-current="page"] {
 }
 
 /* Menu style — controls icon/text visibility in nav */
+[data-menu="icon-only"] nav {
+  font-size: 22px;
+}
+[data-menu="text-only"] nav {
+  font-size: 16px;
+}
 [data-menu="icon-only"] nav .nav__text {
   display: none;
 }
