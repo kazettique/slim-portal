@@ -45,6 +45,17 @@ import { AppConstant } from "../constant";
       </label>
     </div>
     <div class="settings-group" role="group">
+      <span class="settings-group__legend">Navigation position</span>
+      <label class="settings-group__option">
+        <input type="radio" name="menuPosition" id="menu-pos-top" value="top" />
+        Top
+      </label>
+      <label class="settings-group__option">
+        <input type="radio" name="menuPosition" id="menu-pos-bottom" value="bottom" />
+        Bottom (above footer)
+      </label>
+    </div>
+    <div class="settings-group" role="group">
       <span class="settings-group__legend">Text size</span>
       <label class="settings-group__option">
         <input type="radio" name="textSize" id="text-small" value="small" />
@@ -143,7 +154,7 @@ import { AppConstant } from "../constant";
 
 <script>
   import { SettingsUtil } from "../util.settings";
-  import { TimeFormat, Theme, MenuStyle, TextSize, NetworkPage, type GroupBy } from "../type.settings";
+  import { TimeFormat, Theme, MenuStyle, MenuPosition, TextSize, NetworkPage, type GroupBy } from "../type.settings";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
 
@@ -192,6 +203,26 @@ import { AppConstant } from "../constant";
       const value = radio.value as MenuStyle;
       SettingsUtil.setMenuStyle(value);
       applyMenuStyle(value);
+    });
+  });
+
+  // ── Menu position ────────────────────────────────────────────
+  function applyMenuPosition(value: MenuPosition): void {
+    document.documentElement.setAttribute("data-menu-position", value === MenuPosition.TOP ? "" : value);
+  }
+
+  function applyMenuPositionToUI(value: MenuPosition): void {
+    const el = document.getElementById(`menu-pos-${value}`) as HTMLInputElement | null;
+    if (el) el.checked = true;
+  }
+
+  applyMenuPositionToUI(SettingsUtil.getMenuPosition());
+
+  document.querySelectorAll<HTMLInputElement>('input[name="menuPosition"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const value = radio.value as MenuPosition;
+      SettingsUtil.setMenuPosition(value);
+      applyMenuPosition(value);
     });
   });
 

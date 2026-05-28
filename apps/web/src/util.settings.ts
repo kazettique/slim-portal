@@ -1,4 +1,4 @@
-import { TimeFormat, Theme, MenuStyle, TextSize, NetworkPage } from "./type.settings";
+import { TimeFormat, Theme, MenuStyle, MenuPosition, TextSize, NetworkPage } from "./type.settings";
 import type { NetworkEntry } from "./type.settings";
 
 export abstract class SettingsUtil {
@@ -34,6 +34,7 @@ export abstract class SettingsUtil {
   private static readonly LS_KEY_NETWORK_LOG = "setting:networkLog";
   private static readonly LS_KEY_THEME = "setting:theme";
   private static readonly LS_KEY_MENU_STYLE = "setting:menuStyle";
+  private static readonly LS_KEY_MENU_POSITION = "setting:menuPosition";
   private static readonly LS_KEY_TEXT_SIZE = "setting:textSize";
   private static readonly LS_SETTING_KEYS = [
     SettingsUtil.LS_KEY_TIME_FORMAT,
@@ -43,6 +44,7 @@ export abstract class SettingsUtil {
     SettingsUtil.LS_KEY_NETWORK_LOG,
     SettingsUtil.LS_KEY_THEME,
     SettingsUtil.LS_KEY_MENU_STYLE,
+    SettingsUtil.LS_KEY_MENU_POSITION,
     SettingsUtil.LS_KEY_TEXT_SIZE,
   ] as const;
 
@@ -51,6 +53,7 @@ export abstract class SettingsUtil {
     networkUsage: {} as Record<string, number>,
     theme: Theme.SYSTEM,
     menuStyle: MenuStyle.BOTH,
+    menuPosition: MenuPosition.TOP,
     textSize: TextSize.MEDIUM,
   } as const;
 
@@ -109,6 +112,26 @@ export abstract class SettingsUtil {
   public static setMenuStyle(value: MenuStyle): void {
     try {
       localStorage.setItem(SettingsUtil.LS_KEY_MENU_STYLE, value);
+    } catch {
+      // ignore
+    }
+  }
+
+  // ── Menu position ─────────────────────────────────────────────
+
+  public static getMenuPosition(): MenuPosition {
+    try {
+      const stored = localStorage.getItem(SettingsUtil.LS_KEY_MENU_POSITION);
+      if (stored === MenuPosition.TOP || stored === MenuPosition.BOTTOM) return stored;
+    } catch {
+      // localStorage unavailable (private mode, etc.)
+    }
+    return SettingsUtil.DEFAULTS.menuPosition;
+  }
+
+  public static setMenuPosition(value: MenuPosition): void {
+    try {
+      localStorage.setItem(SettingsUtil.LS_KEY_MENU_POSITION, value);
     } catch {
       // ignore
     }

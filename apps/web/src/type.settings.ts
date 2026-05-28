@@ -15,6 +15,11 @@ export enum MenuStyle {
   TEXT_ONLY = "text-only",
 }
 
+export enum MenuPosition {
+  TOP = "top",
+  BOTTOM = "bottom",
+}
+
 export enum TextSize {
   SMALL = "small",
   MEDIUM = "medium",

@@ -26,6 +26,9 @@ const canonicalPath = Astro.url.pathname;
         var menuStyle = "both";
         try { menuStyle = localStorage.getItem("setting:menuStyle") || "both"; } catch (_) {}
         if (menuStyle !== "both") document.documentElement.setAttribute("data-menu", menuStyle);
+        var menuPosition = "top";
+        try { menuPosition = localStorage.getItem("setting:menuPosition") || "top"; } catch (_) {}
+        if (menuPosition !== "top") document.documentElement.setAttribute("data-menu-position", menuPosition);
         var textSize = "medium";
         try { textSize = localStorage.getItem("setting:textSize") || "medium"; } catch (_) {}
         if (textSize !== "medium") document.documentElement.setAttribute("data-text-size", textSize);

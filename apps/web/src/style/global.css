@@ -107,6 +107,19 @@ nav a[aria-current="page"] {
   display: none;
 }
 
+/* Menu position — reorders flex children in <body> */
+[data-menu-position="bottom"] header {
+  order: 2;
+  border-bottom: none;
+  border-top: 1px solid var(--border);
+}
+[data-menu-position="bottom"] main {
+  order: 1;
+}
+[data-menu-position="bottom"] footer {
+  order: 3;
+}
+
 main {
   flex-grow: 1;
   overflow-y: auto;
