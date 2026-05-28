@@ -50,10 +50,7 @@ export abstract class BookmarkUtil {
       return `/place?${sp.toString()}`;
     }
     if (bookmark.page === BookmarkPage.PLACE_DETAIL) {
-      const p = bookmark.params as PlaceDetailBookmarkParam;
-      if (!p.id) return "#";
-      const sp = new URLSearchParams({ id: p.id });
-      return `/place/detail?${sp.toString()}`;
+      return `/place/detail?snapshot=${encodeURIComponent(bookmark.id)}`;
     }
     const p = bookmark.params as { q: string };
     const sp = new URLSearchParams({ q: p.q, restore: "1" });

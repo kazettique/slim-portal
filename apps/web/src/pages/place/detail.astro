@@ -50,6 +50,7 @@ import { AppConstant } from "../../constant";
   const backLink = document.getElementById("back-link") as HTMLAnchorElement | null;
 
   const placeId = new URL(location.href).searchParams.get("id");
+  const snapshotId = new URL(location.href).searchParams.get("snapshot");
 
   let lastPlace: PlaceDetails | null = null;
 
@@ -172,6 +173,20 @@ import { AppConstant } from "../../constant";
     }
   }
 
+  function loadSnapshot(): void {
+    const bookmark = BookmarkUtil.getById(snapshotId!);
+    if (!bookmark) { setStatus("Snapshot not found."); return; }
+    const place = bookmark.params as PlaceDetails;
+    setStatus("");
+    renderDetails(place);
+    if (toolbar) toolbar.style.display = "flex";
+    if (refreshBtn) refreshBtn.style.display = "none";
+    if (bookmarkBtn) bookmarkBtn.style.display = "none";
+    if (cacheStatus) {
+      cacheStatus.textContent = `Saved ${AppUtil.formatDate(bookmark.createdAt, SettingsUtil.getTimeFormat())}`;
+    }
+  }
+
   function saveBookmark(): void {
     if (!lastPlace) return;
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
@@ -203,10 +218,12 @@ import { AppConstant } from "../../constant";
     });
   }
 
-  if (!placeId) {
-    setStatus("No place ID provided.");
-  } else {
+  if (snapshotId) {
+    loadSnapshot();
+  } else if (placeId) {
     doFetch(false);
+  } else {
+    setStatus("No place ID provided.");
   }
 
   if (refreshBtn) {
