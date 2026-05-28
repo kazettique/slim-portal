@@ -9,6 +9,7 @@
   "scripts": {
     "dev:web": "bun run --cwd apps/web dev",
     "dev:worker": "bun run --cwd workers/api dev",
+    "type": "bun run type:web && bun run type:sw && bun run type:worker && bun run type:share",
     "type:web": "bun run --cwd apps/web type",
     "type:sw": "bun run --cwd apps/web type:sw",
     "type:worker": "bun run --cwd workers/api type",
