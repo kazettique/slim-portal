@@ -384,6 +384,23 @@ footer {
   color: var(--muted);
 }
 
+/* ── Transit detail page ── */
+.transit-detail__back {
+  display: inline-block;
+  font-size: 0.875rem;
+  margin-block-end: var(--space);
+}
+
+.transit-detail__heading {
+  margin-block-end: calc(var(--space) * 0.5);
+}
+
+.transit-detail__saved {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-block: calc(var(--space) * 0.4);
+}
+
 /* ── Places page ── */
 
 .places-form {
@@ -991,4 +1008,25 @@ footer {
 
 .bookmark-item__delete {
   flex-shrink: 0;
+}
+
+.bookmark-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bookmark-item__body .bookmark-item__label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-item__meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-block-start: 0.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

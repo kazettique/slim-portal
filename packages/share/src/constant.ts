@@ -6,6 +6,7 @@ export abstract class ShareConstant {
   public static readonly PAGE_URL_PLACE_DETAIL: string = "/place/detail";
   public static readonly PAGE_URL_SEARCH: string = "/search";
   public static readonly PAGE_URL_TRANSIT: string = "/transit";
+  public static readonly PAGE_URL_TRANSIT_DETAIL: string = "/transit/detail";
   public static readonly PAGE_URL_CONVERTER: string = "/converter";
   public static readonly PAGE_URL_YEAR_CONVERTER: string = "/converter/year-converter";
   public static readonly PAGE_URL_AREA_CONVERTER: string = "/converter/area-converter";

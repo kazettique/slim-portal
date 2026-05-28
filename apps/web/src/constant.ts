@@ -60,6 +60,13 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_TRANSIT,
   };
 
+  public static readonly TRANSIT_DETAIL_PAGE_META: PageMeta = {
+    icon: "🚃",
+    title: "Route Details",
+    description: "Saved transit route.",
+    url: ShareConstant.PAGE_URL_TRANSIT_DETAIL,
+  };
+
   public static readonly CONVERTER_PAGE_META: PageMeta = {
     icon: "🔁",
     title: "Convert",

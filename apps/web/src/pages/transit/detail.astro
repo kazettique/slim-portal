@@ -1,0 +1,130 @@
+---
+import Base from "../../layout/Base.astro";
+import { AppConstant } from "../../constant";
+---
+
+<Base icon={AppConstant.TRANSIT_DETAIL_PAGE_META.icon} title={AppConstant.TRANSIT_DETAIL_PAGE_META.title} description={AppConstant.TRANSIT_DETAIL_PAGE_META.description}>
+  <p class="transit-detail__back"><a id="back-link" href="/bookmark">← Bookmarks</a></p>
+
+  <p id="detail-status" class="status" aria-live="polite"></p>
+
+  <div id="route-detail"></div>
+</Base>
+
+<script>
+  import { AppUtil } from "../../util";
+  import { SettingsUtil } from "../../util.settings";
+  import { TimeFormat } from "../../type.settings";
+  import { BookmarkUtil } from "../../util.bookmark";
+  import { BookmarkPage } from "../../type.bookmark";
+  import { TransitUtil } from "../../util.transit";
+  import type { TransitRouteBookmarkParam } from "../../type.bookmark";
+  import type { TransitLeg } from "@slim-portal/share";
+
+  const statusEl = document.getElementById("detail-status") as HTMLParagraphElement | null;
+  const container = document.getElementById("route-detail") as HTMLDivElement | null;
+  const backLink = document.getElementById("back-link") as HTMLAnchorElement | null;
+
+  const bookmarkId = new URL(location.href).searchParams.get("id");
+
+  function setStatus(msg: string): void {
+    if (statusEl) statusEl.textContent = msg;
+  }
+
+  function formatTime(iso: string | null): string {
+    if (!iso) return "—";
+    try {
+      const fmt = SettingsUtil.getTimeFormat();
+      return new Date(iso).toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: fmt === TimeFormat.TWELVE_HOUR,
+      });
+    } catch {
+      return iso;
+    }
+  }
+
+  function formatCreatedAt(iso: string): string {
+    try {
+      const fmt = SettingsUtil.getTimeFormat();
+      return new Date(iso).toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: fmt === TimeFormat.TWELVE_HOUR,
+      });
+    } catch {
+      return iso;
+    }
+  }
+
+  function renderLeg(legs: TransitLeg[]): string {
+    return legs
+      .map((leg) => {
+        const isWalk = TransitUtil.isWalkLeg(leg);
+        const cls = isWalk ? "transit-leg transit-leg--walk" : "transit-leg transit-leg--transit";
+        const colorStyle = !isWalk && leg.color ? ` style="--leg-color:${leg.color}"` : "";
+        const timeRange = leg.depart || leg.arrive ? ` · ${formatTime(leg.depart)}–${formatTime(leg.arrive)}` : "";
+        const durationText = leg.duration !== null ? ` · ${leg.duration}分` : "";
+        const platform = leg.platform ? ` · ${leg.platform}` : "";
+        const getoffText = leg.getoff ? ` · 降 ${leg.getoff}号車` : "";
+        const distanceText = isWalk && leg.distance !== null ? AppUtil.formatDistance(leg.distance) : "";
+        return `<li class="${cls}"${colorStyle}>${leg.line} · ${leg.from} → ${leg.to}${timeRange}${durationText}${platform}${getoffText}${distanceText}</li>`;
+      })
+      .join("");
+  }
+
+  function render(): void {
+    if (!bookmarkId) {
+      setStatus("No route ID provided.");
+      return;
+    }
+
+    const bookmark = BookmarkUtil.getById(bookmarkId);
+
+    if (!bookmark || bookmark.page !== BookmarkPage.TRANSIT_ROUTE) {
+      setStatus("Saved route not found.");
+      return;
+    }
+
+    const p = bookmark.params as TransitRouteBookmarkParam;
+    const r = p.route;
+
+    const transfersText = r.transfers === 0
+      ? "No transfers"
+      : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`;
+
+    const fareText = r.referenceFare
+      ? ` · IC ¥${r.referenceFare.ic.toLocaleString()} / 切符 ¥${r.referenceFare.ticket.toLocaleString()}`
+      : "";
+
+    if (!container) return;
+    container.innerHTML = `
+      <h2 class="transit-detail__heading">${p.from_name} → ${p.to_name}</h2>
+      <div class="transit-route__summary">
+        <span class="transit-route__time">${r.totalTime} min</span>
+        <span class="transit-route__meta">
+          · ${transfersText}
+          · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
+        </span>
+      </div>
+      <p class="transit-detail__saved">Saved ${formatCreatedAt(bookmark.createdAt)}</p>
+      <ul class="transit-route__legs transit-detail__legs">${renderLeg(r.legs)}</ul>
+    `;
+  }
+
+  // Use history.back() if referrer is within this site
+  if (backLink) {
+    backLink.addEventListener("click", (e) => {
+      if (document.referrer && new URL(document.referrer).origin === location.origin) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  }
+
+  render();
+</script>

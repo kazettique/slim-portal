@@ -1,4 +1,4 @@
-import { BookmarkPage, type Bookmark, type TransitBookmarkParam } from "./type.bookmark";
+import { BookmarkPage, type Bookmark, type TransitBookmarkParam, type PlaceDetailBookmarkParam, type TransitRouteBookmarkParam } from "./type.bookmark";
 
 export abstract class BookmarkUtil {
   private static readonly LS_KEY: string = "bookmarks";
@@ -7,11 +7,15 @@ export abstract class BookmarkUtil {
     [BookmarkPage.TRANSIT]: "Transit",
     [BookmarkPage.PLACE]: "Places",
     [BookmarkPage.SEARCH]: "Search",
+    [BookmarkPage.PLACE_DETAIL]: "Place Details",
+    [BookmarkPage.TRANSIT_ROUTE]: "Saved Routes",
   };
 
   public static readonly PAGE_ORDER: BookmarkPage[] = [
     BookmarkPage.TRANSIT,
+    BookmarkPage.TRANSIT_ROUTE,
     BookmarkPage.PLACE,
+    BookmarkPage.PLACE_DETAIL,
     BookmarkPage.SEARCH,
   ];
 
@@ -21,14 +25,27 @@ export abstract class BookmarkUtil {
       const sp = new URLSearchParams({ from: p.from, to: p.to, from_name: p.from_name, to_name: p.to_name, restore: "1" });
       return `/transit?${sp.toString()}`;
     }
+    if (bookmark.page === BookmarkPage.TRANSIT_ROUTE) {
+      return `/transit/detail?id=${encodeURIComponent(bookmark.id)}`;
+    }
     if (bookmark.page === BookmarkPage.PLACE) {
       const p = bookmark.params as { q: string };
       const sp = new URLSearchParams({ q: p.q, restore: "1" });
       return `/place?${sp.toString()}`;
     }
+    if (bookmark.page === BookmarkPage.PLACE_DETAIL) {
+      const p = bookmark.params as PlaceDetailBookmarkParam;
+      if (!p.id) return "#";
+      const sp = new URLSearchParams({ id: p.id });
+      return `/place/detail?${sp.toString()}`;
+    }
     const p = bookmark.params as { q: string };
     const sp = new URLSearchParams({ q: p.q, restore: "1" });
     return `/search?${sp.toString()}`;
+  }
+
+  public static getById(id: string): Bookmark | null {
+    return BookmarkUtil.getAll().find((b) => b.id === id) ?? null;
   }
 
   public static getAll(): Bookmark[] {

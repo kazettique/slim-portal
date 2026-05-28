@@ -87,7 +87,7 @@ import { AppConstant } from "../constant";
   import { BookmarkPage } from "../type.bookmark";
   import { TransitUtil } from "../util.transit";
   import type { TransitRoute, TransitLeg, TransportAutocompleteNode } from "@slim-portal/share";
-  import type { Bookmark, TransitBookmarkParam } from "../type.bookmark";
+  import type { Bookmark, TransitBookmarkParam, TransitRouteBookmarkParam } from "../type.bookmark";
 
   const form = document.getElementById("transit-form") as HTMLFormElement | null;
   const fromInput = document.getElementById("from-input") as HTMLInputElement | null;
@@ -110,6 +110,7 @@ import { AppConstant } from "../constant";
   let lastTo: string | null = null;
   let fromTimer: ReturnType<typeof setTimeout> | null = null;
   let toTimer: ReturnType<typeof setTimeout> | null = null;
+  let lastRoutes: TransitRoute[] = [];
 
   function setStatus(msg: string): void {
     if (statusEl) statusEl.textContent = msg;
@@ -159,7 +160,7 @@ import { AppConstant } from "../constant";
     }
     setStatus("");
     routeList.innerHTML = routes
-      .map((r) => {
+      .map((r, i) => {
         const fareText = r.referenceFare
           ? ` · IC ¥${r.referenceFare.ic.toLocaleString()} / 切符 ¥${r.referenceFare.ticket.toLocaleString()}`
           : "";
@@ -171,6 +172,7 @@ import { AppConstant } from "../constant";
               · ${r.transfers === 0 ? "No transfers" : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`}
               · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
             </span>
+            <button class="transit-route__save bookmark-btn" data-index="${i}" aria-label="Save this route">${AppConstant.BOOKMARK_ICON} Save</button>
           </div>
           <ul class="transit-route__legs">${renderLeg(r.legs)}</ul>
         </li>
@@ -283,6 +285,7 @@ import { AppConstant } from "../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.TRANSIT, new Blob([text]).size);
       const routes = JSON.parse(text) as TransitRoute[];
+      lastRoutes = routes;
       renderRoute(routes);
 
       if (routes.length > 0) {
@@ -297,6 +300,42 @@ import { AppConstant } from "../constant";
       setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);
     }
   }
+
+  function saveRouteBookmark(route: TransitRoute, btnIndex: number): void {
+    const fromName = fromInput?.value ?? "";
+    const toName = toInput?.value ?? "";
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const params: TransitRouteBookmarkParam = {
+      from: fromCoord ?? "",
+      to: toCoord ?? "",
+      from_name: fromName,
+      to_name: toName,
+      route,
+    };
+    const bookmark: Bookmark = {
+      id,
+      page: BookmarkPage.TRANSIT_ROUTE,
+      label: `${fromName} → ${toName} (${formatTime(route.depart)})`,
+      params,
+      createdAt: new Date().toISOString(),
+    };
+    BookmarkUtil.add(bookmark);
+    const btn = routeList?.querySelector<HTMLButtonElement>(`.transit-route__save[data-index="${btnIndex}"]`);
+    if (btn) {
+      btn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
+      setTimeout(() => {
+        if (btn) btn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }, 1500);
+    }
+  }
+
+  routeList?.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".transit-route__save");
+    if (!btn) return;
+    const index = parseInt(btn.dataset["index"] ?? "-1", 10);
+    if (index < 0 || index >= lastRoutes.length) return;
+    saveRouteBookmark(lastRoutes[index], index);
+  });
 
   // Geolocation
   if (locateBtn) {

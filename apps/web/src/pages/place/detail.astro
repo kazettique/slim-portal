@@ -24,6 +24,7 @@ import { AppConstant } from "../../constant";
       </svg>
       Refresh
     </button>
+    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark"></button>
     <span id="cache-status" class="cache-status" aria-live="polite"></span>
   </div>
 
@@ -35,16 +36,22 @@ import { AppConstant } from "../../constant";
   import { AppUtil } from "../../util";
   import { SettingsUtil } from "../../util.settings";
   import { NetworkPage } from "../../type.settings";
+  import { BookmarkUtil } from "../../util.bookmark";
+  import { BookmarkPage } from "../../type.bookmark";
+  import type { Bookmark } from "../../type.bookmark";
   import type { PlaceDetails } from "@slim-portal/share";
 
   const statusEl = document.getElementById("details-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("details-toolbar") as HTMLDivElement | null;
   const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
+  const bookmarkBtn = document.getElementById("bookmark-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
   const container = document.getElementById("place-details") as HTMLDivElement | null;
   const backLink = document.getElementById("back-link") as HTMLAnchorElement | null;
 
   const placeId = new URL(location.href).searchParams.get("id");
+
+  let lastPlace: PlaceDetails | null = null;
 
   function setStatus(msg: string): void {
     if (statusEl) statusEl.textContent = msg;
@@ -151,15 +158,40 @@ import { AppConstant } from "../../constant";
       const text = await res.text();
       SettingsUtil.addNetworkBytes(NetworkPage.PLACE_DETAIL, new Blob([text]).size);
       const item = JSON.parse(text) as PlaceDetails;
+      lastPlace = item;
       setStatus("");
       renderDetails(item);
       if (toolbar) toolbar.style.display = "flex";
+      if (bookmarkBtn) {
+        bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }
       const cacheDate = res.headers.get("X-Cache-Date");
       if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAIL);
     }
   }
+
+  function saveBookmark(): void {
+    if (!lastPlace) return;
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const bookmark: Bookmark = {
+      id,
+      page: BookmarkPage.PLACE_DETAIL,
+      label: lastPlace.name,
+      params: lastPlace,
+      createdAt: new Date().toISOString(),
+    };
+    BookmarkUtil.add(bookmark);
+    if (bookmarkBtn) {
+      bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
+      setTimeout(() => {
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+      }, 1500);
+    }
+  }
+
+  bookmarkBtn?.addEventListener("click", saveBookmark);
 
   // Use history.back() if referrer is within this site
   if (backLink) {

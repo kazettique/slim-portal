@@ -21,7 +21,9 @@ import { AppConstant } from "../constant";
   import { AppConstant } from "../constant";
   import { BookmarkUtil } from "../util.bookmark";
   import { BookmarkPage } from "../type.bookmark";
-  import type { Bookmark } from "../type.bookmark";
+  import type { Bookmark, PlaceDetailBookmarkParam, TransitRouteBookmarkParam } from "../type.bookmark";
+  import { SettingsUtil } from "../util.settings";
+  import { TimeFormat } from "../type.settings";
 
   const actionsEl = document.getElementById("bookmarks-actions") as HTMLDivElement | null;
   const deleteSelectedBtn = document.getElementById("delete-selected-btn") as HTMLButtonElement | null;
@@ -29,6 +31,62 @@ import { AppConstant } from "../constant";
   const statusEl = document.getElementById("bookmarks-status") as HTMLParagraphElement | null;
   const container = document.getElementById("bookmarks-container") as HTMLDivElement | null;
 
+
+  function formatTime(iso: string | null): string {
+    if (!iso) return "—";
+    try {
+      const fmt = SettingsUtil.getTimeFormat();
+      return new Date(iso).toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: fmt === TimeFormat.TWELVE_HOUR,
+      });
+    } catch {
+      return iso;
+    }
+  }
+
+  function formatCreatedAt(iso: string): string {
+    try {
+      const fmt = SettingsUtil.getTimeFormat();
+      return new Date(iso).toLocaleString("ja-JP", {
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: fmt === TimeFormat.TWELVE_HOUR,
+      });
+    } catch {
+      return iso;
+    }
+  }
+
+  function transfersText(transfers: number): string {
+    if (transfers === 0) return "No transfers";
+    return `${transfers} transfer${transfers > 1 ? "s" : ""}`;
+  }
+
+  function renderBookmarkContent(bm: Bookmark): string {
+    if (bm.page === BookmarkPage.PLACE_DETAIL) {
+      const p = bm.params as PlaceDetailBookmarkParam;
+      return `
+        <div class="bookmark-item__body">
+          <a href="${BookmarkUtil.buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>
+          <div class="bookmark-item__meta">${p.address} · Saved ${formatCreatedAt(bm.createdAt)}</div>
+        </div>
+      `;
+    }
+    if (bm.page === BookmarkPage.TRANSIT_ROUTE) {
+      const p = bm.params as TransitRouteBookmarkParam;
+      return `
+        <div class="bookmark-item__body">
+          <a href="${BookmarkUtil.buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>
+          <div class="bookmark-item__meta">${p.route.totalTime}min · ${transfersText(p.route.transfers)} · Saved ${formatCreatedAt(bm.createdAt)}</div>
+        </div>
+      `;
+    }
+    return `<a href="${BookmarkUtil.buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>`;
+  }
 
   function getCheckedIds(): string[] {
     if (!container) return [];
@@ -89,7 +147,7 @@ import { AppConstant } from "../constant";
             <label class="bookmark-item__check">
               <input type="checkbox" class="bookmark-checkbox" value="${bm.id}" aria-label="Select ${bm.label}" />
             </label>
-            <a href="${BookmarkUtil.buildUrl(bm)}" class="bookmark-item__label">${bm.label}</a>
+            ${renderBookmarkContent(bm)}
             <button class="bookmark-item__delete refresh-btn" data-id="${bm.id}" aria-label="Delete ${bm.label}">Delete</button>
           </li>
         `,
