@@ -30,9 +30,15 @@
 
 /* Text size — scales html font-size so rem-based measurements cascade correctly.
    Nav is hard-coded in px (see nav rule) to opt out of scaling. */
-[data-text-size="small"] { font-size: 14px; }
-[data-text-size="large"] { font-size: 18px; }
-[data-text-size="extra-large"] { font-size: 20px; }
+[data-text-size="small"] {
+  font-size: 14px;
+}
+[data-text-size="large"] {
+  font-size: 18px;
+}
+[data-text-size="extra-large"] {
+  font-size: 20px;
+}
 
 html {
   font-size: 16px;
@@ -94,8 +100,12 @@ nav a[aria-current="page"] {
 }
 
 /* Menu style — controls icon/text visibility in nav */
-[data-menu="icon-only"] nav .nav__text { display: none; }
-[data-menu="text-only"] nav .nav__icon { display: none; }
+[data-menu="icon-only"] nav .nav__text {
+  display: none;
+}
+[data-menu="text-only"] nav .nav__icon {
+  display: none;
+}
 
 main {
   flex-grow: 1;
@@ -237,8 +247,6 @@ footer {
 
 .transit-form__input {
   width: 100%;
-  min-width: 0;        /* prevent flex-item min-width:auto expansion on iOS */
-  max-width: 100%;     /* cap at parent width regardless of iOS native chrome */
   padding: 0.45em 0.6em;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -251,6 +259,10 @@ footer {
 .transit-form__input:focus {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
+}
+
+.transit-form__datepicker {
+  width: auto;
 }
 
 .transit-form__submit {

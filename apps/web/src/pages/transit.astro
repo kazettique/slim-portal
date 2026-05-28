@@ -3,7 +3,11 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base icon={AppConstant.TRANSIT_PAGE_META.icon} title={AppConstant.TRANSIT_PAGE_META.title} description={AppConstant.TRANSIT_PAGE_META.description}>
+<Base
+  icon={AppConstant.TRANSIT_PAGE_META.icon}
+  title={AppConstant.TRANSIT_PAGE_META.title}
+  description={AppConstant.TRANSIT_PAGE_META.description}
+>
   <h1>{AppConstant.TRANSIT_PAGE_META.icon} {AppConstant.TRANSIT_PAGE_META.title}</h1>
   <p>{AppConstant.TRANSIT_PAGE_META.description}</p>
 
@@ -43,7 +47,7 @@ import { AppConstant } from "../constant";
 
     <div class="transit-form__group">
       <label class="transit-form__label" for="datetime-input">Departure</label>
-      <input id="datetime-input" type="datetime-local" class="transit-form__input" />
+      <input id="datetime-input" type="datetime-local" class="transit-form__input transit-form__datepicker" />
     </div>
 
     <button type="submit" id="search-btn" class="transit-form__submit">Search routes</button>
