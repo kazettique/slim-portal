@@ -3,7 +3,11 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base icon={AppConstant.SEARCH_PAGE_META.icon} title={AppConstant.SEARCH_PAGE_META.title} description={AppConstant.SEARCH_PAGE_META.description}>
+<Base
+  icon={AppConstant.SEARCH_PAGE_META.icon}
+  title={AppConstant.SEARCH_PAGE_META.title}
+  description={AppConstant.SEARCH_PAGE_META.description}
+>
   <h1>{AppConstant.SEARCH_PAGE_META.icon} {AppConstant.SEARCH_PAGE_META.title}</h1>
   <p>{AppConstant.SEARCH_PAGE_META.description}</p>
 
@@ -14,9 +18,10 @@ import { AppConstant } from "../constant";
         type="search"
         name="q"
         placeholder="e.g. Tokyo, Python, climate change"
-        autocomplete="off"
+        autocomplete="on"
         required
         class="search-form__input"
+        inputmode="search"
       />
       <button type="submit" class="search-form__submit">Search</button>
     </div>
@@ -116,7 +121,8 @@ import { AppConstant } from "../constant";
         lastQ = q;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
+        if (cacheStatus)
+          cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_SEARCH_FAILED);

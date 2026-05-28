@@ -3,7 +3,11 @@ import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
 ---
 
-<Base icon={AppConstant.YEAR_CONVERTER_PAGE_META.icon} title={AppConstant.YEAR_CONVERTER_PAGE_META.title} description={AppConstant.YEAR_CONVERTER_PAGE_META.description}>
+<Base
+  icon={AppConstant.YEAR_CONVERTER_PAGE_META.icon}
+  title={AppConstant.YEAR_CONVERTER_PAGE_META.title}
+  description={AppConstant.YEAR_CONVERTER_PAGE_META.description}
+>
   <h1>{AppConstant.YEAR_CONVERTER_PAGE_META.icon} {AppConstant.YEAR_CONVERTER_PAGE_META.title}</h1>
   <p>{AppConstant.YEAR_CONVERTER_PAGE_META.description}</p>
   <a href={AppConstant.CONVERTER_PAGE_META.url} class="converter-back">← Back to Converters</a>
@@ -11,12 +15,12 @@ import { AppConstant } from "../../constant";
   <div class="converter-grid">
     <div class="converter-group">
       <label for="year-western">西元 (Western)</label>
-      <input id="year-western" type="number" min="1868" max="9999" placeholder="e.g. 2024" />
+      <input id="year-western" type="number" min="1868" max="9999" inputmode="numeric" placeholder="e.g. 2024" />
     </div>
 
     <div class="converter-group">
       <label for="year-roc">民國 (ROC)</label>
-      <input id="year-roc" type="number" min="1" placeholder="e.g. 113" />
+      <input id="year-roc" type="number" min="1" inputmode="numeric" placeholder="e.g. 113" />
     </div>
 
     <div class="converter-group">
@@ -29,7 +33,7 @@ import { AppConstant } from "../../constant";
           <option>平成</option>
           <option selected>令和</option>
         </select>
-        <input id="year-era-num" type="number" min="1" placeholder="e.g. 6" aria-label="Era year" />
+        <input id="year-era-num" type="number" min="1" placeholder="e.g. 6" inputmode="numeric" aria-label="Era year" />
       </div>
     </div>
   </div>

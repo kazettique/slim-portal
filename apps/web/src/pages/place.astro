@@ -3,7 +3,11 @@ import Base from "../layout/Base.astro";
 import { AppConstant } from "../constant";
 ---
 
-<Base icon={AppConstant.PLACE_PAGE_META.icon} title={AppConstant.PLACE_PAGE_META.title} description={AppConstant.PLACE_PAGE_META.description}>
+<Base
+  icon={AppConstant.PLACE_PAGE_META.icon}
+  title={AppConstant.PLACE_PAGE_META.title}
+  description={AppConstant.PLACE_PAGE_META.description}
+>
   <h1>{AppConstant.PLACE_PAGE_META.icon} {AppConstant.PLACE_PAGE_META.title}</h1>
   <p>{AppConstant.PLACE_PAGE_META.description}</p>
 
@@ -15,9 +19,10 @@ import { AppConstant } from "../constant";
           type="search"
           name="q"
           placeholder="e.g. ramen, coffee, pharmacy"
-          autocomplete="off"
+          autocomplete="on"
           required
           class="places-form__input"
+          inputmode="search"
         />
         <ul id="places-suggestion-list" class="places-autocomplete" style="display:none"></ul>
       </div>
@@ -101,9 +106,7 @@ import { AppConstant } from "../constant";
     setStatus("");
     list.innerHTML = items
       .map((p) => {
-        const detailsLink = p.id
-          ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>`
-          : "";
+        const detailsLink = p.id ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>` : "";
         const appleMapsLink =
           p.lat !== null && p.lng !== null
             ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`
@@ -198,7 +201,8 @@ import { AppConstant } from "../constant";
         lastParams = params;
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
+        if (cacheStatus)
+          cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACE);
