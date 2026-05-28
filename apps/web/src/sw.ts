@@ -50,6 +50,13 @@ abstract class SwHandler {
     const cached = await cache.match(request);
     if (cached) return cached;
 
+    // CF Pages caches pages at /path/ but nav <a href> uses /path — retry with slash
+    const url = new URL(request.url);
+    if (!url.pathname.endsWith("/")) {
+      const withSlash = await cache.match(new Request(url.origin + url.pathname + "/"));
+      if (withSlash) return withSlash;
+    }
+
     try {
       const response = await fetch(request);
       // Safari rejects any response with redirected:true served by a SW.
