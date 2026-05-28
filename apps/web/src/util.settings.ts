@@ -119,7 +119,7 @@ export abstract class SettingsUtil {
   public static getTextSize(): TextSize {
     try {
       const stored = localStorage.getItem(SettingsUtil.LS_KEY_TEXT_SIZE);
-      if (stored === TextSize.SMALL || stored === TextSize.MEDIUM || stored === TextSize.LARGE) return stored;
+      if (stored === TextSize.SMALL || stored === TextSize.MEDIUM || stored === TextSize.LARGE || stored === TextSize.EXTRA_LARGE) return stored;
     } catch {
       // localStorage unavailable (private mode, etc.)
     }

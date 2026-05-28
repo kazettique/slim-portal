@@ -19,6 +19,7 @@ export enum TextSize {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
+  EXTRA_LARGE = "extra-large",
 }
 
 export enum NetworkPage {
