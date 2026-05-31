@@ -1,8 +1,10 @@
 import type { PageMeta } from "./type";
 import { ShareConstant } from "@slim-portal/share";
+import pkg from "../package.json";
 
 export abstract class AppConstant {
   public static readonly APP_TITLE: string = "Slim Portal";
+  public static readonly APP_VERSION: string = pkg.version;
   public static readonly APP_DESCRIPTION: string = "Fast, minimal, text-first. Built for slow networks.";
   public static readonly WORKER_URL: string = import.meta.env.WORKER_URL ?? "";
   public static readonly API_BASE_URL: string = "/api";

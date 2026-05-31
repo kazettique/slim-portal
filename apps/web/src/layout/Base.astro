@@ -66,7 +66,7 @@ const canonicalPath = Astro.url.pathname;
       <slot />
     </main>
     <footer>
-      <small>{AppConstant.FOOTER_MESSAGE}</small>
+      <small>{AppConstant.FOOTER_MESSAGE} · v{AppConstant.APP_VERSION}</small>
     </footer>
     <script is:inline>
       if ("serviceWorker" in navigator) {
