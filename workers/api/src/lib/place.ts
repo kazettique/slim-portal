@@ -95,6 +95,10 @@ export abstract class PlaceLib {
 
   // ── Helpers ──────────────────────────────────────────────────────────────────
 
+  public static cacheKey(namespace: string, params: string): string {
+    return `https://slim-portal-places-cache/${namespace}/${params}`;
+  }
+
   public static async details(
     req: DetailsRequest,
     env: Env,
@@ -153,6 +157,38 @@ export abstract class PlaceLib {
     ctx.waitUntil(cache.put(key, cachedResponse));
 
     return { cachedAt: null, item };
+  }
+
+  public static haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
+    const R = 6_371_000;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+  }
+
+  // ── Public methods ────────────────────────────────────────────────────────────
+
+  public static mapPlaceToItem(p: GMapPlace, lat: null | number, lng: null | number): PlaceItem {
+    return {
+      address: p.formattedAddress ?? "",
+      distanceMeters:
+        lat !== null &&
+        lng !== null &&
+        p.location?.latitude !== undefined &&
+        p.location?.longitude !== undefined
+          ? this.haversineMeters(lat, lng, p.location.latitude, p.location.longitude)
+          : null,
+      id: p.id ?? null,
+      lat: p.location?.latitude ?? null,
+      lng: p.location?.longitude ?? null,
+      mapsUrl: p.googleMapsUri ?? "",
+      name: p.displayName?.text ?? "",
+      rating: p.rating ?? null,
+      totalRatings: p.userRatingCount ?? 0,
+    };
   }
 
   public static async nearby(
@@ -285,42 +321,6 @@ export abstract class PlaceLib {
     ctx.waitUntil(cache.put(key, cachedResponse));
 
     return { cachedAt: null, items };
-  }
-
-  // ── Public methods ────────────────────────────────────────────────────────────
-
-  public static cacheKey(namespace: string, params: string): string {
-    return `https://slim-portal-places-cache/${namespace}/${params}`;
-  }
-
-  public static haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
-    const R = 6_371_000;
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLng = ((lng2 - lng1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) ** 2 +
-      Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
-    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
-  }
-
-  public static mapPlaceToItem(p: GMapPlace, lat: null | number, lng: null | number): PlaceItem {
-    return {
-      address: p.formattedAddress ?? "",
-      distanceMeters:
-        lat !== null &&
-        lng !== null &&
-        p.location?.latitude !== undefined &&
-        p.location?.longitude !== undefined
-          ? this.haversineMeters(lat, lng, p.location.latitude, p.location.longitude)
-          : null,
-      id: p.id ?? null,
-      lat: p.location?.latitude ?? null,
-      lng: p.location?.longitude ?? null,
-      mapsUrl: p.googleMapsUri ?? "",
-      name: p.displayName?.text ?? "",
-      rating: p.rating ?? null,
-      totalRatings: p.userRatingCount ?? 0,
-    };
   }
 
   private static RAPIDAPI_HEADERS = (key: string, host: string): Record<string, string> => ({

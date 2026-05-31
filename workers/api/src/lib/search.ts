@@ -7,6 +7,18 @@ import { WorkerConstant } from "../constant";
 import { DuckDuckGoConstant } from "../external/duckduckgo/constant";
 
 export abstract class SearchLib {
+  public static cacheKey(q: string): string {
+    return `https://slim-portal-search-cache/${encodeURIComponent(q)}`;
+  }
+
+  public static mapResults(data: DdgResponse): SearchItem[] {
+    return data.results.slice(0, DuckDuckGoConstant.MAX_RESULTS).map((r) => ({
+      snippet: r.description,
+      title: r.title,
+      url: r.url,
+    }));
+  }
+
   public static async search(
     q: string,
     env: Env,
@@ -46,17 +58,5 @@ export abstract class SearchLib {
     ctx.waitUntil(cache.put(key, cachedResponse));
 
     return { cachedAt: null, items };
-  }
-
-  public static cacheKey(q: string): string {
-    return `https://slim-portal-search-cache/${encodeURIComponent(q)}`;
-  }
-
-  public static mapResults(data: DdgResponse): SearchItem[] {
-    return data.results.slice(0, DuckDuckGoConstant.MAX_RESULTS).map((r) => ({
-      snippet: r.description,
-      title: r.title,
-      url: r.url,
-    }));
   }
 }

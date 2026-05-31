@@ -3,12 +3,9 @@
 
 const store = new Map<string, string>();
 
-Object.defineProperty(globalThis, 'localStorage', {
+Object.defineProperty(globalThis, "localStorage", {
   configurable: true,
   value: {
-    get length() {
-      return store.size;
-    },
     clear() {
       store.clear();
     },
@@ -17,6 +14,9 @@ Object.defineProperty(globalThis, 'localStorage', {
     },
     key(index: number) {
       return [...store.keys()][index] ?? null;
+    },
+    get length() {
+      return store.size;
     },
     removeItem(key: string) {
       store.delete(key);

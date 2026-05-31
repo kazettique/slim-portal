@@ -1,23 +1,23 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: 'e2e',
-  fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  reporter: 'list',
-  use: {
-    baseURL: 'http://localhost:4321',
-  },
+  fullyParallel: true,
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
     },
   ],
+  reporter: "list",
+  retries: process.env.CI ? 2 : 0,
+  testDir: "e2e",
+  use: {
+    baseURL: "http://localhost:4321",
+  },
   webServer: {
-    command: 'bun run dev:web',
-    url: 'http://localhost:4321',
+    command: "bun run dev:web",
     reuseExistingServer: !process.env.CI,
+    url: "http://localhost:4321",
   },
 });
