@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, expect, it } from 'vitest';
 

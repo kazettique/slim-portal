@@ -8,7 +8,7 @@ const makeBookmark = (id: string, page: BookmarkPage, params: Record<string, str
   id,
   label: `Label ${id}`,
   page,
-  params: params as Bookmark['params'],
+  params: params as unknown as Bookmark['params'],
 });
 
 const search1 = makeBookmark('s1', BookmarkPage.SEARCH, { q: 'weather' });

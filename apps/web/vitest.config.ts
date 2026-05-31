@@ -1,14 +1,12 @@
 import { getViteConfig } from 'astro/config';
 import { fileURLToPath } from 'node:url';
+import type {} from 'vitest/config';
 
 export default getViteConfig(
   {
     test: {
       name: 'web',
-      environmentMatchGlobs: [
-        ['tests/component/page.*.test.ts', 'node'],
-        ['**', 'happy-dom'],
-      ],
+      environment: 'happy-dom',
       include: ['tests/**/*.test.ts'],
       setupFiles: ['tests/setup.ts'],
     },
