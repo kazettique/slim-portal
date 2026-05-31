@@ -4,10 +4,7 @@
       "id": "00019821",
       "name": "東急歌舞伎町タワー〔新宿歌舞伎町〕",
       "ruby": "とうきゅうかぶきちょうたわー",
-      "types": [
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["highway_busstop", "shuttle_busstop"],
       "address_name": "東京都新宿区歌舞伎町",
       "address_code": "13104031000",
       "coord": {
@@ -19,9 +16,7 @@
       "id": "00062656",
       "name": "東京ガーデンテラス紀尾井町",
       "ruby": "とうきょうがーでんてらすきおいちょう",
-      "types": [
-        "shuttle_busstop"
-      ],
+      "types": ["shuttle_busstop"],
       "address_name": "東京都千代田区紀尾井町",
       "address_code": "13101035000",
       "coord": {
@@ -33,9 +28,7 @@
       "id": "00062670",
       "name": "東京ワールドゲート赤坂",
       "ruby": "とうきょうわーるどげーとあかさか",
-      "types": [
-        "shuttle_busstop"
-      ],
+      "types": ["shuttle_busstop"],
       "address_name": "東京都港区赤坂",
       "address_code": "13103001000",
       "coord": {
@@ -47,11 +40,7 @@
       "id": "00062522",
       "name": "東京ドームホテル",
       "ruby": "とうきょうどーむほてる",
-      "types": [
-        "busstop",
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["busstop", "highway_busstop", "shuttle_busstop"],
       "address_name": "東京都文京区後楽",
       "address_code": "13105005000",
       "coord": {
@@ -63,10 +52,7 @@
       "id": "00062546",
       "name": "東京プリンスホテル",
       "ruby": "とうきょうぷりんすほてる",
-      "types": [
-        "busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["busstop", "shuttle_busstop"],
       "address_name": "東京都港区芝公園",
       "address_code": "13103012000",
       "coord": {
@@ -78,11 +64,7 @@
       "id": "00017241",
       "name": "東京駅丸の内北口",
       "ruby": "とうきょうえきまるのうちきたぐち",
-      "types": [
-        "busstop",
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["busstop", "highway_busstop", "shuttle_busstop"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {
@@ -94,9 +76,7 @@
       "id": "00006668",
       "name": "東京",
       "ruby": "とうきょう",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {
@@ -142,9 +122,7 @@
       "id": "00062502",
       "name": "東京駅八重洲南口〔空港リムジン〕",
       "ruby": "とうきょうえきやえすみなみぐち",
-      "types": [
-        "shuttle_busstop"
-      ],
+      "types": ["shuttle_busstop"],
       "address_name": "東京都中央区八重洲",
       "address_code": "13102037000",
       "coord": {
@@ -156,10 +134,7 @@
       "id": "00062655",
       "name": "東京駅八重洲北口〔鉄鋼ビル〕",
       "ruby": "とうきょうえきやえすきたぐちてっこうびる",
-      "types": [
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["highway_busstop", "shuttle_busstop"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {
@@ -171,9 +146,7 @@
       "id": "00035132",
       "name": "東京港竹芝客船ターミナル",
       "ruby": "とうきょうこうたけしばきゃくせんたーみなる",
-      "types": [
-        "port"
-      ],
+      "types": ["port"],
       "address_name": "東京都港区海岸",
       "address_code": "13103007000",
       "coord": {
@@ -185,9 +158,7 @@
       "id": "00062525",
       "name": "東京マリオットホテル",
       "ruby": "とうきょうまりおっとほてる",
-      "types": [
-        "shuttle_busstop"
-      ],
+      "types": ["shuttle_busstop"],
       "address_name": "東京都品川区北品川",
       "address_code": "13109006000",
       "coord": {
@@ -199,10 +170,7 @@
       "id": "00062501",
       "name": "東京シティ・エアターミナル",
       "ruby": "とうきょうしてぃえあたーみなる",
-      "types": [
-        "busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["busstop", "shuttle_busstop"],
       "address_name": "東京都中央区日本橋箱崎町",
       "address_code": "13102023000",
       "coord": {

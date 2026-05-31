@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
-import { PublicBathroomApiItem, PublicBathroomRequest } from "./type";
+
+import type { PublicBathroomApiItem, PublicBathroomRequest } from "./type";
 
 export abstract class PublicBathroomValidator {
   private static readonly LATITUDE_VALIDATOR: z.ZodType<number> = z.number().min(-90).max(90);
@@ -8,22 +9,22 @@ export abstract class PublicBathroomValidator {
   public static readonly REQUEST_VALIDATOR: z.ZodType<PublicBathroomRequest> = z.object({
     lat: PublicBathroomValidator.LATITUDE_VALIDATOR,
     lng: PublicBathroomValidator.LONGITUDE_VALIDATOR,
-    radius: z.number().positive().optional(),
     page: z.number().int().positive().optional(),
+    radius: z.number().positive().optional(),
   });
 
   public static readonly RESPONSE_VALIDATOR: z.ZodType<PublicBathroomApiItem[]> = z.array(
     z.object({
-      id: z.number().int(),
-      name: z.string(),
-      city: z.string(),
-      state: z.string(),
-      latitude: z.number(),
-      longitude: z.number(),
       accessible: z.number().int(),
       changing_table: z.number().int(),
-      unisex: z.number().int(),
+      city: z.string(),
       distance: z.number(),
+      id: z.number().int(),
+      latitude: z.number(),
+      longitude: z.number(),
+      name: z.string(),
+      state: z.string(),
+      unisex: z.number().int(),
     }),
   );
 }

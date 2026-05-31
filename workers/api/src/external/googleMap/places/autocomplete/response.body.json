@@ -163,13 +163,7 @@
             ]
           }
         },
-        "types": [
-          "restaurant",
-          "food",
-          "establishment",
-          "point_of_interest",
-          "french_restaurant"
-        ],
+        "types": ["restaurant", "food", "establishment", "point_of_interest", "french_restaurant"],
         "distanceMeters": 14267647
       }
     },

@@ -1,6 +1,6 @@
 export interface PageMeta {
+  description: string;
   icon: string;
   title: string;
-  description: string;
   url: string;
 }

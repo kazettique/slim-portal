@@ -1,6 +1,8 @@
 import { z } from "zod/v4";
+
+import type { SearchNearbyRequest, SearchNearbyResponse } from "./type";
+
 import { GMapCommonValidator } from "../validator.common";
-import { SearchNearbyRequest, SearchNearbyResponse } from "./type";
 
 export abstract class GMapSearchNearbyValidator {
   public static readonly REQUEST_VALIDATOR: z.ZodType<SearchNearbyRequest> = z.object({

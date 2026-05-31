@@ -1,9 +1,9 @@
-import { GMapPlace } from "../type.common";
+import type { GMapPlace } from "../type.common";
 
 export interface SearchTextRequest {
-  q: string;
   lat?: number;
   lng?: number;
+  q: string;
 }
 
 export interface SearchTextResponse {

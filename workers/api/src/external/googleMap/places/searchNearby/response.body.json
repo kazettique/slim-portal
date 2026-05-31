@@ -3,39 +3,25 @@
     {
       "name": "places/ChIJu9ljKNeMGGARcFUr-NmJhAk",
       "id": "ChIJu9ljKNeMGGARcFUr-NmJhAk",
-      "types": [
-        "transit_station",
-        "transportation_service",
-        "point_of_interest",
-        "establishment"
-      ],
+      "types": ["transit_station", "transportation_service", "point_of_interest", "establishment"],
       "formattedAddress": "Shinjuku City, Tokyo, Japan",
       "addressComponents": [
         {
           "longText": "Japan",
           "shortText": "JP",
-          "types": [
-            "country",
-            "political"
-          ],
+          "types": ["country", "political"],
           "languageCode": "en"
         },
         {
           "longText": "Shinjuku City",
           "shortText": "Shinjuku City",
-          "types": [
-            "locality",
-            "political"
-          ],
+          "types": ["locality", "political"],
           "languageCode": "en"
         },
         {
           "longText": "Tokyo",
           "shortText": "Tokyo",
-          "types": [
-            "administrative_area_level_1",
-            "political"
-          ],
+          "types": ["administrative_area_level_1", "political"],
           "languageCode": "en"
         }
       ],
@@ -355,11 +341,7 @@
               "text": "Shinjuku Sta. West",
               "languageCode": "en"
             },
-            "types": [
-              "establishment",
-              "point_of_interest",
-              "transit_station"
-            ],
+            "types": ["establishment", "point_of_interest", "transit_station"],
             "straightLineDistanceMeters": 67.982796
           },
           {
@@ -369,11 +351,7 @@
               "text": "Popondetta",
               "languageCode": "en"
             },
-            "types": [
-              "establishment",
-              "point_of_interest",
-              "store"
-            ],
+            "types": ["establishment", "point_of_interest", "store"],
             "spatialRelationship": "BESIDE",
             "straightLineDistanceMeters": 24.368526
           },

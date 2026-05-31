@@ -7,14 +7,15 @@
 ## Request Example
 
 ```js
-const url = 'https://navitime-transport.p.rapidapi.com/transport_node?word=%E6%9D%B1%E4%BA%AC&coord_unit=degree&offset=0&datum=wgs84&limit=10';
+const url =
+  "https://navitime-transport.p.rapidapi.com/transport_node?word=%E6%9D%B1%E4%BA%AC&coord_unit=degree&offset=0&datum=wgs84&limit=10";
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
-  'x-rapidapi-key': '<RAPIDAPI_KEY>',
-  'x-rapidapi-host': 'navitime-transport.p.rapidapi.com',
-  'Content-Type': 'application/json'
-  }
+    "x-rapidapi-key": "<RAPIDAPI_KEY>",
+    "x-rapidapi-host": "navitime-transport.p.rapidapi.com",
+    "Content-Type": "application/json",
+  },
 };
 
 try {

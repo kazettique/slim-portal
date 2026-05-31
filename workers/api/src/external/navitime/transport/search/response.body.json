@@ -9,9 +9,7 @@
       "id": "00006668",
       "name": "東京",
       "ruby": "とうきょう",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {
@@ -23,9 +21,7 @@
       "id": "00006669",
       "name": "東京テレポート",
       "ruby": "とうきょうてれぽーと",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都江東区青海",
       "address_code": "13108045000",
       "coord": {
@@ -37,9 +33,7 @@
       "id": "00002666",
       "name": "東京ビッグサイト(ゆりかもめ)",
       "ruby": "とうきょうびっぐさいと",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都江東区有明",
       "address_code": "13108001000",
       "coord": {
@@ -51,9 +45,7 @@
       "id": "00009257",
       "name": "東京ディズニーシー",
       "ruby": "とうきょうでぃずにーしー",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "千葉県浦安市舞浜",
       "address_code": "12227017000",
       "coord": {
@@ -65,9 +57,7 @@
       "id": "00009258",
       "name": "東京ディズニーランド",
       "ruby": "とうきょうでぃずにーらんど",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "千葉県浦安市舞浜",
       "address_code": "12227017000",
       "coord": {
@@ -79,9 +69,7 @@
       "id": "00005281",
       "name": "東京国際クルーズターミナル",
       "ruby": "とうきょうこくさいくるーずたーみなる",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都江東区青海",
       "address_code": "13108045000",
       "coord": {
@@ -93,9 +81,7 @@
       "id": "00035132",
       "name": "東京港竹芝客船ターミナル",
       "ruby": "とうきょうこうたけしばきゃくせんたーみなる",
-      "types": [
-        "port"
-      ],
+      "types": ["port"],
       "address_name": "東京都港区海岸",
       "address_code": "13103007000",
       "coord": {
@@ -107,10 +93,7 @@
       "id": "00062655",
       "name": "東京駅八重洲北口〔鉄鋼ビル〕",
       "ruby": "とうきょうえきやえすきたぐちてっこうびる",
-      "types": [
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["highway_busstop", "shuttle_busstop"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {
@@ -122,9 +105,7 @@
       "id": "00035133",
       "name": "東京有明ＦＴ",
       "ruby": "とうきょうありあけふぇりーたーみなる",
-      "types": [
-        "port"
-      ],
+      "types": ["port"],
       "address_name": "東京都江東区有明",
       "address_code": "13108001000",
       "coord": {
@@ -136,11 +117,7 @@
       "id": "00017241",
       "name": "東京駅丸の内北口",
       "ruby": "とうきょうえきまるのうちきたぐち",
-      "types": [
-        "busstop",
-        "highway_busstop",
-        "shuttle_busstop"
-      ],
+      "types": ["busstop", "highway_busstop", "shuttle_busstop"],
       "address_name": "東京都千代田区丸の内",
       "address_code": "13101055000",
       "coord": {

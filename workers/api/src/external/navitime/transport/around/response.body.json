@@ -4,9 +4,7 @@
       "id": "00006547",
       "name": "都庁前",
       "ruby": "とちょうまえ",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区西新宿",
       "address_code": "13104070000",
       "coord": {
@@ -21,9 +19,7 @@
       "id": "00004813",
       "name": "西新宿",
       "ruby": "にししんじゅく",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区西新宿",
       "address_code": "13104070000",
       "coord": {
@@ -38,9 +34,7 @@
       "id": "00004254",
       "name": "新宿",
       "ruby": "しんじゅく",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区新宿",
       "address_code": "13104046000",
       "coord": {
@@ -55,9 +49,7 @@
       "id": "00004814",
       "name": "西新宿五丁目",
       "ruby": "にししんじゅくごちょうめ",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区西新宿",
       "address_code": "13104070000",
       "coord": {
@@ -72,9 +64,7 @@
       "id": "00009217",
       "name": "新宿西口",
       "ruby": "しんじゅくにしぐち",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区西新宿",
       "address_code": "13104070000",
       "coord": {
@@ -89,9 +79,7 @@
       "id": "00007111",
       "name": "南新宿",
       "ruby": "みなみしんじゅく",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都渋谷区代々木",
       "address_code": "13113031000",
       "coord": {
@@ -105,9 +93,7 @@
       "id": "00003605",
       "name": "初台",
       "ruby": "はつだい",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都渋谷区本町",
       "address_code": "13113028000",
       "coord": {
@@ -122,9 +108,7 @@
       "id": "00004927",
       "name": "西武新宿",
       "ruby": "せいぶしんじゅく",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区歌舞伎町",
       "address_code": "13104031000",
       "coord": {
@@ -139,9 +123,7 @@
       "id": "00004256",
       "name": "新宿三丁目",
       "ruby": "しんじゅくさんちょうめ",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都新宿区新宿",
       "address_code": "13104046000",
       "coord": {
@@ -156,9 +138,7 @@
       "id": "00005506",
       "name": "代々木",
       "ruby": "よよぎ",
-      "types": [
-        "station"
-      ],
+      "types": ["station"],
       "address_name": "東京都渋谷区千駄ヶ谷",
       "address_code": "13113017000",
       "coord": {

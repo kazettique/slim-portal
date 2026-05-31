@@ -3,13 +3,7 @@
     {
       "name": "places/ChIJF-Xb7dqMGGARrzNdUa_u0DI",
       "id": "ChIJF-Xb7dqMGGARrzNdUa_u0DI",
-      "types": [
-        "japanese_restaurant",
-        "restaurant",
-        "point_of_interest",
-        "food",
-        "establishment"
-      ],
+      "types": ["japanese_restaurant", "restaurant", "point_of_interest", "food", "establishment"],
       "nationalPhoneNumber": "03-3354-0611",
       "internationalPhoneNumber": "+81 3-3354-0611",
       "formattedAddress": "3-chōme-35-2 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan",
@@ -17,74 +11,49 @@
         {
           "longText": "2",
           "shortText": "2",
-          "types": [
-            "premise"
-          ],
+          "types": ["premise"],
           "languageCode": "en-US"
         },
         {
           "longText": "35",
           "shortText": "35",
-          "types": [
-            "sublocality_level_4",
-            "sublocality",
-            "political"
-          ],
+          "types": ["sublocality_level_4", "sublocality", "political"],
           "languageCode": "en"
         },
         {
           "longText": "3-chōme",
           "shortText": "3-chōme",
-          "types": [
-            "sublocality_level_3",
-            "sublocality",
-            "political"
-          ],
+          "types": ["sublocality_level_3", "sublocality", "political"],
           "languageCode": "ja-Latn"
         },
         {
           "longText": "Shinjuku",
           "shortText": "Shinjuku",
-          "types": [
-            "sublocality_level_2",
-            "sublocality",
-            "political"
-          ],
+          "types": ["sublocality_level_2", "sublocality", "political"],
           "languageCode": "ja-Latn"
         },
         {
           "longText": "Shinjuku City",
           "shortText": "Shinjuku City",
-          "types": [
-            "locality",
-            "political"
-          ],
+          "types": ["locality", "political"],
           "languageCode": "en"
         },
         {
           "longText": "Tokyo",
           "shortText": "Tokyo",
-          "types": [
-            "administrative_area_level_1",
-            "political"
-          ],
+          "types": ["administrative_area_level_1", "political"],
           "languageCode": "en"
         },
         {
           "longText": "Japan",
           "shortText": "JP",
-          "types": [
-            "country",
-            "political"
-          ],
+          "types": ["country", "political"],
           "languageCode": "en"
         },
         {
           "longText": "160-0022",
           "shortText": "160-0022",
-          "types": [
-            "postal_code"
-          ],
+          "types": ["postal_code"],
           "languageCode": "en-US"
         }
       ],
@@ -720,12 +689,7 @@
               "text": "Isetan Shinjuku",
               "languageCode": "en"
             },
-            "types": [
-              "department_store",
-              "establishment",
-              "point_of_interest",
-              "store"
-            ],
+            "types": ["department_store", "establishment", "point_of_interest", "store"],
             "straightLineDistanceMeters": 246.13667,
             "travelDistanceMeters": 267.89273
           },
@@ -736,10 +700,7 @@
               "text": "TAITO STATION Shinjuku GameWorld",
               "languageCode": "en"
             },
-            "types": [
-              "establishment",
-              "point_of_interest"
-            ],
+            "types": ["establishment", "point_of_interest"],
             "spatialRelationship": "AROUND_THE_CORNER",
             "straightLineDistanceMeters": 64.56621,
             "travelDistanceMeters": 118.636185
@@ -751,12 +712,7 @@
               "text": "Shinjuku-sanchome Station",
               "languageCode": "en"
             },
-            "types": [
-              "establishment",
-              "point_of_interest",
-              "subway_station",
-              "transit_station"
-            ],
+            "types": ["establishment", "point_of_interest", "subway_station", "transit_station"],
             "spatialRelationship": "AROUND_THE_CORNER",
             "straightLineDistanceMeters": 208.89107,
             "travelDistanceMeters": 26.69035
@@ -829,10 +785,7 @@
         "languageCode": "en-US",
         "postalCode": "160-0022",
         "administrativeArea": "Tokyo",
-        "addressLines": [
-          "3 Chome-35-2 Shinjuku",
-          "Shinjuku City"
-        ]
+        "addressLines": ["3 Chome-35-2 Shinjuku", "Shinjuku City"]
       },
       "googleMapsTypeLabel": {
         "text": "Gyudon Restaurant",

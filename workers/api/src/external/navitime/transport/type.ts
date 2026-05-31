@@ -1,24 +1,24 @@
-import { NavitimeCoord } from "../type.common";
+import type { NavitimeCoord } from "../type.common";
+
+export interface NavitimeTransportCount {
+  limit: number;
+  offset: number;
+  total: number;
+}
 
 export interface NavitimeTransportNode {
+  address_code?: string;
+  address_name?: string;
+  coord: NavitimeCoord;
   id: string;
   name: string;
   ruby?: string;
   types: string[];
-  address_name?: string;
-  address_code?: string;
-  coord: NavitimeCoord;
-}
-
-export interface NavitimeTransportCount {
-  total: number;
-  offset: number;
-  limit: number;
 }
 
 export interface NavitimeTransportUnit {
-  datum: string;
   coord_unit: string;
+  datum: string;
   distance?: string; // present in around response
   time?: string; // present in around response
 }

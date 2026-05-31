@@ -1,50 +1,77 @@
+export interface BathroomItem {
+  accessible: boolean;
+  changingTable: boolean;
+  city: string;
+  distanceKm: number;
+  id: number;
+  lat: number;
+  lng: number;
+  name: string;
+  state: string;
+  unisex: boolean;
+}
+
 export interface NewsItem {
-  title: string;
-  summary: string;
-  url: string;
   publishedAt: string;
   source: string;
-}
-
-export interface PlaceItem {
-  id: string | null;
-  name: string;
-  address: string;
-  rating: number | null;
-  totalRatings: number;
-  distanceMeters: number | null;
-  mapsUrl: string;
-  lat: number | null;
-  lng: number | null;
-}
-
-export interface PlacePrediction {
-  placeId?: string;
-  text: string;
-  mainText: string;
-  secondaryText: string;
-  distanceMeters?: number;
+  summary: string;
+  title: string;
+  url: string;
 }
 
 export interface PlaceDetails extends PlaceItem {
-  phoneNumber: string | null;
-  website: string | null;
-  openingHours: string[] | null;
-  businessStatus: string | null;
+  businessStatus: null | string;
+  openingHours: null | string[];
+  phoneNumber: null | string;
+  website: null | string;
+}
+
+export interface PlaceItem {
+  address: string;
+  distanceMeters: null | number;
+  id: null | string;
+  lat: null | number;
+  lng: null | number;
+  mapsUrl: string;
+  name: string;
+  rating: null | number;
+  totalRatings: number;
+}
+
+export interface PlacePrediction {
+  distanceMeters?: number;
+  mainText: string;
+  placeId?: string;
+  secondaryText: string;
+  text: string;
 }
 
 export interface SearchItem {
+  snippet: string;
   title: string;
   url: string;
-  snippet: string;
 }
 
-export interface TransportNode {
-  id: string;
-  name: string;
-  ruby?: string;
-  types: string[];
-  coord: { lat: number; lng: number };
+export interface TransitLeg {
+  arrive: null | string;
+  color: null | string;
+  depart: null | string;
+  distance: null | number;
+  duration: null | number;
+  from: string;
+  getoff: null | string;
+  line: string;
+  platform: string;
+  to: string;
+}
+
+export interface TransitRoute {
+  arrive: string;
+  depart: string;
+  legs: TransitLeg[];
+  referenceFare: null | { ic: number; ticket: number };
+  totalTime: number;
+  transfers: number;
 }
 
 export interface TransportAroundNode extends TransportNode {
@@ -56,44 +83,17 @@ export interface TransportAutocompleteNode extends TransportNode {
   numbering?: Array<{ number: string; symbol: string }>;
 }
 
-export interface TransportSearchResult {
-  total: number;
-  offset: number;
-  limit: number;
-  items: TransportNode[];
-}
-
-export interface TransitLeg {
-  line: string;
-  from: string;
-  to: string;
-  depart: string | null;
-  arrive: string | null;
-  platform: string;
-  color: string | null;
-  getoff: string | null;
-  distance: number | null;
-  duration: number | null;
-}
-
-export interface TransitRoute {
-  legs: TransitLeg[];
-  totalTime: number;
-  transfers: number;
-  depart: string;
-  arrive: string;
-  referenceFare: { ticket: number; ic: number } | null;
-}
-
-export interface BathroomItem {
-  id: number;
+export interface TransportNode {
+  coord: { lat: number; lng: number };
+  id: string;
   name: string;
-  city: string;
-  state: string;
-  lat: number;
-  lng: number;
-  accessible: boolean;
-  changingTable: boolean;
-  unisex: boolean;
-  distanceKm: number;
+  ruby?: string;
+  types: string[];
+}
+
+export interface TransportSearchResult {
+  items: TransportNode[];
+  limit: number;
+  offset: number;
+  total: number;
 }

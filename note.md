@@ -31,18 +31,21 @@ first visit (click through once, then it works normally as a PWA).
 ## Option C — Local HTTPS with mkcert (cleanest for ongoing dev)
 
 1. Install mkcert and create a local root CA:
+
    ```bash
    brew install mkcert
    mkcert -install
    ```
 
 2. Generate a cert for localhost:
+
    ```bash
    mkcert localhost
    # → localhost.pem + localhost-key.pem
    ```
 
 3. Add HTTPS to the Astro dev server (`apps/web/astro.config.mjs`):
+
    ```js
    server: {
      https: {

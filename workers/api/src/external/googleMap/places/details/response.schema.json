@@ -131,15 +131,15 @@
               "type": "number",
               "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
               "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "minimum": -1.7976931348623157e308,
+              "maximum": 1.7976931348623157e308
             },
             "longitude": {
               "type": "number",
               "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
               "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "minimum": -1.7976931348623157e308,
+              "maximum": 1.7976931348623157e308
             }
           },
           "description": "An object that represents a latitude/longitude pair. This is expressed as a\n pair of doubles to represent degrees latitude and degrees longitude. Unless\n specified otherwise, this must conform to the\n <a href=\"http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf\">WGS84\n standard</a>. Values must be within normalized ranges."
@@ -161,15 +161,15 @@
                       "type": "number",
                       "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
                       "format": "double",
-                      "minimum": -1.7976931348623157e+308,
-                      "maximum": 1.7976931348623157e+308
+                      "minimum": -1.7976931348623157e308,
+                      "maximum": 1.7976931348623157e308
                     },
                     "longitude": {
                       "type": "number",
                       "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
                       "format": "double",
-                      "minimum": -1.7976931348623157e+308,
-                      "maximum": 1.7976931348623157e+308
+                      "minimum": -1.7976931348623157e308,
+                      "maximum": 1.7976931348623157e308
                     }
                   },
                   "description": "An object that represents a latitude/longitude pair. This is expressed as a\n pair of doubles to represent degrees latitude and degrees longitude. Unless\n specified otherwise, this must conform to the\n <a href=\"http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf\">WGS84\n standard</a>. Values must be within normalized ranges."
@@ -186,15 +186,15 @@
                       "type": "number",
                       "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
                       "format": "double",
-                      "minimum": -1.7976931348623157e+308,
-                      "maximum": 1.7976931348623157e+308
+                      "minimum": -1.7976931348623157e308,
+                      "maximum": 1.7976931348623157e308
                     },
                     "longitude": {
                       "type": "number",
                       "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
                       "format": "double",
-                      "minimum": -1.7976931348623157e+308,
-                      "maximum": 1.7976931348623157e+308
+                      "minimum": -1.7976931348623157e308,
+                      "maximum": 1.7976931348623157e308
                     }
                   },
                   "description": "An object that represents a latitude/longitude pair. This is expressed as a\n pair of doubles to represent degrees latitude and degrees longitude. Unless\n specified otherwise, this must conform to the\n <a href=\"http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf\">WGS84\n standard</a>. Values must be within normalized ranges."
@@ -212,8 +212,8 @@
       "type": "number",
       "description": "A rating between 1.0 and 5.0, based on user reviews of this place.",
       "format": "double",
-      "minimum": -1.7976931348623157e+308,
-      "maximum": 1.7976931348623157e+308
+      "minimum": -1.7976931348623157e308,
+      "maximum": 1.7976931348623157e308
     },
     "googleMapsUri": {
       "type": "string",
@@ -256,8 +256,8 @@
             "type": "number",
             "description": "A number between 1.0 and 5.0, also called the number of stars.",
             "format": "double",
-            "minimum": -1.7976931348623157e+308,
-            "maximum": 1.7976931348623157e+308
+            "minimum": -1.7976931348623157e308,
+            "maximum": 1.7976931348623157e308
           },
           "authorAttribution": {
             "allOf": [
@@ -1220,8 +1220,8 @@
                     "type": "number",
                     "description": "The static max charging rate in kw of each connector in the aggregation.",
                     "format": "double",
-                    "minimum": -1.7976931348623157e+308,
-                    "maximum": 1.7976931348623157e+308
+                    "minimum": -1.7976931348623157e308,
+                    "maximum": 1.7976931348623157e308
                   },
                   "count": {
                     "type": "integer",

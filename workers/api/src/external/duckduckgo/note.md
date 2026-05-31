@@ -3,14 +3,14 @@
 ## Request Example
 
 ```js
-const url = 'https://duckduckgo8.p.rapidapi.com/?q=Nike';
+const url = "https://duckduckgo8.p.rapidapi.com/?q=Nike";
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    'x-rapidapi-key': '<RAPIDAPI_TOKEN>',
-    'x-rapidapi-host': 'duckduckgo8.p.rapidapi.com',
-    'Content-Type': 'application/json'
-  }
+    "x-rapidapi-key": "<RAPIDAPI_TOKEN>",
+    "x-rapidapi-host": "duckduckgo8.p.rapidapi.com",
+    "Content-Type": "application/json",
+  },
 };
 
 try {

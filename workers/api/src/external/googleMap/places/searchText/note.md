@@ -3,21 +3,21 @@
 ## Request Example
 
 ```js
-const url = 'https://google-map-places-new-v2.p.rapidapi.com/v1/places:searchText';
+const url = "https://google-map-places-new-v2.p.rapidapi.com/v1/places:searchText";
 const options = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'x-rapidapi-key': '<RAPIDAPI_TOKEN>',
-    'x-rapidapi-host': 'google-map-places-new-v2.p.rapidapi.com',
-    'Content-Type': 'application/json',
-    'X-Goog-FieldMask': '*'
+    "x-rapidapi-key": "<RAPIDAPI_TOKEN>",
+    "x-rapidapi-host": "google-map-places-new-v2.p.rapidapi.com",
+    "Content-Type": "application/json",
+    "X-Goog-FieldMask": "*",
   },
   body: {
-    textQuery: 'restaurants',
-    languageCode: '',
-    regionCode: '',
+    textQuery: "restaurants",
+    languageCode: "",
+    regionCode: "",
     rankPreference: 0,
-    includedType: '',
+    includedType: "",
     openNow: true,
     minRating: 0,
     maxResultCount: 1,
@@ -27,16 +27,16 @@ const options = {
       circle: {
         center: {
           latitude: 35.690887451171875,
-          longitude: 139.7022247314453
+          longitude: 139.7022247314453,
         },
-        radius: 10000
-      }
+        radius: 10000,
+      },
     },
     evOptions: {
       minimumChargingRateKw: 0,
-      connectorTypes: []
-    }
-  }
+      connectorTypes: [],
+    },
+  },
 };
 
 try {

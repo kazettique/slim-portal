@@ -1,24 +1,24 @@
-export interface NavitimeCoord {
-  lat: number;
-  lon: number;
-}
-
-export enum NavitimeSortOrder {
-  TIME_OPTIMIZED = "time_optimized",
-  TIME = "time",
-  FARE = "fare",
-  TRANSFERS = "transfers",
-}
-
 export enum NavitimeLang {
-  JA = "ja",
   EN = "en",
+  JA = "ja",
   KO = "ko",
   ZH_CN = "zh-CN",
   ZH_TW = "zh-TW",
 }
 
 export enum NavitimeSectionType {
-  POINT = "point",
   MOVE = "move",
+  POINT = "point",
+}
+
+export enum NavitimeSortOrder {
+  FARE = "fare",
+  TIME = "time",
+  TIME_OPTIMIZED = "time_optimized",
+  TRANSFERS = "transfers",
+}
+
+export interface NavitimeCoord {
+  lat: number;
+  lon: number;
 }

@@ -1,9 +1,13 @@
 ---
-import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
+import Base from "../../layout/Base.astro";
 ---
 
-<Base icon={AppConstant.PLACE_NEARBY_PAGE_META.icon} title={AppConstant.PLACE_NEARBY_PAGE_META.title} description={AppConstant.PLACE_NEARBY_PAGE_META.description}>
+<Base
+  description={AppConstant.PLACE_NEARBY_PAGE_META.description}
+  icon={AppConstant.PLACE_NEARBY_PAGE_META.icon}
+  title={AppConstant.PLACE_NEARBY_PAGE_META.title}
+>
   <p class="place-details__back"><a href="/place">← Back to search</a></p>
 
   <h1>{AppConstant.PLACE_NEARBY_PAGE_META.icon} {AppConstant.PLACE_NEARBY_PAGE_META.title}</h1>
@@ -11,46 +15,49 @@ import { AppConstant } from "../../constant";
 
   <div class="places-form" style="margin-block-end: var(--space)">
     <div class="places-form__row">
-      <label for="radius-select" style="font-size:0.875rem; align-self:center; white-space:nowrap">Radius</label>
-      <select id="radius-select" class="places-form__input" style="flex:1; max-width:10rem">
+      <label for="radius-select" style="font-size:0.875rem; align-self:center; white-space:nowrap"
+        >Radius</label
+      >
+      <select class="places-form__input" id="radius-select" style="flex:1; max-width:10rem">
         <option value="500">500 m</option>
-        <option value="1000" selected>1 km</option>
+        <option selected value="1000">1 km</option>
         <option value="2000">2 km</option>
         <option value="5000">5 km</option>
       </select>
     </div>
   </div>
 
-  <p id="nearby-status" class="status" aria-live="polite">Getting your location…</p>
+  <p aria-live="polite" class="status" id="nearby-status">Getting your location…</p>
 
-  <div id="nearby-toolbar" class="toolbar" style="display:none">
-    <button id="refresh-btn" class="refresh-btn" aria-label="Refresh results">
+  <div class="toolbar" id="nearby-toolbar" style="display:none">
+    <button aria-label="Refresh results" class="refresh-btn" id="refresh-btn">
       <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        height="14"
         stroke="currentColor"
         stroke-width="2"
-        aria-hidden="true"
+        viewBox="0 0 24 24"
+        width="14"
       >
         <path d="M1 4v6h6M23 20v-6h-6"></path>
         <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
       </svg>
       Refresh
     </button>
-    <span id="cache-status" class="cache-status" aria-live="polite"></span>
+    <span aria-live="polite" class="cache-status" id="cache-status"></span>
   </div>
 
-  <ul id="nearby-list" class="places-list"></ul>
+  <ul class="places-list" id="nearby-list"></ul>
 </Base>
 
 <script>
+  import type { PlaceItem } from "@slim-portal/share";
+
   import { AppConstant } from "../../constant";
+  import { NetworkPage } from "../../type.settings";
   import { AppUtil } from "../../util";
   import { SettingsUtil } from "../../util.settings";
-  import { NetworkPage } from "../../type.settings";
-  import type { PlaceItem } from "@slim-portal/share";
 
   const radiusSelect = document.getElementById("radius-select") as HTMLSelectElement | null;
   const list = document.getElementById("nearby-list") as HTMLUListElement | null;
@@ -59,44 +66,8 @@ import { AppConstant } from "../../constant";
   const refreshBtn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
 
-  let userLat: number | null = null;
-  let userLng: number | null = null;
-
-  function setStatus(msg: string): void {
-    if (statusEl) statusEl.textContent = msg;
-  }
-
-  function renderPlace(items: PlaceItem[]): void {
-    if (!list) return;
-    if (items.length === 0) {
-      list.innerHTML = "";
-      setStatus("No places found nearby.");
-      return;
-    }
-    setStatus("");
-    list.innerHTML = items
-      .map((p) => {
-        const detailsLink = p.id
-          ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>`
-          : "";
-        const appleMapsLink =
-          p.lat !== null && p.lng !== null
-            ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`
-            : "";
-        return `
-          <li class="place-item">
-            <div class="place-item__name">
-              <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
-              <span class="place-item__distance">${AppUtil.formatDistance(p.distanceMeters)}</span>
-            </div>
-            <div class="place-item__address">${p.address}</div>
-            <div class="place-item__meta">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
-            ${detailsLink || appleMapsLink ? `<div class="place-item__actions">${detailsLink}${appleMapsLink}</div>` : ""}
-          </li>
-        `;
-      })
-      .join("");
-  }
+  let userLat: null | number = null;
+  let userLng: null | number = null;
 
   async function doFetch(bypassCache: boolean): Promise<void> {
     if (userLat === null || userLng === null) return;
@@ -125,11 +96,50 @@ import { AppConstant } from "../../constant";
       if (items.length > 0) {
         if (toolbar) toolbar.style.display = "flex";
         const cacheDate = res.headers.get("X-Cache-Date");
-        if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
+        if (cacheStatus)
+          cacheStatus.textContent = cacheDate
+            ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat())
+            : "";
       }
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_NEARBY);
     }
+  }
+
+  function renderPlace(items: PlaceItem[]): void {
+    if (!list) return;
+    if (items.length === 0) {
+      list.innerHTML = "";
+      setStatus("No places found nearby.");
+      return;
+    }
+    setStatus("");
+    list.innerHTML = items
+      .map((p) => {
+        const detailsLink = p.id
+          ? `<a href="/place/detail?id=${encodeURIComponent(p.id)}">Details</a>`
+          : "";
+        const appleMapsLink =
+          p.lat !== null && p.lng !== null
+            ? `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`
+            : "";
+        return `
+        <li class="place-item">
+          <div class="place-item__name">
+            <a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+            <span class="place-item__distance">${AppUtil.formatDistance(p.distanceMeters)}</span>
+          </div>
+          <div class="place-item__address">${p.address}</div>
+          <div class="place-item__meta">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
+          ${detailsLink || appleMapsLink ? `<div class="place-item__actions">${detailsLink}${appleMapsLink}</div>` : ""}
+        </li>
+      `;
+      })
+      .join("");
+  }
+
+  function setStatus(msg: string): void {
+    if (statusEl) statusEl.textContent = msg;
   }
 
   // On load: restore saved radius from URL

@@ -1,45 +1,51 @@
 ---
-import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
+import Base from "../../layout/Base.astro";
 ---
 
-<Base icon={AppConstant.PLACE_DETAIL_PAGE_META.icon} title={AppConstant.PLACE_DETAIL_PAGE_META.title} description={AppConstant.PLACE_DETAIL_PAGE_META.description}>
-  <p class="place-details__back"><a id="back-link" href="/place">← Back</a></p>
+<Base
+  description={AppConstant.PLACE_DETAIL_PAGE_META.description}
+  icon={AppConstant.PLACE_DETAIL_PAGE_META.icon}
+  title={AppConstant.PLACE_DETAIL_PAGE_META.title}
+>
+  <p class="place-details__back"><a href="/place" id="back-link">← Back</a></p>
 
-  <p id="details-status" class="status" aria-live="polite">Loading…</p>
+  <p aria-live="polite" class="status" id="details-status">Loading…</p>
 
-  <div id="details-toolbar" class="toolbar" style="display:none">
-    <button id="refresh-btn" class="refresh-btn" aria-label="Refresh">
+  <div class="toolbar" id="details-toolbar" style="display:none">
+    <button aria-label="Refresh" class="refresh-btn" id="refresh-btn">
       <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
+        aria-hidden="true"
         fill="none"
+        height="14"
         stroke="currentColor"
         stroke-width="2"
-        aria-hidden="true"
+        viewBox="0 0 24 24"
+        width="14"
       >
         <path d="M1 4v6h6M23 20v-6h-6"></path>
         <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
       </svg>
       Refresh
     </button>
-    <button id="bookmark-btn" class="bookmark-btn" aria-label="Save as bookmark"></button>
-    <span id="cache-status" class="cache-status" aria-live="polite"></span>
+    <button aria-label="Save as bookmark" class="bookmark-btn" id="bookmark-btn"></button>
+    <span aria-live="polite" class="cache-status" id="cache-status"></span>
   </div>
 
-  <div id="place-details" class="place-details"></div>
+  <div class="place-details" id="place-details"></div>
 </Base>
 
 <script>
-  import { AppConstant } from "../../constant";
-  import { AppUtil } from "../../util";
-  import { SettingsUtil } from "../../util.settings";
-  import { NetworkPage } from "../../type.settings";
-  import { BookmarkUtil } from "../../util.bookmark";
-  import { BookmarkPage } from "../../type.bookmark";
-  import type { Bookmark } from "../../type.bookmark";
   import type { PlaceDetails } from "@slim-portal/share";
+
+  import type { Bookmark } from "../../type.bookmark";
+
+  import { AppConstant } from "../../constant";
+  import { BookmarkPage } from "../../type.bookmark";
+  import { NetworkPage } from "../../type.settings";
+  import { AppUtil } from "../../util";
+  import { BookmarkUtil } from "../../util.bookmark";
+  import { SettingsUtil } from "../../util.settings";
 
   const statusEl = document.getElementById("details-status") as HTMLParagraphElement | null;
   const toolbar = document.getElementById("details-toolbar") as HTMLDivElement | null;
@@ -52,92 +58,7 @@ import { AppConstant } from "../../constant";
   const placeId = new URL(location.href).searchParams.get("id");
   const snapshotId = new URL(location.href).searchParams.get("snapshot");
 
-  let lastPlace: PlaceDetails | null = null;
-
-  function setStatus(msg: string): void {
-    if (statusEl) statusEl.textContent = msg;
-  }
-
-
-  function renderDetails(p: PlaceDetails): void {
-    if (!container) return;
-
-    const mapsLinks: string[] = [];
-    if (p.mapsUrl) mapsLinks.push(`<a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">Google Maps</a>`);
-    if (p.lat !== null && p.lng !== null) {
-      mapsLinks.push(`<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`);
-    }
-
-    const sections: string[] = [];
-
-    if (p.address) {
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Address</span>
-          <div class="place-details__value">${p.address}</div>
-        </div>
-      `);
-    }
-
-    if (p.rating !== null || p.totalRatings > 0) {
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Rating</span>
-          <div class="place-details__value">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
-        </div>
-      `);
-    }
-
-    if (p.phoneNumber) {
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Phone</span>
-          <div class="place-details__value"><a href="tel:${p.phoneNumber}">${p.phoneNumber}</a></div>
-        </div>
-      `);
-    }
-
-    if (p.website) {
-      const display = p.website.replace(/^https?:\/\//, "").replace(/\/$/, "");
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Website</span>
-          <div class="place-details__value"><a href="${p.website}" target="_blank" rel="noopener noreferrer">${display}</a></div>
-        </div>
-      `);
-    }
-
-    if (p.businessStatus) {
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Status</span>
-          <div class="place-details__value">
-            <span class="${AppUtil.statusClass(p.businessStatus)}">${p.businessStatus.replace(/_/g, " ")}</span>
-          </div>
-        </div>
-      `);
-    }
-
-    if (p.openingHours && p.openingHours.length > 0) {
-      const fmt = SettingsUtil.getTimeFormat();
-      const hours = p.openingHours.map((h) => `<li>${SettingsUtil.convertHoursString(h, fmt)}</li>`).join("");
-      sections.push(`
-        <div class="place-details__section">
-          <span class="place-details__label">Opening Hours</span>
-          <ul class="place-details__hours">${hours}</ul>
-        </div>
-      `);
-    }
-
-    container.innerHTML = `
-      <div class="place-details__name">${p.name}</div>
-      ${mapsLinks.length > 0 ? `<div class="place-details__maps">${mapsLinks.join("")}</div>` : ""}
-      ${sections.join("")}
-      <div class="place-details__section">
-        <a href="/place/nearby">Find nearby places</a>
-      </div>
-    `;
-  }
+  let lastPlace: null | PlaceDetails = null;
 
   async function doFetch(bypassCache: boolean): Promise<void> {
     if (!placeId) {
@@ -167,7 +88,10 @@ import { AppConstant } from "../../constant";
         bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
       }
       const cacheDate = res.headers.get("X-Cache-Date");
-      if (cacheStatus) cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat()) : "";
+      if (cacheStatus)
+        cacheStatus.textContent = cacheDate
+          ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat())
+          : "";
     } catch {
       setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAIL);
     }
@@ -175,7 +99,10 @@ import { AppConstant } from "../../constant";
 
   function loadSnapshot(): void {
     const bookmark = BookmarkUtil.getById(snapshotId!);
-    if (!bookmark) { setStatus("Snapshot not found."); return; }
+    if (!bookmark) {
+      setStatus("Snapshot not found.");
+      return;
+    }
     const place = bookmark.params as PlaceDetails;
     setStatus("");
     renderDetails(place);
@@ -187,15 +114,102 @@ import { AppConstant } from "../../constant";
     }
   }
 
+  function renderDetails(p: PlaceDetails): void {
+    if (!container) return;
+
+    const mapsLinks: string[] = [];
+    if (p.mapsUrl)
+      mapsLinks.push(
+        `<a href="${p.mapsUrl}" target="_blank" rel="noopener noreferrer">Google Maps</a>`,
+      );
+    if (p.lat !== null && p.lng !== null) {
+      mapsLinks.push(
+        `<a href="https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Apple Maps</a>`,
+      );
+    }
+
+    const sections: string[] = [];
+
+    if (p.address) {
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Address</span>
+        <div class="place-details__value">${p.address}</div>
+      </div>
+    `);
+    }
+
+    if (p.rating !== null || p.totalRatings > 0) {
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Rating</span>
+        <div class="place-details__value">${AppUtil.formatRating(p.rating, p.totalRatings)}</div>
+      </div>
+    `);
+    }
+
+    if (p.phoneNumber) {
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Phone</span>
+        <div class="place-details__value"><a href="tel:${p.phoneNumber}">${p.phoneNumber}</a></div>
+      </div>
+    `);
+    }
+
+    if (p.website) {
+      const display = p.website.replace(/^https?:\/\//, "").replace(/\/$/, "");
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Website</span>
+        <div class="place-details__value"><a href="${p.website}" target="_blank" rel="noopener noreferrer">${display}</a></div>
+      </div>
+    `);
+    }
+
+    if (p.businessStatus) {
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Status</span>
+        <div class="place-details__value">
+          <span class="${AppUtil.statusClass(p.businessStatus)}">${p.businessStatus.replace(/_/g, " ")}</span>
+        </div>
+      </div>
+    `);
+    }
+
+    if (p.openingHours && p.openingHours.length > 0) {
+      const fmt = SettingsUtil.getTimeFormat();
+      const hours = p.openingHours
+        .map((h) => `<li>${SettingsUtil.convertHoursString(h, fmt)}</li>`)
+        .join("");
+      sections.push(`
+      <div class="place-details__section">
+        <span class="place-details__label">Opening Hours</span>
+        <ul class="place-details__hours">${hours}</ul>
+      </div>
+    `);
+    }
+
+    container.innerHTML = `
+    <div class="place-details__name">${p.name}</div>
+    ${mapsLinks.length > 0 ? `<div class="place-details__maps">${mapsLinks.join("")}</div>` : ""}
+    ${sections.join("")}
+    <div class="place-details__section">
+      <a href="/place/nearby">Find nearby places</a>
+    </div>
+  `;
+  }
+
   function saveBookmark(): void {
     if (!lastPlace) return;
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
     const bookmark: Bookmark = {
-      id,
-      page: BookmarkPage.PLACE_DETAIL,
-      label: lastPlace.name,
-      params: lastPlace,
       createdAt: new Date().toISOString(),
+      id,
+      label: lastPlace.name,
+      page: BookmarkPage.PLACE_DETAIL,
+      params: lastPlace,
     };
     BookmarkUtil.add(bookmark);
     if (bookmarkBtn) {
@@ -204,6 +218,10 @@ import { AppConstant } from "../../constant";
         if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
       }, 1500);
     }
+  }
+
+  function setStatus(msg: string): void {
+    if (statusEl) statusEl.textContent = msg;
   }
 
   bookmarkBtn?.addEventListener("click", saveBookmark);
