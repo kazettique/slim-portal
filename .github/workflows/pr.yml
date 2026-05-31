@@ -15,6 +15,24 @@ jobs:
       - run: bun install
       - run: bun run type
 
+  test:
+    name: Test
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/krypton
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun test
+      - run: bunx playwright install chromium --with-deps
+      - run: bun run e2e
+        env:
+          CI: true
+
   build-web:
     name: Build web
     runs-on: ubuntu-24.04-arm
