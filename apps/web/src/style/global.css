@@ -59,7 +59,12 @@ body {
 
 h1 {
   font-size: 1.5rem;
-  margin-block: var(--space);
+  margin-block-start: 0;
+  margin-block-end: var(--space);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
 }
 h2 {
   font-size: 1.25rem;
