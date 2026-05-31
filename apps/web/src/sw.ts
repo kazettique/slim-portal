@@ -25,19 +25,20 @@ abstract class SwHandler {
           // Astro uses content-hashed filenames unknown at SW build time, so we read
           // them dynamically from the already-cached HTML instead of hardcoding paths.
           const cache = await caches.open(this.SHELL_CACHE);
-          const home = await cache.match("/");
-          if (home) {
-            const html = await home.text();
-            const matches = html.match(/\/_astro\/[^"'\s]+\.(?:css|js)/g);
-            if (matches) {
-              const assetUrls = [...new Set(matches)];
-              // Persist manifest so activate can evict stale /_astro/ entries on next SW update
-              await cache.put(
-                "/__sw_asset_manifest",
-                new Response(JSON.stringify(assetUrls), { headers: { "Content-Type": "application/json" } }),
-              );
-              await Promise.allSettled(assetUrls.map((url) => cache.add(url)));
-            }
+          const htmlPages = await Promise.all(this.SHELL_URLS.map((url) => cache.match(url)));
+          const htmlTexts = await Promise.all(
+            htmlPages.filter((r): r is Response => r != null).map((r) => r.text()),
+          );
+          const allHtml = htmlTexts.join("\n");
+          const matches = allHtml.match(/\/_astro\/[^"'\s]+\.(?:css|js)/g);
+          if (matches) {
+            const assetUrls = [...new Set(matches)];
+            // Persist manifest so activate can evict stale /_astro/ entries on next SW update
+            await cache.put(
+              "/__sw_asset_manifest",
+              new Response(JSON.stringify(assetUrls), { headers: { "Content-Type": "application/json" } }),
+            );
+            await Promise.allSettled(assetUrls.map((url) => cache.add(url)));
           }
         })
         .then(() => sw.skipWaiting()),
@@ -127,7 +128,7 @@ abstract class SwHandler {
       return response;
     } catch (err) {
       if (request.mode === "navigate") {
-        const fallback = await cache.match("/");
+        const fallback = await cache.match("/offline/");
         if (fallback) return fallback;
       }
       throw err;

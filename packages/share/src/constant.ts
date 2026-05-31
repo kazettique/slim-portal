@@ -13,6 +13,7 @@ export abstract class ShareConstant {
   public static readonly PAGE_URL_SETTINGS: string = "/settings";
   public static readonly PAGE_URL_BATHROOM: string = "/bathroom";
   public static readonly PAGE_URL_BOOKMARK: string = "/bookmark";
+  public static readonly PAGE_URL_OFFLINE: string = "/offline";
   public static readonly PAGE_URLS: string[] = [
     this.PAGE_URL_HOME,
     this.PAGE_URL_NEWS,
@@ -27,5 +28,6 @@ export abstract class ShareConstant {
     this.PAGE_URL_SETTINGS,
     this.PAGE_URL_BATHROOM,
     this.PAGE_URL_BOOKMARK,
+    this.PAGE_URL_OFFLINE,
   ];
 }

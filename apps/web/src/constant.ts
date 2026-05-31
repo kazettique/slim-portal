@@ -1,8 +1,10 @@
 import type { PageMeta } from "./type";
 import { ShareConstant } from "@slim-portal/share";
+import pkg from "../package.json";
 
 export abstract class AppConstant {
   public static readonly APP_TITLE: string = "Slim Portal";
+  public static readonly APP_VERSION: string = pkg.version;
   public static readonly APP_DESCRIPTION: string = "Fast, minimal, text-first. Built for slow networks.";
   public static readonly WORKER_URL: string = import.meta.env.WORKER_URL ?? "";
   public static readonly API_BASE_URL: string = "/api";
@@ -107,6 +109,20 @@ export abstract class AppConstant {
     title: "面積換算",
     description: "Convert between 坪 (tsubo), ㎡ (square meters), and 畳 (tatami).",
     url: ShareConstant.PAGE_URL_AREA_CONVERTER,
+  };
+
+  public static readonly OFFLINE_PAGE_META: PageMeta = {
+    icon: "📡",
+    title: "You're offline",
+    description: "This page isn't saved for offline use.",
+    url: ShareConstant.PAGE_URL_OFFLINE,
+  };
+
+  public static readonly NOT_FOUND_PAGE_META: PageMeta = {
+    icon: "🔍",
+    title: "Page not found",
+    description: "The page you requested doesn't exist.",
+    url: "/",
   };
 
   public static readonly NAV_LIST: PageMeta[] = [
