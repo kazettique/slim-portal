@@ -128,7 +128,7 @@ abstract class SwHandler {
       return response;
     } catch (err) {
       if (request.mode === "navigate") {
-        const fallback = await cache.match("/");
+        const fallback = await cache.match("/offline/");
         if (fallback) return fallback;
       }
       throw err;

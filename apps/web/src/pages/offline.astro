@@ -1,0 +1,10 @@
+---
+import Base from "../layout/Base.astro";
+import { AppConstant } from "../constant";
+---
+
+<Base icon={AppConstant.OFFLINE_PAGE_META.icon} title={AppConstant.OFFLINE_PAGE_META.title} description={AppConstant.OFFLINE_PAGE_META.description}>
+  <h1>{AppConstant.OFFLINE_PAGE_META.icon} {AppConstant.OFFLINE_PAGE_META.title}</h1>
+  <p>This page isn't saved for offline use. Connect to the internet and try again.</p>
+  <p><a href="/">← Back to home</a></p>
+</Base>

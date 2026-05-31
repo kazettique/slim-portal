@@ -109,6 +109,20 @@ export abstract class AppConstant {
     url: ShareConstant.PAGE_URL_AREA_CONVERTER,
   };
 
+  public static readonly OFFLINE_PAGE_META: PageMeta = {
+    icon: "📡",
+    title: "You're offline",
+    description: "This page isn't saved for offline use.",
+    url: ShareConstant.PAGE_URL_OFFLINE,
+  };
+
+  public static readonly NOT_FOUND_PAGE_META: PageMeta = {
+    icon: "🔍",
+    title: "Page not found",
+    description: "The page you requested doesn't exist.",
+    url: "/",
+  };
+
   public static readonly NAV_LIST: PageMeta[] = [
     this.HOME_PAGE_META,
     this.BOOKMARK_PAGE_META,
