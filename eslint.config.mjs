@@ -92,6 +92,14 @@ export default tseslint.config(
   // Perfectionist — consistent ordering of imports, interface members, enums, object keys
   eslintPluginPerfectionist.configs["recommended-natural"],
 
+  // Declaration files: inline import() types are required in declare module blocks
+  {
+    files: ["**/*.d.ts"],
+    rules: {
+      "@typescript-eslint/consistent-type-imports": "off",
+    },
+  },
+
   // Prettier compat — must be last (disables formatting rules)
   eslintConfigPrettier,
 );
