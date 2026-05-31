@@ -10,7 +10,8 @@
     "build:sw": "bun build src/sw.ts --outfile public/sw.js --target browser --format iife",
     "build": "bun run build:sw && astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "vitest run"
   },
   "dependencies": {
     "@slim-portal/share": "workspace:*",
