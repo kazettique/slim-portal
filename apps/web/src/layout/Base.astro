@@ -82,6 +82,15 @@ const canonicalPath = Astro.url.pathname;
       })();
       // Keep active nav item visible when the nav overflows horizontally
       document.querySelector('nav a[aria-current="page"]')?.scrollIntoView({ inline: "center", block: "nearest" });
+      // Expose header height as CSS var for h1 sticky offset and bottom-nav body padding
+      (function () {
+        var headerEl = document.querySelector("header");
+        function updateHeaderH() {
+          if (headerEl) document.documentElement.style.setProperty("--header-h", headerEl.offsetHeight + "px");
+        }
+        updateHeaderH();
+        window.addEventListener("resize", updateHeaderH, { passive: true });
+      })();
     </script>
   </body>
 </html>
