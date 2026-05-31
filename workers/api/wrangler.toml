@@ -1,5 +1,6 @@
 name = "slim-portal-api"
 main = "src/index.ts"
+account_id = "d097e0c1103cf05aacc21aa0a73bdbfc"
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
 
