@@ -16,6 +16,21 @@
     "type:share": "bun run --cwd packages/share type",
     "build:web": "bun run --cwd apps/web build",
     "deploy:web": "bun run build:web && bunx wrangler pages deploy apps/web/dist --project-name slim-portal",
-    "deploy:worker": "bun run --cwd workers/api deploy"
+    "deploy:worker": "bun run --cwd workers/api deploy",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "8.60.0",
+    "eslint": "10.4.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-astro": "1.7.0",
+    "eslint-plugin-jsonc": "3.2.0",
+    "eslint-plugin-perfectionist": "5.9.0",
+    "prettier": "3.8.3",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript-eslint": "8.60.0"
   }
 }
