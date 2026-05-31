@@ -14,3 +14,14 @@ jobs:
           bun-version: latest
       - run: bun install
       - run: bun run type
+
+  build-web:
+    name: Build web
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run build:web
