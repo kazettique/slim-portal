@@ -78,11 +78,10 @@ a:hover {
 
 header {
   border-bottom: 1px solid var(--border);
-  padding-block: calc(var(--space) * 0.5);
   background: var(--bg);
   overflow-x: auto;
   flex-shrink: 0;
-  padding: 0 var(--space);
+  padding: calc(var(--space) * 0.75) var(--space);
 }
 
 nav {
@@ -223,11 +222,11 @@ main {
 
 footer {
   border-top: 1px solid var(--border);
-  padding-block: calc(var(--space) * 0.5);
+  padding: calc(var(--space) * 0.5) var(--space);
+  padding-bottom: max(calc(var(--space) * 0.5), env(safe-area-inset-bottom));
   font-size: 0.8rem;
   color: var(--muted);
   flex-shrink: 0;
-  padding: 0 var(--space);
 }
 
 @media (max-width: 400px) {
