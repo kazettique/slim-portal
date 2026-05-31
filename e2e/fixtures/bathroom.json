@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Yoyogi Park Restroom A",
+    "city": "Shibuya",
+    "state": "Tokyo",
+    "lat": 35.6714,
+    "lng": 139.6943,
+    "distanceKm": 0.4,
+    "accessible": true,
+    "unisex": false,
+    "changingTable": true
+  },
+  {
+    "id": 2,
+    "name": "Shinjuku Gyoen Toilet B",
+    "city": "Shinjuku",
+    "state": "Tokyo",
+    "lat": 35.6852,
+    "lng": 139.7100,
+    "distanceKm": 1.2,
+    "accessible": false,
+    "unisex": true,
+    "changingTable": false
+  }
+]

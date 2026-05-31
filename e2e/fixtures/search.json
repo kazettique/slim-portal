@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Tokyo travel guide",
+    "url": "https://example.com/tokyo",
+    "snippet": "Everything you need to know about visiting Tokyo."
+  },
+  {
+    "title": "Best ramen in Tokyo",
+    "url": "https://example.com/ramen",
+    "snippet": "A curated list of ramen shops across the city."
+  }
+]
