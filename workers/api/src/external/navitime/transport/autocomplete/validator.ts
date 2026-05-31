@@ -17,7 +17,7 @@ export abstract class NavitimeAutocompleteValidator {
     });
 
   public static readonly REQUEST_VALIDATOR: z.ZodType<NavitimeAutocompleteRequest> = z.object({
-    word: z.string().min(1),
+    word: z.string().min(2),
     word_match: z.string().optional(),
     coord: z.string().regex(this.LAT_LNG_PATTERN, "must be 'lat,lng'").optional(),
     radius: z.coerce.number().int().min(1).optional(),
