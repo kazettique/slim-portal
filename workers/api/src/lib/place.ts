@@ -289,11 +289,11 @@ export abstract class PlaceLib {
 
   // ── Public methods ────────────────────────────────────────────────────────────
 
-  private static cacheKey(namespace: string, params: string): string {
+  public static cacheKey(namespace: string, params: string): string {
     return `https://slim-portal-places-cache/${namespace}/${params}`;
   }
 
-  private static haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  public static haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
     const R = 6_371_000;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
     const dLng = ((lng2 - lng1) * Math.PI) / 180;
@@ -303,7 +303,7 @@ export abstract class PlaceLib {
     return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
   }
 
-  private static mapPlaceToItem(p: GMapPlace, lat: null | number, lng: null | number): PlaceItem {
+  public static mapPlaceToItem(p: GMapPlace, lat: null | number, lng: null | number): PlaceItem {
     return {
       address: p.formattedAddress ?? "",
       distanceMeters:

@@ -288,7 +288,7 @@ export abstract class TransitLib {
     return `https://slim-portal-transit-cache/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${encodeURIComponent(startTime)}`;
   }
 
-  private static mapNode(node: NavitimeTransportNode): TransportNode {
+  public static mapNode(node: NavitimeTransportNode): TransportNode {
     return {
       coord: { lat: node.coord.lat, lng: node.coord.lon },
       id: node.id,
@@ -300,7 +300,7 @@ export abstract class TransitLib {
 
   // ── Public methods ────────────────────────────────────────────────────────────
 
-  private static mapSections(sections: NavitimeSection[]): TransitRoute["legs"] {
+  public static mapSections(sections: NavitimeSection[]): TransitRoute["legs"] {
     const legs: TransitRoute["legs"] = [];
     sections.forEach((s, i) => {
       if (s.type !== "move") return;
@@ -328,13 +328,13 @@ export abstract class TransitLib {
   }
 
   /** Round a "YYYY-MM-DDThh:mm:ss" string (already JST local) down to the hour */
-  private static roundToHour(isoNoOffset: string): string {
+  public static roundToHour(isoNoOffset: string): string {
     // "2026-05-25T10:30:00" → "2026-05-25T10:00:00"
     return isoNoOffset.slice(0, 14) + "00:00";
   }
 
   /** Convert a Date to "YYYY-MM-DDThh:mm:ss" in JST (UTC+9), no timezone suffix */
-  private static toJSTString(date: Date): string {
+  public static toJSTString(date: Date): string {
     const jst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
     return jst.toISOString().slice(0, 19);
   }

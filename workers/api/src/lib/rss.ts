@@ -42,7 +42,7 @@ export abstract class RssLib {
     return { cachedAt, items: items.slice(0, 30) };
   }
 
-  private static extractLinkUrl(block: string): string {
+  public static extractLinkUrl(block: string): string {
     // <link> is often self-closed or has no end tag in RSS — match text node between tags
     const linked = block.match(/<link>([^<]+)<\/link>/i) ?? block.match(/<link\s*\/>([^<]*)/i);
     if (linked?.[1]?.trim()) return linked[1].trim();
@@ -52,7 +52,7 @@ export abstract class RssLib {
     return guidVal.startsWith("http") ? guidVal : "";
   }
 
-  private static extractTag(block: string, tag: string): string {
+  public static extractTag(block: string, tag: string): string {
     const m = block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
     return m?.[1] ? this.stripCdata(m[1]).trim() : "";
   }
@@ -95,7 +95,7 @@ export abstract class RssLib {
     return { cachedAt: null, items };
   }
 
-  private static parseRssXml(xml: string, source: string): NewsItem[] {
+  public static parseRssXml(xml: string, source: string): NewsItem[] {
     const itemMatches = xml.match(/<item[\s>][\s\S]*?<\/item>/gi) ?? [];
     console.log(`[rss] ${source}: found ${itemMatches.length} raw items`);
     return itemMatches
@@ -114,7 +114,7 @@ export abstract class RssLib {
       .filter((item) => item.title && item.url);
   }
 
-  private static stripCdata(s: string): string {
+  public static stripCdata(s: string): string {
     return s.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, "$1").trim();
   }
 }

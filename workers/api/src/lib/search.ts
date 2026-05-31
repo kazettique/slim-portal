@@ -48,11 +48,11 @@ export abstract class SearchLib {
     return { cachedAt: null, items };
   }
 
-  private static cacheKey(q: string): string {
+  public static cacheKey(q: string): string {
     return `https://slim-portal-search-cache/${encodeURIComponent(q)}`;
   }
 
-  private static mapResults(data: DdgResponse): SearchItem[] {
+  public static mapResults(data: DdgResponse): SearchItem[] {
     return data.results.slice(0, DuckDuckGoConstant.MAX_RESULTS).map((r) => ({
       snippet: r.description,
       title: r.title,

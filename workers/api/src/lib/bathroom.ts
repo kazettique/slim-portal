@@ -83,12 +83,12 @@ export abstract class BathroomLib {
     return { cachedAt: null, items };
   }
 
-  private static cacheKey(lat: number, lng: number, radiusMiles: number): string {
+  public static cacheKey(lat: number, lng: number, radiusMiles: number): string {
     return `https://slim-portal-bathrooms-cache/nearby/lat=${lat}&lng=${lng}&radius=${radiusMiles}`;
   }
 
   // The API may return a bare array or wrap it in an object — find the first array.
-  private static extractArray(raw: unknown): unknown[] {
+  public static extractArray(raw: unknown): unknown[] {
     if (Array.isArray(raw)) return raw;
     if (typeof raw === "object" && raw !== null) {
       for (const val of Object.values(raw)) {
