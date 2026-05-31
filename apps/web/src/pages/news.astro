@@ -38,7 +38,7 @@ import { AppConstant } from "../constant";
   import { AppConstant } from "../constant";
   import { AppUtil } from "../util";
   import { SettingsUtil } from "../util.settings";
-  import { NetworkPage } from "../type.settings";
+  import { NetworkPage, TimeFormat } from "../type.settings";
 
   const btn = document.getElementById("refresh-btn") as HTMLButtonElement | null;
   const cacheStatus = document.getElementById("cache-status") as HTMLSpanElement | null;
@@ -51,7 +51,7 @@ import { AppConstant } from "../constant";
     statusEl.hidden = msg === "";
   }
 
-  function renderItem(items: NewsItem[], fmt: string): void {
+  function renderItem(items: NewsItem[], fmt: TimeFormat): void {
     if (!list) return;
     list.innerHTML = items
       .map(
