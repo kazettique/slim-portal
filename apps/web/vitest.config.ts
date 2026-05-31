@@ -1,10 +1,17 @@
-import { defineConfig } from 'vitest/config';
+import { getViteConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 
-export default defineConfig({
-  test: {
-    name: 'web',
-    environment: 'happy-dom',
-    include: ['tests/**/*.test.ts'],
-    setupFiles: ['tests/setup.ts'],
+export default getViteConfig(
+  {
+    test: {
+      name: 'web',
+      environmentMatchGlobs: [
+        ['tests/component/page.*.test.ts', 'node'],
+        ['**', 'happy-dom'],
+      ],
+      include: ['tests/**/*.test.ts'],
+      setupFiles: ['tests/setup.ts'],
+    },
   },
-});
+  { root: fileURLToPath(new URL('.', import.meta.url)) },
+);
