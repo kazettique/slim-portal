@@ -7,22 +7,23 @@
 ## Request Example
 
 ```js
-const url = 'https://navitime-route-totalnavi.p.rapidapi.com/route_transit?start=35.665251%2C139.712092&goal=35.661971%2C139.703795&datum=wgs84&term=1440&limit=5&start_time=2020-08-19T10%3A00%3A00&coord_unit=degree';
+const url =
+  "https://navitime-route-totalnavi.p.rapidapi.com/route_transit?start=35.665251%2C139.712092&goal=35.661971%2C139.703795&datum=wgs84&term=1440&limit=5&start_time=2020-08-19T10%3A00%3A00&coord_unit=degree";
 const options = {
- method: 'GET',
- headers: {
-  'x-rapidapi-key': '<RAPIDAPI_KEY>',
-  'x-rapidapi-host': 'navitime-route-totalnavi.p.rapidapi.com',
-  'Content-Type': 'application/json'
- }
+  method: "GET",
+  headers: {
+    "x-rapidapi-key": "<RAPIDAPI_KEY>",
+    "x-rapidapi-host": "navitime-route-totalnavi.p.rapidapi.com",
+    "Content-Type": "application/json",
+  },
 };
 
 try {
- const response = await fetch(url, options);
- const result = await response.text();
- console.log(result);
+  const response = await fetch(url, options);
+  const result = await response.text();
+  console.log(result);
 } catch (error) {
- console.error(error);
+  console.error(error);
 }
 ```
 

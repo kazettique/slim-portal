@@ -1,11 +1,7 @@
 {
   "name": "places/ChIJj61dQgK6j4AR4GeTYWZsKWw",
   "id": "ChIJj61dQgK6j4AR4GeTYWZsKWw",
-  "types": [
-    "corporate_office",
-    "point_of_interest",
-    "establishment"
-  ],
+  "types": ["corporate_office", "point_of_interest", "establishment"],
   "nationalPhoneNumber": "(650) 253-0000",
   "internationalPhoneNumber": "+1 650-253-0000",
   "formattedAddress": "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
@@ -13,69 +9,49 @@
     {
       "longText": "1600",
       "shortText": "1600",
-      "types": [
-        "street_number"
-      ],
+      "types": ["street_number"],
       "languageCode": "en-US"
     },
     {
       "longText": "Amphitheatre Parkway",
       "shortText": "Amphitheatre Pkwy",
-      "types": [
-        "route"
-      ],
+      "types": ["route"],
       "languageCode": "en"
     },
     {
       "longText": "Mountain View",
       "shortText": "Mountain View",
-      "types": [
-        "locality",
-        "political"
-      ],
+      "types": ["locality", "political"],
       "languageCode": "en"
     },
     {
       "longText": "Santa Clara County",
       "shortText": "Santa Clara County",
-      "types": [
-        "administrative_area_level_2",
-        "political"
-      ],
+      "types": ["administrative_area_level_2", "political"],
       "languageCode": "en"
     },
     {
       "longText": "California",
       "shortText": "CA",
-      "types": [
-        "administrative_area_level_1",
-        "political"
-      ],
+      "types": ["administrative_area_level_1", "political"],
       "languageCode": "en"
     },
     {
       "longText": "United States",
       "shortText": "US",
-      "types": [
-        "country",
-        "political"
-      ],
+      "types": ["country", "political"],
       "languageCode": "en"
     },
     {
       "longText": "94043",
       "shortText": "94043",
-      "types": [
-        "postal_code"
-      ],
+      "types": ["postal_code"],
       "languageCode": "en-US"
     },
     {
       "longText": "1351",
       "shortText": "1351",
-      "types": [
-        "postal_code_suffix"
-      ],
+      "types": ["postal_code_suffix"],
       "languageCode": "en-US"
     }
   ],
@@ -586,10 +562,7 @@
           "text": "Google B43",
           "languageCode": "en"
         },
-        "types": [
-          "establishment",
-          "point_of_interest"
-        ],
+        "types": ["establishment", "point_of_interest"],
         "straightLineDistanceMeters": 124.09476,
         "travelDistanceMeters": 244.21744
       },
@@ -600,10 +573,7 @@
           "text": "Google Athletic Recreation Field Park (GARField)",
           "languageCode": "en"
         },
-        "types": [
-          "establishment",
-          "point_of_interest"
-        ],
+        "types": ["establishment", "point_of_interest"],
         "straightLineDistanceMeters": 312.62656,
         "travelDistanceMeters": 418.29953
       },
@@ -614,10 +584,7 @@
           "text": "Google Mountain View - 1098 Alta",
           "languageCode": "en"
         },
-        "types": [
-          "establishment",
-          "point_of_interest"
-        ],
+        "types": ["establishment", "point_of_interest"],
         "straightLineDistanceMeters": 208.22464,
         "travelDistanceMeters": 381.68466
       },
@@ -628,10 +595,7 @@
           "text": "Google B40",
           "languageCode": "en"
         },
-        "types": [
-          "establishment",
-          "point_of_interest"
-        ],
+        "types": ["establishment", "point_of_interest"],
         "straightLineDistanceMeters": 53.60039,
         "travelDistanceMeters": 316.7161
       },
@@ -642,11 +606,7 @@
           "text": "Charleston Park",
           "languageCode": "en"
         },
-        "types": [
-          "establishment",
-          "park",
-          "point_of_interest"
-        ],
+        "types": ["establishment", "park", "point_of_interest"],
         "straightLineDistanceMeters": 296.3728,
         "travelDistanceMeters": 420.12927
       }
@@ -679,9 +639,7 @@
     "postalCode": "94043-1351",
     "administrativeArea": "California",
     "locality": "Mountain View",
-    "addressLines": [
-      "1600 Amphitheatre Pkwy"
-    ]
+    "addressLines": ["1600 Amphitheatre Pkwy"]
   },
   "googleMapsTypeLabel": {
     "text": "Corporate Campus",

@@ -1,18 +1,18 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  output: 'static',
-  site: 'https://slim-portal.pages.dev',
-  compressHTML: true,
   build: {
-    inlineStylesheets: 'never',
+    inlineStylesheets: "never",
   },
+  compressHTML: true,
+  output: "static",
+  site: "https://slim-portal.pages.dev",
   vite: {
     server: {
       proxy: {
-        '/api': {
-          target: 'http://localhost:8787',
+        "/api": {
           changeOrigin: true,
+          target: "http://localhost:8787",
         },
       },
     },

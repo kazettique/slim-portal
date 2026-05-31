@@ -1,20 +1,20 @@
-import { NavitimeLang } from "../../type.common";
-import { NavitimeTransportNode, NavitimeTransportUnit } from "../type";
+import type { NavitimeLang } from "../../type.common";
+import type { NavitimeTransportNode, NavitimeTransportUnit } from "../type";
 
 export interface NavitimeAroundNode extends NavitimeTransportNode {
   distance: number; // metres
-  time: number; // minutes walking
   gateway?: string;
+  time: number; // minutes walking
 }
 
 export interface NavitimeTransportAroundRequest {
   coord: string; // "lat,lng"
-  term?: number; // walk time limit (minutes)
-  limit?: number;
-  walk_speed?: number; // km/h
-  datum?: string;
   coord_unit?: string;
+  datum?: string;
   lang?: NavitimeLang;
+  limit?: number;
+  term?: number; // walk time limit (minutes)
+  walk_speed?: number; // km/h
 }
 
 export interface NavitimeTransportAroundResponse {

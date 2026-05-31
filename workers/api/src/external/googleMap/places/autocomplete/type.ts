@@ -1,3 +1,17 @@
+export interface AutocompletePlacePrediction {
+  distanceMeters?: number;
+  place?: string;
+  placeId?: string;
+  structuredFormat?: AutocompleteStructuredFormat;
+  text?: AutocompleteText;
+  types?: string[];
+}
+
+export interface AutocompleteQueryPrediction {
+  structuredFormat?: AutocompleteStructuredFormat;
+  text?: AutocompleteText;
+}
+
 export interface AutocompleteRequest {
   input: string;
   lat?: number;
@@ -5,33 +19,8 @@ export interface AutocompleteRequest {
   radius?: number;
 }
 
-interface AutocompleteTextMatch {
-  startOffset?: number;
-  endOffset?: number;
-}
-
-interface AutocompleteText {
-  text?: string;
-  matches?: AutocompleteTextMatch[];
-}
-
-interface AutocompleteStructuredFormat {
-  mainText?: AutocompleteText;
-  secondaryText?: AutocompleteText;
-}
-
-export interface AutocompletePlacePrediction {
-  place?: string;
-  placeId?: string;
-  text?: AutocompleteText;
-  structuredFormat?: AutocompleteStructuredFormat;
-  types?: string[];
-  distanceMeters?: number;
-}
-
-export interface AutocompleteQueryPrediction {
-  text?: AutocompleteText;
-  structuredFormat?: AutocompleteStructuredFormat;
+export interface AutocompleteResponse {
+  suggestions?: AutocompleteSuggestion[];
 }
 
 export interface AutocompleteSuggestion {
@@ -39,6 +28,17 @@ export interface AutocompleteSuggestion {
   queryPrediction?: AutocompleteQueryPrediction;
 }
 
-export interface AutocompleteResponse {
-  suggestions?: AutocompleteSuggestion[];
+interface AutocompleteStructuredFormat {
+  mainText?: AutocompleteText;
+  secondaryText?: AutocompleteText;
+}
+
+interface AutocompleteText {
+  matches?: AutocompleteTextMatch[];
+  text?: string;
+}
+
+interface AutocompleteTextMatch {
+  endOffset?: number;
+  startOffset?: number;
 }

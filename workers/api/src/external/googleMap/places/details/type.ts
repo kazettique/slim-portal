@@ -1,4 +1,4 @@
-import { GMapPlace } from "../type.common";
+import type { GMapPlace } from "../type.common";
 
 export interface DetailsRequest {
   id: string;

@@ -7,14 +7,15 @@
 ## Example
 
 ```js
-const url = 'https://navitime-transport.p.rapidapi.com/transport_node/autocomplete?word=%E3%81%A8%E3%81%86%EF%BD%8B&word_match=prefix&coord=35.689457%2C139.691935&radius=10000&datum=wgs84&coord_unit=degree';
+const url =
+  "https://navitime-transport.p.rapidapi.com/transport_node/autocomplete?word=%E3%81%A8%E3%81%86%EF%BD%8B&word_match=prefix&coord=35.689457%2C139.691935&radius=10000&datum=wgs84&coord_unit=degree";
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
-  'x-rapidapi-key': '<REPIDAPI_KEY>',
-  'x-rapidapi-host': 'navitime-transport.p.rapidapi.com',
-  'Content-Type': 'application/json'
-  }
+    "x-rapidapi-key": "<REPIDAPI_KEY>",
+    "x-rapidapi-host": "navitime-transport.p.rapidapi.com",
+    "Content-Type": "application/json",
+  },
 };
 
 try {

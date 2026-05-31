@@ -1,16 +1,16 @@
 ---
-import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
+import Base from "../../layout/Base.astro";
 ---
 
 <Base
+  description={AppConstant.AREA_CONVERTER_PAGE_META.description}
   icon={AppConstant.AREA_CONVERTER_PAGE_META.icon}
   title={AppConstant.AREA_CONVERTER_PAGE_META.title}
-  description={AppConstant.AREA_CONVERTER_PAGE_META.description}
 >
   <h1>{AppConstant.AREA_CONVERTER_PAGE_META.icon} {AppConstant.AREA_CONVERTER_PAGE_META.title}</h1>
   <p>{AppConstant.AREA_CONVERTER_PAGE_META.description}</p>
-  <a href={AppConstant.CONVERTER_PAGE_META.url} class="converter-back">← Back to Converters</a>
+  <a class="converter-back" href={AppConstant.CONVERTER_PAGE_META.url}>← Back to Converters</a>
 
   <div class="converter-group" style="margin-block: var(--space)">
     <label for="tatami-type">畳の種類 (Tatami standard)</label>
@@ -26,17 +26,38 @@ import { AppConstant } from "../../constant";
   <div class="converter-grid">
     <div class="converter-group">
       <label for="area-tsubo">坪 (Tsubo)</label>
-      <input id="area-tsubo" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 20" />
+      <input
+        id="area-tsubo"
+        inputmode="decimal"
+        min="0"
+        placeholder="e.g. 20"
+        step="0.01"
+        type="number"
+      />
     </div>
 
     <div class="converter-group">
       <label for="area-sqm">㎡ (Square Meters)</label>
-      <input id="area-sqm" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 66.12" />
+      <input
+        id="area-sqm"
+        inputmode="decimal"
+        min="0"
+        placeholder="e.g. 66.12"
+        step="0.01"
+        type="number"
+      />
     </div>
 
     <div class="converter-group">
       <label for="area-tatami">畳 (Tatami)</label>
-      <input id="area-tatami" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 40.8" />
+      <input
+        id="area-tatami"
+        inputmode="decimal"
+        min="0"
+        placeholder="e.g. 40.8"
+        step="0.1"
+        type="number"
+      />
     </div>
   </div>
 </Base>
@@ -50,16 +71,6 @@ import { AppConstant } from "../../constant";
   const tatamiInput = document.getElementById("area-tatami") as HTMLInputElement | null;
 
   let updating = false;
-
-  function fromTsubo(tsubo: number): void {
-    if (updating) return;
-    updating = true;
-    const sqm = tsubo * AreaConverterUtil.TSUBO_TO_SQM;
-    const tatami = sqm / AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
-    if (sqmInput) sqmInput.value = AreaConverterUtil.round(sqm, 2);
-    if (tatamiInput) tatamiInput.value = AreaConverterUtil.round(tatami, 2);
-    updating = false;
-  }
 
   function fromSqm(sqm: number): void {
     if (updating) return;
@@ -78,6 +89,16 @@ import { AppConstant } from "../../constant";
     const tsubo = sqm / AreaConverterUtil.TSUBO_TO_SQM;
     if (tsuboInput) tsuboInput.value = AreaConverterUtil.round(tsubo, 2);
     if (sqmInput) sqmInput.value = AreaConverterUtil.round(sqm, 2);
+    updating = false;
+  }
+
+  function fromTsubo(tsubo: number): void {
+    if (updating) return;
+    updating = true;
+    const sqm = tsubo * AreaConverterUtil.TSUBO_TO_SQM;
+    const tatami = sqm / AreaConverterUtil.getTatamiM2(tatamiTypeEl?.value ?? "");
+    if (sqmInput) sqmInput.value = AreaConverterUtil.round(sqm, 2);
+    if (tatamiInput) tatamiInput.value = AreaConverterUtil.round(tatami, 2);
     updating = false;
   }
 

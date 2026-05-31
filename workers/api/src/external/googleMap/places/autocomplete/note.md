@@ -3,46 +3,46 @@
 ## Request Example
 
 ```js
-const url = 'https://google-map-places-new-v2.p.rapidapi.com/v1/places:autocomplete';
+const url = "https://google-map-places-new-v2.p.rapidapi.com/v1/places:autocomplete";
 const options = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'x-rapidapi-key': '<RAPIDAPI_TOKEN>',
-    'x-rapidapi-host': 'google-map-places-new-v2.p.rapidapi.com',
-    'Content-Type': 'application/json',
-    'X-Goog-FieldMask': '*'
+    "x-rapidapi-key": "<RAPIDAPI_TOKEN>",
+    "x-rapidapi-host": "google-map-places-new-v2.p.rapidapi.com",
+    "Content-Type": "application/json",
+    "X-Goog-FieldMask": "*",
   },
   body: {
-    input: 'Restaurant',
+    input: "Restaurant",
     locationBias: {
       circle: {
         center: {
           latitude: 35.690887451171875,
-          longitude: 139.7022247314453
+          longitude: 139.7022247314453,
         },
-        radius: 10000
-      }
+        radius: 10000,
+      },
     },
     includedPrimaryTypes: [],
     includedRegionCodes: [],
-    languageCode: '',
-    regionCode: '',
+    languageCode: "",
+    regionCode: "",
     origin: {
       latitude: 0,
-      longitude: 0
+      longitude: 0,
     },
     inputOffset: 0,
     includeQueryPredictions: true,
-    sessionToken: ''
-  }
+    sessionToken: "",
+  },
 };
 
 try {
- const response = await fetch(url, options);
- const result = await response.text();
- console.log(result);
+  const response = await fetch(url, options);
+  const result = await response.text();
+  console.log(result);
 } catch (error) {
- console.error(error);
+  console.error(error);
 }
 ```
 

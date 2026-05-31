@@ -1,24 +1,12 @@
-export interface Feed {
-  url: string;
-  source: string;
-}
-
-export interface Env {
-  ALLOWED_ORIGIN_DEV?: string;
-  RAPIDAPI_KEY: string;
-  // Future:
-  // NEWS_CACHE: KVNamespace;
-}
-
 export enum HttpRequestMethod {
-  GET = "GET",
-  POST = "POST",
-  PATCH = "PATCH",
-  PUT = "PUT",
-  DELETE = "DELETE",
   CONNECT = "CONNECT",
+  DELETE = "DELETE",
+  GET = "GET",
   HEAD = "HEAD",
   OPTIONS = "OPTIONS",
+  PATCH = "PATCH",
+  POST = "POST",
+  PUT = "PUT",
   TRACE = "TRACE",
 }
 
@@ -400,4 +388,16 @@ export enum HttpStatusCode {
    * to require agreement to Terms of Service before granting full Internet access via a Wi-Fi hotspot).
    */
   NETWORK_AUTHENTICATION_REQUIRED = 511,
+}
+
+export interface Env {
+  ALLOWED_ORIGIN_DEV?: string;
+  RAPIDAPI_KEY: string;
+  // Future:
+  // NEWS_CACHE: KVNamespace;
+}
+
+export interface Feed {
+  source: string;
+  url: string;
 }

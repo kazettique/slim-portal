@@ -1,23 +1,13 @@
-import { BookmarkPage, type Bookmark, type TransitBookmarkParam, type PlaceDetailBookmarkParam, type TransitRouteBookmarkParam } from "./type.bookmark";
+import { type Bookmark, BookmarkPage, type TransitBookmarkParam } from "./type.bookmark";
 
 export abstract class BookmarkUtil {
-  private static readonly LS_KEY: string = "bookmarks";
-
   public static readonly BOOKMARK_PAGE_LABELS: Record<BookmarkPage, string> = {
-    [BookmarkPage.TRANSIT]: "Transit",
     [BookmarkPage.PLACE]: "Places",
-    [BookmarkPage.SEARCH]: "Search",
     [BookmarkPage.PLACE_DETAIL]: "Place Details",
+    [BookmarkPage.SEARCH]: "Search",
+    [BookmarkPage.TRANSIT]: "Transit",
     [BookmarkPage.TRANSIT_ROUTE]: "Saved Routes",
   };
-
-  public static readonly PAGE_ORDER: BookmarkPage[] = [
-    BookmarkPage.TRANSIT,
-    BookmarkPage.TRANSIT_ROUTE,
-    BookmarkPage.PLACE,
-    BookmarkPage.PLACE_DETAIL,
-    BookmarkPage.SEARCH,
-  ];
 
   public static readonly QUERY_PAGES: BookmarkPage[] = [
     BookmarkPage.TRANSIT,
@@ -35,10 +25,36 @@ export abstract class BookmarkUtil {
     { label: "Snapshots", pages: this.SNAPSHOT_PAGES },
   ];
 
+  public static readonly PAGE_ORDER: BookmarkPage[] = [
+    BookmarkPage.TRANSIT,
+    BookmarkPage.TRANSIT_ROUTE,
+    BookmarkPage.PLACE,
+    BookmarkPage.PLACE_DETAIL,
+    BookmarkPage.SEARCH,
+  ];
+
+  private static readonly LS_KEY: string = "bookmarks";
+
+  public static add(bookmark: Bookmark): void {
+    try {
+      const list = BookmarkUtil.getAll();
+      list.unshift(bookmark);
+      localStorage.setItem(this.LS_KEY, JSON.stringify(list));
+    } catch {
+      // ignore
+    }
+  }
+
   public static buildUrl(bookmark: Bookmark): string {
     if (bookmark.page === BookmarkPage.TRANSIT) {
       const p = bookmark.params as TransitBookmarkParam;
-      const sp = new URLSearchParams({ from: p.from, to: p.to, from_name: p.from_name, to_name: p.to_name, restore: "1" });
+      const sp = new URLSearchParams({
+        from: p.from,
+        from_name: p.from_name,
+        restore: "1",
+        to: p.to,
+        to_name: p.to_name,
+      });
       return `/transit?${sp.toString()}`;
     }
     if (bookmark.page === BookmarkPage.TRANSIT_ROUTE) {
@@ -57,34 +73,18 @@ export abstract class BookmarkUtil {
     return `/search?${sp.toString()}`;
   }
 
-  public static getById(id: string): Bookmark | null {
-    return BookmarkUtil.getAll().find((b) => b.id === id) ?? null;
-  }
-
-  public static getAll(): Bookmark[] {
+  public static delete(id: string): void {
     try {
-      const raw = localStorage.getItem(this.LS_KEY);
-      if (!raw) return [];
-      return JSON.parse(raw) as Bookmark[];
-    } catch {
-      return [];
-    }
-  }
-
-  public static add(bookmark: Bookmark): void {
-    try {
-      const list = BookmarkUtil.getAll();
-      list.unshift(bookmark);
+      const list = BookmarkUtil.getAll().filter((b) => b.id !== id);
       localStorage.setItem(this.LS_KEY, JSON.stringify(list));
     } catch {
       // ignore
     }
   }
 
-  public static delete(id: string): void {
+  public static deleteAll(): void {
     try {
-      const list = BookmarkUtil.getAll().filter((b) => b.id !== id);
-      localStorage.setItem(this.LS_KEY, JSON.stringify(list));
+      localStorage.removeItem(this.LS_KEY);
     } catch {
       // ignore
     }
@@ -100,11 +100,17 @@ export abstract class BookmarkUtil {
     }
   }
 
-  public static deleteAll(): void {
+  public static getAll(): Bookmark[] {
     try {
-      localStorage.removeItem(this.LS_KEY);
+      const raw = localStorage.getItem(this.LS_KEY);
+      if (!raw) return [];
+      return JSON.parse(raw) as Bookmark[];
     } catch {
-      // ignore
+      return [];
     }
+  }
+
+  public static getById(id: string): Bookmark | null {
+    return BookmarkUtil.getAll().find((b) => b.id === id) ?? null;
   }
 }

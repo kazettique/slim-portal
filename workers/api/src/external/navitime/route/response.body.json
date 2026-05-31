@@ -27,9 +27,7 @@
           "to_time": "2020-08-19T10:15:00+09:00",
           "time": 15,
           "distance": 1086,
-          "move_type": [
-            "walk"
-          ]
+          "move_type": ["walk"]
         }
       },
       "sections": [
@@ -94,10 +92,7 @@
           "to_time": "2020-08-19T10:16:00+09:00",
           "time": 16,
           "distance": 1896,
-          "move_type": [
-            "local_train",
-            "walk"
-          ],
+          "move_type": ["local_train", "walk"],
           "reference_fare": {
             "lowest_total_ticket": 170.0,
             "lowest_total_ic": 168.0
@@ -130,9 +125,7 @@
           },
           "name": "表参道",
           "node_id": "00007820",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "B4口",
           "numbering": {
             "departure": [
@@ -311,9 +304,7 @@
           },
           "name": "渋谷",
           "node_id": "00003544",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "B1口",
           "numbering": {
             "arrival": [
@@ -377,10 +368,7 @@
           "to_time": "2020-08-19T10:17:00+09:00",
           "time": 17,
           "distance": 1954,
-          "move_type": [
-            "local_train",
-            "walk"
-          ],
+          "move_type": ["local_train", "walk"],
           "reference_fare": {
             "lowest_total_ticket": 170.0,
             "lowest_total_ic": 168.0
@@ -413,9 +401,7 @@
           },
           "name": "表参道",
           "node_id": "00007820",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "B4口",
           "numbering": {
             "departure": [
@@ -594,9 +580,7 @@
           },
           "name": "渋谷",
           "node_id": "00003544",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "明治通り側出入口",
           "numbering": {
             "arrival": [
@@ -660,10 +644,7 @@
           "to_time": "2020-08-19T10:23:00+09:00",
           "time": 23,
           "distance": 1919,
-          "move_type": [
-            "local_train",
-            "walk"
-          ],
+          "move_type": ["local_train", "walk"],
           "reference_fare": {
             "lowest_total_ticket": 170.0,
             "lowest_total_ic": 168.0
@@ -696,9 +677,7 @@
           },
           "name": "表参道",
           "node_id": "00007820",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "B4口",
           "numbering": {
             "departure": [
@@ -877,9 +856,7 @@
           },
           "name": "明治神宮前",
           "node_id": "00008598",
-          "node_types": [
-            "station"
-          ],
+          "node_types": ["station"],
           "gateway": "7番口",
           "numbering": {
             "arrival": [

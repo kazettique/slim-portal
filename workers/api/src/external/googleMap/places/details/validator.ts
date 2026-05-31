@@ -1,6 +1,8 @@
 import { z } from "zod/v4";
+
+import type { DetailsRequest, DetailsResponse } from "./type";
+
 import { GMapCommonValidator } from "../validator.common";
-import { DetailsRequest, DetailsResponse } from "./type";
 
 export abstract class GMapDetailsValidator {
   public static readonly REQUEST_VALIDATOR: z.ZodType<DetailsRequest> = z.object({

@@ -1,44 +1,58 @@
 ---
-import Base from "../../layout/Base.astro";
 import { AppConstant } from "../../constant";
+import Base from "../../layout/Base.astro";
 ---
 
 <Base
+  description={AppConstant.YEAR_CONVERTER_PAGE_META.description}
   icon={AppConstant.YEAR_CONVERTER_PAGE_META.icon}
   title={AppConstant.YEAR_CONVERTER_PAGE_META.title}
-  description={AppConstant.YEAR_CONVERTER_PAGE_META.description}
 >
   <h1>{AppConstant.YEAR_CONVERTER_PAGE_META.icon} {AppConstant.YEAR_CONVERTER_PAGE_META.title}</h1>
   <p>{AppConstant.YEAR_CONVERTER_PAGE_META.description}</p>
-  <a href={AppConstant.CONVERTER_PAGE_META.url} class="converter-back">← Back to Converters</a>
+  <a class="converter-back" href={AppConstant.CONVERTER_PAGE_META.url}>← Back to Converters</a>
 
   <div class="converter-grid">
     <div class="converter-group">
       <label for="year-western">西元 (Western)</label>
-      <input id="year-western" type="number" min="1868" max="9999" inputmode="numeric" placeholder="e.g. 2024" />
+      <input
+        id="year-western"
+        inputmode="numeric"
+        max="9999"
+        min="1868"
+        placeholder="e.g. 2024"
+        type="number"
+      />
     </div>
 
     <div class="converter-group">
       <label for="year-roc">民國 (ROC)</label>
-      <input id="year-roc" type="number" min="1" inputmode="numeric" placeholder="e.g. 113" />
+      <input id="year-roc" inputmode="numeric" min="1" placeholder="e.g. 113" type="number" />
     </div>
 
     <div class="converter-group">
       <label for="year-era-num">日本年號 (Japanese era)</label>
       <div class="converter-group__row year__row">
-        <select id="year-era" aria-label="Era name">
+        <select aria-label="Era name" id="year-era">
           <option>明治</option>
           <option>大正</option>
           <option>昭和</option>
           <option>平成</option>
           <option selected>令和</option>
         </select>
-        <input id="year-era-num" type="number" min="1" placeholder="e.g. 6" inputmode="numeric" aria-label="Era year" />
+        <input
+          aria-label="Era year"
+          id="year-era-num"
+          inputmode="numeric"
+          min="1"
+          placeholder="e.g. 6"
+          type="number"
+        />
       </div>
     </div>
   </div>
 
-  <p id="year-note" class="converter-note" aria-live="polite"></p>
+  <p aria-live="polite" class="converter-note" id="year-note"></p>
 </Base>
 
 <script>
@@ -52,10 +66,46 @@ import { AppConstant } from "../../constant";
 
   let updating = false;
 
-  function setNote(western: number): void {
-    if (!noteEl) return;
-    const msg = YearConverterUtil.TRANSITION_YEARS[western];
-    noteEl.textContent = msg ? `⚠ ${western} = ${msg} (depends on the month)` : "";
+  function fromEra(): void {
+    if (updating) return;
+    updating = true;
+
+    const eraName = eraSelect?.value ?? "";
+    const eraYear = parseInt(eraNumInput?.value ?? "", 10);
+    const era = YearConverterUtil.ERAS.find((e) => e.name === eraName);
+
+    if (era && !isNaN(eraYear) && eraYear >= 1) {
+      const western = era.start + eraYear - 1;
+      if (westernInput) westernInput.value = String(western);
+      if (rocInput) rocInput.value = western >= 1912 ? String(western - 1911) : "";
+      setNote(western);
+    } else {
+      if (westernInput) westernInput.value = "";
+      if (rocInput) rocInput.value = "";
+      if (noteEl) noteEl.textContent = "";
+    }
+
+    updating = false;
+  }
+
+  function fromRoc(roc: number): void {
+    if (updating) return;
+    updating = true;
+    const western = roc + 1911;
+    if (westernInput) westernInput.value = String(western);
+
+    const result = YearConverterUtil.westernToEra(western);
+    if (eraSelect && eraNumInput) {
+      if (result) {
+        eraSelect.value = result.era.name;
+        eraNumInput.value = String(result.eraYear);
+      } else {
+        eraNumInput.value = "";
+      }
+    }
+
+    setNote(western);
+    updating = false;
   }
 
   function fromWestern(western: number): void {
@@ -82,46 +132,10 @@ import { AppConstant } from "../../constant";
     updating = false;
   }
 
-  function fromRoc(roc: number): void {
-    if (updating) return;
-    updating = true;
-    const western = roc + 1911;
-    if (westernInput) westernInput.value = String(western);
-
-    const result = YearConverterUtil.westernToEra(western);
-    if (eraSelect && eraNumInput) {
-      if (result) {
-        eraSelect.value = result.era.name;
-        eraNumInput.value = String(result.eraYear);
-      } else {
-        eraNumInput.value = "";
-      }
-    }
-
-    setNote(western);
-    updating = false;
-  }
-
-  function fromEra(): void {
-    if (updating) return;
-    updating = true;
-
-    const eraName = eraSelect?.value ?? "";
-    const eraYear = parseInt(eraNumInput?.value ?? "", 10);
-    const era = YearConverterUtil.ERAS.find((e) => e.name === eraName);
-
-    if (era && !isNaN(eraYear) && eraYear >= 1) {
-      const western = era.start + eraYear - 1;
-      if (westernInput) westernInput.value = String(western);
-      if (rocInput) rocInput.value = western >= 1912 ? String(western - 1911) : "";
-      setNote(western);
-    } else {
-      if (westernInput) westernInput.value = "";
-      if (rocInput) rocInput.value = "";
-      if (noteEl) noteEl.textContent = "";
-    }
-
-    updating = false;
+  function setNote(western: number): void {
+    if (!noteEl) return;
+    const msg = YearConverterUtil.TRANSITION_YEARS[western];
+    noteEl.textContent = msg ? `⚠ ${western} = ${msg} (depends on the month)` : "";
   }
 
   westernInput?.addEventListener("input", () => {

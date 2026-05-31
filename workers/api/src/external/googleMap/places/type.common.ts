@@ -1,34 +1,34 @@
-export type Latitude = number;
-export type Longitude = number;
-
-export interface GMapLocText {
-  text?: string;
-  languageCode?: string;
-}
-
 export interface GMapLocation {
   latitude?: number;
   longitude?: number;
 }
+export interface GMapLocText {
+  languageCode?: string;
+  text?: string;
+}
 
 export interface GMapOpeningHours {
-  weekdayDescriptions?: string[];
   openNow?: boolean;
+  weekdayDescriptions?: string[];
 }
 
 export interface GMapPlace {
-  id?: string;
-  displayName?: GMapLocText;
-  formattedAddress?: string;
-  shortFormattedAddress?: string;
-  location?: GMapLocation;
-  rating?: number;
-  userRatingCount?: number;
-  googleMapsUri?: string;
-  nationalPhoneNumber?: string;
-  internationalPhoneNumber?: string;
-  websiteUri?: string;
   businessStatus?: string;
-  regularOpeningHours?: GMapOpeningHours;
+  displayName?: GMapLocText;
   editorialSummary?: GMapLocText;
+  formattedAddress?: string;
+  googleMapsUri?: string;
+  id?: string;
+  internationalPhoneNumber?: string;
+  location?: GMapLocation;
+  nationalPhoneNumber?: string;
+  rating?: number;
+  regularOpeningHours?: GMapOpeningHours;
+  shortFormattedAddress?: string;
+  userRatingCount?: number;
+  websiteUri?: string;
 }
+
+export type Latitude = number;
+
+export type Longitude = number;

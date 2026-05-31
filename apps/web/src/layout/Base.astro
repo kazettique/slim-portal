@@ -4,12 +4,12 @@ import { AppConstant } from "../constant";
 import { AppUtil } from "../util";
 
 interface Props {
+  description?: string;
   icon?: string;
   title: string;
-  description?: string;
 }
 
-const { icon, title, description = AppConstant.HOME_PAGE_META.description } = Astro.props;
+const { description = AppConstant.HOME_PAGE_META.description, icon, title } = Astro.props;
 const canonicalPath = Astro.url.pathname;
 ---
 
@@ -18,27 +18,37 @@ const canonicalPath = Astro.url.pathname;
   <head>
     <script is:inline>
       (function () {
-        var stored = "";
-        try { stored = localStorage.getItem("setting:theme") || ""; } catch (_) {}
-        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        var isDark = stored === "dark" || (stored !== "light" && prefersDark);
+        let stored = "";
+        try {
+          stored = localStorage.getItem("setting:theme") || "";
+        } catch (_) {}
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = stored === "dark" || (stored !== "light" && prefersDark);
         if (isDark) document.documentElement.setAttribute("data-theme", "dark");
-        var menuStyle = "both";
-        try { menuStyle = localStorage.getItem("setting:menuStyle") || "both"; } catch (_) {}
+        let menuStyle = "both";
+        try {
+          menuStyle = localStorage.getItem("setting:menuStyle") || "both";
+        } catch (_) {}
         if (menuStyle !== "both") document.documentElement.setAttribute("data-menu", menuStyle);
-        var menuPosition = "top";
-        try { menuPosition = localStorage.getItem("setting:menuPosition") || "top"; } catch (_) {}
-        if (menuPosition !== "top") document.documentElement.setAttribute("data-menu-position", menuPosition);
-        var textSize = "medium";
-        try { textSize = localStorage.getItem("setting:textSize") || "medium"; } catch (_) {}
-        if (textSize !== "medium") document.documentElement.setAttribute("data-text-size", textSize);
+        let menuPosition = "top";
+        try {
+          menuPosition = localStorage.getItem("setting:menuPosition") || "top";
+        } catch (_) {}
+        if (menuPosition !== "top")
+          document.documentElement.setAttribute("data-menu-position", menuPosition);
+        let textSize = "medium";
+        try {
+          textSize = localStorage.getItem("setting:textSize") || "medium";
+        } catch (_) {}
+        if (textSize !== "medium")
+          document.documentElement.setAttribute("data-text-size", textSize);
       })();
     </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta id="theme-color-meta" name="theme-color" content="#ffffff" />
-    <meta name="description" content={description} />
-    <link rel="manifest" href="/manifest.json" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+    <meta content="#ffffff" id="theme-color-meta" name="theme-color" />
+    <meta content={description} name="description" />
+    <link href="/manifest.json" rel="manifest" />
     <title>{AppUtil.getPageTitle(icon ? `${icon} ${title}` : title)}</title>
   </head>
   <body>
@@ -51,7 +61,7 @@ const canonicalPath = Astro.url.pathname;
                 ? canonicalPath === "/"
                 : canonicalPath === navItem.url || canonicalPath.startsWith(navItem.url + "/");
             return (
-              <a href={navItem.url} aria-current={isActive ? "page" : undefined}>
+              <a aria-current={isActive ? "page" : undefined} href={navItem.url}>
                 <span class="nav__icon">{navItem.icon}</span>
                 <span class="nav__text">{navItem.title}</span>
               </a>
@@ -76,17 +86,20 @@ const canonicalPath = Astro.url.pathname;
       }
       // Sync theme-color meta to current data-theme
       (function () {
-        var isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        var meta = document.getElementById("theme-color-meta");
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        const meta = document.getElementById("theme-color-meta");
         if (meta) meta.content = isDark ? "#121212" : "#ffffff";
       })();
       // Keep active nav item visible when the nav overflows horizontally
-      document.querySelector('nav a[aria-current="page"]')?.scrollIntoView({ inline: "center", block: "nearest" });
+      document
+        .querySelector('nav a[aria-current="page"]')
+        ?.scrollIntoView({ block: "nearest", inline: "center" });
       // Expose header height as CSS var for h1 sticky offset and bottom-nav body padding
       (function () {
-        var headerEl = document.querySelector("header");
+        const headerEl = document.querySelector("header");
         function updateHeaderH() {
-          if (headerEl) document.documentElement.style.setProperty("--header-h", headerEl.offsetHeight + "px");
+          if (headerEl)
+            document.documentElement.style.setProperty("--header-h", headerEl.offsetHeight + "px");
         }
         updateHeaderH();
         window.addEventListener("resize", updateHeaderH, { passive: true });
