@@ -23,9 +23,11 @@
     "format:check": "prettier --check .",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
+    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "1.52.0",
     "@typescript-eslint/parser": "8.60.0",
     "@vitest/coverage-v8": "4.1.7",
     "eslint": "10.4.1",
