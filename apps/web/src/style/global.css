@@ -606,6 +606,7 @@ footer {
   font-size: 1.25rem;
   font-weight: 700;
   margin-block-end: 0.25rem;
+  overflow-wrap: break-word;
 }
 
 .place-details__maps {
@@ -634,6 +635,11 @@ footer {
 
 .place-details__value {
   font-size: 0.95rem;
+  overflow-wrap: break-word;
+}
+
+.place-details__value a {
+  word-break: break-all;
 }
 
 .place-details__hours {
@@ -912,9 +918,7 @@ footer {
   font-size: 0.75rem;
   color: var(--muted);
   margin-block-start: 0.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: break-all;
 }
 
 /* ── Home page ── */
@@ -1040,9 +1044,7 @@ footer {
   flex: 1;
   color: var(--accent);
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .bookmark-item__delete {
@@ -1056,16 +1058,11 @@ footer {
 
 .bookmark-item__body .bookmark-item__label {
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .bookmark-item__meta {
   font-size: 0.8rem;
   color: var(--muted);
   margin-block-start: 0.15rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
