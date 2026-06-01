@@ -14,6 +14,8 @@ export default defineConfig({
   testDir: "e2e",
   use: {
     baseURL: "http://localhost:4321",
+    // use pre-installed Chrome on CI runners instead of downloading Playwright's Chromium
+    ...(process.env.CI ? { channel: "chrome" } : {}),
   },
   webServer: {
     command: "bun run dev:web",
