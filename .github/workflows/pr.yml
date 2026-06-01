@@ -17,7 +17,7 @@ jobs:
 
   test:
     name: Test
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,8 +27,8 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-      - run: bun run test
       - run: bunx playwright install chromium --with-deps
+      - run: bun run test
       - run: bun run e2e
         env:
           CI: true
