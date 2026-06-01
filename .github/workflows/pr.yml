@@ -77,10 +77,10 @@ jobs:
 
       - name: Install Playwright Browser
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: bunx playwright install chromium
+        run: node_modules/.bin/playwright install chromium
 
       - name: Install Playwright System Dependencies
-        run: bunx playwright install-deps chromium
+        run: node_modules/.bin/playwright install-deps chromium
 
       - name: Run Playwright Tests
         run: bun run e2e
