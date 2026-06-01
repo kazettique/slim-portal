@@ -5,40 +5,74 @@ on:
 
 jobs:
   typecheck:
-    name: Type check
+    name: Type Check
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
       - run: bun install
       - run: bun run type
 
-  test:
-    name: Test
+  unit:
+    name: Unit Test
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        id: setup-node
+        uses: actions/setup-node@v6
         with:
           node-version: lts/krypton
-      - uses: oven-sh/setup-bun@v2
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun install
-      - run: bun run test
-      - run: bunx playwright install chromium --with-deps
-      - run: bun run e2e
+          cache-dependency-path: '**/bun.lock'
+
+      - name: Install Bun
+        run: bun install
+
+      - name: Run Test
+        run: bun run test
+
+  e2e:
+    name: Playwright
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        id: setup-node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/krypton
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+          cache-dependency-path: '**/bun.lock'
+
+      - name: Install Bun
+        run: bun install
+
+      - name: Run Playwright Tests
+        run: bun run e2e
         env:
           CI: true
 
   build-web:
-    name: Build web
+    name: Build Web
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/krypton
       - uses: oven-sh/setup-bun@v2
