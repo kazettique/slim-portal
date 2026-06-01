@@ -1,0 +1,35 @@
+[
+  {
+    "totalTime": 35,
+    "transfers": 1,
+    "depart": "2026-06-01T09:00:00+09:00",
+    "arrive": "2026-06-01T09:35:00+09:00",
+    "referenceFare": { "ic": 210, "ticket": 220 },
+    "legs": [
+      {
+        "line": "JR Yamanote Line",
+        "from": "Shibuya",
+        "to": "Shinjuku",
+        "depart": "2026-06-01T09:00:00+09:00",
+        "arrive": "2026-06-01T09:10:00+09:00",
+        "duration": 10,
+        "color": "#80C241",
+        "platform": "Track 1",
+        "getoff": null,
+        "distance": null
+      },
+      {
+        "line": "Walk",
+        "from": "Shinjuku",
+        "to": "Shinjuku (East Exit)",
+        "depart": null,
+        "arrive": null,
+        "duration": 5,
+        "color": null,
+        "platform": "",
+        "getoff": null,
+        "distance": 400
+      }
+    ]
+  }
+]

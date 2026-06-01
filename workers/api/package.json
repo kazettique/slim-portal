@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "type": "tsc",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "test": "vitest run"
   },
   "dependencies": {
     "@slim-portal/share": "workspace:*",

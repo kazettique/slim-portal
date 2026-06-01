@@ -11,6 +11,21 @@ export abstract class BathroomLib {
   private static readonly MAX_RADIUS_MILES: number = 100;
   private static readonly METERS_PER_MILE: number = 1_609.344;
 
+  public static cacheKey(lat: number, lng: number, radiusMiles: number): string {
+    return `https://slim-portal-bathrooms-cache/nearby/lat=${lat}&lng=${lng}&radius=${radiusMiles}`;
+  }
+
+  // The API may return a bare array or wrap it in an object — find the first array.
+  public static extractArray(raw: unknown): unknown[] {
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === "object" && raw !== null) {
+      for (const val of Object.values(raw)) {
+        if (Array.isArray(val)) return val as unknown[];
+      }
+    }
+    return [];
+  }
+
   public static async nearby(
     req: PublicBathroomRequest,
     env: Env,
@@ -81,20 +96,5 @@ export abstract class BathroomLib {
     ctx.waitUntil(cache.put(key, cachedResponse));
 
     return { cachedAt: null, items };
-  }
-
-  private static cacheKey(lat: number, lng: number, radiusMiles: number): string {
-    return `https://slim-portal-bathrooms-cache/nearby/lat=${lat}&lng=${lng}&radius=${radiusMiles}`;
-  }
-
-  // The API may return a bare array or wrap it in an object — find the first array.
-  private static extractArray(raw: unknown): unknown[] {
-    if (Array.isArray(raw)) return raw;
-    if (typeof raw === "object" && raw !== null) {
-      for (const val of Object.values(raw)) {
-        if (Array.isArray(val)) return val as unknown[];
-      }
-    }
-    return [];
   }
 }

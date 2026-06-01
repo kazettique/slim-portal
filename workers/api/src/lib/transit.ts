@@ -28,6 +28,45 @@ import { NavitimeTransportSearchValidator } from "../external/navitime/transport
 export abstract class TransitLib {
   // ── Route helpers ────────────────────────────────────────────────────────────
 
+  public static mapNode(node: NavitimeTransportNode): TransportNode {
+    return {
+      coord: { lat: node.coord.lat, lng: node.coord.lon },
+      id: node.id,
+      name: node.name,
+      ruby: node.ruby,
+      types: node.types,
+    };
+  }
+
+  public static mapSections(sections: NavitimeSection[]): TransitRoute["legs"] {
+    const legs: TransitRoute["legs"] = [];
+    sections.forEach((s, i) => {
+      if (s.type !== "move") return;
+      const move = s as NavitimeMoveSection;
+      const from = (sections[i - 1] as NavitimePointSection | undefined)?.name ?? "";
+      const to = (sections[i + 1] as NavitimePointSection | undefined)?.name ?? "";
+      legs.push({
+        arrive: move.to_time ?? null,
+        color: move.transport?.color ?? null,
+        depart: move.from_time ?? null,
+        distance: move.distance ?? null,
+        duration: move.time ?? null,
+        from,
+        getoff: move.transport?.getoff ?? null,
+        line: move.transport?.name ?? move.line_name ?? "",
+        platform: move.transport?.destination?.name ?? "",
+        to,
+      });
+    });
+    return legs;
+  }
+
+  /** Round a "YYYY-MM-DDThh:mm:ss" string (already JST local) down to the hour */
+  public static roundToHour(isoNoOffset: string): string {
+    // "2026-05-25T10:30:00" → "2026-05-25T10:00:00"
+    return isoNoOffset.slice(0, 14) + "00:00";
+  }
+
   public static async search(
     from: string,
     to: string,
@@ -96,6 +135,8 @@ export abstract class TransitLib {
 
     return { cachedAt: null, routes };
   }
+
+  // ── Station node helpers ──────────────────────────────────────────────────────
 
   public static async stationAround(
     req: NavitimeTransportAroundRequest,
@@ -222,6 +263,8 @@ export abstract class TransitLib {
     return { cachedAt: null, items };
   }
 
+  // ── Public methods ────────────────────────────────────────────────────────────
+
   public static async stationSearch(
     req: NavitimeTransportSearchRequest,
     env: Env,
@@ -282,60 +325,17 @@ export abstract class TransitLib {
     return { cachedAt: null, result };
   }
 
-  // ── Station node helpers ──────────────────────────────────────────────────────
+  /** Convert a Date to "YYYY-MM-DDThh:mm:ss" in JST (UTC+9), no timezone suffix */
+  public static toJSTString(date: Date): string {
+    const jst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    return jst.toISOString().slice(0, 19);
+  }
 
   private static cacheKey(from: string, to: string, startTime: string): string {
     return `https://slim-portal-transit-cache/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${encodeURIComponent(startTime)}`;
   }
 
-  private static mapNode(node: NavitimeTransportNode): TransportNode {
-    return {
-      coord: { lat: node.coord.lat, lng: node.coord.lon },
-      id: node.id,
-      name: node.name,
-      ruby: node.ruby,
-      types: node.types,
-    };
-  }
-
-  // ── Public methods ────────────────────────────────────────────────────────────
-
-  private static mapSections(sections: NavitimeSection[]): TransitRoute["legs"] {
-    const legs: TransitRoute["legs"] = [];
-    sections.forEach((s, i) => {
-      if (s.type !== "move") return;
-      const move = s as NavitimeMoveSection;
-      const from = (sections[i - 1] as NavitimePointSection | undefined)?.name ?? "";
-      const to = (sections[i + 1] as NavitimePointSection | undefined)?.name ?? "";
-      legs.push({
-        arrive: move.to_time ?? null,
-        color: move.transport?.color ?? null,
-        depart: move.from_time ?? null,
-        distance: move.distance ?? null,
-        duration: move.time ?? null,
-        from,
-        getoff: move.transport?.getoff ?? null,
-        line: move.transport?.name ?? move.line_name ?? "",
-        platform: move.transport?.destination?.name ?? "",
-        to,
-      });
-    });
-    return legs;
-  }
-
   private static nodeCacheKey(endpoint: string, params: URLSearchParams): string {
     return `https://slim-portal-transport-cache/${endpoint}/${params.toString()}`;
-  }
-
-  /** Round a "YYYY-MM-DDThh:mm:ss" string (already JST local) down to the hour */
-  private static roundToHour(isoNoOffset: string): string {
-    // "2026-05-25T10:30:00" → "2026-05-25T10:00:00"
-    return isoNoOffset.slice(0, 14) + "00:00";
-  }
-
-  /** Convert a Date to "YYYY-MM-DDThh:mm:ss" in JST (UTC+9), no timezone suffix */
-  private static toJSTString(date: Date): string {
-    const jst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
-    return jst.toISOString().slice(0, 19);
   }
 }

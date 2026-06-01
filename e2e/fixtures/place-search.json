@@ -1,0 +1,24 @@
+[
+  {
+    "id": "place_abc123",
+    "name": "Sakura Coffee",
+    "address": "1-2-3 Shinjuku, Tokyo",
+    "rating": 4.3,
+    "totalRatings": 210,
+    "distanceMeters": 350,
+    "lat": 35.6895,
+    "lng": 139.6917,
+    "mapsUrl": "https://maps.google.com/?cid=123"
+  },
+  {
+    "id": "place_def456",
+    "name": "Harajuku Bakery",
+    "address": "4-5-6 Harajuku, Tokyo",
+    "rating": 4.1,
+    "totalRatings": 98,
+    "distanceMeters": 820,
+    "lat": 35.6702,
+    "lng": 139.7026,
+    "mapsUrl": "https://maps.google.com/?cid=456"
+  }
+]

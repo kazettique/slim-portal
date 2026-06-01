@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Test news headline one",
+    "url": "https://example.com/news/1",
+    "publishedAt": "2026-06-01T09:00:00Z",
+    "source": "NHK",
+    "summary": "Summary of test news item one."
+  },
+  {
+    "title": "Test news headline two",
+    "url": "https://example.com/news/2",
+    "publishedAt": "2026-06-01T08:00:00Z",
+    "source": "BBC",
+    "summary": ""
+  }
+]
