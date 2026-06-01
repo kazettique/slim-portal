@@ -75,12 +75,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ runner.arch }}-playwright-chromium-
 
-      - name: Install Playwright browsers and system dependencies
+      - name: Install Playwright browser
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: bunx playwright install chromium --with-deps
+        run: bunx playwright install chromium
 
-      - name: Install Playwright system dependencies only
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+      - name: Install Playwright system dependencies
         run: bunx playwright install-deps chromium
 
       - name: Run Playwright Tests
