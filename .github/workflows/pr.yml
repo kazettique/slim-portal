@@ -42,7 +42,7 @@ jobs:
 
   e2e:
     name: Playwright
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v6
