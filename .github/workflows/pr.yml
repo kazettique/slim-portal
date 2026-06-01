@@ -15,8 +15,8 @@ jobs:
       - run: bun install
       - run: bun run type
 
-  vitest:
-    name: unit test
+  unit:
+    name: Unit Test
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
