@@ -7,12 +7,12 @@ export enum JapaneseEra {
   Reiwa = "Reiwa",
 }
 
+export interface Era extends EraData {
+  name: JapaneseEra;
+}
+
 export interface EraData {
   end: null | number;
   jaName: string;
   start: number;
-}
-
-export interface Era extends EraData {
-  name: JapaneseEra;
 }

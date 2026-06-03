@@ -38,7 +38,7 @@ import { YearConverterUtil } from "../../util.converter";
         <select aria-label="Era name" id="year-era">
           {
             YearConverterUtil.ERA_OPTIONS.map((era) => (
-              <option value={era.value} selected={era.value === JapaneseEra.Reiwa}>
+              <option selected={era.value === JapaneseEra.Reiwa} value={era.value}>
                 {era.label}
               </option>
             ))
