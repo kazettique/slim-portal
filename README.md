@@ -101,3 +101,7 @@ Before using, subscribe to all five RapidAPI providers with the same key:
 - [Navitime Route (TotalNavi)](https://rapidapi.com/navitimejapan-navitimejapan/api/navitime-route-totalnavi)
 - [Navitime Transport](https://rapidapi.com/navitimejapan-navitimejapan/api/navitime-transport)
 - [Google Map Places New V2](https://rapidapi.com/gmapplatform/api/google-map-places-new-v2)
+
+## Screenshot
+
+![screenshot](public/app-screenshot.png)
