@@ -10,31 +10,31 @@ describe("YearConverterUtil", () => {
 
     it("maps 1868 to Meiji 1", () => {
       const result = YearConverterUtil.westernToEra(1868);
-      expect(result?.era.name).toBe("明治");
+      expect(result?.era.name).toBe("Meiji");
       expect(result?.eraYear).toBe(1);
     });
 
     it("maps 2019 to 令和 1 (prefers newer era on transition year)", () => {
       const result = YearConverterUtil.westernToEra(2019);
-      expect(result?.era.name).toBe("令和");
+      expect(result?.era.name).toBe("Reiwa");
       expect(result?.eraYear).toBe(1);
     });
 
     it("maps 2024 to 令和 6", () => {
       const result = YearConverterUtil.westernToEra(2024);
-      expect(result?.era.name).toBe("令和");
+      expect(result?.era.name).toBe("Reiwa");
       expect(result?.eraYear).toBe(6);
     });
 
     it("maps 1989 to 平成 1 (prefers newer era)", () => {
       const result = YearConverterUtil.westernToEra(1989);
-      expect(result?.era.name).toBe("平成");
+      expect(result?.era.name).toBe("Heisei");
       expect(result?.eraYear).toBe(1);
     });
 
     it("maps 1945 to 昭和 20", () => {
       const result = YearConverterUtil.westernToEra(1945);
-      expect(result?.era.name).toBe("昭和");
+      expect(result?.era.name).toBe("Showa");
       expect(result?.eraYear).toBe(20);
     });
   });

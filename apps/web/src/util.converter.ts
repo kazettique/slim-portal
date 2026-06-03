@@ -31,6 +31,9 @@ export abstract class YearConverterUtil {
     value: name as JapaneseEra,
   }));
 
+  public static readonly ROC_OFFSET: number = 1911;
+  public static readonly ROC_START: number = 1912;
+
   // Years where two eras overlap (transition years)
   public static readonly TRANSITION_YEARS: Record<number, string> = Object.entries(
     this.ERAS,

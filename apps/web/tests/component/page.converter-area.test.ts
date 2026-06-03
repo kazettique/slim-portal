@@ -8,7 +8,7 @@ describe("Area converter page", () => {
   it("renders the page heading", async () => {
     const container = await AstroContainer.create();
     const result = await container.renderToString(AreaConverterPage);
-    expect(result).toContain("面積換算");
+    expect(result).toContain("Area Converter for Rental House");
   });
 
   it("renders the tatami type selector", async () => {

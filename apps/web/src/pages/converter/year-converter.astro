@@ -60,7 +60,7 @@ import { YearConverterUtil } from "../../util.converter";
 </Base>
 
 <script>
-  import type { JapaneseEra } from "../../type.converter";
+  import { JapaneseEra } from "../../type.converter";
   import { YearConverterUtil } from "../../util.converter";
 
   const westernInput = document.getElementById("year-western") as HTMLInputElement | null;
@@ -82,7 +82,7 @@ import { YearConverterUtil } from "../../util.converter";
     if (era && !isNaN(eraYear) && eraYear >= 1) {
       const western = era.start + eraYear - 1;
       if (westernInput) westernInput.value = String(western);
-      if (rocInput) rocInput.value = western >= 1912 ? String(western - 1911) : "";
+      if (rocInput) rocInput.value = western >= YearConverterUtil.ROC_START ? String(western - YearConverterUtil.ROC_OFFSET) : "";
       setNote(western);
     } else {
       if (westernInput) westernInput.value = "";
@@ -96,7 +96,7 @@ import { YearConverterUtil } from "../../util.converter";
   function fromRoc(roc: number): void {
     if (updating) return;
     updating = true;
-    const western = roc + 1911;
+    const western = roc + YearConverterUtil.ROC_OFFSET;
     if (westernInput) westernInput.value = String(western);
 
     const result = YearConverterUtil.westernToEra(western);
@@ -119,7 +119,7 @@ import { YearConverterUtil } from "../../util.converter";
 
     // ROC
     if (rocInput) {
-      rocInput.value = western >= 1912 ? String(western - 1911) : "";
+      rocInput.value = western >= YearConverterUtil.ROC_START ? String(western - YearConverterUtil.ROC_OFFSET) : "";
     }
 
     // Japanese era
@@ -139,13 +139,26 @@ import { YearConverterUtil } from "../../util.converter";
 
   function setNote(western: number): void {
     if (!noteEl) return;
+    const meijiStart = YearConverterUtil.ERAS[JapaneseEra.Meiji].start;
+    const notes: string[] = [];
+
+    if (western < meijiStart)
+      notes.push(`ℹ Japanese era (元号) not available before ${meijiStart}`);
+    if (western < YearConverterUtil.ROC_START)
+      notes.push(`ℹ ROC calendar (民國) not available before ${YearConverterUtil.ROC_START}`);
+
+    if (notes.length > 0) {
+      noteEl.textContent = notes.join(" · ");
+      return;
+    }
+
     const msg = YearConverterUtil.TRANSITION_YEARS[western];
     noteEl.textContent = msg ? `⚠ ${western} = ${msg} (depends on the month)` : "";
   }
 
   westernInput?.addEventListener("input", () => {
     const v = parseInt(westernInput.value, 10);
-    if (!isNaN(v) && v >= 1868) fromWestern(v);
+    if (!isNaN(v) && v > 0) fromWestern(v);
   });
 
   rocInput?.addEventListener("input", () => {
