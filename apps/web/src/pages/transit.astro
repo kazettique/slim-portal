@@ -4,12 +4,12 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.TRANSIT_PAGE_META.description}
-  icon={AppConstant.TRANSIT_PAGE_META.icon}
-  title={AppConstant.TRANSIT_PAGE_META.title}
+  description={AppConstant.PAGE_META_TRANSIT.description}
+  icon={AppConstant.PAGE_META_TRANSIT.icon}
+  title={AppConstant.PAGE_META_TRANSIT.title}
 >
-  <h1>{AppConstant.TRANSIT_PAGE_META.icon} {AppConstant.TRANSIT_PAGE_META.title}</h1>
-  <p>{AppConstant.TRANSIT_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_TRANSIT.icon} {AppConstant.PAGE_META_TRANSIT.title}</h1>
+  <p>{AppConstant.PAGE_META_TRANSIT.description}</p>
 
   <form class="transit-form" id="transit-form">
     <div class="transit-form__group">
@@ -178,7 +178,7 @@ import Base from "../layout/Base.astro";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_TRANSIT_SEARCH_FAILED);
+      setStatus(AppConstant.MSG_TRANSIT_SEARCH_FAILED);
     }
   }
 
@@ -302,7 +302,7 @@ import Base from "../layout/Base.astro";
             · ${r.transfers === 0 ? "No transfers" : `${r.transfers} transfer${r.transfers > 1 ? "s" : ""}`}
             · ${formatTime(r.depart)} → ${formatTime(r.arrive)}${fareText}
           </span>
-          <button class="transit-route__save bookmark-btn" data-index="${i}" aria-label="Save this route">${AppConstant.BOOKMARK_ICON} Save route</button>
+          <button class="transit-route__save bookmark-btn" data-index="${i}" aria-label="Save this route">${AppConstant.ICON_BOOKMARK} Save route</button>
         </div>
         <ul class="transit-route__legs">${renderLeg(r.legs)}</ul>
       </li>
@@ -336,7 +336,7 @@ import Base from "../layout/Base.astro";
     if (btn) {
       btn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (btn) btn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save route`;
+        if (btn) btn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save route`;
       }, 1500);
     }
   }
@@ -451,7 +451,7 @@ import Base from "../layout/Base.astro";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save search`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save search`;
       }, 1500);
     }
   }
@@ -465,10 +465,10 @@ import Base from "../layout/Base.astro";
       fromCoord = lastFrom;
       toCoord = lastTo;
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await doSearch(true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 

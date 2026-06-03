@@ -4,17 +4,17 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.BOOKMARK_PAGE_META.description}
-  icon={AppConstant.BOOKMARK_PAGE_META.icon}
-  title={AppConstant.BOOKMARK_PAGE_META.title}
+  description={AppConstant.PAGE_META_BOOKMARK.description}
+  icon={AppConstant.PAGE_META_BOOKMARK.icon}
+  title={AppConstant.PAGE_META_BOOKMARK.title}
 >
-  <h1>{AppConstant.BOOKMARK_PAGE_META.icon} {AppConstant.BOOKMARK_PAGE_META.title}</h1>
-  <p>{AppConstant.BOOKMARK_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_BOOKMARK.icon} {AppConstant.PAGE_META_BOOKMARK.title}</h1>
+  <p>{AppConstant.PAGE_META_BOOKMARK.description}</p>
 
   <div class="bookmarks-actions" id="bookmarks-actions" style="display:none">
-    <button class="refresh-btn refresh-btn--danger" disabled id="delete-selected-btn"
-      >Delete selected</button
-    >
+    <button class="refresh-btn refresh-btn--danger" disabled id="delete-selected-btn">
+      Delete selected
+    </button>
     <button class="refresh-btn refresh-btn--danger" id="delete-all-btn">Delete all</button>
   </div>
 
@@ -187,7 +187,7 @@ import Base from "../layout/Base.astro";
     if (!btn) return;
     const id = btn.dataset["id"];
     if (!id) return;
-    if (!confirm(AppConstant.CONFIRM_DELETE_BOOKMARK)) return;
+    if (!confirm(AppConstant.MSG_CONFIRM_DELETE_BOOKMARK)) return;
     BookmarkUtil.delete(id);
     removeItemFromDom(id);
     updateDeleteSelectedState();
@@ -198,7 +198,7 @@ import Base from "../layout/Base.astro";
   deleteSelectedBtn?.addEventListener("click", () => {
     const ids = getCheckedIds();
     if (ids.length === 0) return;
-    if (!confirm(AppConstant.CONFIRM_DELETE_SELECTED_BOOKMARKS(ids.length))) return;
+    if (!confirm(AppConstant.MSG_CONFIRM_DELETE_SELECTED_BOOKMARKS(ids.length))) return;
     BookmarkUtil.deleteMany(ids);
     for (const id of ids) removeItemFromDom(id);
     updateDeleteSelectedState();
@@ -207,7 +207,7 @@ import Base from "../layout/Base.astro";
 
   // Delete all
   deleteAllBtn?.addEventListener("click", () => {
-    if (!confirm(AppConstant.CONFIRM_DELETE_ALL_BOOKMARKS)) return;
+    if (!confirm(AppConstant.MSG_CONFIRM_DELETE_ALL_BOOKMARKS)) return;
     BookmarkUtil.deleteAll();
     showEmptyState();
   });

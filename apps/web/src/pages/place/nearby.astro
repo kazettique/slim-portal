@@ -4,14 +4,14 @@ import Base from "../../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.PLACE_NEARBY_PAGE_META.description}
-  icon={AppConstant.PLACE_NEARBY_PAGE_META.icon}
-  title={AppConstant.PLACE_NEARBY_PAGE_META.title}
+  description={AppConstant.PAGE_META_PLACE_NEARBY.description}
+  icon={AppConstant.PAGE_META_PLACE_NEARBY.icon}
+  title={AppConstant.PAGE_META_PLACE_NEARBY.title}
 >
   <p class="place-details__back"><a href="/place">← Back to search</a></p>
 
-  <h1>{AppConstant.PLACE_NEARBY_PAGE_META.icon} {AppConstant.PLACE_NEARBY_PAGE_META.title}</h1>
-  <p>{AppConstant.PLACE_NEARBY_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_PLACE_NEARBY.icon} {AppConstant.PAGE_META_PLACE_NEARBY.title}</h1>
+  <p>{AppConstant.PAGE_META_PLACE_NEARBY.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">
     <div class="places-form__row">
@@ -102,7 +102,7 @@ import Base from "../../layout/Base.astro";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_NEARBY);
+      setStatus(AppConstant.MSG_LOAD_PLACE_FAILED_NEARBY);
     }
   }
 
@@ -177,10 +177,10 @@ import Base from "../../layout/Base.astro";
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await doFetch(true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 </script>

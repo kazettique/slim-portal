@@ -13,7 +13,7 @@ test.describe("Year converter", () => {
   test("entering a western year updates era fields", async ({ page }) => {
     await page.locator("#year-western").fill("2024");
     await page.locator("#year-western").dispatchEvent("input");
-    await expect(page.locator("#year-era")).toHaveValue("令和");
+    await expect(page.locator("#year-era")).toHaveValue("Reiwa");
     await expect(page.locator("#year-era-num")).toHaveValue("6");
   });
 
