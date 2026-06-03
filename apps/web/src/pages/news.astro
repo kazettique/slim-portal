@@ -4,11 +4,11 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.NEWS_PAGE_META.description}
-  icon={AppConstant.NEWS_PAGE_META.icon}
-  title={AppConstant.NEWS_PAGE_META.title}
+  description={AppConstant.PAGE_META_NEWS.description}
+  icon={AppConstant.PAGE_META_NEWS.icon}
+  title={AppConstant.PAGE_META_NEWS.title}
 >
-  <h1>{AppConstant.NEWS_PAGE_META.icon} {AppConstant.NEWS_PAGE_META.title}</h1>
+  <h1>{AppConstant.PAGE_META_NEWS.icon} {AppConstant.PAGE_META_NEWS.title}</h1>
 
   <p aria-live="polite" class="status" id="news-status">Loading…</p>
 
@@ -55,12 +55,12 @@ import Base from "../layout/Base.astro";
   async function fetchNews(noCache: boolean = false): Promise<void> {
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      btn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
     }
     if (cacheStatus) cacheStatus.textContent = "";
 
     try {
-      const res = await fetch(AppConstant.API_BASE_URL + AppConstant.NEWS_PAGE_META.url, {
+      const res = await fetch(AppConstant.API_BASE_URL + AppConstant.PAGE_META_NEWS.url, {
         cache: noCache ? "no-store" : "default",
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -76,12 +76,12 @@ import Base from "../layout/Base.astro";
       if (cacheStatus)
         cacheStatus.textContent = cacheDate ? AppUtil.formatCacheTime(cacheDate, fmt) : "";
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_NEWS);
-      if (noCache) alert(AppConstant.ERROR_MSG_REFRESH_FAILED);
+      setStatus(AppConstant.MSG_LOAD_NEWS_FAILED);
+      if (noCache) alert(AppConstant.MSG_REFRESH_FAILED);
     } finally {
       if (btn) {
         btn.disabled = false;
-        btn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+        btn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
       }
     }
   }

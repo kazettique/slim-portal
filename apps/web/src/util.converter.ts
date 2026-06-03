@@ -1,4 +1,4 @@
-import type { Era } from "./type.converter";
+import { type Era, type EraData, JapaneseEra } from "./type.converter";
 
 export abstract class AreaConverterUtil {
   // 1 坪 = 400/121 ㎡ (exact)
@@ -14,28 +14,40 @@ export abstract class AreaConverterUtil {
 }
 
 export abstract class YearConverterUtil {
-  public static readonly ERAS: Era[] = [
-    { end: 1912, name: "明治", start: 1868 },
-    { end: 1926, name: "大正", start: 1912 },
-    { end: 1989, name: "昭和", start: 1926 },
-    { end: 2019, name: "平成", start: 1989 },
-    { end: null, name: "令和", start: 2019 },
-  ];
+  public static readonly ERAS: Record<JapaneseEra, EraData> = {
+    [JapaneseEra.Meiji]: { end: 1912, jaName: "明治", start: 1868 },
+    [JapaneseEra.Taisho]: { end: 1926, jaName: "大正", start: 1912 },
+    // eslint-disable-next-line perfectionist/sort-objects
+    [JapaneseEra.Showa]: { end: 1989, jaName: "昭和", start: 1926 },
+    // eslint-disable-next-line perfectionist/sort-objects
+    [JapaneseEra.Heisei]: { end: 2019, jaName: "平成", start: 1989 },
+    [JapaneseEra.Reiwa]: { end: null, jaName: "令和", start: 2019 },
+  };
+
+  public static readonly ERA_OPTIONS: { label: string; value: JapaneseEra }[] = Object.entries(
+    this.ERAS,
+  ).map(([name, era]) => ({
+    label: `${name} (${era.jaName})`,
+    value: name as JapaneseEra,
+  }));
 
   // Years where two eras overlap (transition years)
-  public static readonly TRANSITION_YEARS: Record<number, string> = {
-    1912: "明治45 or 大正1",
-    1926: "大正15 or 昭和1",
-    1989: "昭和64 or 平成1",
-    2019: "平成31 or 令和1",
-  };
+  public static readonly TRANSITION_YEARS: Record<number, string> = Object.entries(
+    this.ERAS,
+  ).reduce<Record<number, string>>((acc, [currKey, currVal], i, arr) => {
+    if (i === 0) return acc;
+    const [prevKey, prevVal] = arr[i - 1];
+    const n = currVal.start - prevVal.start + 1;
+    acc[currVal.start] = `${prevKey} (${prevVal.jaName}) ${n} or ${currKey} (${currVal.jaName}) 1`;
+    return acc;
+  }, {});
 
   // Find the latest era that covers this year (for transition years, prefer the newer era)
   public static westernToEra(western: number): null | { era: Era; eraYear: number } {
-    for (let i = YearConverterUtil.ERAS.length - 1; i >= 0; i--) {
-      const era = YearConverterUtil.ERAS[i];
-      if (western >= era.start && (era.end === null || western <= era.end)) {
-        return { era, eraYear: western - era.start + 1 };
+    const entries = Object.entries(YearConverterUtil.ERAS) as [JapaneseEra, EraData][];
+    for (const [name, eraData] of [...entries].reverse()) {
+      if (western >= eraData.start && (eraData.end === null || western <= eraData.end)) {
+        return { era: { ...eraData, name }, eraYear: western - eraData.start + 1 };
       }
     }
     return null;

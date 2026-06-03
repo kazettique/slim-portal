@@ -1,20 +1,22 @@
 ---
 import { AppConstant } from "../../constant";
 import Base from "../../layout/Base.astro";
+import { JapaneseEra } from "../../type.converter";
+import { YearConverterUtil } from "../../util.converter";
 ---
 
 <Base
-  description={AppConstant.YEAR_CONVERTER_PAGE_META.description}
-  icon={AppConstant.YEAR_CONVERTER_PAGE_META.icon}
-  title={AppConstant.YEAR_CONVERTER_PAGE_META.title}
+  description={AppConstant.PAGE_META_YEAR_CONVERTER.description}
+  icon={AppConstant.PAGE_META_YEAR_CONVERTER.icon}
+  title={AppConstant.PAGE_META_YEAR_CONVERTER.title}
 >
-  <h1>{AppConstant.YEAR_CONVERTER_PAGE_META.icon} {AppConstant.YEAR_CONVERTER_PAGE_META.title}</h1>
-  <p>{AppConstant.YEAR_CONVERTER_PAGE_META.description}</p>
-  <a class="converter-back" href={AppConstant.CONVERTER_PAGE_META.url}>← Back to Converters</a>
+  <h1>{AppConstant.PAGE_META_YEAR_CONVERTER.icon} {AppConstant.PAGE_META_YEAR_CONVERTER.title}</h1>
+  <p>{AppConstant.PAGE_META_YEAR_CONVERTER.description}</p>
+  <a class="converter-back" href={AppConstant.PAGE_META_CONVERTER.url}>← Back to Converters</a>
 
   <div class="converter-grid">
     <div class="converter-group">
-      <label for="year-western">西元 (Western)</label>
+      <label for="year-western">Western (西元)</label>
       <input
         id="year-western"
         inputmode="numeric"
@@ -26,19 +28,21 @@ import Base from "../../layout/Base.astro";
     </div>
 
     <div class="converter-group">
-      <label for="year-roc">民國 (ROC)</label>
+      <label for="year-roc">ROC Calendar (民國)</label>
       <input id="year-roc" inputmode="numeric" min="1" placeholder="e.g. 113" type="number" />
     </div>
 
     <div class="converter-group">
-      <label for="year-era-num">日本年號 (Japanese era)</label>
+      <label for="year-era-num">Japanese Era (元号)</label>
       <div class="converter-group__row year__row">
         <select aria-label="Era name" id="year-era">
-          <option>明治</option>
-          <option>大正</option>
-          <option>昭和</option>
-          <option>平成</option>
-          <option selected>令和</option>
+          {
+            YearConverterUtil.ERA_OPTIONS.map((era) => (
+              <option value={era.value} selected={era.value === JapaneseEra.Reiwa}>
+                {era.label}
+              </option>
+            ))
+          }
         </select>
         <input
           aria-label="Era year"
@@ -56,6 +60,7 @@ import Base from "../../layout/Base.astro";
 </Base>
 
 <script>
+  import type { JapaneseEra } from "../../type.converter";
   import { YearConverterUtil } from "../../util.converter";
 
   const westernInput = document.getElementById("year-western") as HTMLInputElement | null;
@@ -72,7 +77,7 @@ import Base from "../../layout/Base.astro";
 
     const eraName = eraSelect?.value ?? "";
     const eraYear = parseInt(eraNumInput?.value ?? "", 10);
-    const era = YearConverterUtil.ERAS.find((e) => e.name === eraName);
+    const era = YearConverterUtil.ERAS[eraName as JapaneseEra];
 
     if (era && !isNaN(eraYear) && eraYear >= 1) {
       const western = era.start + eraYear - 1;

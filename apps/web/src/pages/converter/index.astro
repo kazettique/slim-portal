@@ -4,19 +4,27 @@ import Base from "../../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.CONVERTER_PAGE_META.description}
-  icon={AppConstant.CONVERTER_PAGE_META.icon}
-  title={AppConstant.CONVERTER_PAGE_META.title}
+  description={AppConstant.PAGE_META_CONVERTER.description}
+  icon={AppConstant.PAGE_META_CONVERTER.icon}
+  title={AppConstant.PAGE_META_CONVERTER.title}
 >
-  <h1>{AppConstant.CONVERTER_PAGE_META.icon} {AppConstant.CONVERTER_PAGE_META.title}</h1>
-  <p>{AppConstant.CONVERTER_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_CONVERTER.icon} {AppConstant.PAGE_META_CONVERTER.title}</h1>
+  <p>{AppConstant.PAGE_META_CONVERTER.description}</p>
 
   <ul class="converter-list">
     <li class="converter-list__item">
-      <a href={AppConstant.YEAR_CONVERTER_PAGE_META.url}>年份換算</a> — 西元 / 民國 / 日本年號
+      <a href={AppConstant.PAGE_META_YEAR_CONVERTER.url}>
+        {AppConstant.PAGE_META_YEAR_CONVERTER.title}
+      </a>
+      <span>&nbsp;—&nbsp;</span>
+      <span>{AppConstant.PAGE_META_YEAR_CONVERTER.description}</span>
     </li>
     <li class="converter-list__item">
-      <a href={AppConstant.AREA_CONVERTER_PAGE_META.url}>面積換算</a> — 坪 / ㎡ / 畳
+      <a href={AppConstant.PAGE_META_AREA_CONVERTER.url}>
+        {AppConstant.PAGE_META_AREA_CONVERTER.title}
+      </a>
+      <span>&nbsp;—&nbsp;</span>
+      <span>{AppConstant.PAGE_META_AREA_CONVERTER.description}</span>
     </li>
   </ul>
 </Base>
