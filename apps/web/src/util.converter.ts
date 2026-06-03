@@ -45,6 +45,16 @@ export abstract class YearConverterUtil {
     return acc;
   }, {});
 
+  public static eraToWestern(eraName: JapaneseEra, eraYear: number): null | number {
+    const era = YearConverterUtil.ERAS[eraName];
+    if (!era || eraYear < 1) return null;
+    return era.start + eraYear - 1;
+  }
+
+  public static rocToWestern(roc: number): number {
+    return roc + YearConverterUtil.ROC_OFFSET;
+  }
+
   // Find the latest era that covers this year (for transition years, prefer the newer era)
   public static westernToEra(western: number): null | { era: Era; eraYear: number } {
     const entries = Object.entries(YearConverterUtil.ERAS) as [JapaneseEra, EraData][];
@@ -54,5 +64,9 @@ export abstract class YearConverterUtil {
       }
     }
     return null;
+  }
+
+  public static westernToRoc(western: number): null | number {
+    return western >= YearConverterUtil.ROC_START ? western - YearConverterUtil.ROC_OFFSET : null;
   }
 }

@@ -77,12 +77,12 @@ import { YearConverterUtil } from "../../util.converter";
 
     const eraName = eraSelect?.value ?? "";
     const eraYear = parseInt(eraNumInput?.value ?? "", 10);
-    const era = YearConverterUtil.ERAS[eraName as JapaneseEra];
+    const western = YearConverterUtil.eraToWestern(eraName as JapaneseEra, eraYear);
 
-    if (era && !isNaN(eraYear) && eraYear >= 1) {
-      const western = era.start + eraYear - 1;
+    if (western !== null) {
       if (westernInput) westernInput.value = String(western);
-      if (rocInput) rocInput.value = western >= YearConverterUtil.ROC_START ? String(western - YearConverterUtil.ROC_OFFSET) : "";
+      const roc = YearConverterUtil.westernToRoc(western);
+      if (rocInput) rocInput.value = roc !== null ? String(roc) : "";
       setNote(western);
     } else {
       if (westernInput) westernInput.value = "";
@@ -96,7 +96,7 @@ import { YearConverterUtil } from "../../util.converter";
   function fromRoc(roc: number): void {
     if (updating) return;
     updating = true;
-    const western = roc + YearConverterUtil.ROC_OFFSET;
+    const western = YearConverterUtil.rocToWestern(roc);
     if (westernInput) westernInput.value = String(western);
 
     const result = YearConverterUtil.westernToEra(western);
@@ -119,7 +119,8 @@ import { YearConverterUtil } from "../../util.converter";
 
     // ROC
     if (rocInput) {
-      rocInput.value = western >= YearConverterUtil.ROC_START ? String(western - YearConverterUtil.ROC_OFFSET) : "";
+      const roc = YearConverterUtil.westernToRoc(western);
+      rocInput.value = roc !== null ? String(roc) : "";
     }
 
     // Japanese era
