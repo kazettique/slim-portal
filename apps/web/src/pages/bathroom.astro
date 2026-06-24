@@ -4,18 +4,18 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.BATHROOM_PAGE_META.description}
-  icon={AppConstant.BATHROOM_PAGE_META.icon}
-  title={AppConstant.BATHROOM_PAGE_META.title}
+  description={AppConstant.PAGE_META_BATHROOM.description}
+  icon={AppConstant.PAGE_META_BATHROOM.icon}
+  title={AppConstant.PAGE_META_BATHROOM.title}
 >
-  <h1>{AppConstant.BATHROOM_PAGE_META.icon} {AppConstant.BATHROOM_PAGE_META.title}</h1>
-  <p>{AppConstant.BATHROOM_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_BATHROOM.icon} {AppConstant.PAGE_META_BATHROOM.title}</h1>
+  <p>{AppConstant.PAGE_META_BATHROOM.description}</p>
 
   <div class="places-form" style="margin-block-end: var(--space)">
     <div class="places-form__row">
-      <label for="radius-select" style="font-size:0.875rem; align-self:center; white-space:nowrap"
-        >Radius</label
-      >
+      <label for="radius-select" style="font-size:0.875rem; align-self:center; white-space:nowrap">
+        Radius
+      </label>
       <select class="places-form__input" id="radius-select" style="flex:1; max-width:10rem">
         <option value="500">500 m</option>
         <option selected value="1000">1 km</option>
@@ -102,7 +102,7 @@ import Base from "../layout/Base.astro";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_BATHROOM);
+      setStatus(AppConstant.MSG_LOAD_BATHROOM_FAILED);
     }
   }
 
@@ -196,10 +196,10 @@ import Base from "../layout/Base.astro";
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await locateAndFetch(true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 </script>

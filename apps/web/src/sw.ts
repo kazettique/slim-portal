@@ -5,7 +5,7 @@ const sw = self as unknown as ServiceWorkerGlobalScope;
 abstract class SwHandler {
   public static readonly API_CACHE: string = "api-v1";
   public static readonly MAX_API_ENTRIES: number = 60;
-  public static readonly SHELL_CACHE: string = "shell-v5";
+  public static readonly SHELL_CACHE: string = "shell-v6";
   // CF Pages serves pages at trailing-slash URLs (/bookmark/ not /bookmark).
   // Fetching without trailing slash causes a 301 redirect, and Safari refuses
   // to serve a redirected response from a service worker. Use trailing slashes

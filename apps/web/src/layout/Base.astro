@@ -9,7 +9,7 @@ interface Props {
   title: string;
 }
 
-const { description = AppConstant.HOME_PAGE_META.description, icon, title } = Astro.props;
+const { description = AppConstant.PAGE_META_HOME.description, icon, title } = Astro.props;
 const canonicalPath = Astro.url.pathname;
 ---
 
@@ -76,7 +76,7 @@ const canonicalPath = Astro.url.pathname;
       <slot />
     </main>
     <footer>
-      <small>{AppConstant.FOOTER_MESSAGE} · v{AppConstant.APP_VERSION}</small>
+      <small>{AppConstant.APP_DESCRIPTION_FOOTER} · v{AppConstant.APP_VERSION}</small>
     </footer>
     <script is:inline>
       if ("serviceWorker" in navigator) {

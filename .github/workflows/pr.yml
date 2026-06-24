@@ -32,7 +32,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-          cache-dependency-path: '**/bun.lock'
+          cache-dependency-path: "**/bun.lock"
 
       - name: Install Bun
         run: bun install
@@ -57,7 +57,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-          cache-dependency-path: '**/bun.lock'
+          cache-dependency-path: "**/bun.lock"
 
       - name: Install Bun
         run: bun install

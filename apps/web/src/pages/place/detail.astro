@@ -4,9 +4,9 @@ import Base from "../../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.PLACE_DETAIL_PAGE_META.description}
-  icon={AppConstant.PLACE_DETAIL_PAGE_META.icon}
-  title={AppConstant.PLACE_DETAIL_PAGE_META.title}
+  description={AppConstant.PAGE_META_PLACE_DETAIL.description}
+  icon={AppConstant.PAGE_META_PLACE_DETAIL.icon}
+  title={AppConstant.PAGE_META_PLACE_DETAIL.title}
 >
   <p class="place-details__back"><a href="/place" id="back-link">← Back</a></p>
 
@@ -85,7 +85,7 @@ import Base from "../../layout/Base.astro";
       renderDetails(item);
       if (toolbar) toolbar.style.display = "flex";
       if (bookmarkBtn) {
-        bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
+        bookmarkBtn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save place`;
       }
       const cacheDate = res.headers.get("X-Cache-Date");
       if (cacheStatus)
@@ -93,7 +93,7 @@ import Base from "../../layout/Base.astro";
           ? AppUtil.formatCacheTime(cacheDate, SettingsUtil.getTimeFormat())
           : "";
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE_DETAIL);
+      setStatus(AppConstant.MSG_LOAD_PLACE_FAILED_DETAIL);
     }
   }
 
@@ -215,7 +215,7 @@ import Base from "../../layout/Base.astro";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save place`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save place`;
       }, 1500);
     }
   }
@@ -247,10 +247,10 @@ import Base from "../../layout/Base.astro";
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await doFetch(true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 </script>

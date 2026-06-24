@@ -4,12 +4,12 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.PLACE_PAGE_META.description}
-  icon={AppConstant.PLACE_PAGE_META.icon}
-  title={AppConstant.PLACE_PAGE_META.title}
+  description={AppConstant.PAGE_META_PLACE.description}
+  icon={AppConstant.PAGE_META_PLACE.icon}
+  title={AppConstant.PAGE_META_PLACE.title}
 >
-  <h1>{AppConstant.PLACE_PAGE_META.icon} {AppConstant.PLACE_PAGE_META.title}</h1>
-  <p>{AppConstant.PLACE_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_PLACE.icon} {AppConstant.PAGE_META_PLACE.title}</h1>
+  <p>{AppConstant.PAGE_META_PLACE.description}</p>
 
   <form class="places-form" id="places-form">
     <div class="places-form__row">
@@ -122,7 +122,7 @@ import Base from "../layout/Base.astro";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_LOAD_PLACE);
+      setStatus(AppConstant.MSG_LOAD_PLACE_FAILED);
     }
   }
 
@@ -295,7 +295,7 @@ import Base from "../layout/Base.astro";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save`;
       }, 1500);
     }
   }
@@ -307,10 +307,10 @@ import Base from "../layout/Base.astro";
     refreshBtn.addEventListener("click", async () => {
       if (!lastParams) return;
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await doSearch(lastParams, true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 

@@ -4,12 +4,12 @@ import Base from "../layout/Base.astro";
 ---
 
 <Base
-  description={AppConstant.SEARCH_PAGE_META.description}
-  icon={AppConstant.SEARCH_PAGE_META.icon}
-  title={AppConstant.SEARCH_PAGE_META.title}
+  description={AppConstant.PAGE_META_SEARCH.description}
+  icon={AppConstant.PAGE_META_SEARCH.icon}
+  title={AppConstant.PAGE_META_SEARCH.title}
 >
-  <h1>{AppConstant.SEARCH_PAGE_META.icon} {AppConstant.SEARCH_PAGE_META.title}</h1>
-  <p>{AppConstant.SEARCH_PAGE_META.description}</p>
+  <h1>{AppConstant.PAGE_META_SEARCH.icon} {AppConstant.PAGE_META_SEARCH.title}</h1>
+  <p>{AppConstant.PAGE_META_SEARCH.description}</p>
 
   <form class="search-form" id="search-form">
     <div class="search-form__row">
@@ -102,7 +102,7 @@ import Base from "../layout/Base.astro";
             : "";
       }
     } catch {
-      setStatus(AppConstant.ERROR_MSG_SEARCH_FAILED);
+      setStatus(AppConstant.MSG_SEARCH_FAILED);
     }
   }
 
@@ -159,7 +159,7 @@ import Base from "../layout/Base.astro";
     if (bookmarkBtn) {
       bookmarkBtn.textContent = AppConstant.MSG_BOOKMARK_SAVED;
       setTimeout(() => {
-        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.BOOKMARK_ICON} Save`;
+        if (bookmarkBtn) bookmarkBtn.innerHTML = `${AppConstant.ICON_BOOKMARK} Save`;
       }, 1500);
     }
   }
@@ -170,10 +170,10 @@ import Base from "../layout/Base.astro";
     refreshBtn.addEventListener("click", async () => {
       if (!lastQ) return;
       refreshBtn.disabled = true;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Loading…`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Loading…`;
       await doSearch(lastQ, true);
       refreshBtn.disabled = false;
-      refreshBtn.innerHTML = `${AppConstant.REFRESH_ICON} Refresh`;
+      refreshBtn.innerHTML = `${AppConstant.ICON_REFRESH} Refresh`;
     });
   }
 
