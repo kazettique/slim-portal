@@ -141,4 +141,6 @@ Before using, subscribe to all five RapidAPI providers with the same key:
 
 ## Screenshot
 
-![screenshot](public/app-screenshot.png)
+![screenshot](public/00-overview.png)
+
+Screen shot for every page, please refer to [public folder](public)
