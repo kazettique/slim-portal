@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@slim-portal/share": "workspace:*",
-    "zod": "4.4.3"
+    "zod": "4.5.4"
   },
   "devDependencies": {
     "wrangler": "4.86.0",
